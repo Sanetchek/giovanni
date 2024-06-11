@@ -1,0 +1,170 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+	font-family: $assistant;
+  font-size: 1rem;
+
+  &.active {
+    overflow: hidden;
+  }
+}
+
+#page {
+  min-height: 1760px;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: $blue;
+  font-size: 1rem;
+  line-height: 1.31em;
+  text-decoration-line: underline;
+  transition: all 0.5s ease;
+
+  &:hover {
+    color: $dark;
+  }
+}
+
+p {
+  font-family: $assistant-light;
+  font-size: 1.25rem;
+  line-height: 1.6em;
+
+  &:nth-child(n+2) {
+    margin-top: 1.25rem;
+  }
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: $dark;
+}
+
+.container {
+  max-width: 1110px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+  &__relative {
+    position: relative;
+  }
+
+  @media screen and (max-width: 1200px) {
+    max-width: 90vw
+  }
+}
+
+.hidden {
+  display: none !important;
+
+  &__input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 0;
+    height: 0;
+    opacity: 0;
+
+    & + label {
+      &::before {
+        content: "";
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        border: 0.0625rem solid #8b8b98;
+        border-radius: 0.375rem;
+        box-sizing: border-box;
+      }
+    }
+
+    &:checked + label {
+      &::before {
+        content: "";
+        border: 0.0625rem solid $dark;
+        background: $dark url('assets/img/icons/check.svg') no-repeat center;
+      }
+    }
+  }
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.bg-white {
+  position: relative;
+  background-color: #fff;
+}
+
+.br-circle {
+  border-radius: 50%;
+}
+
+.br-40 {
+  border-radius: 2.5rem;
+}
+
+.br-25 {
+  border-radius: 1.5625rem;
+}
+
+.br-12 {
+  border-radius: 0.75rem;
+}
+
+.shadow {
+  box-shadow: 0 4px 20px rgba(135, 153, 84, 0.2);
+}
+
+.thumb-placer {
+  height: 100%;
+  min-height: 175px;
+  background-color: #ff9432;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 60%;
+  }
+}
+
+.bg-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9;
+
+  &.black {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  &.green {
+    background-color: rgba(246, 255, 163, 0.4);
+    z-index: 10;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
