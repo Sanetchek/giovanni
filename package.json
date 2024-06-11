@@ -19,8 +19,13 @@
   },
   "devDependencies": {
     "@wordpress/scripts": "^19.2.2",
-    "dir-archiver": "^1.1.1",
-    "node-sass": "^7.0.1",
+    "gulp": "^5.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-rename": "^2.0.0",
+    "gulp-uglify": "^3.0.2",
+    "gulp-watch": "^5.0.1",
+    "npm-run-all": "^4.1.5",
     "rtlcss": "^3.5.0"
   },
   "rtlcssConfig": {
@@ -37,13 +42,11 @@
     "map": false
   },
   "scripts": {
-    "watch": "node-sass assets/style-rtl.scss style-rtl.css --source-map true --output-style compressed --indent-type tab --indent-width 1 -w",
-    "compile:css": "node-sass assets/style-rtl.scss style-rtl.css && stylelint '*.css' --fix || true && stylelint '*.css' --fix",
-    "minify:js": "minify assets/js/script.js > assets/js/script.min.js",
-    "compile:rtl": "rtlcss style-rtl.css style.css",
-    "lint:scss": "wp-scripts lint-style 'assets/**/*.scss'",
+    "minify:js": "gulp minify-js",
     "lint:js": "wp-scripts lint-js 'assets/js/*.js'",
-    "bundle": "dir-archiver --src . --dest ../giovanni.zip --exclude .DS_Store .stylelintrc.json .eslintrc .git .gitattributes .github .gitignore README.md composer.json composer.lock node_modules vendor package-lock.json package.json .travis.yml phpcs.xml.dist sass style.css.map yarn.lock"
+    "lint:css": "wp-scripts lint-style 'assets/**/*.css'",
+    "compile:rtl": "rtlcss style-rtl.css style.css",
+    "start": "gulp"
   },
   "dependencies": {
     "jquery-validation": "^1.19.5",
