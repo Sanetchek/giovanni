@@ -1,0 +1,34 @@
+<?php $bg = get_field('hero_image') ?>
+
+<section id="hero" class="hero">
+  <div class="hero-image main-wrap">
+    <?php show_image($bg, '1920-865') ?>
+
+    <div class="hero-wrap">
+      <div class="hero-content">
+        <?php
+          $title = get_field('hero_title');
+          $label = get_field('hero_label');
+          $link_label = get_field('hero_link_label');
+          $link = get_field('hero_link');
+        ?>
+
+        <h1>
+          <span class="hero-label"><?= $label ?></span>
+          <span class="hero-spacer">|</span>
+          <span class="hero-title"><?= $title ?></span>
+        </h1>
+
+        <?php if ($link) : ?>
+          <a href="<?= $link ?>" class="btn hero-link">
+            <span><?= $link_label ?></span>
+            <svg class='icon-arrow-left' width='24' height='6'>
+              <use href='<?= assets('img/sprite.svg#icon-arrow-left') ?>'></use>
+            </svg>
+          </a>
+        <?php endif ?>
+      </div>
+    </div>
+
+  </div>
+</section>

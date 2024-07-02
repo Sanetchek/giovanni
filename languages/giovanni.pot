@@ -1,0 +1,198 @@
+# Copyright (C) 2024 Webeffect
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: giovanni 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/giovanni\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-06-13T13:39:58+03:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.8.1\n"
+"X-Domain: giovanni\n"
+
+#. Theme Name of the theme
+msgid "giovanni"
+msgstr ""
+
+#. Description of the theme
+msgid "Description"
+msgstr ""
+
+#. Author of the theme
+msgid "Webeffect"
+msgstr ""
+
+#: 404.php:18
+msgid "Oops! That page can&rsquo;t be found."
+msgstr ""
+
+#: 404.php:22
+msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
+msgstr ""
+
+#: 404.php:32
+msgid "Most Used Categories"
+msgstr ""
+
+#. translators: %1$s: smiley
+#: 404.php:51
+msgid "Try looking in the monthly archives. %1$s"
+msgstr ""
+
+#. translators: 1: title.
+#: comments.php:34
+msgid "One thought on &ldquo;%1$s&rdquo;"
+msgstr ""
+
+#. translators: 1: comment count number, 2: title.
+#: comments.php:40
+msgctxt "comments title"
+msgid "%1$s thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:66
+msgid "Comments are closed."
+msgstr ""
+
+#: functions.php:52
+msgid "Primary"
+msgstr ""
+
+#: functions.php:117
+msgid "Sidebar"
+msgstr ""
+
+#: functions.php:119
+msgid "Add widgets here."
+msgstr ""
+
+#: functions.php:128
+msgid "Footer Widget 1"
+msgstr ""
+
+#: functions.php:130
+msgid "First area"
+msgstr ""
+
+#: functions.php:138
+msgid "Footer Widget 2"
+msgstr ""
+
+#: functions.php:140
+msgid "Second area"
+msgstr ""
+
+#: functions.php:148
+msgid "Footer Widget 3"
+msgstr ""
+
+#: functions.php:150
+msgid "Third area"
+msgstr ""
+
+#: functions.php:158
+msgid "Footer Widget 4"
+msgstr ""
+
+#: functions.php:160
+msgid "Fourth area"
+msgstr ""
+
+#: inc/customizer.php:6
+msgid "Site Identity"
+msgstr ""
+
+#: inc/customizer.php:14
+msgid "Logo"
+msgstr ""
+
+#: inc/customizer.php:40
+msgid "Social Media Links"
+msgstr ""
+
+#: inc/customizer.php:50
+msgid "Whatsup URL"
+msgstr ""
+
+#: inc/customizer.php:62
+msgid "Telegram URL"
+msgstr ""
+
+#: inc/customizer.php:74
+msgid "LinkedIn URL"
+msgstr ""
+
+#: inc/customizer.php:85
+msgid "Copyrights"
+msgstr ""
+
+#: inc/customizer.php:95
+msgid "Copyrights Text"
+msgstr ""
+
+#. translators: %s: search query.
+#: search.php:22
+msgid "Search Results for: %s"
+msgstr ""
+
+#: searchform.php:3
+msgid "Search by keyword"
+msgstr ""
+
+#: searchform.php:4
+msgid "Search"
+msgstr ""
+
+#: template-parts/content-none.php:14
+msgid "Nothing Found"
+msgstr ""
+
+#. translators: 1: link to WP admin new post page.
+#: template-parts/content-none.php:24
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr ""
+
+#: template-parts/content-none.php:37
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr ""
+
+#: template-parts/content-none.php:44
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr ""
+
+#: template-parts/content-page.php:25
+#: template-parts/content.php:44
+msgid "Pages:"
+msgstr ""
+
+#. translators: %s: Name of current post. Only visible to screen readers
+#: template-parts/content-page.php:39
+msgid "Edit <span class=\"screen-reader-text\">%s</span>"
+msgstr ""
+
+#: template-parts/content-post.php:32
+msgid "printing "
+msgstr ""
+
+#: template-parts/content-post.php:89
+msgid "More articles"
+msgstr ""
+
+#. translators: %s: Name of current post. Only visible to screen readers
+#: template-parts/content.php:31
+msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
+msgstr ""
+
+#: template-parts/subscribe-form.php:3
+msgid "Enter your email"
+msgstr ""
+
+#: template-parts/subscribe-form.php:4
+msgid "Sign up"
+msgstr ""

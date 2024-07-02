@@ -1,0 +1,99 @@
+.header-bar {
+  padding: 4px 0;
+  background-color: #000;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.6;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  position: relative;
+  min-height: 76px;
+}
+
+.site-branding {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Libre Caslon Text", sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #000;
+  text-decoration: none;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.branding-label {
+  background: #000;
+  font-family: "Jost", sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 0 4px;
+}
+
+.user-actions {
+  display: flex;
+  gap: 32px;
+}
+
+.header-action {
+  display: inline-flex;
+  position: relative;
+  height: 28px;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.header-count {
+  position: relative;
+  top: -8px;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.6;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #000;
+}
+
+.main-navigation .menu {
+  margin: 0;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-navigation .menu-item a {
+  display: block;
+  padding: 16px 20px;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.6;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #000;
+  border-bottom: 2px solid transparent;
+}
+
+.main-navigation .menu-item a:hover,
+.main-navigation .menu-item a.active {
+  border-bottom: 2px solid #000;
+}

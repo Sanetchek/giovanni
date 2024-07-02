@@ -21,65 +21,66 @@
 </head>
 
 <body <?php body_class(); ?>>
-	<!-- Preloader Start -->
-	<section>
-		<div id="preloader">
-			<div id="ctn-preloader" class="ctn-preloader">
-				<div class="animation-preloader">
-					<div class="icon">
-						<?php if (theme_logo()) : ?>
-							<?= theme_logo(); // you can set logo in Appearance -> Customize -> Site Identity -> Logo field ?>
-						<?php else : ?>
-							<img src="<?= assets('img/logo.svg') ?>" alt="logo" width="38">
-						<?php endif; ?>
-					</div>
-					<div class="txt-loading mt-2">
-						<?php
-							$text = strtoupper(get_bloginfo('name'));
-							$name = str_split( $text );
-						?>
-						<?php foreach ($name as $letter) : ?>
-							<span data-text-preloader="<?= $letter ?>" class="letters-loading">
-								<?= $letter ?>
-							</span>
-						<?php endforeach; ?>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Preloader End -->
-
 	<?php wp_body_open(); ?>
+
 	<div id="page" class="site">
 
 		<header id="masthead">
 			<div class="site-header">
-				<div class="container header__wrap">
-					<?php if (theme_logo()) : ?>
-						<?= theme_logo(); // you can set logo in Appearance -> Customize -> Site Identity -> Logo field ?>
-					<?php else : ?>
-						<a href="/" class="site-branding">
-							<img src="<?= assets('img/logo.svg') ?>" alt="logo" width="38">
+
+				<?php $bar = get_field('header_bar', 'option'); ?>
+				<?php if ($bar) : ?>
+
+					<div class="header-bar">
+						<?= __($bar, 'giovanni'); ?>
+					</div>
+
+				<?php endif ?>
+
+				<div class="container header-wrap">
+					<div class="header-top">
+
+						<div id="burger-menu" class="burger-menu"></div>
+
+						<a href="/" class="site-branding" rel="home" aria-current="page" tabindex="0">
+
+							<?php $logo = get_field('header_logo_image', 'option'); ?>
+
+							<?php if ($logo['image']) : ?>
+
+								<?php show_image( $logo['image'], [300, 50], ['class' => 'site-logo'] ); ?>
+
+							<?php else : ?>
+								<?php $logo = get_field('header_logo_name', 'option'); ?>
+
+								<?php if ($logo['name']) : ?>
+									<?= $logo['name'] ?>
+								<?php endif ?>
+
+								<?php if ($logo['label']) : ?>
+									<span class="branding-label"><?= $logo['label'] ?></span>
+								<?php endif ?>
+							<?php endif; ?>
+
 						</a><!-- .site-branding -->
-					<?php endif; ?>
+
+						<div class="user-actions">
+							<?php get_template_part('template-parts/header/user-actions') ?>
+						</div>
+
+					</div>
 
 					<nav class="main-navigation">
+
 						<?php
-						wp_nav_menu(
-							array(
+							wp_nav_menu([
 								'theme_location' => 'menu-1',
 								'menu_id'        => 'primary-menu',
-							)
-						);
+								'container'			 => ''
+							]);
 						?>
-					</nav><!-- #site-navigation -->
 
-					<div id="burger-menu" class="burger-menu">
-						<div class="bar1"></div>
-						<div class="bar2"></div>
-						<div class="bar3"></div>
-					</div>
+					</nav><!-- #site-navigation -->
 				</div>
 
 			</div>

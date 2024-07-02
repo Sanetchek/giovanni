@@ -1,0 +1,379 @@
+.hero {
+  position: relative;
+}
+
+.hero-wrap {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  right: 64px;
+}
+
+.hero-content {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0 5px 91px 0;
+}
+
+.main-wrap {
+  position: relative;
+  max-width: 1920px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.hero-title {
+  font-family: "Libre Caslon Text", sans-serif;
+  font-weight: 500;
+  line-height: 1.28571;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 17px;
+}
+
+.hero-label {
+  font-family: "Assistant", sans-serif;
+  font-weight: 600;
+  line-height: 1.28571;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.taxonomies-title {
+  margin: 64px 0;
+  text-align: center;
+}
+
+.taxonomies-wrap {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 90px;
+}
+
+.taxonomies-content {
+  width: 350px;
+  height: 350px;
+  position: relative;
+  background: #f5f5f5;
+  mix-blend-mode: multiply;
+}
+
+.taxonomies-content-title {
+  margin: 0;
+  position: absolute;
+  bottom: 0;
+  padding: 16px 24px;
+  width: 100%;
+  text-align: center;
+}
+
+.collections-image {
+  position: relative;
+  z-index: -1;
+  margin-bottom: -105px;
+}
+
+.collections-content {
+  margin: 0 auto;
+  max-width: 1488px;
+  position: relative;
+}
+
+.collections-container {
+  padding: 65px 0 41px;
+  background: #fff;
+  position: relative;
+}
+
+.collections-shadow {
+  position: absolute;
+  top: -70px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+}
+
+.collections-container>h2 {
+  margin: 0;
+  text-align: center;
+}
+
+.collections-container>p {
+  font-family: "Assistant", sans-serif;
+  font-weight: 600;
+  line-height: 0.88889;
+  letter-spacing: 0.06em;
+  text-align: center;
+  color: #000;
+  padding: 16px 0;
+  margin-bottom: 17px;
+}
+
+.collections-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+li.product-card {
+  width: calc(100% / 4);
+}
+
+li.product-card a {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-decoration: none;
+}
+
+.product-title {
+  font-family: "Assistant", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.33333;
+  text-transform: uppercase;
+  text-align: center;
+  color: #000;
+  padding: 0 10px;
+  margin: 16px 0 0;
+}
+
+.product-info {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.product-price {
+  font-family: "Assistant", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.33333;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #000;
+}
+
+.main-posts {
+  margin-top: 70px;
+  margin-bottom: 50px;
+}
+
+.main-posts-picture {
+  position: relative;
+  min-height: 357px;
+  width: 1184px;
+}
+
+.main-posts-art.second .main-posts-picture {
+  margin-right: auto;
+}
+
+.main-post-image {
+  position: absolute;
+  z-index: -1;
+}
+
+.main-posts-art.first .main-post-image {
+  right: 11%;
+}
+
+.main-posts-art.second .main-post-image {
+  left: 11%;
+}
+
+.main-posts-content {
+  position: relative;
+  max-width: 947px;
+  padding: 84px;
+  min-height: 678px;
+  background-color: #fff;
+}
+
+.main-posts-art.first .main-posts-content {
+  margin-right: auto;
+}
+
+.main-posts-art.second .main-posts-content {
+  margin-left: auto;
+}
+
+.main-posts-shadow {
+  position: absolute;
+  z-index: -1;
+  width: 83%;
+  height: 80%;
+}
+
+.main-posts-art.first .main-posts-shadow {
+  top: -30px;
+  right: -50px;
+}
+
+.main-posts-art.second .main-posts-shadow {
+  top: -30px;
+  left: -50px;
+}
+
+.main-posts-wrap {
+  max-width: 673px;
+  display: flex;
+  margin: 0;
+  flex-direction: column;
+  gap: 64px;
+}
+
+.main-posts-art.first .main-posts-wrap {
+  margin-left: auto;
+}
+
+.main-posts-art.second .main-posts-wrap {
+  margin-right: auto;
+}
+
+.main-posts-wrap h2 {
+  margin: 0;
+}
+
+.exhibition-wrap {
+  max-width: 1552px;
+  margin-right: auto;
+  background: #f6f6f6;
+  position: relative;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  padding: 23px 0;
+  margin-bottom: 200px;
+}
+
+.exhibition-image-wrap {
+  width: 424px;
+  height: 424px;
+  position: relative;
+}
+
+.exhibition-content-wrap {
+  width: 924px;
+}
+
+.exhibition-image-wrap .exhibition-image {
+  position: absolute;
+  top: 65px;
+  left: 152px;
+}
+
+.exhibition-content {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  padding: 65px 0 36px;
+}
+
+.exhibition-content p,
+.exhibition-content h2 {
+  margin: 0;
+}
+
+.popular {
+  margin-bottom: 90px;
+}
+
+.popular-title {
+  margin: 0;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.popular-nav {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-indicator {
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #000;
+}
+
+span.slide-indicator {
+  position: relative;
+  font-size: 20px;
+  top: -9px;
+  right: -2px;
+}
+
+span.slide-total {
+  position: relative;
+  line-height: 0;
+  font-size: 20px;
+  bottom: -3px;
+  left: -1px;
+}
+
+.popular-product {
+  max-width: 1489px;
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+
+.slick-track {
+  display: flex;
+}
+
+.product-item {
+  max-width: 372px;
+}
+
+.product-item a {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  height: 100%;
+  text-decoration: none;
+  align-items: center;
+}
+
+.product-item h3 {
+  text-align: center;
+  margin: 0;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.33333;
+  text-transform: uppercase;
+  text-align: center;
+  color: #000;
+}
+
+p.popular-price {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.33333;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #000;
+}

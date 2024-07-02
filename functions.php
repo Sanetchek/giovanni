@@ -50,6 +50,8 @@ function giovanni_setup() {
 	register_nav_menus(
 		array(
 			'menu-1' => esc_html__( 'Primary', 'giovanni' ),
+			'footer' => esc_html__( 'Footer', 'giovanni' ),
+			'footer-2' => esc_html__( 'Footer-2', 'giovanni' ),
 		)
 	);
 
@@ -86,7 +88,29 @@ function giovanni_setup() {
 	add_theme_support( 'customize-selective-refresh-widgets' );
 
 	// Add Image Sizes
-	add_image_size( 'post-col-1', 542, 362, true );
+	add_image_size( '1920-920', 1920, 920, true );
+	add_image_size( '1440-690', 1440, 690, true );
+	add_image_size( '1280-613', 1280, 613, true );
+	add_image_size( '768-368', 768, 368, true );
+	add_image_size( '360-173', 360, 173, true );
+	add_image_size( '1920-865', 1920, 865, true );
+	add_image_size( '1440-649', 1440, 649, true );
+	add_image_size( '1280-577', 1280, 577, true );
+	add_image_size( '768-346', 768, 346, true );
+	add_image_size( '360-162', 360, 162, true );
+	add_image_size( '1920-400', 1920, 400, true );
+	add_image_size( '1440-300', 1440, 300, true );
+	add_image_size( '1280-267', 1280, 267, true );
+	add_image_size( '768-160', 768, 160, true );
+	add_image_size( '360-75', 360, 75, true );
+	add_image_size( '1184-865', 1184, 865, true );
+	add_image_size( '1400-865', 1400, 865, true );
+	add_image_size( '880-880', 880, 880, true );
+	add_image_size( '436-436', 436, 436, true );
+	add_image_size( '745-516', 745, 516, true );
+	add_image_size( '424-424', 424, 424, true );
+	add_image_size( '372-372', 372, 372, true );
+	add_image_size( '350-350', 350, 350, true );
 
 	/**
 	 * Remove WordPress Meta Generator
@@ -177,20 +201,14 @@ function giovanni_scripts() {
 	// script - jquery
 	wp_enqueue_script('jquery');
 
-	// script - form validation https://jqueryvalidation.org/
-	wp_enqueue_script('jquery-validate', get_template_directory_uri() . '/assets/js/jquery.validate.min.js');
-
 	// script - aos animation https://michalsnik.github.io/aos/
 	wp_enqueue_script( 'aos', get_template_directory_uri() . '/assets/js/aos-next/aos.js', array(), _S_VERSION, true  );
-
-	// script - counter up https://github.com/bfintal/Counter-Up
-	wp_enqueue_script( 'counterup', get_template_directory_uri() . '/assets/js/jquery.counterup.min.js', array(), _S_VERSION, true  );
 
 	// script - slick slider https://kenwheeler.github.io/slick/
 	wp_enqueue_script( 'slick', get_template_directory_uri() . '/assets/js/slick/slick.min.js', array(), _S_VERSION, true  );
 
 	// script - theme
-	wp_enqueue_script( 'giovanni-script', get_template_directory_uri() . '/assets/js/script.js', array('jquery'), _S_VERSION, true );
+	wp_enqueue_script( 'giovanni-script', get_template_directory_uri() . '/assets/js/script.min.js', array('jquery'), _S_VERSION, true );
 
 	// script - comment reply
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -258,24 +276,29 @@ add_filter( 'script_loader_tag', 'add_attribs_to_scripts', 10, 3 );
 /**
  * Actions.
  */
-require get_template_directory() . '/inc/actions.php';
+require get_template_directory() . '/inc/__actions.php';
+
+/**
+ * Filters.
+ */
+require get_template_directory() . '/inc/__filters.php';
 
 /**
  * Ajax.
  */
-require get_template_directory() . '/inc/ajax.php';
+require get_template_directory() . '/inc/__ajax.php';
 
 /**
  * ACF functionality.
  */
-require get_template_directory() . '/inc/acf.php';
+require get_template_directory() . '/inc/__acf.php';
 
 /**
  * Custom functionality.
  */
-require get_template_directory() . '/inc/custom-functions.php';
+require get_template_directory() . '/inc/__custom-functions.php';
 
 /**
  * Customizer.
  */
-require get_template_directory() . '/inc/customizer.php';
+require get_template_directory() . '/inc/__customizer.php';

@@ -1,0 +1,145 @@
+.footer-subscribe {
+  padding: 24px 0 40px;
+  background: #f6f6f6;
+  display: flex;
+  justify-content: center;
+}
+
+.subscribe-container {
+  max-width: 576px;
+  border-bottom: 1px solid #000;
+}
+
+.subscribe-title {
+  margin-bottom: 21px;
+}
+
+.subscribe-text {
+  font-size: 15px;
+  line-height: 1.6;
+  letter-spacing: 0.07em;
+  margin: 0 0 40px;
+}
+
+.subscribe-form form.wpcf7-form {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.subscribe-form label {
+  width: calc(100% - 40px);
+}
+
+input.subscribe-email {
+  width: 100%;
+  padding: 8px 15px;
+  border: 0;
+  background: transparent;
+  margin-bottom: 4px;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.6;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+input.subscribe-email::placeholder {
+  color: #9a9999;
+}
+
+button.arrow-btn {
+  border: 0;
+  background: transparent;
+  padding: 0;
+}
+
+.subscribe-form .wpcf7 form .wpcf7-response-output {
+  flex-shrink: 0;
+  width: 100%;
+  margin: 1em 0 4px;
+}
+
+html[dir="rtl"] .subscribe-form .wpcf7 form .wpcf7-response-output {
+  text-align: right;
+}
+
+.footer-menu .menu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-menu .menu .menu-item a {
+  display: block;
+  padding: 16px 20px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.6;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #000;
+}
+
+.footer-social {
+  margin: 62px 0 38px;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+.social-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+p.copyrights {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 2.57143;
+  text-align: center;
+  color: #000;
+  margin: 0;
+}
+
+.footer-menu-bottom .menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.footer-menu-bottom .menu .menu-item {
+  position: relative;
+}
+
+.footer-menu-bottom .menu .menu-item a {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 2.57143;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  text-align: center;
+  color: #000;
+}
+
+.footer-menu-bottom .menu .menu-item:not(:last-child)::after {
+  content: "|";
+  position: absolute;
+  left: -7px;
+  top: 50%;
+  transform: translateY(-50%);
+}
