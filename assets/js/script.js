@@ -35,6 +35,7 @@
     ]
   });
 
+  // #region Menu
   /**
    * Toggles the visibility of a menu.
    * @param {string} menuSelector - The selector for the menu to be toggled.
@@ -81,7 +82,7 @@
    * @param {string} menuSelector - The selector for the menu to be shown/hidden.
    */
   function addCloseButton(menuSelector) {
-      $(menuSelector).find('.mega-menu-header').on('click', () => toggleMenu(menuSelector, false));
+    $(menuSelector).find('.mega-menu-header').on('click', () => toggleMenu(menuSelector, false));
   }
 
   /**
@@ -124,10 +125,12 @@
     $(window).resize(adjustMenuHandlers);
   });
 
+  // Open/Close Mobile Menu
   $('.burger-menu').on('click', function (e) {
     e.preventDefault();
     $('body').toggleClass('is-block');
     $('.main-navigation').toggleClass('is-show');
   })
+  // #endregion Menu
 
 }(jQuery));
