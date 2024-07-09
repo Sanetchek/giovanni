@@ -79,6 +79,7 @@ html[dir="rtl"] .subscribe-form .wpcf7 form .wpcf7-response-output {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .footer-menu .menu .menu-item a {
@@ -100,6 +101,7 @@ html[dir="rtl"] .subscribe-form .wpcf7 form .wpcf7-response-output {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 32px;
 }
 
@@ -125,6 +127,7 @@ p.copyrights {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 12px;
 }
 

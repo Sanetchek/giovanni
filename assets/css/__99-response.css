@@ -384,6 +384,26 @@
   .mega-menu {
     padding: 33px 15px 22px;
   }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .product-title {
+    font-size: 14px;
+  }
+
+  .main-posts-container {
+    padding: 42px 30px 42px;
+  }
+
+  .footer-subscribe {
+    padding: 24px 15px 40px;
+  }
 }
 
 @media screen and (max-width: 359px) {
