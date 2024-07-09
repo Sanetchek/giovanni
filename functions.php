@@ -52,6 +52,10 @@ function giovanni_setup() {
 			'menu-1' => esc_html__( 'Primary', 'giovanni' ),
 			'footer' => esc_html__( 'Footer', 'giovanni' ),
 			'footer-2' => esc_html__( 'Footer-2', 'giovanni' ),
+			'themes' => esc_html__( 'Themes', 'giovanni' ),
+			'featured' => esc_html__( 'Featured', 'giovanni' ),
+			'men' => esc_html__( 'Men', 'giovanni' ),
+			'women' => esc_html__( 'Women', 'giovanni' ),
 		)
 	);
 
@@ -89,27 +93,22 @@ function giovanni_setup() {
 
 	// Add Image Sizes
 	add_image_size( '1920-920', 1920, 920, true );
-	add_image_size( '1440-690', 1440, 690, true );
-	add_image_size( '1280-613', 1280, 613, true );
-	add_image_size( '768-368', 768, 368, true );
-	add_image_size( '360-173', 360, 173, true );
 	add_image_size( '1920-865', 1920, 865, true );
-	add_image_size( '1440-649', 1440, 649, true );
-	add_image_size( '1280-577', 1280, 577, true );
-	add_image_size( '768-346', 768, 346, true );
-	add_image_size( '360-162', 360, 162, true );
 	add_image_size( '1920-400', 1920, 400, true );
-	add_image_size( '1440-300', 1440, 300, true );
-	add_image_size( '1280-267', 1280, 267, true );
-	add_image_size( '768-160', 768, 160, true );
-	add_image_size( '360-75', 360, 75, true );
-	add_image_size( '1184-865', 1184, 865, true );
+	add_image_size( '1440-690', 1440, 690, true );
+	add_image_size( '1440-400', 1440, 400, true );
 	add_image_size( '1400-865', 1400, 865, true );
+	add_image_size( '1280-600', 1280, 600, true );
+	add_image_size( '1280-267', 1280, 300, true );
+	add_image_size( '1184-865', 1184, 865, true );
 	add_image_size( '880-880', 880, 880, true );
-	add_image_size( '436-436', 436, 436, true );
+	add_image_size( '768-400', 768, 400, true );
 	add_image_size( '745-516', 745, 516, true );
+	add_image_size( '436-436', 436, 436, true );
 	add_image_size( '424-424', 424, 424, true );
+	add_image_size( '424-307', 424, 307, true );
 	add_image_size( '372-372', 372, 372, true );
+	add_image_size( '360-400', 360, 400, true );
 	add_image_size( '350-350', 350, 350, true );
 
 	/**

@@ -15,24 +15,15 @@
 get_header();
 ?>
 
-<main id="primary" class="site-main">
+<?php get_template_part('template-parts/frontpage/hero'); ?>
 
-  <?php
-    if ( have_posts() ) :
-      while ( have_posts() ) :
-        the_post();
-  ?>
-      <?php get_template_part('template-parts/frontpage/hero'); ?>
-      <?php get_template_part('template-parts/frontpage/taxonomies'); ?>
-      <?php get_template_part('template-parts/frontpage/collections'); ?>
-      <?php get_template_part('template-parts/frontpage/home-posts'); ?>
-      <?php get_template_part('template-parts/frontpage/exhibition'); ?>
-      <?php get_template_part('template-parts/frontpage/popular'); ?>
+<main id="primary" class="site-main frontpage">
 
-  <?php
-      endwhile;
-    endif;
-  ?>
+  <?php get_template_part('template-parts/frontpage/taxonomies'); ?>
+  <?php get_template_part('template-parts/frontpage/collections'); ?>
+  <?php get_template_part('template-parts/frontpage/home-posts'); ?>
+  <?php get_template_part('template-parts/frontpage/exhibition'); ?>
+  <?php get_template_part('template-parts/frontpage/popular'); ?>
 
 </main><!-- #main -->
 

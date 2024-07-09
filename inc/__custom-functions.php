@@ -255,3 +255,45 @@ function showYoutubeVideo($link)
 		<img src="https://img.youtube.com/vi/<?php $video ?>/default.jpg" class="br-40" alt="youtube">
 	<?php endif;
 }
+
+/**
+ * Show Logo
+ *
+ * @param [type] $image
+ * @param [type] $text
+ * @return void
+ */
+function show_logo($image, $text) { ?>
+	<a href="/" class="site-branding" rel="home" aria-current="page" tabindex="0">
+	<?php
+		$logo = get_field($image, 'option');
+
+		if ($logo['image']) :
+
+			show_image( $logo['image'], [300, 50], ['class' => 'site-logo'] );
+
+		else :
+			$logo = get_field($text, 'option');
+
+			if ($logo['name']) :
+				echo $logo['name'];
+			endif;
+
+			if ($logo['label']) : ?>
+				<span class="branding-label"><?= $logo['label'] ?></span>
+			<?php endif;
+		endif; ?>
+	</a>
+	<?php
+}
+
+function show_burger($is_active = false) {
+	$is_active = $is_active ? 'open' : '';
+	?>
+	<div id="burger-menu" class="burger-menu <?= $is_active ?>">
+		<div class="burger-bar"></div>
+		<div class="burger-bar"></div>
+		<div class="burger-bar"></div>
+	</div>
+	<?php
+}

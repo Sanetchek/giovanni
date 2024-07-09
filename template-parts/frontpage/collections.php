@@ -1,8 +1,13 @@
 <section id="collections" class="collections">
   <div class="collections-image main-wrap">
     <?php
+      $img_mob = get_field('new_col_image_mob');
       $img = get_field('new_col_image');
-      show_image($img, '1920-920', ['class' => 'collections-bg'])
+
+      show_image($img, '1920-920', ['class' => 'collections-bg page-desk']);
+
+      $img_mob = $img_mob ? $img_mob : $img;
+      show_image($img_mob, '880-880', ['class' => 'page-mob']);
     ?>
   </div>
 
@@ -30,28 +35,13 @@
         <?php
         $products = get_field('new_col_products');
 
-        foreach ($products as $product_id) {
-          $product = wc_get_product($product_id); // Get the product object
-          if ($product) {
-            $title = $product->get_name(); // Get the product title
-            $price = $product->get_price_html(); // Get the price (including sale price if applicable)
-            $image = wp_get_attachment_image_src(get_post_thumbnail_id($product_id), '372-372'); // Get the featured image URL
-            $permalink = get_permalink($product_id); // Get the product permalink
-            ?>
-            <li class="product-card">
-              <a href="<?php echo esc_url($permalink); ?>" class="product-link">
-                <div class="product-image">
-                  <img src="<?php echo esc_url($image[0]); ?>" alt="<?php echo esc_attr($title); ?>">
-                </div>
-                <div class="product-info">
-                  <h2 class="product-title"><?php echo esc_html($title); ?></h2>
-                  <span class="product-price"><?php echo $price; ?></span>
-                </div>
-              </a>
-            </li>
-            <?php
-          }
-        }
+        foreach ($products as $product_id) : ?>
+          <li class="product-card">
+            <?php $args = ['product_id' => $product_id]; ?>
+            <?php get_template_part( 'template-parts/product', 'card', $args ) ?>
+          </li>
+          <?php
+        endforeach;
         ?>
       </ul>
     </div>

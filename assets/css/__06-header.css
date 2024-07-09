@@ -1,3 +1,8 @@
+.main-wrap.header-wrap {
+  padding-left: 64px;
+  padding-right: 64px;
+}
+
 .header-bar {
   padding: 4px 0;
   background-color: #000;
@@ -11,7 +16,7 @@
 
 .header-top {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 24px 0;
   position: relative;
@@ -47,6 +52,13 @@
 }
 
 .user-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+}
+
+.user-actions-side {
   display: flex;
   gap: 32px;
 }
@@ -96,4 +108,98 @@
 .main-navigation .menu-item a:hover,
 .main-navigation .menu-item a.active {
   border-bottom: 2px solid #000;
+}
+
+.mega-menu {
+  position: absolute;
+  top: 165px;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: #fff;
+  padding: 33px 215px 22px 64px;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s ease;
+}
+
+.is-show {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: initial;
+}
+
+.admin-bar .mega-menu {
+  top: calc(165px + 32px);
+}
+
+.mega-menu-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu-wrap {
+  display: flex;
+  gap: 90px;
+}
+
+.links-wrap {
+  display: flex;
+  gap: 32px;
+}
+
+.mega-menu-container .menu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mega-menu-container .menu a {
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.06667;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #000;
+  text-decoration: none;
+}
+
+.menu-btns {
+  display: flex;
+  gap: 13px;
+  margin-top: 52px;
+}
+
+.menu-title {
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.06667;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #000;
+  margin-bottom: 44px;
+}
+
+.link-item {
+  text-decoration: none;
+}
+
+.link-item p {
+  margin-bottom: 0;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.6;
+  text-transform: uppercase;
+  color: #000;
+}
+
+p.link-item-title {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.33333;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #000;
+  margin-top: 10px;
 }

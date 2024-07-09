@@ -14,7 +14,7 @@
           <p><?= $desc ?></p>
 
           <?php if ($link) : ?>
-            <a href="<?= $link ?>" class="btn"><?= $label ?></a>
+            <a href="<?= $link ?>" class="btn btn-hover"><?= $label ?></a>
           <?php endif ?>
         </div>
       </div>

@@ -37,32 +37,10 @@
 
 				<?php endif ?>
 
-				<div class="container header-wrap">
+				<div class="main-wrap header-wrap">
 					<div class="header-top">
 
-						<div id="burger-menu" class="burger-menu"></div>
-
-						<a href="/" class="site-branding" rel="home" aria-current="page" tabindex="0">
-
-							<?php $logo = get_field('header_logo_image', 'option'); ?>
-
-							<?php if ($logo['image']) : ?>
-
-								<?php show_image( $logo['image'], [300, 50], ['class' => 'site-logo'] ); ?>
-
-							<?php else : ?>
-								<?php $logo = get_field('header_logo_name', 'option'); ?>
-
-								<?php if ($logo['name']) : ?>
-									<?= $logo['name'] ?>
-								<?php endif ?>
-
-								<?php if ($logo['label']) : ?>
-									<span class="branding-label"><?= $logo['label'] ?></span>
-								<?php endif ?>
-							<?php endif; ?>
-
-						</a><!-- .site-branding -->
+						<?php show_logo('header_logo_image', 'header_logo_name') ?>
 
 						<div class="user-actions">
 							<?php get_template_part('template-parts/header/user-actions') ?>
@@ -71,6 +49,12 @@
 					</div>
 
 					<nav class="main-navigation">
+						<div class="page-mob">
+							<div class="main-navigation-mob">
+								<?php show_logo('header_logo_image', 'header_logo_name') ?>
+								<?php show_burger(true); ?>
+							</div>
+						</div>
 
 						<?php
 							wp_nav_menu([
@@ -85,3 +69,6 @@
 
 			</div>
 		</header><!-- #masthead -->
+
+		<?php get_template_part('template-parts/mega-menu/collections') ?>
+		<?php get_template_part('template-parts/mega-menu/jewellry') ?>

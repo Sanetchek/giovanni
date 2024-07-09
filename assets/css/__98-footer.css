@@ -1,3 +1,9 @@
+.site-footer {
+  position: relative;
+  background: #fff;
+  padding-bottom: 20px;
+}
+
 .footer-subscribe {
   padding: 24px 0 40px;
   background: #f6f6f6;

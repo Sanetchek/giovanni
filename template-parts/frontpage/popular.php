@@ -24,11 +24,8 @@
       <?php foreach ($productArray as $product_id) :
         $product = wc_get_product($product_id); ?>
         <div class="product-item">
-          <a href="<?php echo get_permalink($product_id); ?>">
-            <?php echo get_the_post_thumbnail($product_id, '372x372'); ?>
-            <h3><?php echo $product->get_name(); ?></h3>
-            <p class="popular-price"><?php echo $product->get_price_html(); ?></p>
-          </a>
+          <?php $args = ['product_id' => $product_id]; ?>
+          <?php get_template_part( 'template-parts/product', 'card', $args ) ?>
         </div>
       <?php endforeach; ?>
     </div>
