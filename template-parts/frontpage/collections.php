@@ -31,7 +31,7 @@
       <h2><?= get_field('new_col_title') ?></h2>
       <p><?= get_field('new_col_subtitle') ?></p>
 
-      <ul class="collections-list">
+      <ul class="products-list">
         <?php
         $products = get_field('new_col_products');
 

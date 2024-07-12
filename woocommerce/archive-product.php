@@ -57,6 +57,13 @@ if ( woocommerce_product_loop() ) {
 		while ( have_posts() ) {
 			the_post();
 
+			global $product;
+
+			// Ensure visibility.
+			if ( empty( $product ) || ! $product->is_visible() ) {
+				return;
+			}
+
 			/**
 			 * Hook: woocommerce_shop_loop.
 			 */
@@ -67,6 +74,7 @@ if ( woocommerce_product_loop() ) {
 	}
 
 	woocommerce_product_loop_end();
+
 
 	/**
 	 * Hook: woocommerce_after_shop_loop.

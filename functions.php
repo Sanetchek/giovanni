@@ -306,3 +306,8 @@ require get_template_directory() . '/inc/__custom-functions.php';
  * Customizer.
  */
 require get_template_directory() . '/inc/__customizer.php';
+
+/**
+ * Woocommerce.
+ */
+require get_template_directory() . '/inc/__woocommerce.php';
