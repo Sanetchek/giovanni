@@ -14,20 +14,23 @@ $second_image = $second_image;
 ?>
 
 <?php if ($product) : ?>
-  <a href="<?php echo esc_url($permalink); ?>" class="product-link">
+  <div class="product-link">
     <div class="product-image">
-      <?php show_image($image, '372-372') ?>
+      <a href="<?php echo esc_url($permalink); ?>"><?php show_image($image, '372-372') ?></a>
 
       <div class="product-hidden product-hidden-img">
+        <?php echo simpleLikes($product_id) ?>
         <?php show_image($second_image, '372-372') ?>
       </div>
     </div>
 
-    <div class="product-info">
-      <h2 class="product-title"><?php echo esc_html($title); ?></h2>
-      <span class="product-price"><?php echo $price; ?></span>
-    </div>
+    <a href="<?php echo esc_url($permalink); ?>">
+      <div class="product-info">
+        <h2 class="product-title"><?php echo esc_html($title); ?></h2>
+        <span class="product-price"><?php echo $price; ?></span>
+      </div>
+    </a>
 
-    <div class="product-hidden product-hidden-btn btn-hover white"><?= __('לקנות עכשיו', 'giovanni') ?></div>
-  </a>
+    <a href="<?php echo esc_url($permalink); ?>"><span class="product-hidden product-hidden-btn btn-hover white"><?= __('לקנות עכשיו', 'giovanni') ?></span></a>
+  </div>
 <?php endif ?>

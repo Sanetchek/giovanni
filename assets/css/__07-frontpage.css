@@ -196,6 +196,10 @@ li.product-card {
   text-decoration: none;
 }
 
+.product-link a {
+  text-decoration: none;
+}
+
 .product-title {
   font-family: "Assistant", sans-serif;
   font-weight: 400;
@@ -243,6 +247,8 @@ li.product-card {
 
 .product-hidden-img {
   width: 100%;
+  max-width: 372px;
+  margin: 0 auto;
   position: absolute;
   top: 0;
   left: 50%;
@@ -255,7 +261,15 @@ li.product-card {
   margin: 0 auto;
 }
 
+.post-review__like {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+}
+
 .product-hidden-btn {
+  display: block;
   width: 100%;
   background: #000;
   font-weight: 600;

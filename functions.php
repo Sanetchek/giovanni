@@ -293,6 +293,11 @@ require get_template_directory() . '/inc/__ajax.php';
 require get_template_directory() . '/inc/__acf.php';
 
 /**
+ * Likes functionality.
+ */
+require get_template_directory() . '/inc/__likes.php';
+
+/**
  * Custom functionality.
  */
 require get_template_directory() . '/inc/__custom-functions.php';
