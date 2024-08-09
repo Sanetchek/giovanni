@@ -590,6 +590,14 @@
   .filter-mob {
     display: block;
   }
+
+  .image-caption-item.half {
+    width: 100%;
+  }
+
+  .article-slider .slick-list {
+    max-width: 90%;
+  }
 }
 
 @media screen and (max-width: 359px) {

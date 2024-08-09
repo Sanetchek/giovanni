@@ -44,6 +44,33 @@
     });
   });
 
+  /**
+   * Initialize sliders on the page
+   */
+  $('.article-slider-list').each(function () {
+    const $slider = $(this);
+    const $slideIndicator = $slider.closest('.article-slider').find('.slide-indicator');
+    const $slideTotal = $slider.closest('.article-slider').find('.slide-total');
+
+    $slider.on('init reInit afterChange', function(event, slick, currentSlide, nextSlide) {
+      const currentIndex = (currentSlide ? currentSlide : 0) + 1;
+      const totalSlides = slick.slideCount;
+      $slideIndicator.text(currentIndex);
+      $slideTotal.text(totalSlides);
+    });
+
+    $slider.slick({
+      dots: false,
+      infinite: true,
+      speed: 300,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      rtl: false,
+      prevArrow: $slider.closest('.article-slider').find('.slick-prev'),
+      nextArrow: $slider.closest('.article-slider').find('.slick-next'),
+    });
+  });
+
   if (screenWidth <= 1024) {
     $('.product-gallery__wrapper').slick({
       dots: true,

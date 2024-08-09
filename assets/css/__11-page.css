@@ -38,6 +38,39 @@
   text-align: center;
 }
 
+.paragraph-link {
+  text-decoration: none;
+  color: #000;
+  display: flex;
+  gap: 10px;
+  width: max-content;
+  margin: 40px auto 0;
+  overflow: hidden;
+  height: 24px;
+}
+
+.paragraph-link-animation {
+  display: flex;
+  flex-direction: column;
+  text-transform: uppercase;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.paragraph-link:hover .paragraph-link-animation {
+  transform: translateY(-32px);
+}
+
+.paragraph-link::before {
+  content: '';
+  display: block;
+  width: 16px;
+  height: 1px;
+  background-color: #000;
+  position: relative;
+  top: 11px;
+}
+
 .image-caption-list {
   list-style: none;
   padding: 0;
@@ -66,4 +99,33 @@
   z-index: 100;
   background: #fff;
   padding: 4px 16px;
+}
+
+.article-downloads {
+  border-top: 1px solid #e2e2e2;
+  padding: 40px 0 60px;
+}
+
+.download-link {
+  display: flex;
+  gap: 11px;
+  width: max-content;
+  margin: 0 auto;
+  margin-top: 24px;
+  text-decoration: none;
+  color: #000;
+}
+
+.article-slider {
+  overflow-x: hidden;
+}
+
+.article-slider .slick-track {
+  display: flex;
+  gap: 10px;
+}
+
+.article-slider .slick-list {
+  max-width: 80%;
+  margin: 0 auto 20px;
 }
