@@ -14,6 +14,10 @@
   color: #fff;
 }
 
+.header-bar-link {
+  text-decoration: none;
+}
+
 .header-top {
   display: flex;
   justify-content: flex-end;
@@ -202,4 +206,135 @@ p.link-item-title {
   text-transform: uppercase;
   color: #000;
   margin-top: 10px;
+}
+
+.header-mini-cart {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1000;
+  background: #fff;
+  padding: 80px 20px 20px;
+  overflow-y: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.header-mini-cart.is-show {
+  pointer-events: initial;
+  animation: slideLeft 0.5s forwards;
+}
+
+.header-mini-cart.is-hidden {
+  pointer-events: none;
+  animation: slideRight 0.5s forwards;
+}
+
+@keyframes slideLeft {
+  from {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(110%);
+  }
+
+  to {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideRight {
+  from {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(110%);
+  }
+}
+
+.admin-bar .header-mini-cart {
+  top: 32px;
+}
+
+.header-mini-cart-close {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+}
+
+.mini_cart_item {
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  gap: 40px;
+  margin-bottom: 30px;
+  padding-top: 10px;
+  border-top: 1px solid #aaa;
+}
+
+.mini_cart_item::after,
+.mini_cart_item::before {
+  content: none !important;
+}
+
+.mini_cart_item a {
+  display: flex !important;
+  align-items: flex-end;
+  gap: 8px;
+  text-decoration: none;
+  color: #000;
+  font-weight: 600;
+}
+
+.mini_cart_item a.remove {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  text-decoration: none;
+  display: flex !important;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  color: #fff !important;
+  border-radius: 50px;
+}
+
+.mini_cart_item a img {
+  width: 60px !important;
+}
+
+.header-mini-cart .total {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #000;
+}
+
+.header-mini-cart .buttons {
+  margin-top: 40px;
+  display: flex;
+  gap: 8px;
+}
+
+.header-mini-cart .buttons .button {
+  background-color: #000 !important;
+  color: #fff !important;
+  width: 100%;
+  text-align: center;
+}
+
+.header-mini-cart .buttons .checkout {
+  display: none;
 }

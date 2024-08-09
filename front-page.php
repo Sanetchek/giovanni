@@ -17,7 +17,7 @@ get_header();
 
 <?php get_template_part('template-parts/frontpage/hero'); ?>
 
-<main id="primary" class="site-main frontpage">
+<main id="primary" class="site-main frontpage page-container">
 
   <?php get_template_part('template-parts/frontpage/taxonomies'); ?>
   <?php get_template_part('template-parts/frontpage/collections'); ?>

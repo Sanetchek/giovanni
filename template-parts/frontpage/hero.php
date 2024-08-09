@@ -5,11 +5,7 @@ $bg_mob = get_field('hero_image_mob');
 
 <section id="hero" class="hero">
   <div class="hero-image main-wrap">
-    <?php show_image($bg, '1920-865', ['class' => 'page-desk']) ?>
-    <?php
-      $bg_mob = $bg_mob ? $bg_mob : $bg;
-      show_image($bg_mob, '880-880', ['class' => 'page-mob']);
-    ?>
+    <?php get_template_part('template-parts/page', 'hero', ['hero_image' => $bg, 'hero_image_mob' => $bg_mob]) ?>
 
     <div class="hero-wrap">
       <div class="hero-content">

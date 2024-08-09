@@ -102,6 +102,8 @@ function giovanni_setup() {
 	add_image_size( '1280-267', 1280, 300, true );
 	add_image_size( '1184-865', 1184, 865, true );
 	add_image_size( '880-880', 880, 880, true );
+	add_image_size('800-full', 800, 0, false);
+	add_image_size('800-980', 800, 980, array('center', 'center'));
 	add_image_size( '768-400', 768, 400, true );
 	add_image_size( '745-516', 745, 516, true );
 	add_image_size( '436-436', 436, 436, true );
@@ -214,10 +216,14 @@ function giovanni_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 
+	global $wp_query;
+
 	// wordpress localize
 	wp_localize_script('giovanni-script', 'giovanni', [
 		'ajax_url' => admin_url('admin-ajax.php'),
 		'site_url' => get_home_url(),
+		'current_page' => max( 1, get_query_var('paged') ),
+		'max_page' => $wp_query->max_num_pages
 	]);
 
 	// dequeue

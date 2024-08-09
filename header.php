@@ -28,14 +28,7 @@
 		<header id="masthead">
 			<div class="site-header">
 
-				<?php $bar = get_field('header_bar', 'option'); ?>
-				<?php if ($bar) : ?>
-
-					<div class="header-bar">
-						<?= __($bar, 'giovanni'); ?>
-					</div>
-
-				<?php endif ?>
+				<?php get_template_part('template-parts/header/bar') ?>
 
 				<div class="main-wrap header-wrap">
 					<div class="header-top">

@@ -17,9 +17,14 @@ get_header();
 
 <?php get_template_part('template-parts/collections/hero'); ?>
 
-<main id="primary" class="site-main collections">
+<main id="primary" class="site-main collectionspage page-container">
 
+  <?php get_template_part('template-parts/collections/block', '1'); ?>
+  <?php get_template_part('template-parts/collections/block', '2'); ?>
+  <?php get_template_part('template-parts/collections/block', '3'); ?>
 
 </main><!-- #main -->
+
+<?php get_template_part('template-parts/collections/block', '4'); ?>
 
 <?php get_footer(); ?>

@@ -4,7 +4,7 @@
   z-index: 0;
 }
 
-.frontpage {
+.page-container {
   background: #fff;
   position: relative;
   z-index: 1;
@@ -49,7 +49,7 @@
 }
 
 .taxonomies {
-  padding-top: 64px;
+  padding: 64px 0 5px;
 }
 
 .taxonomies-title {
@@ -185,6 +185,10 @@
 
 li.product-card {
   width: calc(100% / 4);
+}
+
+li.product-card-big {
+  width: calc(100% / 2);
 }
 
 .product-link {
@@ -457,10 +461,23 @@ span.slide-total {
   max-width: 1489px;
   margin: 0 auto;
   overflow-x: hidden;
+  direction: ltr;
 }
 
-.slick-track {
+.popular-product .slick-track,
+.product-container .slick-track {
   display: flex;
+}
+
+.popular-product .product-item {
+  max-width: unset;
+}
+
+.product-container {
+  max-width: 1520px;
+  margin: 0 auto;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .product-item {

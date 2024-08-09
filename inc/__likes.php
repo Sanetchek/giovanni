@@ -103,7 +103,9 @@ function processSimpleLike()
     }
 
     update_field($field_count, $like_count, $post_id);
-    wp_send_json(['count' => $like_count, 'icon' => $heart]);
+    $likes = query_user_liked_posts();
+
+    wp_send_json(['count' => $like_count, 'icon' => $heart, 'total_likes' => $likes['count']]);
   }
 
   wp_die();

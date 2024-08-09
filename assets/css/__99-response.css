@@ -9,6 +9,14 @@
     padding-left: 32px;
     padding-right: 32px;
   }
+
+  .archive-header-content nav.woocommerce-breadcrumb {
+    margin-bottom: 20px;
+  }
+
+  .archive-header-content header.woocommerce-products-header h1 {
+    margin: 0 0 40px;
+  }
 }
 
 @media screen and (max-width: 1600px) {
@@ -29,6 +37,15 @@
   .collections-shadow,
   .collections-shadow svg {
     width: 100%;
+  }
+
+  .archive-header-content header.woocommerce-products-header {
+    max-width: 800px;
+    margin-right: 80px;
+  }
+
+  .product-user-info-wrap {
+    overflow-x: hidden;
   }
 }
 
@@ -67,13 +84,10 @@
     width: calc(100% / 2);
   }
 
-  .main-posts-picture {
-    width: 100%;
-  }
-
-  .main-posts-picture {
+  .main-posts-picture,
+  .single-product-post .main-posts-picture {
     position: relative;
-    min-height: 357px;
+    min-height: auto;
     width: 100%;
     display: flex;
     margin-bottom: -30%;
@@ -182,7 +196,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 999;
+    z-index: 9999;
     background: #fff;
     overflow-y: auto;
 
@@ -280,8 +294,120 @@
     transform: scale(-1);
   }
 
+  html[dir="rtl"] .product-gallery__wrapper {
+    direction: ltr;
+  }
+
   .mega-menu-container .menu li {
     padding: 0 0 10px;
+  }
+
+  .archive-header {
+    height: 240px;
+  }
+
+  .archive-header-content header.woocommerce-products-header {
+    max-width: 100%;
+    margin-right: 0;
+  }
+
+  .archive-header-content {
+    position: initial;
+  }
+
+  .archive-header-content nav.woocommerce-breadcrumb {
+    position: absolute;
+    top: 0;
+  }
+
+  .page-description {
+    display: none;
+  }
+
+  .archive-header-content .container {
+    max-width: 100%;
+  }
+
+  .archive-header-content header.woocommerce-products-header h1 {
+    margin: 0;
+    padding: 16px 24px 24px;
+  }
+
+  .archive-header-content header.woocommerce-products-header h1,
+  .product-count {
+    color: #000;
+  }
+
+  .products-filter {
+    margin-top: 85px;
+  }
+
+  li.product-card-big {
+    width: 100%;
+  }
+
+  .adv-link img,
+  .adv-link {
+    width: 100%;
+  }
+
+  .product-summary-wrap {
+    flex-direction: column;
+  }
+
+  .product-gallery__wrapper * {
+    width: 100%;
+  }
+
+  .product-container .product-gallery,
+  .product-gallery__image.half {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .custom-slider-cl {
+    max-width: 100% !important;
+  }
+
+  .product-container .product-gallery {
+    overflow: hidden;
+  }
+
+  .product-container .product-summary {
+    max-width: 100%;
+  }
+
+  .product-summary .price {
+    margin-top: 0;
+  }
+
+  .product-user-info {
+    flex-direction: column;
+  }
+
+  .product-info-shadow svg {
+    max-width: max-content;
+  }
+
+  .product-summary-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .woocommerce div.product form.cart {
+    align-items: center;
+  }
+
+  .single-product-content-wrap {
+    gap: 40px;
+    flex-direction: column;
+  }
+
+  .product-user-info-wrap::before {
+    content: '';
+    bottom: 150px;
+    height: auto;
   }
 }
 
@@ -331,6 +457,11 @@
 
   .mega-menu-container {
     flex-direction: column;
+  }
+
+  .main-posts-picture,
+  .single-product-post .main-posts-picture {
+    margin-bottom: 0;
   }
 }
 
@@ -403,6 +534,61 @@
 
   .footer-subscribe {
     padding: 24px 15px 40px;
+  }
+
+  li.product-card {
+    width: 100%;
+  }
+
+  .products-filter-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 43px;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    background: #fff;
+    padding: 40px 20px;
+    box-shadow: 0 12px 30px -18px rgba(0, 0, 0, 0.75);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 0.5s ease;
+  }
+
+  .products-filter-container.is-show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: initial;
+  }
+
+  .filter-side {
+    width: 100%;
+    display: flex;
+    gap: 43px;
+    flex-direction: column;
+  }
+
+  .filter-sort {
+    display: flex;
+    gap: 0;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .btn-filter {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+  }
+
+  .filter-mob {
+    display: block;
   }
 }
 
