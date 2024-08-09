@@ -117,7 +117,7 @@
 }
 
 .article-slider {
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .article-slider .slick-track {
@@ -128,4 +128,8 @@
 .article-slider .slick-list {
   max-width: 80%;
   margin: 0 auto 20px;
+}
+
+.article-slider .popular-nav {
+  margin-bottom: 0;
 }
