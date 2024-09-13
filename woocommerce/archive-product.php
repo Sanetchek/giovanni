@@ -31,9 +31,6 @@ get_header( 'shop' ); ?>
 
 			if (!is_shop()) {
 				$hero = get_field('hero', $term);
-				echo '<pre>';
-				print_r($hero);
-				echo '</pre>';
 				if ($hero) {
 					$archive_image = $hero['page_background'];
 					$archive_image_mob = $hero['page_background_mob'];
@@ -103,6 +100,16 @@ get_header( 'shop' ); ?>
 
 		</div>
 
+		<?php if (is_shop()) : ?>
+			<div class="shop-taxonomies">
+				<?php
+					$shop_page_id = get_option( 'woocommerce_shop_page_id' );
+					$taxonomies = get_field('taxonomy_filter', $shop_page_id);
+					get_template_part('template-parts/sections/taxonomies', '', ['title' => '', 'taxonomies' => $taxonomies]);
+				?>
+			</div>
+		<?php endif ?>
+
 		<div id="products-filter" class="products-filter">
 			<div class="filter-mob">
 				<button type="button" class="btn btn-no-border open-filter">
@@ -114,49 +121,7 @@ get_header( 'shop' ); ?>
 			</div>
 
 			<div class="products-container">
-				<div class="products-filter-container">
-					<div class="filter-side">
-						<div class="filter-wrap filter-collection">
-							<button type="button" class="btn btn-no-border btn-filter">
-								<span><?= __('אוספים', 'giovanni') ?></span>
-								<svg class='icon-chevron-down' width='24' height='24'>
-									<use href='<?= assets('img/sprite.svg#icon-chevron-down') ?>'></use>
-								</svg>
-							</button>
-
-							<input type="hidden" name="collection" id="collection">
-							<div class="filter-dropdown"></div>
-						</div>
-
-						<div class="filter-wrap filter-materials">
-							<button type="button" class="btn btn-no-border btn-filter">
-								<span><?= __('חומרים', 'giovanni') ?></span>
-								<svg class='icon-chevron-down' width='24' height='24'>
-									<use href='<?= assets('img/sprite.svg#icon-chevron-down') ?>'></use>
-								</svg>
-							</button>
-
-							<input type="hidden" name="materials" id="materials">
-							<div class="filter-dropdown"></div>
-						</div>
-					</div>
-
-					<div class="filter-side">
-						<div class="filter-wrap filter-sort">
-							<span class="filter-label"><?= __('מיין לפי', 'giovanni') ?></span>
-
-							<button type="button" class="btn btn-no-border btn-filter">
-								<span><?= __('המלצות', 'giovanni') ?></span>
-								<svg class='icon-frame' width='24' height='24'>
-									<use href='<?= assets('img/sprite.svg#icon-frame') ?>'></use>
-								</svg>
-							</button>
-
-							<input type="hidden" name="sort" id="sort">
-							<div class="filter-dropdown"></div>
-						</div>
-					</div>
-				</div>
+				<?php display_product_filters(); ?>
 			</div>
 		</div>
 

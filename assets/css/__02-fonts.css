@@ -1,57 +1,65 @@
-@import url('https://fonts.googleapis.com/css2?family=Jost:wght@500&family=Libre+Caslon+Text&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@500&family=Libre+Caslon+Text&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 @font-face {
   font-family: "Assistant";
   src: url("assets/fonts/Assistant-Bold.ttf");
   font-weight: 700;
   font-style: normal;
-  font-display: swap; }
+  font-display: swap;
+}
 
 @font-face {
   font-family: "Assistant";
   src: url("assets/fonts/Assistant-ExtraBold.ttf");
   font-weight: 800;
   font-style: normal;
-  font-display: swap; }
+  font-display: swap;
+}
 
 @font-face {
   font-family: "Assistant";
   src: url("assets/fonts/Assistant-ExtraLight.ttf");
   font-weight: 200;
   font-style: normal;
-  font-display: swap; }
+  font-display: swap;
+}
 
 @font-face {
   font-family: "Assistant";
   src: url("assets/fonts/Assistant-Light.ttf");
   font-weight: 300;
   font-style: normal;
-  font-display: swap; }
+  font-display: swap;
+}
 
 @font-face {
   font-family: "Assistant";
   src: url("assets/fonts/Assistant-Medium.ttf");
   font-weight: 500;
   font-style: normal;
-  font-display: swap; }
+  font-display: swap;
+}
 
 @font-face {
   font-family: "Assistant";
   src: url("assets/fonts/Assistant-Regular.ttf");
   font-weight: 400;
   font-style: normal;
-  font-display: swap; }
+  font-display: swap;
+}
 
 @font-face {
   font-family: "Assistant";
   src: url("assets/fonts/Assistant-SemiBold.ttf");
   font-weight: 600;
   font-style: normal;
-  font-display: swap; }
+  font-display: swap;
+}
 
 @font-face {
   font-family: "Roboto";
   src: url("assets/fonts/Roboto-Regular.ttf");
   font-weight: 400;
   font-style: normal;
-  font-display: swap; }
+  font-display: swap;
+}

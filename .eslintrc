@@ -1,8 +1,63 @@
 {
     "extends": [
-        "plugin:@wordpress/eslint-plugin/esnext"
+        "plugin:@wordpress/eslint-plugin/recommended",
+        "plugin:@wordpress/eslint-plugin/esnext",
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:jsx-a11y/recommended"
     ],
     "env": {
-        "browser": true
+        "browser": true,
+        "node": true,
+        "es6": true,
+        "jquery": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 2020,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "plugins": [
+        "@wordpress",
+        "react",
+        "jsx-a11y",
+        "import"
+    ],
+    "rules": {
+        "prettier/prettier": ["error", {
+            "singleQuote": true,
+            "printWidth": 80,
+            "trailingComma": "es5"
+        }],
+        "react/prop-types": "off",
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "import/order": ["error", {
+            "groups": ["builtin", "external", "internal"],
+            "pathGroups": [
+                {
+                    "pattern": "@wordpress/**",
+                    "group": "external",
+                    "position": "before"
+                }
+            ],
+            "pathGroupsExcludedImportTypes": ["builtin"],
+            "newlines-between": "always"
+        }],
+        "@wordpress/dependency-group": "warn",
+        "jsx-a11y/anchor-is-valid": ["error", {
+            "components": ["Link"],
+            "specialLink": ["hrefLeft", "hrefRight"],
+            "aspects": ["invalidHref", "preferButton"]
+        }],
+        "no-console": "warn",
+        "eqeqeq": ["error", "always"],
+        "curly": ["error", "all"],
+        "no-unused-vars": ["warn", { "varsIgnorePattern": "^_" }],
+        "no-var": "error",
+        "prefer-const": "error",
+        "no-alert": "warn",
+        "consistent-return": "error"
     }
 }

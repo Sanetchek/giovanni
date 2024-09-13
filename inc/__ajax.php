@@ -32,3 +32,37 @@ function giovanni_ajax_add_to_cart() {
 }
 add_action('wp_ajax_woocommerce_ajax_add_to_cart', 'giovanni_ajax_add_to_cart');
 add_action('wp_ajax_nopriv_woocommerce_ajax_add_to_cart', 'giovanni_ajax_add_to_cart');
+
+/**
+ * Handle AJAX Search
+ */
+function giovanni_ajax_search() {
+  check_ajax_referer('giovanni_search_nonce', 'nonce');
+
+  $search_query = sanitize_text_field($_GET['s_modal']);
+
+  $args = array(
+    's' => $search_query,
+    'posts_per_page' => -1,
+  );
+
+  $query = new WP_Query($args);
+
+  if ($query->have_posts()) {
+    $count = 0;
+
+    while ($query->have_posts()) {
+      $query->the_post();
+
+      get_template_part('template-parts/search', 'card', ['id' => get_the_ID(), 'count' => $count]);
+      $count++;
+    }
+  } else {
+    echo '<li class="results-not-found">' . __('לא נמצאו תוצאות', 'giovanni') . '</li>';
+  }
+
+  wp_reset_postdata();
+  wp_die();
+}
+add_action('wp_ajax_giovanni_search', 'giovanni_ajax_search');
+add_action('wp_ajax_nopriv_giovanni_search', 'giovanni_ajax_search');

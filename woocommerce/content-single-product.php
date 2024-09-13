@@ -12,7 +12,7 @@
  *
  * @see     https://woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
- * @version 3.6.0
+ * @version 50.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -88,7 +88,7 @@ if ( post_password_required() ) {
 			<div class="single-product-content-wrap">
 				<div class="single-product-description">
 					<h2 class="single-product-title"><?= __('Description', 'giovanni') ?></h2>
-					<?php the_field('description') ?>
+					<?php the_content() ?>
 				</div>
 
 				<div class="single-product-details">

@@ -56,6 +56,9 @@ function giovanni_setup() {
 			'featured' => esc_html__( 'Featured', 'giovanni' ),
 			'men' => esc_html__( 'Men', 'giovanni' ),
 			'women' => esc_html__( 'Women', 'giovanni' ),
+			'charms' => esc_html__( 'Charms', 'giovanni' ),
+			'gifts' => esc_html__( 'Gifts', 'giovanni' ),
+			'occasions' => esc_html__( 'Occasions', 'giovanni' ),
 		)
 	);
 
@@ -95,6 +98,7 @@ function giovanni_setup() {
 	add_image_size( '1920-920', 1920, 920, true );
 	add_image_size( '1920-865', 1920, 865, true );
 	add_image_size( '1920-400', 1920, 400, true );
+	add_image_size( '1780-full', 1920, 0, false );
 	add_image_size( '1440-690', 1440, 690, true );
 	add_image_size( '1440-400', 1440, 400, true );
 	add_image_size( '1400-865', 1400, 865, true );
@@ -109,6 +113,7 @@ function giovanni_setup() {
 	add_image_size( '436-436', 436, 436, true );
 	add_image_size( '424-424', 424, 424, true );
 	add_image_size( '424-307', 424, 307, true );
+	add_image_size( '382-382', 382, 382, true );
 	add_image_size( '372-372', 372, 372, true );
 	add_image_size( '360-400', 360, 400, true );
 	add_image_size( '350-350', 350, 350, true );
@@ -128,6 +133,9 @@ function giovanni_setup() {
 	remove_action('wp_head', 'adjacent_posts_rel_link', 10);
 	remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10);
 	remove_action('wp_head', 'print_emoji_detection_script', 7);
+
+	// Disable automatic paragraph tags in Contact Form 7
+	add_filter('wpcf7_autop_or_not', '__return_false');
 }
 add_action( 'after_setup_theme', 'giovanni_setup' );
 
@@ -209,7 +217,7 @@ function giovanni_scripts() {
 	wp_enqueue_script( 'slick', get_template_directory_uri() . '/assets/js/slick/slick.min.js', array(), _S_VERSION, true  );
 
 	// script - theme
-	wp_enqueue_script( 'giovanni-script', get_template_directory_uri() . '/assets/js/script.min.js', array('jquery'), _S_VERSION, true );
+	wp_enqueue_script( 'giovanni-script', get_template_directory_uri() . '/assets/js/scripts.min.js', array('jquery'), _S_VERSION, true );
 
 	// script - comment reply
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -223,7 +231,9 @@ function giovanni_scripts() {
 		'ajax_url' => admin_url('admin-ajax.php'),
 		'site_url' => get_home_url(),
 		'current_page' => max( 1, get_query_var('paged') ),
-		'max_page' => $wp_query->max_num_pages
+		'max_page' => $wp_query->max_num_pages,
+		'search_nonce' => wp_create_nonce('giovanni_search_nonce'),
+		'product_filter_nonce' => wp_create_nonce('giovanni_product_filter_nonce'),
 	]);
 
 	// dequeue

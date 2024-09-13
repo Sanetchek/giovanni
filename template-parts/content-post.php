@@ -9,7 +9,7 @@
 
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class( 'article' ); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class( 'article main-wrap' ); ?>>
 
 	<?php
 		$bg = get_field('background_image');

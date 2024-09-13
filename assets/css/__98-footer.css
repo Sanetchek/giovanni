@@ -50,6 +50,7 @@ input.subscribe-email {
   line-height: 1.6;
   letter-spacing: 0.07em;
   text-transform: uppercase;
+  border: none !important;
 }
 
 input.subscribe-email::placeholder {

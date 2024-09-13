@@ -57,34 +57,6 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters('active_plugins', ge
   add_action( 'woocommerce_shop_loop_header', 'custom_woocommerce_product_taxonomy_archive_header', 10 );
 
   /**
-   * Infinite Scroll for Products Loop
-   *
-   * @return void
-   */
-  function load_more_products() {
-    $paged = $_POST['page'] + 1; // next page
-
-    $args = array(
-      'post_type' => 'product',
-      'paged' => $paged
-    );
-
-    $query = new WP_Query( $args );
-
-    if( $query->have_posts() ) :
-      while( $query->have_posts() ): $query->the_post();
-
-        wc_get_template_part( 'content', 'product' );
-
-      endwhile;
-    endif;
-    wp_reset_postdata();
-    wp_die();
-  }
-  add_action('wp_ajax_load_more_products', 'load_more_products');
-  add_action('wp_ajax_nopriv_load_more_products', 'load_more_products');
-
-  /**
    * Remove woocommerce actions
    *
    * @return void
@@ -184,4 +156,16 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters('active_plugins', ge
     return $fragments;
   }
   add_filter( 'woocommerce_add_to_cart_fragments', 'giovanni_add_to_cart_fragment' );
+
+  /**
+   * Remove downloads from my-account
+   *
+   * @param [type] $items
+   * @return void
+   */
+  function remove_downloads_from_my_account($items) {
+    unset($items['downloads']); // Remove the Downloads tab
+    return $items;
+  }
+  add_filter('woocommerce_account_menu_items', 'remove_downloads_from_my_account', 999);
 }

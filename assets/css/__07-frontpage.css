@@ -29,6 +29,7 @@
   max-width: 1920px;
   width: 100%;
   margin: 0 auto;
+  overflow-x: hidden;
 }
 
 .hero-title {
@@ -381,9 +382,20 @@ li.product-card-big {
   flex-direction: row-reverse;
   justify-content: flex-end;
   align-items: center;
-  gap: 10px;
   padding: 23px 0;
   margin-bottom: 200px;
+}
+
+.exhibition-wrap.reversed {
+  flex-direction: row;
+  margin-right: unset;
+}
+
+.exhibition-wrap.reversed .exhibition-image-wrap .exhibition-image {
+  position: absolute;
+  top: 65px;
+  left: unset;
+  right: 152px;
 }
 
 .exhibition-image-wrap {
@@ -407,7 +419,7 @@ li.product-card-big {
   display: flex;
   flex-direction: column;
   gap: 64px;
-  padding: 65px 0 36px;
+  padding: 65px 20px 36px;
 }
 
 .exhibition-content p,

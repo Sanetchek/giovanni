@@ -10,44 +10,36 @@
 get_header();
 ?>
 
-	<main id="primary" class="site-main">
+	<main id="primary" class="site-main search-page">
 
 		<div class="container">
-			<?php if ( have_posts() ) : ?>
+			<header class="page-header">
+				<?php get_search_form(); ?>
 
-				<header class="page-header">
-					<h1 class="page-title main-title title-green">
-						<?php
-						/* translators: %s: search query. */
-						printf( esc_html__( 'Search Results for: %s', 'giovanni' ), '<div>" ' . get_search_query() . ' "</div>' );
-						?>
-					</h1>
-				</header><!-- .page-header -->
-
-				<div class="row row__30">
+				<h1 class="page-title main-title search-title">
 					<?php
-					/* Start the Loop */
-					while ( have_posts() ) :
-						the_post();
+					/* translators: %s: search query. */
+					printf( esc_html__( 'תוצאות חיפוש עבור: %s', 'giovanni' ), '"<span> ' . get_search_query() . ' </span>"' );
+					?>
+				</h1>
+			</header><!-- .page-header -->
 
-						/**
-						 * Run the loop for the search to output the results.
-						 * If you want to overload this in a child theme then include a file
-						 * called content-search.php and that will be used instead.
-						 */
-						get_template_part( 'template-parts/content', 'search' );
+			<ul class="search-modal-content">
+				<?php
+					if (have_posts()) {
+						$count = 0;
 
-					endwhile;
+						while (have_posts()) {
+							the_post();
 
-					the_posts_navigation();
-
-				else :
-
-					get_template_part( 'template-parts/content', 'none' );
-
-				endif;
+							get_template_part('template-parts/search', 'card', ['id' => get_the_ID(), 'count' => $count]);
+							$count++;
+						}
+					} else {
+						echo '<li class="results-not-found">' . __('לא נמצאו תוצאות', 'giovanni') . '</li>';
+					}
 				?>
-			</div>
+			</ul>
 		</div>
 
 	</main><!-- #main -->

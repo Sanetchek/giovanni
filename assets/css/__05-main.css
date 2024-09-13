@@ -4,6 +4,7 @@ body {
   font-weight: 400;
   line-height: 1.5;
   overflow-x: hidden;
+  background-color: transparent;
 }
 
 .is-block {
@@ -72,6 +73,25 @@ video {
   height: auto;
 }
 
+a {
+  color: #000;
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+select {
+  height: 50px;
+  border: 1px solid #000;
+  padding: 8px 20px;
+  max-width: 100%;
+  width: 100%;
+}
+
+textarea {
+  min-height: 50px;
+  border: 1px solid #000;
+  padding: 8px 20px;
+}
+
 .btn,
 .button {
   display: flex;
@@ -83,6 +103,7 @@ video {
   font-size: 15px;
   line-height: 1.06667;
   letter-spacing: 0.07em;
+  color: #000;
   text-transform: uppercase;
   border: 1px solid #000;
   padding: 16px 24px;
@@ -124,6 +145,31 @@ html[dir="rtl"] .btn-hover:hover::after {
 html[dir="rtl"] .btn-hover.white:hover::after {
   content: '';
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="6" viewBox="0 0 24 6" fill="none"><path d="M0 3L5 5.88675L5 0.113247L0 3ZM24 2.5L4.5 2.5L4.5 3.5L24 3.5L24 2.5Z" fill="white"/></svg>');
+}
+
+/* Spinner */
+.btn.is-loaded::after,
+.button.is-loaded::after {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  border-top-color: #000000;
+  animation: spin 0.6s linear infinite;
+  margin: 0 8px;
+}
+
+/* Spinner Animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .btn-black {
@@ -282,6 +328,10 @@ html[dir="rtl"] .btn-hover.white:hover::after {
 
 .video-container {
   position: relative;
+}
+
+.video-container video {
+  width: 100%;
 }
 
 .video-container.play .icon-play,

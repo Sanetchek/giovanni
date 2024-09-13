@@ -10,15 +10,29 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<div class="container">
-		<header class="entry-header">
-			<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-		</header><!-- .entry-header -->
+	<header class="entry-header">
+		<?php
+			if ( is_account_page() && is_user_logged_in() ) {
+				$current_user = wp_get_current_user();
+				echo '<div class="my-account-header">';
+				echo '<p>' . esc_html( $current_user->display_name ) . '</p>'; // Display user name
+				the_title( '<h1 class="entry-title">', '</h1>' );
+				echo '</div>';
+			} else {
+				echo '<div class="container">';
+				the_title( '<h1 class="entry-title">', '</h1>' );
+				echo '</div>';
+			}
+		?>
+	</header><!-- .entry-header -->
 
+	<div class="container">
 		<?php the_post_thumbnail(); ?>
 
 		<div class="entry-content">
 			<?php
+			if ( is_account_page() && is_user_logged_in() ) { echo '<div class="profile-container">';}
+
 			the_content();
 
 			wp_link_pages(
@@ -27,6 +41,8 @@
 					'after'  => '</div>',
 				)
 			);
+
+			if ( is_account_page() && is_user_logged_in() ) { echo '</div>';}
 			?>
 		</div><!-- .entry-content -->
 

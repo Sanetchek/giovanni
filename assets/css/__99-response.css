@@ -47,6 +47,10 @@
   .product-user-info-wrap {
     overflow-x: hidden;
   }
+
+  .page-list {
+    padding: 0 15px;
+  }
 }
 
 @media screen and (max-width: 1439px) {
@@ -112,13 +116,61 @@
   }
 
   .exhibition-image-wrap .exhibition-image {
-    position: absolute;
     top: 100px;
     left: 100px;
   }
 
+
+  .exhibition-wrap.reversed .exhibition-image-wrap .exhibition-image {
+    top: 100px;
+    right: 100px;
+  }
+
   .exhibition-content {
     padding: 65px 0 36px 65px;
+  }
+
+  .exhibition-wrap.reversed .exhibition-content {
+    padding: 65px 36px 0 65px;
+  }
+
+  .article-list-item.two-in-a-row,
+  .article-list-item.three-in-a-row,
+  .list-item-side {
+    width: 100%;
+  }
+
+  .post-side {
+    width: 100%;
+  }
+
+  .profile-container .woocommerce {
+    flex-direction: column;
+  }
+
+  .profile-navigation {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .profile-navigation ul {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .profile-navigation .woocommerce-MyAccount-navigation-link--customer-logout {
+    display: none;
+  }
+
+  .profile-content {
+    padding: 0;
+    width: 100%;
+  }
+
+  .dashboard-item.logout-item {
+    display: flex;
   }
 }
 
@@ -409,6 +461,10 @@
     bottom: 150px;
     height: auto;
   }
+
+  .page-item {
+    width: calc((100% - 48px) / 3);
+  }
 }
 
 @media screen and (max-width: 992px) {
@@ -432,12 +488,17 @@
     top: -80px;
   }
 
-  .exhibition-wrap {
+  .exhibition-wrap,
+  .exhibition-wrap.reversed {
     width: 100%;
     padding: 0 15px 23px 15px;
     margin-top: 200px;
     margin-bottom: 100px;
     flex-direction: column-reverse;
+  }
+
+  .article-exhibition {
+    margin: 300px 0 100px;
   }
 
   .exhibition-content-wrap {
@@ -453,6 +514,12 @@
   .exhibition-image-wrap .exhibition-image {
     top: -200px;
     left: unset;
+  }
+
+
+  .exhibition-wrap.reversed .exhibition-image-wrap .exhibition-image {
+    top: -200px;
+    right: unset;
   }
 
   .mega-menu-container {
@@ -567,9 +634,6 @@
   }
 
   .filter-side {
-    width: 100%;
-    display: flex;
-    gap: 43px;
     flex-direction: column;
   }
 
@@ -598,6 +662,24 @@
   .article-slider .slick-list {
     max-width: 90%;
   }
+
+  .exhibition-content {
+    padding: 30px 0 65px;
+  }
+
+  .page-item {
+    width: calc((100% - 24px) / 2);
+  }
+
+  .search-modal-content .article-list-item {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 402px) {
+  .page-item {
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 359px) {
@@ -614,5 +696,9 @@
 
   .site-branding {
     font-size: 20px;
+  }
+
+  .exhibition-content {
+    padding: 0 0 65px;
   }
 }

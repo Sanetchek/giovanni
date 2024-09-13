@@ -1,5 +1,6 @@
-<form action="/" method="get" class="label-top search">
-  <input type="text" name="s" id="search" value="<?php the_search_query(); ?>" />
-  <label for="search"><?php _e('Search by keyword', 'giovanni') ?></label>
-  <button class="btn btn__green search__btn"><?php _e('Search', 'giovanni') ?></button>
+<form action="/" method="get" class="search-form search">
+  <div class="search-form-wrap">
+    <input type="text" name="s" id="search" class="search-form-input" value="<?php the_search_query(); ?>" />
+    <button class="btn search-form-submit"><?php _e('חפש', 'giovanni') ?></button>
+  </div>
 </form>

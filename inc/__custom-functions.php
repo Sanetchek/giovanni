@@ -465,6 +465,9 @@ function show_page_content($content) {
 				$productArray = $block['list'];
 				get_template_part('template-parts/product', 'slider', ['productArray' => $productArray]);
 				break;
+			case 'page_list':
+				get_template_part('template-parts/page/page', 'list', ['block' => $block]);
+				break;
 		}
 	endforeach;
 }

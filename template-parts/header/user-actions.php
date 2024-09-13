@@ -5,11 +5,17 @@
     </svg>
   </span>
 
-  <span class="header-action header-user">
-    <svg class='icon-user' width='24' height='24'>
-      <use href='<?= assets('img/sprite.svg#icon-user') ?>'></use>
-    </svg>
-  </span>
+  <?php
+    $login = !is_user_logged_in() ? 'show-login-form' : '';
+    $url = !is_user_logged_in() ? '#' : '/my-account';
+  ?>
+  <a href="<?= $url ?>" class="header-login-link <?= $login ?>">
+    <span class="header-action header-user">
+      <svg class='icon-user' width='24' height='24'>
+        <use href='<?= assets('img/sprite.svg#icon-user') ?>'></use>
+      </svg>
+    </span>
+  </a>
 
   <a href="/favorites" class="header-action header-like">
     <span class="header-count">
@@ -30,17 +36,18 @@
     </svg>
   </a>
 
-  <div class="header-mini-cart">
-    <div class="header-mini-cart-close">
-      <svg class='icon-close' width='24' height='24'>
-        <use href='<?= assets('img/sprite.svg#icon-close') ?>'></use>
-      </svg>
-    </div>
+  <?php
+    // Modal mini cart
+    get_template_part('template-parts/modal/cart', 'modal');
 
-    <div class="header-mini-cart-content">
-      <?php woocommerce_mini_cart( [ 'list_class' => 'header-mini-cart-list' ] ); ?>
-    </div>
-  </div>
+    // Modal search
+    get_template_part('template-parts/modal/search', 'modal');
+
+    // Login search
+    if (!is_user_logged_in()) {
+      get_template_part('template-parts/modal/login', 'modal');
+    }
+  ?>
 </div>
 
 <div class="page-mob">

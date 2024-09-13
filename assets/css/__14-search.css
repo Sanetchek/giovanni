@@ -1,0 +1,11 @@
+.search-page {
+  margin: 100px 0;
+}
+
+.search-title {
+  text-align: center;
+}
+
+.search-title span {
+  font-weight: 400;
+}
