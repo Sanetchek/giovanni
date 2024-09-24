@@ -164,9 +164,17 @@
   font-size: 15px;
   line-height: 1.06667;
   letter-spacing: 0.07em;
-  text-transform: uppercase;
+  text-transform: capitalize;
   color: #000;
   text-decoration: none;
+}
+
+.mega-menu-container .menu .charms-menu-item {
+  margin-top: 16px;
+}
+
+.mega-menu-container .menu .charms-menu-item a {
+  font-weight: 700;
 }
 
 .menu-btns {

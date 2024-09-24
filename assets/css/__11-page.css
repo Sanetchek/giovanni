@@ -116,6 +116,12 @@
   color: #000;
 }
 
+.slider-container,
+.article-collections {
+  margin-top: 80px;
+  margin-bottom: 80px;
+}
+
 .article-slider {
   overflow: hidden;
 }

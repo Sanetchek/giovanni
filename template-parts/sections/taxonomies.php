@@ -3,19 +3,23 @@
   $taxs = isset($args['taxonomies']) ? $args['taxonomies'] : false;
 ?>
 
-<div class="container">
+<div class="taxonomies-container">
   <?php if ($title) : ?>
-    <h2 class="taxonomies-title"><?= $title ?></h2>
+  <h2 class="taxonomies-title"><?= $title ?></h2>
   <?php endif ?>
 
   <?php if ($taxs) : ?>
-    <ul class="taxonomies-wrap">
-      <?php foreach ($taxs as $category_id) : ?>
-        <li class="taxonomies-content">
-          <?php $args = ['category_id' => $category_id]; ?>
-          <?php get_template_part( 'template-parts/taxonomy', 'card', $args ) ?>
-        </li>
-      <?php endforeach ?>
-    </ul>
+  <ul class="taxonomies-wrap">
+    <?php foreach ($taxs as $key => $category_id) :
+      $all_cat_count = count($taxs);
+      $count = $key+1;
+      $is_last = $count === $all_cat_count && $count % 2 !== 0;
+    ?>
+    <li class="taxonomies-content <?= $is_last ? 'last' : '' ?>">
+      <?php $args = ['category_id' => $category_id, 'all_cat_count' => $all_cat_count, 'count' => $count]; ?>
+      <?php get_template_part( 'template-parts/taxonomy', 'card', $args ) ?>
+    </li>
+    <?php endforeach ?>
+  </ul>
   <?php endif ?>
 </div>

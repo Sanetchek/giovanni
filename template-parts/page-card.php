@@ -6,13 +6,13 @@ $id = $args['id'];
   <a href="<?= get_permalink($id) ?>" target="_blank">
     <?php
       $image = get_field('background_image', $id);
-      show_image($image, '382-382', ['class'=> 'page-item-image']);
+      show_image($image, '812-812', ['class'=> 'page-item-image']);
     ?>
 
     <?php if (!$image) : ?>
-      <div class="page-item-replacer">
-        <img src="<?= assets('img/replacer.jpg') ?>" alt="replacer">
-      </div>
+    <div class="page-item-replacer">
+      <img src="<?= assets('img/replacer.jpg') ?>" alt="replacer">
+    </div>
     <?php endif ?>
   </a>
 

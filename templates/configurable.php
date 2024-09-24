@@ -1,12 +1,18 @@
 <?php
 /**
- * Template part for displaying posts
+ * Template Name: Configurable Page
+ *
+ * This is the most generic template file in a WordPress theme
+ * and one of the two required files for a theme (the other being style.css).
+ * It is used to display a page when nothing more specific matches a query.
+ * E.g., it puts together the home page when no home.php file exists.
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
  * @package giovanni
  */
 
+get_header();
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'article main-wrap' ); ?>>
@@ -18,15 +24,8 @@
 	 	get_template_part('template-parts/page', 'hero', ['hero_image' => $bg, 'hero_image_mob' => $bg_mob]);
 	?>
 
-  <div class="article-wrap article-top">
+  <div class="article-wrap">
     <div class="container">
-      <?php
-				if (function_exists('giovanni_breadcrumbs')) {
-					giovanni_breadcrumbs();
-				}
-			?>
-
-      <h1 class="page-title"><?= get_the_title() ?></h1>
       <div class="article-content">
         <?= get_the_content() ?>
       </div>
@@ -37,3 +36,5 @@
   <?php show_page_content($content); ?>
 
 </article><!-- #post-<?php the_ID(); ?> -->
+
+<?php get_footer(); ?>

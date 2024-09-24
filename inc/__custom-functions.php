@@ -20,6 +20,87 @@ function str_word($text, $counttext = 30, $sep = ' ')
 }
 
 /**
+ * Generate picture
+ *
+ * @param [type] $image_id
+ * @param [type] $is_last
+ * @param [type] $class
+ * @return void
+ */
+function generate_picture_element($image_id, $is_last, $class) {
+	// Get the image URLs for different sizes
+	$thumb = '812-812';
+	$large_image = wp_get_attachment_image_src($image_id, $thumb);
+
+  $thumb = $is_last ? '1440-500' : $thumb;
+	$medium_image = wp_get_attachment_image_src($image_id, $thumb);
+
+	// Check if images are available
+	if ($large_image && $medium_image) {
+		$output = '<picture aria-hidden="true">';
+		$output .= '<source media="(min-width:1280px)" srcset="' . esc_url($large_image[0]) . '">';
+		$output .= '<source media="(max-width:768px)" srcset="' . esc_url($large_image[0]) . '">';
+		$output .= '<img class="lazyloaded" data-src="' . esc_url($medium_image[0]) . '" alt="' . esc_attr(get_the_title($image_id)) . '" src="' . esc_url($medium_image[0]) . '" class="'.$class.'">';
+		$output .= '</picture>';
+
+		return $output;
+	}
+
+	return '';
+}
+
+/**
+ * Generates a responsive <picture> element with multiple <source> elements for different screen sizes.
+ *
+ * @param int    $image_id ID of the image attachment.
+ * @param string $thumb    Size of the thumbnail to retrieve for the default image.
+ * @param string $class    CSS class to apply to the <img> element.
+ * @param array  $min      An associative array of min-width media queries and corresponding image sizes.
+ *                         Example: ['768' => 'medium', '1024' => 'large']
+ * @param array  $max      An associative array of max-width media queries and corresponding image sizes.
+ *                         Example: ['767' => 'thumbnail', '1023' => 'medium']
+ *
+ * @return string The generated HTML markup for the <picture> element or an empty string if the image is not found.
+ */
+function generate_picture($image_id, $thumb = 'full', $class = '', $min = [], $max = []) {
+	$image = wp_get_attachment_image_src($image_id, $thumb);
+
+	// Check if the image source is available
+	if ($image) {
+		$output = '<picture aria-hidden="true">';
+
+		// Generate <source> elements for min-width queries
+		if ($min) {
+			foreach ($min as $width => $size) {
+				$source_image = wp_get_attachment_image_src($image_id, $size);
+				if ($source_image) {
+					$output .= '<source media="(min-width:' . esc_attr($width) . 'px)" srcset="' . esc_url($source_image[0]) . '">';
+				}
+			}
+		}
+
+		// Generate <source> elements for max-width queries
+		if ($max) {
+			foreach ($max as $width => $size) {
+				$source_image = wp_get_attachment_image_src($image_id, $size);
+				if ($source_image) {
+					$output .= '<source media="(max-width:' . esc_attr($width) . 'px)" srcset="' . esc_url($source_image[0]) . '">';
+				}
+			}
+		}
+
+		// Add the <img> element
+		$output .= '<img class="lazyloaded ' . esc_attr($class) . '" data-src="' . esc_url($image[0]) . '" alt="' . esc_attr(get_the_title($image_id)) . '" src="' . esc_url($image[0]) . '">';
+		$output .= '</picture>';
+
+		return $output;
+	}
+
+	return '';
+}
+
+
+/**
  * Counting the number of page visits
  */
 add_action('wp_head', function ($args = []) {
@@ -301,12 +382,12 @@ function showYoutubeVideo($link)
 	$video = $link;
 	$video = substr($video, strpos($video, "=") + 1);
 	if ($link): ?>
-		<iframe width="635" height="405" src="https://www.youtube.com/embed/<?= $video ?>" title="YouTube video player"
-			frameborder="0" allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-			allowfullscreen></iframe>
-	<?php else: ?>
-		<img src="https://img.youtube.com/vi/<?php $video ?>/default.jpg" class="br-40" alt="youtube">
-	<?php endif;
+<iframe width="635" height="405" src="https://www.youtube.com/embed/<?= $video ?>" title="YouTube video player"
+  frameborder="0" allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen></iframe>
+<?php else: ?>
+<img src="https://img.youtube.com/vi/<?php $video ?>/default.jpg" class="br-40" alt="youtube">
+<?php endif;
 }
 
 /**
@@ -317,8 +398,8 @@ function showYoutubeVideo($link)
  * @return void
  */
 function show_logo($image, $text) { ?>
-	<a href="/" class="site-branding" rel="home" aria-current="page" tabindex="0">
-	<?php
+<a href="/" class="site-branding" rel="home" aria-current="page" tabindex="0">
+  <?php
 		$logo = get_field($image, 'option');
 
 		if ($logo['image']) :
@@ -333,11 +414,11 @@ function show_logo($image, $text) { ?>
 			endif;
 
 			if ($logo['label']) : ?>
-				<span class="branding-label"><?= $logo['label'] ?></span>
-			<?php endif;
+  <span class="branding-label"><?= $logo['label'] ?></span>
+  <?php endif;
 		endif; ?>
-	</a>
-	<?php
+</a>
+<?php
 }
 
 /**
@@ -349,12 +430,12 @@ function show_logo($image, $text) { ?>
 function show_burger($is_active = false) {
 	$is_active = $is_active ? 'open' : '';
 	?>
-	<div id="burger-menu" class="burger-menu <?= $is_active ?>">
-		<div class="burger-bar"></div>
-		<div class="burger-bar"></div>
-		<div class="burger-bar"></div>
-	</div>
-	<?php
+<div id="burger-menu" class="burger-menu <?= $is_active ?>">
+  <div class="burger-bar"></div>
+  <div class="burger-bar"></div>
+  <div class="burger-bar"></div>
+</div>
+<?php
 }
 
 /**
@@ -461,6 +542,10 @@ function show_page_content($content) {
 				$taxonomies = $block['list'];
     		get_template_part('template-parts/sections/taxonomies', '', ['title' => $title, 'taxonomies' => $taxonomies]);
 				break;
+			case 'products':
+				$productArray = $block['list'];
+				get_template_part('template-parts/page/products', '', ['productArray' => $productArray]);
+				break;
 			case 'products_slider':
 				$productArray = $block['list'];
 				get_template_part('template-parts/product', 'slider', ['productArray' => $productArray]);
@@ -480,30 +565,32 @@ function show_page_content($content) {
  */
 function get_shadow($shadow) {
   if ($shadow) : ?>
-    <svg xmlns="http://www.w3.org/2000/svg" width="782" height="542" fill="none" viewBox="0 0 862 622">
-      <g filter="url(#a)" transform="translate(-70, -11) scale(1.12)">
-        <path fill="#000" fill-opacity=".2" d="M822 40 40 76.41c23 66.749 43.193 223.328 43.193 345.383V582h702.26V460.284c0-88.871.77-298.706 36.547-420.284Z"/>
-      </g>
-      <defs>
-        <filter id="a" width="862" height="622" x="0" y="0" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
-          <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-          <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-          <feGaussianBlur result="effect1_foregroundBlur_18_653" stdDeviation="20"/>
-        </filter>
-      </defs>
-    </svg>
-  <?php else: ?>
-    <svg xmlns="http://www.w3.org/2000/svg" width="782" height="542" fill="none" viewBox="0 0 861 696">
-      <g filter="url(#a)" transform="translate(-98, -11) scale(1.12)">
-        <path fill="#000" fill-opacity=".2" d="m40 40 781 41.382c-22.97 75.862-43.138 253.819-43.138 392.537V656H76.5V517.666C76.5 416.661 75.731 178.177 40 40Z"/>
-      </g>
-      <defs>
-        <filter id="a" width="861" height="696" x="0" y="0" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
-          <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-          <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-          <feGaussianBlur result="effect1_foregroundBlur_18_669" stdDeviation="20"/>
-        </filter>
-      </defs>
-    </svg>
-  <?php endif;
+<svg xmlns="http://www.w3.org/2000/svg" width="782" height="542" fill="none" viewBox="0 0 862 622">
+  <g filter="url(#a)" transform="translate(-70, -11) scale(1.12)">
+    <path fill="#000" fill-opacity=".2"
+      d="M822 40 40 76.41c23 66.749 43.193 223.328 43.193 345.383V582h702.26V460.284c0-88.871.77-298.706 36.547-420.284Z" />
+  </g>
+  <defs>
+    <filter id="a" width="862" height="622" x="0" y="0" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-opacity="0" result="BackgroundImageFix" />
+      <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+      <feGaussianBlur result="effect1_foregroundBlur_18_653" stdDeviation="20" />
+    </filter>
+  </defs>
+</svg>
+<?php else: ?>
+<svg xmlns="http://www.w3.org/2000/svg" width="782" height="542" fill="none" viewBox="0 0 861 696">
+  <g filter="url(#a)" transform="translate(-98, -11) scale(1.12)">
+    <path fill="#000" fill-opacity=".2"
+      d="m40 40 781 41.382c-22.97 75.862-43.138 253.819-43.138 392.537V656H76.5V517.666C76.5 416.661 75.731 178.177 40 40Z" />
+  </g>
+  <defs>
+    <filter id="a" width="861" height="696" x="0" y="0" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-opacity="0" result="BackgroundImageFix" />
+      <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+      <feGaussianBlur result="effect1_foregroundBlur_18_669" stdDeviation="20" />
+    </filter>
+  </defs>
+</svg>
+<?php endif;
 }

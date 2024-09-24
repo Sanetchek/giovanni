@@ -13,7 +13,7 @@ $videos = get_field('gallery_media');
     <?php
     // Display the main product image.
     $post_thumbnail_id = $product->get_image_id();
-    $thumb = '880-880';
+    $thumb = '812-812';
     echo '<div class="product-gallery__image">';
     if ( $post_thumbnail_id ) {
       show_image($post_thumbnail_id, $thumb, ['class' => 'show-product-modal']);
@@ -21,7 +21,7 @@ $videos = get_field('gallery_media');
       $title = $product->get_name();
       $image_url = wc_placeholder_img_src('full');
       ?>
-      <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($title); ?>" width="880" height="880">
+      <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($title); ?>" width="812" height="812">
     <?php }
     echo '</div>';
 

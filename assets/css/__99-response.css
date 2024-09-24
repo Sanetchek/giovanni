@@ -64,7 +64,7 @@
 
 @media screen and (max-width: 1279px) {
   .container {
-    max-width: 768px;
+    max-width: 1024px;
     padding-left: 25px;
     padding-right: 25px;
   }
@@ -172,9 +172,34 @@
   .dashboard-item.logout-item {
     display: flex;
   }
+
+  .taxonomies-wrap {
+    flex-wrap: wrap;
+  }
+
+  .taxonomies-content {
+    width: calc((100% - 20px) / 2);
+  }
+
+  .taxonomies-content.last {
+    width: 100%;
+  }
+
+  .taxonomies-image,
+  .taxonomies-hover-image,
+  .product-image a,
+  .product-image img {
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 1024px) {
+  .container {
+    max-width: 768px;
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+
   .page-mob {
     display: block;
   }
@@ -547,12 +572,6 @@
     max-width: 100%;
   }
 
-  .taxonomies-content {
-    max-width: 350px;
-    width: 100%;
-    height: unset;
-  }
-
   .main-navigation-mob .site-branding {
     font-size: 20px;
   }
@@ -672,6 +691,10 @@
   }
 
   .search-modal-content .article-list-item {
+    width: 100%;
+  }
+
+  .taxonomies-content {
     width: 100%;
   }
 }
