@@ -602,6 +602,15 @@ form.cart .button {
   width: 100%;
 }
 
+.single-product-post .main-posts-art .main-posts-picture {
+  min-height: 480px;
+}
+
+.main-posts-art.first .main-post-image {
+  right: unset;
+  width: 100%;
+}
+
 .product-modal {
   position: fixed;
   top: 0;
