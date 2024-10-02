@@ -555,6 +555,15 @@
   .single-product-post .main-posts-picture {
     margin-bottom: 0;
   }
+
+  .product-container .product-summary.sticky {
+    position: relative;
+  }
+  
+  .bottom-stop {
+    position: relative;
+    bottom: 0;
+  }
 }
 
 @media screen and (max-width: 782px) {
