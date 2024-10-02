@@ -721,3 +721,12 @@ form.cart .button {
 .threesixty {
   height: 100% !important;
 }
+
+
+.product-container .product-summary {
+  position: sticky;
+  top: 0;
+  margin-bottom: -2em;
+  padding-top: 4em;
+  height: 100%;
+}
