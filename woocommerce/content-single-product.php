@@ -155,16 +155,36 @@ if ( post_password_required() ) {
 	<div class="main-wrap">
 		<div class="single-product-post">
 			<?php
-				$product_post = get_field('product_post', 'option');
+				// Get WooCommerce product category IDs
+				$product_categories = $product->get_category_ids();
 
-				/**
-				 * 'item' -> Group of ACF fields (names: image, title, description, link_label, link)
-				 * 'class' -> (string) first/second (default: first)
-				 * 'shadow' -> (number) 0/1 - it put shadow on left or right (default: 1)
-				 */
-				get_template_part('template-parts/main', 'post', ['item' => $product_post, 'class' => 'second', 'shadow' => 0]);
+				// Get collections from ACF field
+				$collections = get_field('collection_settings', 'option');
+
+				foreach ($collections as $key => $collection) {
+					/**
+					 * 'item' -> Group of ACF fields (names: image, title, description, link_label, link)
+					 * 'class' -> (string) first/second (default: first)
+					 * 'shadow' -> (number) 0/1 - it puts shadow on left or right (default: 1)
+					 * 'choose_category' -> Array of category IDs chosen for the collection
+					 */
+
+					// Check if any of the product categories exist in the 'choose_category' field
+					if (!empty($collection['choose_category']) && array_intersect($product_categories, $collection['choose_category'])) {
+						$class = $key % 2 ? 'second' : 'first';
+						$shadow = $key % 2 ? 0 : 1;
+
+						// Load the template part
+						get_template_part('template-parts/main', 'post', [
+							'item' => $collection,
+							'class' => $class,
+							'shadow' => $shadow
+						]);
+					}
+				}
 			?>
 		</div>
+
 
 		<div class="taxonomies page-container single-product-taxonomies">
 			<?php
