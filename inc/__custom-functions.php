@@ -495,16 +495,25 @@ function giovanni_breadcrumbs() {
 	}
 }
 
+/**
+ * Get content template for Page and Post types
+ *
+ * @param array $content
+ * @return void
+ */
 function show_page_content($content) {
+	if (empty($content)) {
+		return;
+	}
+
 	foreach ($content as $block) :
-		switch($block['acf_fc_layout']) {
+		switch ($block['acf_fc_layout']) {
 			case 'paragraph':
 				get_template_part('template-parts/page/paragraph', '', ['block' => $block]);
 				break;
 			case 'full_width_image':
 				$bg = $block['image'];
 				$bg_mob = $block['image_mob'];
-
 				get_template_part('template-parts/page', 'hero', ['hero_image' => $bg, 'hero_image_mob' => $bg_mob]);
 				break;
 			case 'image_with_caption':
@@ -538,9 +547,9 @@ function show_page_content($content) {
 				get_template_part('template-parts/page/slider', '', ['block' => $block]);
 				break;
 			case 'taxonomies':
-				$title = $block['title'];
+				$title = esc_html($block['title']); // Escape title
 				$taxonomies = $block['list'];
-    		get_template_part('template-parts/sections/taxonomies', '', ['title' => $title, 'taxonomies' => $taxonomies]);
+				get_template_part('template-parts/sections/taxonomies', '', ['title' => $title, 'taxonomies' => $taxonomies]);
 				break;
 			case 'products':
 				$productArray = $block['list'];
@@ -557,6 +566,65 @@ function show_page_content($content) {
 	endforeach;
 }
 
+
+/**
+ * Get content template for Custom Service page Template
+ *
+ * @param [type] $content
+ * @return void
+ */
+function show_customer_service_content($content) {
+	if (empty($content)) {
+		return;
+	}
+
+	foreach ($content as $block) :
+		switch ($block['acf_fc_layout']) {
+			case 'tabs':
+				$tabs = $block['tab_list'];
+				get_template_part('template-parts/customer-service/tabs', '', ['tabs' => $tabs]);
+				break;
+			case 'text_content':
+				echo '<div class="customer-content">';
+				echo $block['content'];
+				echo '</div>';
+				break;
+			case 'image':
+				show_image($block['image'], 'full', ['class' => 'customer-image']);
+				break;
+			case 'shortcode':
+				echo '<div class="customer-shortcode">';
+				echo do_shortcode( sanitize_text_field($block['shortcode']) );
+				echo '</div>';
+				break;
+		}
+	endforeach;
+}
+
+/**
+ * Get Array of Current Page Children
+ *
+ * @param int|null $current_page_id The ID of the current page. Defaults to the ID of the current post if null.
+ * @return array Array of child pages.
+ */
+function get_current_page_children($current_page_id = null) {
+	// Default to the current page ID if not provided
+	if (empty($current_page_id)) {
+		$current_page_id = get_the_ID();
+	}
+
+	// Query to get child pages of the current page
+	$args = array(
+		'post_type'      => 'page',
+		'post_parent'    => $current_page_id,
+		'posts_per_page' => -1,
+		'fields'         => 'ids',
+	);
+
+	// Return the child pages as an array of posts
+	return get_posts($args);
+}
+
 /**
  * Get Shadow for Main Post
  *
@@ -565,32 +633,32 @@ function show_page_content($content) {
  */
 function get_shadow($shadow) {
   if ($shadow) : ?>
-<svg xmlns="http://www.w3.org/2000/svg" width="782" height="542" fill="none" viewBox="0 0 862 622">
-  <g filter="url(#a)" transform="translate(-70, -11) scale(1.12)">
-    <path fill="#000" fill-opacity=".2"
-      d="M822 40 40 76.41c23 66.749 43.193 223.328 43.193 345.383V582h702.26V460.284c0-88.871.77-298.706 36.547-420.284Z" />
-  </g>
-  <defs>
-    <filter id="a" width="862" height="622" x="0" y="0" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
-      <feFlood flood-opacity="0" result="BackgroundImageFix" />
-      <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-      <feGaussianBlur result="effect1_foregroundBlur_18_653" stdDeviation="20" />
-    </filter>
-  </defs>
-</svg>
-<?php else: ?>
-<svg xmlns="http://www.w3.org/2000/svg" width="782" height="542" fill="none" viewBox="0 0 861 696">
-  <g filter="url(#a)" transform="translate(-98, -11) scale(1.12)">
-    <path fill="#000" fill-opacity=".2"
-      d="m40 40 781 41.382c-22.97 75.862-43.138 253.819-43.138 392.537V656H76.5V517.666C76.5 416.661 75.731 178.177 40 40Z" />
-  </g>
-  <defs>
-    <filter id="a" width="861" height="696" x="0" y="0" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
-      <feFlood flood-opacity="0" result="BackgroundImageFix" />
-      <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-      <feGaussianBlur result="effect1_foregroundBlur_18_669" stdDeviation="20" />
-    </filter>
-  </defs>
-</svg>
-<?php endif;
+		<svg xmlns="http://www.w3.org/2000/svg" width="782" height="542" fill="none" viewBox="0 0 862 622">
+			<g filter="url(#a)" transform="translate(-70, -11) scale(1.12)">
+				<path fill="#000" fill-opacity=".2"
+					d="M822 40 40 76.41c23 66.749 43.193 223.328 43.193 345.383V582h702.26V460.284c0-88.871.77-298.706 36.547-420.284Z" />
+			</g>
+			<defs>
+				<filter id="a" width="862" height="622" x="0" y="0" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+					<feFlood flood-opacity="0" result="BackgroundImageFix" />
+					<feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+					<feGaussianBlur result="effect1_foregroundBlur_18_653" stdDeviation="20" />
+				</filter>
+			</defs>
+		</svg>
+		<?php else: ?>
+		<svg xmlns="http://www.w3.org/2000/svg" width="782" height="542" fill="none" viewBox="0 0 861 696">
+			<g filter="url(#a)" transform="translate(-98, -11) scale(1.12)">
+				<path fill="#000" fill-opacity=".2"
+					d="m40 40 781 41.382c-22.97 75.862-43.138 253.819-43.138 392.537V656H76.5V517.666C76.5 416.661 75.731 178.177 40 40Z" />
+			</g>
+			<defs>
+				<filter id="a" width="861" height="696" x="0" y="0" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+					<feFlood flood-opacity="0" result="BackgroundImageFix" />
+					<feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+					<feGaussianBlur result="effect1_foregroundBlur_18_669" stdDeviation="20" />
+				</filter>
+			</defs>
+		</svg>
+	<?php endif;
 }
