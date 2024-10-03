@@ -20,23 +20,40 @@ $is_children = !empty($childrens_page);
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'article main-wrap' ); ?>>
 
-  <div class="cusotem-header">
+  <div class="customer-header">
     <p class="customer-subtitle">
       <?php
-      $subtitle = __('Customer service', 'giovanni');
+      $subtitle = __('שירות לקוחות', 'giovanni');
       echo $is_children ? '**' . $subtitle . '**' : $subtitle;
       ?>
     </p>
     <h1 class="customer-title">
       <?php
-        echo $is_children ? __('Dashboard', 'giovanni') : get_the_title();
+        $dashbord_name = __('דשבורד', 'giovanni');
+        echo !$is_children ? $dashbord_name : get_the_title();
       ?>
     </h1>
   </div>
 
+  <div class="customer-main">
+    <div class="customer-side menu">
+      <?php get_template_part('template-parts/customer-service/menu', '', ['children_page' => $children_page, 'dashbord_name' => $dashbord_name]); ?>
+    </div>
 
-  <?php $content = get_field('content'); ?>
-  <?php show_customer_service_content($content); ?>
+    <div class="customer-side content">
+      <?php if (!$is_children) {
+        get_template_part('template-parts/customer-service/dashboard', '', ['children_page' => $children_page]);
+      } ?>
+
+      <?php
+        $content = get_field('content');
+        show_customer_service_content($content);
+      ?>
+    </div>
+  </div>
+
+
+
 
 </article><!-- #post-<?php the_ID(); ?> -->
 
