@@ -1,19 +1,15 @@
 <?php
   $children_page = $args['children_page'];
-  $dashbord_name = $args['dashbord_name'];
+  $current_page_id = get_the_ID(); // Get the current page ID
 ?>
 
-<ul class="customer-menu-links">
-  <li class="customer-menu-item">
-    <a href="<?= get_permalink() ?>" class="customer-menu-link">
-      <?= $dashbord_name ?>
-    </a>
-  </li>
-  <?php foreach ($children_page as $page_id) : ?>
-    <li class="customer-menu-item">
+
+  <?php foreach ($children_page as $page_id) :
+    $is_current = ($current_page_id === $page_id) ? 'current' : '';
+  ?>
+    <li class="customer-menu-item <?= $is_current; ?>">
       <a href="<?= get_permalink($page_id) ?>" class="customer-menu-link">
-        <?= get_the_title($page_id) ?>
+        <span><?= get_the_title($page_id) ?></span>
       </a>
     </li>
-  <?php endforeach ?>
-</ul>
+  <?php endforeach; ?>

@@ -24,4 +24,164 @@
 
 .customer-main {
   display: flex;
+  box-shadow: 0 1px 0 #e2e2e2, 0 -1px 0 #e2e2e2;
+  margin-bottom: 1px;
+}
+
+.customer-side.menu {
+  background-color: #f6f6f6;
+  min-width: 25%;
+  position: relative;
+  padding: 56px 0;
+}
+
+.customer-menu-links {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: .2rem;
+  text-transform: uppercase;
+  max-width: max-content;
+  margin: 0 24px;
+  padding: 10px 0;
+}
+
+.customer-menu-item {
+  margin-bottom: 27px;
+}
+
+.customer-menu-link {
+  font-size: 12px;
+  text-decoration: none;
+  padding-bottom: 2px;
+}
+
+.customer-menu-item.current .customer-menu-link {
+  border-bottom: 1px solid;
+}
+
+.customer-side.content {
+  max-width: 65%;
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.customer-dashbord-links {
+  display: flex;
+  gap: 40px 24px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.customer-dashboard-item {
+  width: calc((100% - 24px) / 2);
+}
+
+.customer-dashboard-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 65px;
+  padding: 0 10px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.customer-table {
+  width: 100%;
+  max-width: 600px;
+  margin: 32px 0;
+}
+
+.customer-table thead th {
+  min-width: 90px;
+  font-weight: 500;
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+  letter-spacing: 2px;
+  text-align: right;
+  padding: 0 0 10px 10px;
+}
+
+.customer-table tbody td {
+  padding-bottom: 10px;
+  text-align: right;
+}
+
+.customer-content h2 {
+  margin-bottom: 32px;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 40px;
+  letter-spacing: 0;
+}
+
+.customer-content p {
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+
+.customer-content a {
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+img.customer-image {
+  margin-top: 32px;
+  margin-bottom: 16px;
+}
+
+form.wpcf7-form * {
+  text-align: right;
+  direction: rtl;
+}
+
+.form-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.form-message,
+.form-margin-bottom {
+  margin-bottom: 32px;
+}
+
+.form-checkbox-label {
+  display: inline-block;
+  margin: 0 8px;
+  font-size: 14px;
+}
+
+.form-submit {
+  color: #fff;
+  background: #000;
+  display: block;
+  margin-left: auto;
+}
+
+.form-submit:after {
+  background-image: url(data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="6" viewBox="0 0 24 6" fill="none"><path d="M0 3L5 5.88675L5 0.113247L0 3ZM24 2.5L4.5 2.5L4.5 3.5L24 3.5L24 2.5Z" fill="black"/></svg>);
+}
+
+form.wpcf7-form label {
+  width: calc((100% - 20px) / 2);
+  font-size: 12px;
+}
+
+form.wpcf7-form input[type="text"],
+form.wpcf7-form input[type="tel"],
+form.wpcf7-form input[type="email"],
+form.wpcf7-form select {
+  border: none !important;
+  border-bottom: 1px solid #999 !important;
+  font-size: 10px;
 }

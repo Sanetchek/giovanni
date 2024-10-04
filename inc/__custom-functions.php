@@ -597,8 +597,31 @@ function show_customer_service_content($content) {
 				echo do_shortcode( sanitize_text_field($block['shortcode']) );
 				echo '</div>';
 				break;
+			case 'table':
+				$table = $block['table'];
+				get_template_part('template-parts/customer-service/table', '', ['table' => $table]);
+				break;
 		}
 	endforeach;
+}
+
+/**
+ * Get the parent page ID of the current page or a specified page.
+ *
+ * If no specific page ID is provided, it retrieves the ID of the current post in the loop.
+ *
+ * @param int|null $current_page The ID of the current page. If null, the function retrieves the current post's ID.
+ * @return int The parent page ID or the current page ID if no parent exists.
+ */
+function get_parent_page_id($current_page = null) {
+	// If no current page is provided, get the ID of the current post
+	$current_page = $current_page ?? get_the_ID();
+
+	// Get the parent page ID
+	$parent_id = wp_get_post_parent_id($current_page);
+
+	// Return the parent ID if it exists, otherwise return the current page ID
+	return $parent_id > 0 ? $parent_id : $current_page;
 }
 
 /**
@@ -607,7 +630,7 @@ function show_customer_service_content($content) {
  * @param int|null $current_page_id The ID of the current page. Defaults to the ID of the current post if null.
  * @return array Array of child pages.
  */
-function get_current_page_children($current_page_id = null) {
+function get_current_page_children_ids($current_page_id = null) {
 	// Default to the current page ID if not provided
 	if (empty($current_page_id)) {
 		$current_page_id = get_the_ID();
@@ -619,6 +642,8 @@ function get_current_page_children($current_page_id = null) {
 		'post_parent'    => $current_page_id,
 		'posts_per_page' => -1,
 		'fields'         => 'ids',
+		'order'          => 'ASC',
+		'orderby'        => 'date',
 	);
 
 	// Return the child pages as an array of posts
