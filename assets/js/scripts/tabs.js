@@ -1,23 +1,39 @@
-document.addEventListener('DOMContentLoaded', function () {
-  const tabs = document.querySelectorAll('.category-tabs a');
-  const contents = document.querySelectorAll('.tab-content');
+(function ($) {
+  const tabs = $('.category-tabs a');
+  const contents = $('.tab-content');
 
-  tabs.forEach(tab => {
-    tab.addEventListener('click', function (e) {
-      e.preventDefault();
+  tabs.on('click', function (e) {
+    e.preventDefault();
 
-      tabs.forEach(t => t.classList.remove('active'));
-      contents.forEach(content => content.classList.remove('active'));
+    tabs.removeClass('active');
+    contents.removeClass('active');
 
-      tab.classList.add('active');
-      const contentId = tab.getAttribute('href');
-      document.querySelector(contentId).classList.add('active');
-    });
+    $(this).addClass('active');
+    const contentId = $(this).attr('href');
+    $(contentId).addClass('active');
   });
 
   // Activate the first tab and content by default
   if (tabs.length > 0) {
-    tabs[0].classList.add('active');
-    contents[0].classList.add('active');
+    tabs.first().addClass('active');
+    contents.first().addClass('active');
   }
-});
+
+  // Tab toggle functionality
+  $('.tab-btn').on('click', function () {
+    const item = $(this).closest('.tab-item');
+    const content = $(item).find('.tab-content');
+
+    $('.tab-item').removeClass('active');
+    $('.tab-content').slideUp();
+
+    if (!content.is(':visible')) {
+      content.slideDown();
+      $(item).addClass('active');
+    }
+  });
+
+  // Show the first tab and its content by default
+  $('.tab-item').first().addClass('active');
+  $('.tab-item').first().find('.tab-content').slideDown();
+}(jQuery));

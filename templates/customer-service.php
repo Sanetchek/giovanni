@@ -14,8 +14,9 @@
 
 get_header();
 
-$children_page = get_current_page_children();
-$is_children = !empty($childrens_page);
+$dashboard_page_id = get_parent_page_id();
+$children_page = get_current_page_children_ids($dashboard_page_id);
+$is_dashboard = get_the_ID() === $dashboard_page_id;
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'article main-wrap' ); ?>>
@@ -24,24 +25,31 @@ $is_children = !empty($childrens_page);
     <p class="customer-subtitle">
       <?php
       $subtitle = __('שירות לקוחות', 'giovanni');
-      echo $is_children ? '**' . $subtitle . '**' : $subtitle;
+      echo !$is_dashboard ? '**' . $subtitle . '**' : $subtitle;
       ?>
     </p>
     <h1 class="customer-title">
       <?php
         $dashbord_name = __('דשבורד', 'giovanni');
-        echo !$is_children ? $dashbord_name : get_the_title();
+        echo $is_dashboard ? $dashbord_name : get_the_title();
       ?>
     </h1>
   </div>
 
   <div class="customer-main">
     <div class="customer-side menu">
-      <?php get_template_part('template-parts/customer-service/menu', '', ['children_page' => $children_page, 'dashbord_name' => $dashbord_name]); ?>
+      <ul class="customer-menu-links">
+        <li class="customer-menu-item <?= $is_dashboard ? 'current' : ''; ?>">
+          <a href="<?= get_permalink($dashboard_page_id) ?>" class="customer-menu-link">
+            <?= $dashbord_name ?>
+          </a>
+        </li>
+        <?php get_template_part('template-parts/customer-service/menu', '', ['children_page' => $children_page]); ?>
+      </ul>
     </div>
 
     <div class="customer-side content">
-      <?php if (!$is_children) {
+      <?php if ($is_dashboard) {
         get_template_part('template-parts/customer-service/dashboard', '', ['children_page' => $children_page]);
       } ?>
 
@@ -51,9 +59,6 @@ $is_children = !empty($childrens_page);
       ?>
     </div>
   </div>
-
-
-
 
 </article><!-- #post-<?php the_ID(); ?> -->
 
