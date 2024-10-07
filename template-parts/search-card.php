@@ -1,19 +1,27 @@
 <?php
   $post_id = $args['id'];
-  $count = $args['count'];
+  $product = wc_get_product($post_id);
 ?>
 
 <li class="article-list-item one-in-the-row">
 
-  <?php $count += 1; ?>
-  <span class="list-item-number"><?= $count = $count < 10 ? '0' . $count : $count; ?></span>
+
 
   <div class="list-item-wrap pad">
 
     <div class="list-item-side list-item-content full-content">
-      <h2 class="list-title"><?= get_the_title($post_id) ?></h2>
 
-      <a href="<?= get_permalink( $post_id ) ?>" class="btn btn-hover list-link" target="_blank" rel="noopener noreferrer"><?= __('קרא עוד', 'giovanni') ?></a>
+      <?php if (has_post_thumbnail($post_id)) : ?>
+        <a href="<?= get_permalink( $post_id ) ?>" class="product-thumbnail-link" target="_blank" rel="noopener noreferrer">
+          <img src="<?= get_the_post_thumbnail_url($post_id, 'full'); ?>" alt="<?= get_the_title($post_id); ?>" class="product-thumbnail">
+        </a>
+      <?php endif; ?>
+      <h2 class="search-result-title"><?= get_the_title($post_id) ?></h2>
+      <?php if ($product) : ?>
+        <p class="product-price"><?= $product->get_price_html(); ?></p>
+      <?php endif; ?>
+
+
     </div>
 
   </div>
