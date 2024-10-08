@@ -155,13 +155,20 @@ if ( post_password_required() ) {
 		<h2 class="related-title"><?php echo __('מומלצים ביחד', 'giovanni') ?></h2>
 
 		<?php
-			// Get the current product ID
-			$product_id = $product->get_id();
+		//this function shows products if they are selected in upsells or cross-sells. If nothing is set - show related items
+		$product_id = $product->get_id();
+		$upsell_ids = $product->get_upsell_ids();
+		$cross_sell_ids = $product->get_cross_sell_ids();
 
-			// Get post ids
+		$productArray = array_merge($upsell_ids, $cross_sell_ids);
+
+		if ( empty($productArray) ) {
 			$productArray = get_related_product_ids($product_id);
+		}
 
+		if ( ! empty($productArray) ) {
 			get_template_part('template-parts/product', 'slider', ['productArray' => $productArray]);
+		}
 		?>
 	</div>
 
