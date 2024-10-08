@@ -60,7 +60,12 @@ if ( post_password_required() ) {
 				if ( $product->is_type( 'variable' ) ) {
 					echo '<div class="product-size-container">';
 					echo '<div class="body-s-medium-u">זמין ב</div>';
-					echo '<a href="#" class="open-modal-btnsize">מצא את המידה שלך</a>';
+					
+					$radio_value = get_field('use_size_table_popup');
+					if ($radio_value !== 'none') {
+						echo '<a href="#" class="open-modal-btnsize">מצא את המידה שלך</a>';
+					}
+
 					echo '</div>';
 				}
 
