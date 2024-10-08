@@ -722,11 +722,141 @@ form.cart .button {
   height: 100% !important;
 }
 
-
 .product-container .product-summary {
   position: sticky;
   top: 0;
   margin-bottom: -2em;
   padding-top: 4em;
   height: 100%;
+}
+
+.product-container .product-size-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Product Size Popup */
+body.modal-open {
+  overflow: hidden;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 300px;
+  min-width: 34rem;
+  height: 100%;
+  background-color: white;
+  transition: left 0.3s ease;
+  z-index: 9999;
+  overflow-y: scroll;
+}
+
+.modal.is-open {
+  left: 0;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-header {
+  padding: 15px;
+}
+
+.modal-content {
+  padding: 20px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 0px;
+  left: 15px;
+  background: 0 0;
+  border: none;
+  font-size: 59px;
+  cursor: pointer;
+  font-weight: 100;
+}
+
+.open-modal-btn {
+  margin: 50px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.modal-size-guide .sub-title {
+  color: #515151;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.modal-size-guide .separator {
+  border-bottom: 1px solid #c4c4c4;
+  margin-bottom: 0;
+  margin-top: 2rem;
+}
+
+.modal-size-guide .list {
+  display: flex;
+  font-size: 14px;
+  flex-direction: column
+}
+
+.modal-size-guide .list h3 {
+  padding-bottom: .8rem
+}
+
+.modal-size-guide .list .diametro li,.modal-size-guide .list .circonferenza li {
+  color: #515151
+}
+
+.modal-size-guide .list .taglia li {
+  font-weight: 500
+}
+
+.modal-size-guide .list ul {
+  list-style: none;
+  display: flex;
+  flex: 1;
+  width: 100%
+}
+
+.modal-size-guide .list ul li {
+  flex: 1;
+  text-align: right
+}
+
+.modal-size-guide .modal-end h1 {
+  padding-top: 3.2rem;
+  padding-bottom: .8rem
+}
+
+.modal-size-guide .modal-end a {
+  color: #000
+}
+.modal-size-guide .modal-title {
+  padding-top: 15px;
+  font-size: 22px;
+  padding-bottom: 18px;
+}
+.modal-size-guide .modal-main-title {
+  font-size: 22px;
 }

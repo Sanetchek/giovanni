@@ -56,4 +56,22 @@
     return false;
   });
 
+  /**
+   * popup modal for Size Table
+  */
+  const openModalBtn = document.querySelector('.open-modal-btnsize');
+  const modal = document.getElementById('left-popup');
+  const closeModalBtn = modal.querySelector('.modal-close');
+  const overlay = document.getElementById('modal-overlay');
+
+  function toggleModal() {
+      modal.classList.toggle('is-open');
+      overlay.classList.toggle('is-visible');
+      document.body.classList.toggle('modal-open');
+  }
+
+  openModalBtn.addEventListener('click', toggleModal);
+  closeModalBtn.addEventListener('click', toggleModal);
+  overlay.addEventListener('click', toggleModal);
+
 }(jQuery));

@@ -564,6 +564,10 @@
     position: relative;
     bottom: 0;
   }
+
+  .modal {
+    min-width: 100%;
+  }
 }
 
 @media screen and (max-width: 782px) {
