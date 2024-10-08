@@ -1,9 +1,5 @@
 <?php
-
-global $product;
-
-// Get the product gallery attachment ids.
-//$attachment_ids = $product->get_gallery_image_ids();
+// Show Product Size Table Popup
 ?>
 
 <div id="left-popup" class="modal product-size-modal modal-size-guide">
@@ -26,7 +22,6 @@ global $product;
     }
     ?>
  
-
 </div>
 
 <div id="modal-overlay" class="modal-overlay"></div>
