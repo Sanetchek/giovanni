@@ -56,6 +56,14 @@ if ( post_password_required() ) {
 				// Output the product price
 				woocommerce_template_single_price();
 
+				// Add Find your size Popup
+				if ( $product->is_type( 'variable' ) ) {
+					echo '<div class="product-size-container">';
+					echo '<div class="body-s-medium-u">זמין ב</div>';
+					echo '<a href="#" class="open-modal-btnsize">מצא את המידה שלך</a>';
+					echo '</div>';
+				}
+
 				// Output the add to cart button
 				woocommerce_template_single_add_to_cart();
 				?>
@@ -202,6 +210,7 @@ if ( post_password_required() ) {
  * Modal Gallery.
  */
 get_template_part('template-parts/product/modal');
+get_template_part('template-parts/product/sizes');
 ?>
 
 <?php do_action( 'woocommerce_after_single_product' ); ?>

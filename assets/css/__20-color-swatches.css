@@ -1,6 +1,6 @@
 .label.yith_wccl_layout_inline,
 a.reset_variations {
-    display:none;
+    display:none !important;
 }
 /* label field */
 .select_box_label.select_box .select_option_label {
