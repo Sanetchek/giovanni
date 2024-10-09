@@ -148,4 +148,24 @@
     $('#login_modal').addClass('is-hidden').removeClass('is-show')
   })
 
+  /**
+   * Footer accordion menu
+   */
+    if ($(window).width() <= 768) {
+      $('.js-accordion-trigger, .accordion-row h2').on('click', function() {
+        var $accordionRow = $(this).closest('.accordion-row');
+        var $menuContainer = $accordionRow.next('.menu-footer-container');
+    
+        var isExpanded = $accordionRow.find('.js-accordion-trigger').attr('aria-expanded') === 'true';
+        $accordionRow.find('.js-accordion-trigger').attr('aria-expanded', !isExpanded);
+        $menuContainer.slideToggle(200);
+    
+        $accordionRow.find('.toggle-icon.plus').toggle(isExpanded);
+        $accordionRow.find('.toggle-icon.minus').toggle(!isExpanded);
+    
+        $accordionRow.toggleClass('active');
+    });
+    
+    }
+
 }(jQuery));
