@@ -154,18 +154,24 @@
     if ($(window).width() <= 768) {
       $('.js-accordion-trigger, .accordion-row h2').on('click', function() {
         var $accordionRow = $(this).closest('.accordion-row');
-        var $menuContainer = $accordionRow.next('.menu-footer-container');
+        var $menuContainer1 = $accordionRow.next('.menu-footer-widget-1-container');
+        var $menuContainer2 = $accordionRow.next('.menu-footer-widget-2-container');
+        var $menuContainer3 = $accordionRow.next('.menu-footer-widget-3-container');
+        var $menuContainer4 = $accordionRow.next('.menu-footer-widget-4-container');
     
         var isExpanded = $accordionRow.find('.js-accordion-trigger').attr('aria-expanded') === 'true';
         $accordionRow.find('.js-accordion-trigger').attr('aria-expanded', !isExpanded);
-        $menuContainer.slideToggle(200);
+        $menuContainer1.slideToggle(200);
+        $menuContainer2.slideToggle(200);
+        $menuContainer3.slideToggle(200);
+        $menuContainer4.slideToggle(200);
     
         $accordionRow.find('.toggle-icon.plus').toggle(isExpanded);
         $accordionRow.find('.toggle-icon.minus').toggle(!isExpanded);
     
         $accordionRow.toggleClass('active');
     });
-    
+     
     }
 
 }(jQuery));

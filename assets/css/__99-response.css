@@ -715,11 +715,17 @@
     display:block;
   }
 
-  .accordion-row.active + .menu-footer-container {
+  .accordion-row.active + .menu-footer-widget-1-container,
+  .accordion-row.active + .menu-footer-widget-2-container,
+  .accordion-row.active + .menu-footer-widget-3-container,
+  .accordion-row.active + .menu-footer-widget-4-container {
     display: block;
   }
 
-  .menu-footer-container {
+  .menu-footer-widget-1-container,
+  .menu-footer-widget-2-container,
+  .menu-footer-widget-3-container,
+  .menu-footer-widget-4-container {
       display: none;
   }
 
@@ -740,7 +746,7 @@
     display: inline-block;
     width: 1.6rem;
   }
-  
+
   .footer-four-menu  {
       display: flex;
       flex-direction: column;
