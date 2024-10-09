@@ -69,6 +69,7 @@
       setupHoverHandler('.show-collection a', '#collection_menu');
       setupHoverHandler('.show-charms a', '#charms_menu');
       setupHoverHandler('.show-gifts a', '#gifts_menu');
+      setupHoverHandler('.show-about a', '#about_menu');
     } else {
       // Remove hover handlers
       $('.show-jewellery a').off('mouseenter mouseleave');
@@ -76,21 +77,25 @@
       $('#jewellery_menu').off('mouseenter mouseleave');
       $('#collection_menu').off('mouseenter mouseleave');
       $('.show-charms a').off('mouseenter mouseleave');
+      $('.show-about a').off('mouseenter mouseleave');
       $('.show-gifts a').off('mouseenter mouseleave');
       $('#charms_menu').off('mouseenter mouseleave');
       $('#gifts_menu').off('mouseenter mouseleave');
+      $('#about_menu').off('mouseenter mouseleave');
 
       // Setup click handlers
       setupClickHandler('.show-jewellery a', '#jewellery_menu');
       setupClickHandler('.show-collection a', '#collection_menu');
       setupClickHandler('.show-charms a', '#charms_menu');
       setupClickHandler('.show-gifts a', '#gifts_menu');
+      setupClickHandler('.show-about a', '#about_menu');
 
       // Add close buttons
       addCloseButton('#jewellery_menu');
       addCloseButton('#collection_menu');
       addCloseButton('#charms_menu');
       addCloseButton('#gifts_menu');
+      addCloseButton('#about_menu');
     }
   }
 
