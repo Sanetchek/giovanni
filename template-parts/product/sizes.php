@@ -1,4 +1,5 @@
 <?php
+global $product;
 // Show Product Size Table Popup
 ?>
 
@@ -26,6 +27,11 @@
 
 <div id="modal-overlay" class="modal-overlay"></div>
 
+<?php
+    if ( $product->is_type( 'variable' ) ) {
+        $radio_value = get_field('use_size_table_popup');
+        if ($radio_value !== 'none') {
+?>
 <script>
 /**
  * popup modal for Size Table
@@ -45,3 +51,7 @@ const openModalBtn = document.querySelector('.open-modal-btnsize');
   closeModalBtn.addEventListener('click', toggleModal);
   overlay.addEventListener('click', toggleModal);
 </script>
+<?php
+        }
+    }    
+?>

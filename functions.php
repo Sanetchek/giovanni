@@ -164,8 +164,8 @@ function giovanni_widgets_init() {
     'description' => esc_html__( 'First area', 'giovanni' ),
     'before_widget' => '<div class="wsfooterwdget">',
     'after_widget' => '</div>',
-    'before_title' => '<h2>',
-    'after_title' => '</h2>',
+    'before_title' => '<div class="accordion-row active"><h2>',
+    'after_title' => '</h2><button class="js-accordion-trigger accordion-trigger" aria-controls="footer1" aria-expanded="false"><span class="toggle-icon plus"></span>	<span class="toggle-icon minus" style="display: none;"></span></button></div>',
     ));
 
     register_sidebar(array(
@@ -174,8 +174,8 @@ function giovanni_widgets_init() {
     'description' => esc_html__( 'Second area', 'giovanni' ),
     'before_widget' => '<div class="wsfooterwdget">',
     'after_widget' => '</div>',
-    'before_title' => '<h2>',
-    'after_title' => '</h2>',
+    'before_title' => '<div class="accordion-row"><h2>',
+    'after_title' => '</h2><button class="js-accordion-trigger accordion-trigger" aria-controls="footer2" aria-expanded="true"><span class="toggle-icon plus"></span>	<span class="toggle-icon minus" style="display: none;"></span></button></div>',
     ));
 
     register_sidebar(array(
@@ -184,8 +184,8 @@ function giovanni_widgets_init() {
     'description' => esc_html__( 'Third area', 'giovanni' ),
     'before_widget' => '<div class="wsfooterwdget">',
     'after_widget' => '</div>',
-    'before_title' => '<h2>',
-    'after_title' => '</h2>',
+    'before_title' => '<div class="accordion-row"><h2>',
+    'after_title' => '</h2><button class="js-accordion-trigger accordion-trigger" aria-controls="footer3" aria-expanded="true"><span class="toggle-icon plus"></span>	<span class="toggle-icon minus" style="display: none;"></span></button></div>',
     ));
 
   register_sidebar(array(
@@ -194,8 +194,8 @@ function giovanni_widgets_init() {
     'description' => esc_html__( 'Fourth area', 'giovanni' ),
     'before_widget' => '<div class="wsfooterwdget">',
     'after_widget' => '</div>',
-    'before_title' => '<h2>',
-    'after_title' => '</h2>',
+    'before_title' => '<div class="accordion-row"><h2>',
+    'after_title' => '</h2><button class="js-accordion-trigger accordion-trigger" aria-controls="footer4" aria-expanded="true"><span class="toggle-icon plus"></span>	<span class="toggle-icon minus" style="display: none;"></span></button></div>',
   ));
 }
 add_action( 'widgets_init', 'giovanni_widgets_init' );

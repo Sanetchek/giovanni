@@ -38,46 +38,30 @@
 
 			<div class="site-info container">
 
-				<div class="footer-menu">
+				<div class="footer-four-menu">
 					<?php
-						wp_nav_menu([
-							'theme_location' => 'footer',
-							'menu_id'        => 'footer-menu',
-							'container'			 => ''
-						]);
+					if ( is_active_sidebar( 'footer-1' ) ) {
+						dynamic_sidebar( 'footer-1' );
+					}
+					if ( is_active_sidebar( 'footer-2' ) ) {
+						dynamic_sidebar( 'footer-2' );
+					}
+					if ( is_active_sidebar( 'footer-3' ) ) {
+						dynamic_sidebar( 'footer-3' );
+					}
+					if ( is_active_sidebar( 'footer-4' ) ) {
+						dynamic_sidebar( 'footer-4' );
+					}
 					?>
 				</div>
 
-				<ul class="footer-social">
-					<li class="social-item">
-						<a href="#">
-							<svg class='icon-pinterest' width='24' height='24'>
-								<use href='<?= assets('img/sprite.svg#icon-pinterest') ?>'></use>
-							</svg>
-						</a>
-					</li>
-					<li class="social-item">
-						<a href="#">
-							<svg class='icon-youtube' width='24' height='24'>
-								<use href='<?= assets('img/sprite.svg#icon-youtube') ?>'></use>
-							</svg>
-						</a>
-					</li>
-					<li class="social-item">
-						<a href="#">
-							<svg class='icon-instagram' width='24' height='24'>
-								<use href='<?= assets('img/sprite.svg#icon-instagram') ?>'></use>
-							</svg>
-						</a>
-					</li>
-					<li class="social-item">
-						<a href="#">
-							<svg class='icon-facebook' width='24' height='24'>
-								<use href='<?= assets('img/sprite.svg#icon-facebook') ?>'></use>
-							</svg>
-						</a>
-					</li>
-				</ul>
+				<div class="footer-socials">
+					<a rel="noreferrer" href="https://www.facebook.com/giovanniraspini" target="_blank" class="icon-fb" aria-label="facebook"></a>
+					<a rel="noreferrer" href="https://www.instagram.com/giovanniraspini" target="_blank" class="icon-is" aria-label="istangram"></a>
+					<a rel="noreferrer" href="https://www.youtube.com/giovanniraspinigioielli" target="_blank" class="icon-yt" aria-label="youtube"></a>
+					<a rel="noreferrer" href="https://www.pinterest.it/giovanni_raspini/" target="_blank" class="icon-pinterest" aria-label="pinterest"></a>
+					<a rel="noreferrer" href="https://www.tiktok.com/@giovanni_raspini" target="_blank" class="icon-tiktok" aria-label="tiktok"></a>
+				</div>
 
 				<?php $copyrights = get_field('copyrights', 'option'); ?>
 
