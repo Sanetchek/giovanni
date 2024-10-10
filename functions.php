@@ -58,6 +58,7 @@ function giovanni_setup() {
 			'women' => esc_html__( 'Women', 'giovanni' ),
 			'charms' => esc_html__( 'Charms', 'giovanni' ),
 			'gifts' => esc_html__( 'Gifts', 'giovanni' ),
+			'about' => esc_html__( 'About', 'giovanni' ),
 			'occasions' => esc_html__( 'Occasions', 'giovanni' ),
 		)
 	);

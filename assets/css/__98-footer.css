@@ -158,7 +158,7 @@ p.copyrights {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: space-evenly;
   margin-top: 40px;
 }
 
