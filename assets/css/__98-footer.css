@@ -158,7 +158,7 @@ p.copyrights {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: space-evenly;
   margin-top: 40px;
 }
 
@@ -167,20 +167,32 @@ p.copyrights {
   font-weight: 600;
 }
 
-.footer-four-menu .menu-footer-container {
+.footer-four-menu .menu-footer-widget-1-container,
+.footer-four-menu .menu-footer-widget-2-container,
+.footer-four-menu .menu-footer-widget-3-container,
+.footer-four-menu .menu-footer-widget-4-container {
   margin-top: 20px;
 }
 
-.footer-four-menu .menu-footer-container ul li {
+.footer-four-menu .menu-footer-widget-1-container ul li,
+.footer-four-menu .menu-footer-widget-2-container ul li,
+.footer-four-menu .menu-footer-widget-3-container ul li,
+.footer-four-menu .menu-footer-widget-4-container ul li {
   margin-bottom: 10px;
 }
 
-.footer-four-menu .menu-footer-container ul li a {
+.footer-four-menu .menu-footer-widget-1-container ul li a,
+.footer-four-menu .menu-footer-widget-2-container ul li a,
+.footer-four-menu .menu-footer-widget-3-container ul li a,
+.footer-four-menu .menu-footer-widget-4-container ul li a {
   font-size: 14px;
   text-decoration: none;
 }
 
-.menu-footer-container .menu {
+.menu-footer-widget-1-container .menu,
+.menu-footer-widget-2-container .menu,
+.menu-footer-widget-3-container .menu,
+.menu-footer-widget-4-container .menu {
   display: block;
 }
 button.js-accordion-trigger.accordion-trigger {

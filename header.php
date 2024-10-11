@@ -67,3 +67,4 @@
 		<?php get_template_part('template-parts/mega-menu/jewellry') ?>
 		<?php get_template_part('template-parts/mega-menu/charms') ?>
 		<?php get_template_part('template-parts/mega-menu/gifts') ?>
+		<?php get_template_part('template-parts/mega-menu/about') ?>

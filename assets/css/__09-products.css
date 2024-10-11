@@ -204,7 +204,7 @@
 .btn-filter,
 .open-filter {
   display: flex;
-  gap: 10px;
+  gap: 7px;
 }
 
 .filter-dropdown {

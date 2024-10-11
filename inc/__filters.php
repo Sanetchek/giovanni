@@ -167,8 +167,6 @@ function display_sort_options() {
     echo '<div class="filter-dropdown"><ul>';
     $sort_options = [
         'menu_order' => __('מומלץ', 'giovanni'),
-        'popularity' => __('המלצות', 'giovanni'),
-        'rating'     => __('דירוג', 'giovanni'),
         'date'       => __('חדשים ביותר', 'giovanni'),
         'price'      => __('מחיר: מהנמוך לגבוה', 'giovanni'),
         'price-desc' => __('מחיר: מהגבוה לנמוך', 'giovanni'),

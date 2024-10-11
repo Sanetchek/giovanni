@@ -69,6 +69,7 @@
       setupHoverHandler('.show-collection a', '#collection_menu');
       setupHoverHandler('.show-charms a', '#charms_menu');
       setupHoverHandler('.show-gifts a', '#gifts_menu');
+      setupHoverHandler('.show-about a', '#about_menu');
     } else {
       // Remove hover handlers
       $('.show-jewellery a').off('mouseenter mouseleave');
@@ -76,21 +77,25 @@
       $('#jewellery_menu').off('mouseenter mouseleave');
       $('#collection_menu').off('mouseenter mouseleave');
       $('.show-charms a').off('mouseenter mouseleave');
+      $('.show-about a').off('mouseenter mouseleave');
       $('.show-gifts a').off('mouseenter mouseleave');
       $('#charms_menu').off('mouseenter mouseleave');
       $('#gifts_menu').off('mouseenter mouseleave');
+      $('#about_menu').off('mouseenter mouseleave');
 
       // Setup click handlers
       setupClickHandler('.show-jewellery a', '#jewellery_menu');
       setupClickHandler('.show-collection a', '#collection_menu');
       setupClickHandler('.show-charms a', '#charms_menu');
       setupClickHandler('.show-gifts a', '#gifts_menu');
+      setupClickHandler('.show-about a', '#about_menu');
 
       // Add close buttons
       addCloseButton('#jewellery_menu');
       addCloseButton('#collection_menu');
       addCloseButton('#charms_menu');
       addCloseButton('#gifts_menu');
+      addCloseButton('#about_menu');
     }
   }
 
@@ -154,18 +159,24 @@
     if ($(window).width() <= 768) {
       $('.js-accordion-trigger, .accordion-row h2').on('click', function() {
         var $accordionRow = $(this).closest('.accordion-row');
-        var $menuContainer = $accordionRow.next('.menu-footer-container');
+        var $menuContainer1 = $accordionRow.next('.menu-footer-widget-1-container');
+        var $menuContainer2 = $accordionRow.next('.menu-footer-widget-2-container');
+        var $menuContainer3 = $accordionRow.next('.menu-footer-widget-3-container');
+        var $menuContainer4 = $accordionRow.next('.menu-footer-widget-4-container');
     
         var isExpanded = $accordionRow.find('.js-accordion-trigger').attr('aria-expanded') === 'true';
         $accordionRow.find('.js-accordion-trigger').attr('aria-expanded', !isExpanded);
-        $menuContainer.slideToggle(200);
+        $menuContainer1.slideToggle(200);
+        $menuContainer2.slideToggle(200);
+        $menuContainer3.slideToggle(200);
+        $menuContainer4.slideToggle(200);
     
         $accordionRow.find('.toggle-icon.plus').toggle(isExpanded);
         $accordionRow.find('.toggle-icon.minus').toggle(!isExpanded);
     
         $accordionRow.toggleClass('active');
     });
-    
+     
     }
 
 }(jQuery));
