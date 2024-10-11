@@ -1,4 +1,5 @@
 .main-wrap.header-wrap {
+  overflow: visible;
   padding-left: 64px;
   padding-right: 64px;
 }
@@ -74,6 +75,11 @@
   align-items: center;
   text-decoration: none;
   cursor: pointer;
+  flex-direction: row-reverse;
+}
+
+.header-action.header-search {
+  gap: 16px;
 }
 
 .header-count {
@@ -429,14 +435,17 @@ button.btn.search-form-submit {
   grid-auto-flow: row dense;
   padding-top: 0;
 }
+
 h2.search-result-title {
   font-size: 16px;
   text-align: center;
   margin-bottom: 15px;
 }
+
 button.btn.search-form-submit {
   padding: 11px 24px;
 }
+
 /*
 .search-modal-content .article-list-item {
   width: calc((50% - 24px) / 2);
@@ -456,6 +465,117 @@ button.btn.search-form-submit {
   font-size: 24px;
   font-weight: 700;
   text-align: center;
+}
+
+form.header-form-search {
+  display: none;
+}
+
+form.header-form-search .header-form-container {
+  display: flex;
+  gap: 6px;
+}
+
+form.header-form-search .header-form-container:focus-within {
+  border-bottom: 1px solid #000;
+}
+
+form.header-form-search input#header_search {
+  height: auto;
+  width: auto;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 4px 0;
+}
+
+form.header-form-search button {
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.header-form-btns-container {
+  display: flex;
+  gap: 6px;
+}
+
+.header-form-btns {
+  display: none;
+}
+
+form.header-form-search input#header_search:focus+.header-form-btns {
+  display: block;
+}
+
+#search_results {
+  width: 374px;
+  position: absolute;
+  top: 30px;
+  background: #fff;
+  z-index: 9999;
+}
+
+.search-header {
+  color: #515151;
+  line-height: 24px;
+  padding: 16px 24px;
+  margin-bottom: 16px;
+  letter-spacing: 0.05rem;
+  font-size: 12px;
+  font-weight: 400;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.product-results {
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.product-results li a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.product-results li img {
+  width: 88px;
+}
+
+.product-results li h2 {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.product-results li bdi {
+  font-size: 12px;
+  color: #515151;
+}
+
+.category-results li {
+  padding: 0 24px;
+  background-color: #f6f6f6;
+  font-weight: 500;
+  letter-spacing: 0.02rem;
+  line-height: 2.4rem;
+}
+
+.category-results li a {
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-bottom: 1px solid #e2e2e2;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.category-results li:last-child a {
+  border-bottom: 0;
 }
 
 @keyframes slideLeft {

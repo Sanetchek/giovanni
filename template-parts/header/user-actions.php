@@ -3,6 +3,8 @@
     <svg class='icon-search' width='24' height='24'>
       <use href='<?= assets('img/sprite.svg#icon-search') ?>'></use>
     </svg>
+
+    <?php get_template_part('template-parts/header/searchform') ?>
   </span>
 
   <?php
@@ -41,7 +43,7 @@
     get_template_part('template-parts/modal/cart', 'modal');
 
     // Modal search
-    get_template_part('template-parts/modal/search', 'modal');
+    // get_template_part('template-parts/modal/search', 'modal');
 
     // Login search
     if (!is_user_logged_in()) {
