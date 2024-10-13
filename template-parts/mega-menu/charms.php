@@ -26,3 +26,30 @@
     </div>
   </div>
 </div>
+
+<div id="charms_menu_mobile" class="mobile-charms mobile-dropdown-menu">
+
+  <div class="page-mob">
+    <button class="mega-menu-header">
+      <?= __('CHARMS', 'giovanni') ?>
+    </button>
+  </div>
+
+  <div class="menu-1">
+      <?php
+        wp_nav_menu([
+          'theme_location' => 'charms',
+          'menu_id'        => 'charms-menu',
+          'container'			 => ''
+        ]);
+      ?>
+  </div>
+
+  <div class="links-wrap mobile-links-wrap">
+    <?php
+      $links = get_field('menu_charms', 'options');
+      get_template_part('template-parts/mega-menu/links-mobile', '', ['links' => $links]);
+    ?>
+  </div>
+
+</div>

@@ -597,9 +597,23 @@
     flex-wrap: wrap;
   }
 
+  .mobile-dropdown-menu .mega-menu-header {
+    margin-bottom: 0.4rem;
+  }
+
   .links-wrap {
     flex-wrap: wrap;
     justify-content: center;
+  }
+
+  .links-wrap.mobile-links-wrap a {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+  }
+
+  .links-wrap.mobile-links-wrap a img {
+    max-width: 50%;
   }
 
   .site-branding {
