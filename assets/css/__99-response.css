@@ -595,6 +595,7 @@
 
   .menu-wrap {
     flex-wrap: wrap;
+    flex-direction: column;
   }
 
   .mobile-dropdown-menu .mega-menu-header {

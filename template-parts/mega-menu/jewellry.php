@@ -93,7 +93,7 @@
     <div class="links-wrap mobile-links-wrap">
       <?php
         $links = get_field('menu_gifts', 'options');
-        get_template_part('template-parts/mega-menu/links', '', ['links' => $links]);
+        get_template_part('template-parts/mega-menu/links-mobile', '', ['links' => $links]);
       ?>
     </div>
   </div>
