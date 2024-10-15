@@ -19,6 +19,11 @@
   $('#header_search').on('keyup', function () {
     clearTimeout(typingTimer); // Clear previous timer if user continues typing
     typingTimer = setTimeout(searchAjaxRequest, typingDelay); // Set new timer
+    if ($(this).val()) {
+      $('.header-form-btns').fadeIn();
+    } else {
+      $('.header-form-btns').fadeOut();
+    }
   });
 
   $('#header_search').on('keydown', function () {
@@ -43,6 +48,16 @@
   });
 
   /**
+   * Clear Search form
+   */
+  $('#header_form_clear').on('click', function (e) {
+    e.preventDefault();
+    $('#header_search').val('');
+    $('#search_results').fadeOut().html('');
+    $('.header-form-btns').fadeOut();
+  })
+
+  /**
    * Search request
    */
   function searchAjaxRequest() {
@@ -59,7 +74,6 @@
         },
         success: function (response) {
           // Handle the successful response
-          console.log(response);
           $('#search_results').html(response); // Populate search results
           $('#search_results').fadeIn(); // Fade in search results after getting response
         },
@@ -72,7 +86,6 @@
       $('#search_results').fadeOut(); // Fade out search results if there's no search term
     }
   }
-
 
   /**
    * Close Modal Search

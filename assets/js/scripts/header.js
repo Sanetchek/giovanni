@@ -163,20 +163,20 @@
         var $menuContainer2 = $accordionRow.next('.menu-footer-widget-2-container');
         var $menuContainer3 = $accordionRow.next('.menu-footer-widget-3-container');
         var $menuContainer4 = $accordionRow.next('.menu-footer-widget-4-container');
-    
+
         var isExpanded = $accordionRow.find('.js-accordion-trigger').attr('aria-expanded') === 'true';
         $accordionRow.find('.js-accordion-trigger').attr('aria-expanded', !isExpanded);
         $menuContainer1.slideToggle(200);
         $menuContainer2.slideToggle(200);
         $menuContainer3.slideToggle(200);
         $menuContainer4.slideToggle(200);
-    
+
         $accordionRow.find('.toggle-icon.plus').toggle(isExpanded);
         $accordionRow.find('.toggle-icon.minus').toggle(!isExpanded);
-    
+
         $accordionRow.toggleClass('active');
     });
-     
+
     }
 
 }(jQuery));

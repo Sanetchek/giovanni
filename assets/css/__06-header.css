@@ -430,10 +430,8 @@ button.btn.search-form-submit {
 .search-modal-content {
   max-width: 1600px;
   margin: 40px auto 0;
-  display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
-  grid-auto-flow: row dense;
-  padding-top: 0;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 h2.search-result-title {
@@ -502,10 +500,6 @@ form.header-form-search button {
 
 .header-form-btns {
   display: none;
-}
-
-form.header-form-search input#header_search:focus+.header-form-btns {
-  display: block;
 }
 
 #search_results {
@@ -579,14 +573,14 @@ form.header-form-search input#header_search:focus+.header-form-btns {
 }
 
 .mobile-dropdown-menu {
-  display:none;
+  display: none;
   position: absolute;
   z-index: 99999;
   right: 0px;
   padding: 30px;
   top: 100px;
-  width:100%;
-  height:100%;
+  width: 100%;
+  height: 100%;
   background: #fff;
   overflow-y: scroll;
   padding-bottom: 130px;

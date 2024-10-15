@@ -5,8 +5,8 @@
  *
  * @return array
  */
-function get_products_with_attributes() {
-  $args = build_query_args();
+function get_products_with_attributes($search_query = '') {
+  $args = build_query_args($search_query);
 
   // Query products
   $products = new WP_Query($args);
@@ -23,13 +23,17 @@ function get_products_with_attributes() {
  *
  * @return array
  */
-function build_query_args() {
+function build_query_args($search_query = '') {
   $args = [
     'post_type'      => 'product',
     'posts_per_page' => -1,
     'post_status'    => 'publish',
     'tax_query'      => [],
   ];
+
+  if ($search_query) {
+    $args['s'] = $search_query;
+  }
 
   // Check if current page is a product category page
   if (is_product_category()) {
@@ -100,11 +104,14 @@ function collect_product_attributes($products) {
 /**
  * Display product filters form.
  */
-function display_product_filters() {
-  $attributes = get_products_with_attributes();
+function display_product_filters($search_query = '') {
+  $attributes = get_products_with_attributes($search_query);
 
   echo '<form id="product-filters" method="get">';
   echo '<div class="products-filter-container">';
+  if ($search_query) {
+    echo '<input type="hidden" name="s" value="'.$search_query.'">';
+  }
 
   if (!empty($attributes)) {
     echo '<div class="filter-side">';
@@ -116,7 +123,7 @@ function display_product_filters() {
 
   display_sort_options();
 
-  echo '</div>';
+  echo '</input>';
   echo '</form>';
 }
 
@@ -245,6 +252,10 @@ function build_product_query_args($form_data = [], $paged = 1) {
       'relation' => 'OR', // Use 'OR' to match any of the taxonomy terms
     ],
   ];
+
+  if (!empty($form_data['s'])) {
+    $args['s'] = $form_data['s'];
+  }
 
   // Handle sorting options
   if (!empty($form_data['sort'])) {
