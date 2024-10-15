@@ -2,10 +2,28 @@
   margin: 100px 0;
 }
 
-.search-title {
-  text-align: center;
+.search-page .page-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 100px;
 }
 
-.search-title span {
+.search-page h1.search-title {
   font-weight: 400;
+  font-size: 4.8rem;
+  line-height: 5.6rem;
+  letter-spacing: -.2px;
+  margin: 0;
+  padding-bottom: 24px;
+}
+
+.search-result-count {
+  font-size: 12px;
+}
+
+.search-keywords {
+  font-weight: 500;
+  text-transform: uppercase;
 }
