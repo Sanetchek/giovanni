@@ -1,4 +1,4 @@
-<section id="taxonomies" class="taxonomies">
+<section id="taxonomies" class="container taxonomies">
   <?php
     $title = get_field('category_title');
     $taxonomies = get_field('category_taxonomies');

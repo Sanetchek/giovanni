@@ -1,7 +1,7 @@
 <div id="about_menu" class="mega-menu">
   <div class="page-mob">
     <button class="mega-menu-header">
-      <?= __('ABOUT', 'giovanni') ?>
+      <?= __('אוֹדוֹת', 'giovanni') ?>
     </button>
   </div>
 
@@ -32,7 +32,7 @@
 
   <div class="page-mob">
     <button class="mega-menu-header">
-      <?= __('ABOUT', 'giovanni') ?>
+      <?= __('אוֹדוֹת', 'giovanni') ?>
     </button>
   </div>
 
