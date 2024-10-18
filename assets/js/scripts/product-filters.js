@@ -33,6 +33,21 @@
     $('#product-filters').submit(); // Trigger form submission
   });
 
+  // Handle sort item click - mobile version
+  $('.filter-sort-item').on('click', function (e) {
+    e.preventDefault();
+    const filter = $(this).attr('data-sort');
+    const parent = $(this).closest('.filter-wrap');
+    const sortText = $(parent).find('.filter-sort-text');
+    const dropdown = $(parent).find('.filter-dropdown');
+
+    $('#sort-mobile').val(filter);
+    $(sortText).html($(this).text());
+    $(dropdown).slideUp();
+
+    $('#product-filters').submit(); // Trigger form submission
+  });
+
   // Handle checkbox change
   $('.filter-checkbox').on('change', function (e) {
     $('#product-filters').submit(); // Trigger form submission
