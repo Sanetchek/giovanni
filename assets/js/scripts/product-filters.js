@@ -66,4 +66,12 @@
     });
   });
 
+  $('.mobile-header .reset.js-reset').on('click', function() {
+    location.reload(); 
+  });
+
+  $('.mobile-header .js-close-filters').on('click', function() {
+    $('.open-filter').trigger('click'); 
+  });  
+
 }(jQuery));

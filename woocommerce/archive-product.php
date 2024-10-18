@@ -111,13 +111,18 @@ get_header( 'shop' ); ?>
 		<?php endif ?>
 
 		<div id="products-filter" class="products-filter">
-			<div class="filter-mob">
-				<button type="button" class="btn btn-no-border open-filter">
-					<span class="filter-label"><?= __('מסנן', 'giovanni') ?></span>
-					<svg class='icon-filter' width='24' height='24'>
-						<use href='<?= assets('img/sprite.svg#icon-filter') ?>'></use>
-					</svg>
-				</button>
+			<div class="filters-sort-row-mob">
+				<div class="filter-mob">
+					<button type="button" class="btn btn-no-border open-filter">
+						<span class="filter-label"><?= __('מסנן', 'giovanni') ?></span>
+						<svg class='icon-filter' width='24' height='24'>
+							<use href='<?= assets('img/sprite.svg#icon-filter') ?>'></use>
+						</svg>
+					</button>
+				</div>
+				<div class="sorting-mob">
+					<?php display_sort_options(); ?>
+				</div>
 			</div>
 
 			<div class="products-container">
