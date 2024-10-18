@@ -121,7 +121,7 @@ get_header( 'shop' ); ?>
 					</button>
 				</div>
 				<div class="sorting-mob">
-					<?php display_sort_options(); ?>
+					<?php display_sort_options_mobile(); ?>
 				</div>
 			</div>
 

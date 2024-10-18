@@ -1,5 +1,6 @@
 @media screen and (min-width: 1920px) {
-  #products-filter .sorting-mob {
+  #products-filter .sorting-mob,
+  #products-filter .mobile-header {
     display: none;
   }
 }
@@ -23,7 +24,8 @@
   .archive-header-content header.woocommerce-products-header h1 {
     margin: 0 0 40px;
   }
-  #products-filter .sorting-mob {
+  #products-filter .sorting-mob,
+  #products-filter .mobile-header {
     display: none;
   }
 }
@@ -774,6 +776,10 @@
     display: inline-block;
     outline: none;
     border: 0;
+  }
+
+  #products-filter .mobile-header {
+    display: flex;
   }
 
   .filter-sort {

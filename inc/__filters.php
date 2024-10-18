@@ -162,6 +162,33 @@ function display_filter_options($attribute_name, $attribute_data) {
  * Display sorting options in the filter form.
  */
 function display_sort_options() {
+  echo '<div class="filter-side">';
+  echo '<div class="filter-wrap filter-sort">';
+  echo '<span class="filter-label">' . __('מיין לפי', 'giovanni') . '</span>';
+  echo '<button type="button" class="btn btn-no-border btn-filter">';
+  echo '<span class="filter-sort-text">' . __('המלצות', 'giovanni') . '</span>';
+  echo '<svg class="icon-frame" width="24" height="24">';
+  echo '<use href="' . esc_url(assets('img/sprite.svg#icon-frame')) . '"></use>';
+  echo '</svg>';
+  echo '</button>';
+  echo '<input type="hidden" name="sort" id="sort" value="popularity">';
+  echo '<div class="filter-dropdown"><ul>';
+  $sort_options = [
+      'menu_order' => __('מומלץ', 'giovanni'),
+      'date'       => __('חדשים ביותר', 'giovanni'),
+      'price'      => __('מחיר: מהנמוך לגבוה', 'giovanni'),
+      'price-desc' => __('מחיר: מהגבוה לנמוך', 'giovanni'),
+  ];
+  foreach ($sort_options as $value => $label) {
+      echo '<li><button type="button" data-sort="' . esc_attr($value) . '" class="filter-sort-item">' . esc_html($label) . '</button></li>';
+  }
+  echo '</ul></div></div></div>';
+}
+/**
+ * Display sorting options in the filter form. 
+ * Separate code for mobile version.
+ */
+function display_sort_options_mobile() {
     echo '<div class="filter-side">';
     echo '<div class="filter-wrap filter-sort">';
     echo '<span class="filter-label">' . __('מיין לפי', 'giovanni') . '</span>';
@@ -171,7 +198,7 @@ function display_sort_options() {
     echo '<use href="' . esc_url(assets('img/sprite.svg#icon-frame')) . '"></use>';
     echo '</svg>';
     echo '</button>';
-    echo '<input type="hidden" name="sort" id="sort" value="popularity">';
+    echo '<input type="hidden" name="sort" id="sort-mobile" value="popularity">';
     echo '<div class="filter-dropdown"><ul>';
     $sort_options = [
         'menu_order' => __('מומלץ', 'giovanni'),
