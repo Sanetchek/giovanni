@@ -113,12 +113,13 @@ function display_product_filters($search_query = '') {
     echo '<input type="hidden" name="s" value="'.$search_query.'">';
   }
 
-  if (!empty($attributes)) {
+  if (!empty($attributes)) {  
     echo '<div class="filter-side">';
     foreach ($attributes as $attribute_name => $attribute_data) {
       display_filter_options($attribute_name, $attribute_data);
     }
     echo '</div>';
+    echo '<div class="mobile-header"><button class="reset js-reset"> אִתחוּל</button><div class="title">סינון לפי:</div><button class="js-close-filters icon-close" aria-label="close"></button></div>';
   }
 
   display_sort_options();
