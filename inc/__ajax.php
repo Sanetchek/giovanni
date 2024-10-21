@@ -70,12 +70,18 @@ add_action('wp_ajax_nopriv_giovanni_search', 'giovanni_ajax_search');
 /**
  * Handle AJAX Search Suggestion
  */
+/**
+ * Handle AJAX Search Suggestion
+ */
 function giovanni_search_suggestions() {
   check_ajax_referer('giovanni_search_nonce', 'nonce');
 
-  $search_query = sanitize_text_field($_GET['search']);
+  $search_query = sanitize_text_field($_POST['search']);
 
-  // Modify the query to search for products (assuming 'product' is the post type)
+  if (empty($search_query)) {
+    wp_die();
+  }
+
   $args = array(
     'post_type' => 'product',
     's' => $search_query,
@@ -85,51 +91,52 @@ function giovanni_search_suggestions() {
   $query = new WP_Query($args);
 
   if ($query->have_posts()) {
-    echo '<h2 class="search-header">'. __('הצעות:', 'giovanni') .'</h2>';
-    echo '<ul class="product-results">'; // Start product list
+    echo '<h2 class="search-header">' . __('הצעות:', 'giovanni') . '</h2>';
+    echo '<ul class="product-results">';
+
     while ($query->have_posts()) {
       $query->the_post();
-
-      // Create the product object
       $product = wc_get_product(get_the_ID());
       $name = get_the_title();
-      $thumbnail = get_the_post_thumbnail(get_the_ID(), 'thumbnail') ?: '<img src="' . wc_placeholder_img_src('full') . '" alt="'.$name.'" />';
-      $price_html = $product->get_price_html(); // Get formatted price
-      $permalink = get_permalink(); // Get the product permalink
+      $thumbnail = get_the_post_thumbnail(get_the_ID(), 'thumbnail') ?: 
+                   '<img src="' . esc_url(wc_placeholder_img_src('full')) . '" alt="' . esc_attr($name) . '" />';
+      $price_html = $product->get_price_html();
+      $permalink = get_permalink();
 
-      // Output product details with link
       echo '<li>';
-      echo '<a href="' . esc_url($permalink) . '">'; // Link to the product
-      echo $thumbnail; // Product thumbnail
-      echo '<div>'; // Product name
-      echo '<h2>' . esc_html($name) . '</h2>'; // Product name
-      echo '<span>' . $price_html . '</span>'; // Product price
-      echo '</div>'; // Product price
-      echo '</a>'; // Close link
-      echo '</li>'; // Close product list item
+      echo '<a href="' . esc_url($permalink) . '">';
+      echo $thumbnail;
+      echo '<div>';
+      echo '<h2>' . esc_html($name) . '</h2>';
+      echo '<span>' . $price_html . '</span>';
+      echo '</div>';
+      echo '</a>';
+      echo '</li>';
     }
-    echo '</ul>'; // Close product list
 
-    // Now fetch categories related to the search query
+    echo '</ul>';
+
     $categories = get_terms(array(
-      'taxonomy' => 'product_cat', // Assuming 'product_cat' is the taxonomy for product categories
-      'name__like' => $search_query, // Search for categories similar to the search query
-      'number' => 3, // Limit to 3 categories
-      'hide_empty' => true, // Hide empty categories
+      'taxonomy' => 'product_cat',
+      'name__like' => $search_query,
+      'number' => 3,
+      'hide_empty' => true,
     ));
 
-    if (!empty($categories) && !is_wp_error($categories)) {
-      echo '<ul class="category-results">'; // Start category list
+    if (!is_wp_error($categories) && !empty($categories)) {
+      echo '<ul class="category-results">';
       foreach ($categories as $category) {
-        $category_link = get_term_link($category); // Get link for the category
+        $category_link = get_term_link($category);
         echo '<li>';
         echo '<a href="' . esc_url($category_link) . '">';
         echo '<span>' . esc_html($category->name) . '</span>';
-        echo '<svg class="icon-chevron-right" width="24" height="24"><use href="'.assets('img/sprite.svg#icon-chevron-right').'"></use></svg>';
+        echo '<svg class="icon-chevron-right" width="24" height="24">';
+        echo '<use xlink:href="' . esc_url(assets('img/sprite.svg#icon-chevron-right')) . '"></use>';
+        echo '</svg>';
         echo '</a>';
         echo '</li>';
       }
-      echo '</ul>'; // Close category list
+      echo '</ul>';
     }
   } else {
     echo '<li class="results-not-found">' . __('לא נמצאו תוצאות', 'giovanni') . '</li>';
@@ -140,5 +147,4 @@ function giovanni_search_suggestions() {
 }
 add_action('wp_ajax_giovanni_search_suggestions', 'giovanni_search_suggestions');
 add_action('wp_ajax_nopriv_giovanni_search_suggestions', 'giovanni_search_suggestions');
-
 
