@@ -8,7 +8,10 @@
    */
   $('.header-search .icon-search').on('click', function () {
     $('form.header-form-search').fadeToggle();
+    $('.search-overlay-container').toggleClass('active');
+    $('body').toggleClass('no-scroll');
   });
+
 
   /**
    * Typing check
@@ -60,32 +63,38 @@
   /**
    * Search request
    */
-  function searchAjaxRequest() {
-    let searchTerm = $('#header_search').val(); // Get the input value
+   let searchTimeout;
 
-    if (searchTerm.length > 0) {
-      $.ajax({
-        url: ajax_url, // Your AJAX URL or endpoint
-        type: 'POST',
-        data: {
-          action: 'giovanni_search_suggestions',
-          search: searchTerm,
-          nonce: giovanni.search_nonce
-        },
-        success: function (response) {
-          // Handle the successful response
-          $('#search_results').html(response); // Populate search results
-          $('#search_results').fadeIn(); // Fade in search results after getting response
-        },
-        error: function (xhr, status, error) {
-          // Handle error
-          console.log('AJAX Error: ' + error);
-        }
-      });
-    } else {
-      $('#search_results').fadeOut(); // Fade out search results if there's no search term
-    }
-  }
+   function searchAjaxRequest() {
+     let searchTerm = $('#header_search').val().trim();
+   
+     if (searchTerm.length > 0) {
+       clearTimeout(searchTimeout);
+   
+       searchTimeout = setTimeout(function () {
+         $.ajax({
+           url: ajax_url,
+           type: 'POST',
+           data: {
+             action: 'giovanni_search_suggestions',
+             search: searchTerm,
+             nonce: giovanni.search_nonce
+           },
+           success: function (response) {
+             $('#search_results').html(response).fadeIn();
+           },
+           error: function (xhr, status, error) {
+             console.log('AJAX Error: ' + error);
+           }
+         });
+       }, 300); 
+     } else {
+       $('#search_results').fadeOut(); 
+     }
+   }
+
+   $('#header_search').on('input', searchAjaxRequest);
+   
 
   /**
    * Close Modal Search
@@ -104,6 +113,11 @@
     const submitButton = $(this).find('.search-form-submit');
 
     $('.search-modal-error').hide();
+
+    if (searchValue.length === 0) {
+      $('.search-modal-error').text('אנא הזן את בקשתך').show();
+      return;
+    }
 
     $.ajax({
       url: ajax_url,

@@ -823,7 +823,7 @@
   span.woo-login-wrap {
     flex-direction: column;
   }
-/*
+
   form.header-form-search {
     position: fixed;
     top: 150px;
@@ -834,7 +834,48 @@
     padding: 5px 15px;
     z-index: 2;
   }
-*/
+
+  .search-overlay-container {
+    display: none;
+  }
+  .search-overlay-container.active {
+    display: block;
+  }
+
+  body.no-scroll {
+    overflow: hidden;
+  }
+
+  #search_overlay {
+    position: fixed;
+    top: 10rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .6);
+    display: flex;
+    flex-direction: row;
+    will-change: transform;
+    z-index: 1;
+  }
+
+  #search_results {
+    overflow-y: scroll;
+    width: 100%;
+    position: fixed;
+    top: 12rem;
+    right:0;
+    z-index: 999999;
+  }
+
+  #search_results .search-header {
+    display: none;
+  }
+
+  form.header-form-search input#header_search {
+    width: 100%;
+  }
+
   .taxonomies-title {
     margin-bottom: 20px;
   }

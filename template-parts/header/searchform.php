@@ -18,3 +18,6 @@
   </div>
 </form>
 <div id="search_results"></div>
+<div class="search-overlay-container">
+  <div id="search_overlay"></div>
+</div>
