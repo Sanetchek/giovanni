@@ -816,6 +816,20 @@
     width: calc((100% - 24px) / 2);
   }
 
+  .article-paragraph.main-title-container {
+    margin: 0 auto;
+    transform: translateY(0);
+    max-width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .article-paragraph.main-title-container .breadcrumbs {
+    text-align: center;
+  }
+
   .search-modal-content .article-list-item {
     width: 100%;
   }
