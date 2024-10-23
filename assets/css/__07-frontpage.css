@@ -29,7 +29,15 @@
   max-width: 1920px;
   width: 100%;
   margin: 0 auto;
-  overflow-x: hidden;
+  overflow: hidden;
+}
+
+.main-wrap.boxed {
+  max-width: 87%;
+}
+
+.main-wrap.boxed .main-posts-content {
+  max-width: 815px;
 }
 
 .hero-title {
@@ -340,7 +348,7 @@ li.product-card-big {
 
 .main-posts-container {
   position: relative;
-  padding: 84px;
+  padding: 15px 35px;
   background-color: #fff;
   min-height: 678px;
 }
@@ -375,7 +383,7 @@ li.product-card-big {
   display: flex;
   margin: 0;
   flex-direction: column;
-  gap: 64px;
+  gap: 25px;
 }
 
 .main-posts-art.first .main-posts-wrap {
@@ -526,7 +534,6 @@ span.slide-total {
 
 .product-item h3 {
   text-align: center;
-  margin: 0;
   font-weight: 400;
   font-size: 18px;
   line-height: 1.33333;

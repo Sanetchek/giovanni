@@ -44,7 +44,7 @@ $second_image_url = $second_image_id ? wp_get_attachment_image_url($second_image
 
   <a href="<?php echo esc_url($permalink); ?>">
     <div class="product-info">
-      <h2 class="product-title"><?php echo esc_html($title); ?></h2>
+      <h3 class="product-title"><?php echo esc_html($title); ?></h3>
       <span class="product-price" dir="ltr"><?php echo $price; ?></span>
     </div>
   </a>
