@@ -26,7 +26,6 @@ if ($category && !is_wp_error($category)) :
   $hover_image_url = generate_picture_element($hover_image_id, $is_last, 'taxonomies-hover-image');
 ?>
 <a href="<?= esc_url($category_link) ?>" class="taxonomies-content-link">
-  <h3 class="taxonomies-content-title"><?= esc_html($category_title) ?></h3>
   <div class="taxonomies-content-image">
     <?= $thumbnail_url ?>
   </div>
@@ -37,6 +36,14 @@ if ($category && !is_wp_error($category)) :
     </div>
     <h3 class="taxonomies-hidden-title btn-hover white">
       <?= esc_html($category_title) ?>
+    </h3>
+  </div>
+  <div class="editorial-list-item animation-container">
+    <h3 class="taxonomies-content-title">
+      <span><?= esc_html($category_title) ?></span>
+    </h3>
+    <h3 class="taxonomies-content-title animation-text" aria-hidden="true">
+      <span><?= esc_html($category_title) ?></span>
     </h3>
   </div>
 </a>

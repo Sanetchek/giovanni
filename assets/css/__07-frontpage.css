@@ -77,7 +77,7 @@
   align-items: center;
   justify-content: center;
   flex-wrap: nowrap;
-  gap: 0;
+  gap: 25px;
   margin-bottom: 90px;
 }
 
@@ -90,17 +90,25 @@
 .taxonomies-content {
   width: 100%;
   position: relative;
-  background: #f5f5f5;
   mix-blend-mode: multiply;
+}
+
+.taxonomies-content-image {
+  max-height: 270px;
+  overflow: hidden;
 }
 
 .taxonomies-content img {
   width: 100%;
 }
 
+.taxonomies-content img:hover {
+  filter: contrast(.79);
+}
+
 .taxonomies-content-title {
   margin: 0;
-  position: absolute;
+  position: relative;
   bottom: 0;
   line-height: 48px;
   width: 100%;
@@ -110,9 +118,40 @@
   text-overflow: ellipsis;
 }
 
+/* hover animation title taxonomies ---> */
+.animation-container {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  height: 2.5em; 
+}
+
+.taxonomies-content-title {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.animation-text {
+  transform: translateY(-100%);
+}
+
+.taxonomies-content:hover .taxonomies-content-title:not(.animation-text) {
+  transform: translateY(100%);
+}
+
+.taxonomies-content:hover .animation-text {
+  transform: translateY(0);
+}
+/* <-----hover animation title taxonomies */
+
 .taxonomies-content-link {
   position: relative;
   overflow: hidden;
+  text-decoration: none;
 }
 
 .taxonomies-hidden {
@@ -128,8 +167,7 @@
 }
 
 .taxonomies-content:hover .taxonomies-hidden {
-  opacity: 1;
-  visibility: visible;
+
 }
 
 .taxonomies-hidden-title {
@@ -348,7 +386,7 @@ li.product-card-big {
 
 .main-posts-container {
   position: relative;
-  padding: 15px 35px;
+  padding: 30px 45px 35px 25px;
   background-color: #fff;
   min-height: 678px;
 }

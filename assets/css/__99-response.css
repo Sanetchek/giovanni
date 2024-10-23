@@ -895,7 +895,15 @@
   }
 
   .taxonomies-content {
-    width: 50%;
+    width: 42%;
+  }
+
+  .taxonomies-content-image {
+    max-height: fit-content;
+  }
+
+  .taxonomies-content-title {
+    font-size: 13px;
   }
 
   button.js-accordion-trigger.accordion-trigger {
