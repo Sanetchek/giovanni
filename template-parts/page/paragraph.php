@@ -9,7 +9,7 @@
 
     <?php if ($heading_tag === 'h1'): ?>
     <nav class="breadcrumbs">
-      <a href="/">Home</a> /
+      <a href="/">עמוד הבית </a> /
       <span><?= esc_html($block['title']) ?></span>
     </nav>
     <?php endif; ?>

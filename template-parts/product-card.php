@@ -42,14 +42,14 @@ $second_image_url = $second_image_id ? wp_get_attachment_image_url($second_image
     </a>
   </div>
 
-  <a href="<?php echo esc_url($permalink); ?>">
+  <a href="<?php echo esc_url($permalink); ?>" class="product-info-box">
     <div class="product-info">
       <h3 class="product-title"><?php echo esc_html($title); ?></h3>
       <span class="product-price" dir="ltr"><?php echo $price; ?></span>
     </div>
   </a>
 
-  <a href="<?php echo esc_url($permalink); ?>">
+  <a href="<?php echo esc_url($permalink); ?>" class="product-button-cart">
     <span class="product-hidden product-hidden-btn btn-hover white">
       <?php echo __('לקנות עכשיו', 'giovanni'); ?>
     </span>
