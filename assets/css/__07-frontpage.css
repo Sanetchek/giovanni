@@ -262,6 +262,11 @@ li.product-card-big {
   flex-direction: column;
   justify-content: space-between;
   text-decoration: none;
+  border: 1px solid transparent;
+}
+
+.product-link:hover {
+  border: 1px solid #737373;
 }
 
 .product-link a {
@@ -560,6 +565,10 @@ span.slide-total {
   max-width: 372px;
 }
 
+.product-item:last-child .product-link:hover {
+  margin-right: 3px;
+}
+
 .product-item a {
   display: flex;
   flex-direction: column;
@@ -578,6 +587,18 @@ span.slide-total {
   text-transform: uppercase;
   text-align: center;
   color: #000;
+}
+
+.single-product .product-item h3 {
+  font-size: 16px;
+}
+
+.product-link .product-info-box {
+  padding: 10px 20px 0 20px;
+}
+
+.product-link .product-button-cart { 
+  padding: 0 20px 20px 20px;
 }
 
 p.popular-price {

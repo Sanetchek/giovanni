@@ -386,6 +386,7 @@ span.social_share_svg {
   color: #000;
   margin-bottom: 32px;
   direction: ltr;
+  text-align: right;
 }
 
 .product-summary .product-short-description {
@@ -460,7 +461,7 @@ form.cart .button {
 .single-product-content {
   border-top: 1px solid #dedede;
   margin: 32px 0 0;
-  padding: 30px 0 75px;
+  padding: 40px 0 75px;
 }
 
 .single-product-content-wrap {
@@ -472,7 +473,7 @@ form.cart .button {
 
 .single-product-content-wrap * {
   font-weight: 400;
-  font-size: 18px;
+  font-size: 14px;
   line-height: 1.77778;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -486,29 +487,31 @@ form.cart .button {
 
 .single-product-details {
   max-width: 423px;
+  border-right: 1px solid #f0f0f0;
+  padding-right: 15px;
 }
 
 .single-product-title {
   font-weight: 700;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 1.5;
-  letter-spacing: 0.21em;
+  letter-spacing: .08em;
   text-transform: uppercase;
   color: #000;
   margin-top: 0;
-  margin-bottom: 32px;
+  margin-bottom: 12px;
 }
 
 .product-details-list {
   margin: 0;
-  padding-right: 18px;
+  padding-right: 4px;
 }
 
 .product-user-info {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
-  gap: 64px;
+  gap: 15px;
 }
 
 .product-info-item {
@@ -518,6 +521,7 @@ form.cart .button {
 }
 
 .product-info-shadow svg {
+  display: none;
   position: absolute;
   top: 0;
   left: 50%;
@@ -525,7 +529,7 @@ form.cart .button {
 }
 
 .product-info-content {
-  padding: 59px 0 58px;
+  padding: 37px 0 36px;
   background: #fff;
   position: relative;
   z-index: 1;
@@ -536,8 +540,9 @@ form.cart .button {
 }
 
 .product-user-info-wrap {
-  padding: 64px 0;
+  padding: 45px 0;
   position: relative;
+  margin-bottom: 45px;
 }
 
 .product-user-info-wrap::before {
@@ -547,7 +552,7 @@ form.cart .button {
   top: 0;
   left: 0;
   right: 0;
-  height: 239px;
+  height: 288px;
   background: #f6f6f6;
 }
 
