@@ -167,9 +167,7 @@ function display_sort_options() {
   echo '<span class="filter-label">' . __('מיין לפי', 'giovanni') . '</span>';
   echo '<button type="button" class="btn btn-no-border btn-filter">';
   echo '<span class="filter-sort-text">' . __('המלצות', 'giovanni') . '</span>';
-  echo '<svg class="icon-frame" width="24" height="24">';
-  echo '<use href="' . esc_url(assets('img/sprite.svg#icon-frame')) . '"></use>';
-  echo '</svg>';
+  echo '<svg class="icon-chevron-down" width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 16"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 13.293l3.646-3.647.707.708L6 14.707l-4.354-4.353.708-.708L6 13.293zM6 2.707L2.354 6.354l-.708-.708L6 1.293l4.354 4.353-.708.708L6 2.707z" fill="black"/></svg>';
   echo '</button>';
   echo '<input type="hidden" name="sort" id="sort" value="popularity">';
   echo '<div class="filter-dropdown"><ul>';
@@ -194,9 +192,7 @@ function display_sort_options_mobile() {
     echo '<span class="filter-label">' . __('מיין לפי', 'giovanni') . '</span>';
     echo '<button type="button" class="btn btn-no-border btn-filter">';
     echo '<span class="filter-sort-text">' . __('המלצות', 'giovanni') . '</span>';
-    echo '<svg class="icon-frame" width="24" height="24">';
-    echo '<use href="' . esc_url(assets('img/sprite.svg#icon-frame')) . '"></use>';
-    echo '</svg>';
+    echo '<svg class="icon-chevron-down" width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 16"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 13.293l3.646-3.647.707.708L6 14.707l-4.354-4.353.708-.708L6 13.293zM6 2.707L2.354 6.354l-.708-.708L6 1.293l4.354 4.353-.708.708L6 2.707z" fill="black"/></svg>';
     echo '</button>';
     echo '<input type="hidden" name="sort" id="sort-mobile" value="popularity">';
     echo '<div class="filter-dropdown"><ul>';

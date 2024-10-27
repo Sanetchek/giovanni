@@ -36,25 +36,49 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters('active_plugins', ge
   // Add to functions.php or a custom plugin file
   function custom_woocommerce_product_taxonomy_archive_header() {
     if ( ! is_search() ) {
-      $title = woocommerce_page_title( false );
+        $title = woocommerce_page_title( false );
 
-      // Get the current query object
-      global $wp_query;
+        // Get the current query object
+        global $wp_query;
 
-      // Get the total number of products
-      $total_products = $wp_query->found_posts;
+        // Get the total number of products
+        $total_products = $wp_query->found_posts;
 
-      // Modify the title to include the product count
-      $title .= '<span class="product-count">' . esc_html( $total_products ) . '</span>';
+        // Modify the title to include the product count
+        $title .= '<span class="product-count">' . esc_html( $total_products ) . '</span>';
 
-      echo '<header class="woocommerce-products-header">';
-			echo '<h1 class="woocommerce-products-header__title page-title">' . $title . '</h1>';
-      do_action( 'woocommerce_archive_description' );
-	    echo '</header>';
+        // Check ACF field use_black_title
+        $use_black_title = get_field('use_black_title', get_queried_object());
+
+        // Add class based on ACF field
+        $title_class = $use_black_title ? 'black-color' : '';
+
+        echo '<header class="woocommerce-products-header">';
+        echo '<h1 class="woocommerce-products-header__title page-title ' . esc_attr($title_class) . '">' . $title . '</h1>';
+        do_action( 'custom_woocommerce_archive_description' );
+        echo '</header>';
     }
   }
   remove_action( 'woocommerce_shop_loop_header', 'woocommerce_product_taxonomy_archive_header', 10 );
   add_action( 'woocommerce_shop_loop_header', 'custom_woocommerce_product_taxonomy_archive_header', 10 );
+
+  // Add a custom function for the archive description with a conditional class
+  function custom_archive_description() {
+      $description = term_description();
+      if ( $description ) {
+          // Check ACF field use_black_title
+          $use_black_title = get_field('use_black_title', get_queried_object());
+
+          // Add class based on ACF field
+          $description_class = $use_black_title ? 'black-color' : 'your-custom-class';
+
+          echo '<div class="custom-archive-description ' . esc_attr($description_class) . '">' . $description . '</div>';
+      }
+  }
+  remove_action( 'woocommerce_archive_description', 'woocommerce_taxonomy_archive_description', 10 );
+  add_action( 'custom_woocommerce_archive_description', 'custom_archive_description', 10 );
+
+
 
   /**
    * Remove woocommerce actions
