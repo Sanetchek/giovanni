@@ -115,9 +115,7 @@ get_header( 'shop' ); ?>
 				<div class="filter-mob">
 					<button type="button" class="btn btn-no-border open-filter">
 						<span class="filter-label"><?= __('מסנן', 'giovanni') ?></span>
-						<svg class='icon-filter' width='24' height='24'>
-							<use href='<?= assets('img/sprite.svg#icon-filter') ?>'></use>
-						</svg>
+						<svg class='icon-filter' width='18' height='18' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 16'><path fill-rule='evenodd' clip-rule='evenodd' d='M7.5 8.5V16h1V8.5H16v-1H8.5V0h-1v7.5H0v1h7.5z' fill='black'/></svg>
 					</button>
 				</div>
 				<div class="sorting-mob">
