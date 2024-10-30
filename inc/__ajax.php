@@ -42,8 +42,17 @@ function giovanni_ajax_search() {
   $search_query = sanitize_text_field($_GET['s_modal']);
 
   $args = array(
-    's' => $search_query,
     'posts_per_page' => -1,
+    'post_type' => 'product',
+    's' => $search_query,
+    'meta_query' => array(
+      'relation' => 'OR',
+      array(
+        'key' => '_sku',
+        'value' => $search_query,
+        'compare' => 'LIKE'
+      ),
+    ),
   );
 
   $query = new WP_Query($args);
@@ -67,6 +76,7 @@ function giovanni_ajax_search() {
 add_action('wp_ajax_giovanni_search', 'giovanni_ajax_search');
 add_action('wp_ajax_nopriv_giovanni_search', 'giovanni_ajax_search');
 
+
 /**
  * Handle AJAX Search Suggestion
  */
@@ -82,20 +92,58 @@ function giovanni_search_suggestions() {
     wp_die();
   }
 
-  $args = array(
+  // Первый запрос для поиска по названию
+  $args_title_search = array(
     'post_type' => 'product',
-    's' => $search_query,
     'posts_per_page' => 3,
+    's' => $search_query,
   );
 
-  $query = new WP_Query($args);
+  // Второй запрос для поиска по SKU
+  $args_sku_search = array(
+    'post_type' => 'product',
+    'posts_per_page' => 3,
+    'meta_query' => array(
+      array(
+        'key' => '_sku',
+        'value' => $search_query,
+        'compare' => 'LIKE',
+      ),
+    ),
+  );
 
-  if ($query->have_posts()) {
+  // Выполняем оба запроса
+  $query_title = new WP_Query($args_title_search);
+  $query_sku = new WP_Query($args_sku_search);
+
+  if ($query_title->have_posts() || $query_sku->have_posts()) {
     echo '<h2 class="search-header">' . __('הצעות:', 'giovanni') . '</h2>';
     echo '<ul class="product-results">';
 
-    while ($query->have_posts()) {
-      $query->the_post();
+    // Выводим результаты поиска по названию
+    while ($query_title->have_posts()) {
+      $query_title->the_post();
+      $product = wc_get_product(get_the_ID());
+      $name = get_the_title();
+      $thumbnail = get_the_post_thumbnail(get_the_ID(), 'thumbnail') ?: 
+                   '<img src="' . esc_url(wc_placeholder_img_src('full')) . '" alt="' . esc_attr($name) . '" />';
+      $price_html = $product->get_price_html();
+      $permalink = get_permalink();
+
+      echo '<li>';
+      echo '<a href="' . esc_url($permalink) . '">';
+      echo $thumbnail;
+      echo '<div>';
+      echo '<h2>' . esc_html($name) . '</h2>';
+      echo '<span>' . $price_html . '</span>';
+      echo '</div>';
+      echo '</a>';
+      echo '</li>';
+    }
+
+    // Выводим результаты поиска по SKU
+    while ($query_sku->have_posts()) {
+      $query_sku->the_post();
       $product = wc_get_product(get_the_ID());
       $name = get_the_title();
       $thumbnail = get_the_post_thumbnail(get_the_ID(), 'thumbnail') ?: 
@@ -116,11 +164,12 @@ function giovanni_search_suggestions() {
 
     echo '</ul>';
 
+    // Поиск по категориям
     $categories = get_terms(array(
       'taxonomy' => 'product_cat',
       'name__like' => $search_query,
       'number' => 3,
-      'hide_empty' => true,
+      'hide_empty' => false,
     ));
 
     if (!is_wp_error($categories) && !empty($categories)) {
@@ -147,4 +196,3 @@ function giovanni_search_suggestions() {
 }
 add_action('wp_ajax_giovanni_search_suggestions', 'giovanni_search_suggestions');
 add_action('wp_ajax_nopriv_giovanni_search_suggestions', 'giovanni_search_suggestions');
-
