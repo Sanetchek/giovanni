@@ -113,6 +113,10 @@
   text-overflow: ellipsis;
 }
 
+.mobile-only {
+  display: none;
+}
+
 /* hover animation title taxonomies ---> */
 .animation-container {
   position: relative;

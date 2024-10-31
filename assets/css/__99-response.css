@@ -922,6 +922,10 @@
     max-height: fit-content;
   }
 
+  .taxonomies-content.last .taxonomies-content-image {
+    display: none;
+  }
+
   .taxonomies-content-title {
     font-size: 13px;
   }
@@ -1015,7 +1019,10 @@
   .product-count {
     font-size: 17px;
   }
-
+  
+  .mobile-only {
+    display: block;
+  }
 }
 
 @media screen and (max-width: 600px) {
