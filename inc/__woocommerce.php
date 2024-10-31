@@ -192,4 +192,28 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters('active_plugins', ge
     return $items;
   }
   add_filter('woocommerce_account_menu_items', 'remove_downloads_from_my_account', 999);
+
+
+  /**
+   * Function adds black color class to the breadcrumbs when is field ACF activated.
+   */
+  add_action('init', 'customize_woocommerce_breadcrumbs_for_category');
+  function customize_woocommerce_breadcrumbs_for_category() {
+      if (function_exists('woocommerce_breadcrumb')) {
+          remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
+          add_action('woocommerce_before_main_content', 'custom_woocommerce_breadcrumb', 20);
+      }
+  }
+  function custom_woocommerce_breadcrumb() {
+      $breadcrumb_class = 'woocommerce-breadcrumb';
+      if (is_product_category()) {
+          $category = get_queried_object();
+          
+          if (function_exists('get_field') && get_field('use_black_title', 'product_cat_' . $category->term_id)) {
+              $breadcrumb_class .= ' black-color';
+          }
+      }
+      woocommerce_breadcrumb(['wrap_before' => '<nav class="' . esc_attr($breadcrumb_class) . '" aria-label="Breadcrumb">', 'wrap_after' => '</nav>']);
+  }
+
 }
