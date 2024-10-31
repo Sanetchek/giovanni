@@ -93,11 +93,6 @@
   mix-blend-mode: multiply;
 }
 
-.taxonomies-content-image {
-  max-height: 270px;
-  overflow: hidden;
-}
-
 .taxonomies-content img {
   width: 100%;
 }
