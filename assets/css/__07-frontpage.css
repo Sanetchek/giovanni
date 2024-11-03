@@ -24,6 +24,11 @@
   padding: 0 5px 91px 0;
 }
 
+.hero-content h1 {
+  font-size: 34px;
+  padding-bottom: 20px;
+}
+
 .main-wrap {
   position: relative;
   max-width: 1920px;
@@ -40,6 +45,12 @@
   max-width: 815px;
 }
 
+.hero-image.main-wrap img {
+  width: 100%;
+  height: calc(100vh - 155px);
+  object-fit: cover;
+}
+
 .hero-title {
   font-family: "Libre Caslon Text", sans-serif;
   font-weight: 500;
@@ -50,7 +61,7 @@
 }
 
 .hero-label {
-  font-family: "Assistant", sans-serif;
+  font-family: "Heebo", sans-serif;
   font-weight: 600;
   line-height: 1.28571;
   letter-spacing: 0.18em;
@@ -59,7 +70,7 @@
 
 .taxonomies {
   margin: 0 auto;
-  max-width: 1488px;
+  max-width: 1600px;
   position: relative;
   padding: 64px 0 5px;
 }
@@ -204,7 +215,7 @@
 
 .collections-content {
   margin: 0 auto;
-  max-width: 1488px;
+  max-width: 1600px;
   position: relative;
 }
 
@@ -228,7 +239,7 @@
 }
 
 .collections-container>p {
-  font-family: "Assistant", sans-serif;
+  font-family: "Heebo", sans-serif;
   font-weight: 600;
   line-height: 0.88889;
   letter-spacing: 0.06em;
@@ -254,6 +265,12 @@ li.product-card-big {
   width: calc(100% / 2);
 }
 
+li.product-card-big.banner img {
+  width: 100%;
+  height: calc(590px - 10px);
+  object-fit: cover;
+}
+
 .product-link {
   position: relative;
   height: 100%;
@@ -273,7 +290,7 @@ li.product-card-big {
 }
 
 .product-title {
-  font-family: "Assistant", sans-serif;
+  font-family: "Heebo", sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 1.33333;
@@ -295,9 +312,9 @@ li.product-card-big {
 }
 
 .product-price {
-  font-family: "Assistant", sans-serif;
-  font-weight: 700;
-  font-size: 18px;
+  font-family: "Heebo", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
   line-height: 1.33333;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -362,7 +379,7 @@ li.product-card-big {
 
 .main-posts-picture {
   position: relative;
-  min-height: 357px;
+  min-height: 546px;
   width: 1184px;
 }
 
@@ -392,7 +409,7 @@ li.product-card-big {
   position: relative;
   padding: 30px 45px 35px 25px;
   background-color: #fff;
-  min-height: 678px;
+  min-height: 325px;
 }
 
 .main-posts-art.first .main-posts-content {
@@ -404,10 +421,15 @@ li.product-card-big {
 }
 
 .main-posts-shadow {
+  display: none; /* hide temp */
   position: absolute;
   z-index: 0;
   width: 83%;
   height: 80%;
+}
+
+.main-posts-art.first {
+  margin-bottom: 100px;
 }
 
 .main-posts-art.first .main-posts-shadow {
@@ -516,7 +538,7 @@ li.product-card-big {
 
 .nav-indicator {
   font-weight: 400;
-  font-size: 32px;
+  font-size: 18px;
   line-height: 1;
   text-transform: uppercase;
   color: #000;
@@ -524,7 +546,7 @@ li.product-card-big {
 
 span.slide-indicator {
   position: relative;
-  font-size: 20px;
+  font-size: 16px;
   top: -9px;
   right: -2px;
 }
@@ -532,13 +554,13 @@ span.slide-indicator {
 span.slide-total {
   position: relative;
   line-height: 0;
-  font-size: 20px;
+  font-size: 16px;
   bottom: -3px;
   left: 0px;
 }
 
 .popular-product {
-  max-width: 1489px;
+  max-width: 1632px;
   margin: 0 auto;
   overflow-x: hidden;
   direction: ltr;
@@ -581,7 +603,7 @@ span.slide-total {
 .product-item h3 {
   text-align: center;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 15px;
   line-height: 1.33333;
   text-transform: uppercase;
   text-align: center;

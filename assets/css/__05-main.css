@@ -1,5 +1,5 @@
 body {
-  font-family: 'Assistant', sans-serif;
+  font-family: 'Heebo', sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
@@ -24,10 +24,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.16667;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  letter-spacing: 0.1em;
   color: #000;
 }
 
@@ -98,14 +97,13 @@ textarea {
   width: fit-content;
   align-items: center;
   justify-content: center;
-  font-family: "Assistant", sans-serif;
+  font-family: "Heebo", sans-serif;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.06667;
   letter-spacing: 0.07em;
   color: #000;
   text-transform: uppercase;
-  border: 1px solid #000;
   padding: 16px 24px;
   background-color: #fff;
   text-decoration: none;
@@ -116,35 +114,63 @@ textarea {
   border: 0;
 }
 
-.btn-hover::after {
+.btn-hover::before {
   content: "";
-  transition: all 0.5s ease;
+  width: 18px;
+  height: 1px;
+  background-color: #000;
+  margin-left: 11px;
+  margin-bottom: 3px;
+}
+
+.block1-content .btn-hover::before {
+  margin-bottom: 5px;
+}
+
+.animation-label-container {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  height: 2.5em; 
+  min-width: calc(1ch * var(--char-count, 10)); 
+}
+
+.animation-label-container .cta-text {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0;
+  transition: transform 0.2s ease-in-out;
+}
+
+.animation-label-container .animation-label-text {
+  transform: translateY(-100%);
+}
+
+.button-animation-effect a:hover .animation-label-container .cta-text:not(.animation-label-text) {
+  transform: translateY(100%);
+}
+
+.button-animation-effect a:hover .animation-label-container .animation-label-text {
+  transform: translateY(0);
 }
 
 .btn-hover:hover::after {
-  content: '';
-  display: inline-block;
-  width: 24px;
-  height: 6px;
-  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="24" height="6" viewBox="0 0 24 6"%3E%3Cpath d="M24 3L19 0.113249V5.88675L24 3ZM0 3.5L19.5 3.5V2.5L0 2.5L0 3.5Z" fill="black" /%3E%3C/svg%3E');
-  margin: 0 0 0 24px;
-  vertical-align: middle;
+
 }
 
 .btn-hover.white:hover::after {
-  content: '';
-  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="24" height="6" viewBox="0 0 24 6"%3E%3Cpath d="M24 3L19 0.113249V5.88675L24 3ZM0 3.5L19.5 3.5V2.5L0 2.5L0 3.5Z" fill="white" /%3E%3C/svg%3E');
+ 
 }
 
 html[dir="rtl"] .btn-hover:hover::after {
-  content: '';
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="6" viewBox="0 0 24 6" fill="none"><path d="M0 3L5 5.88675L5 0.113247L0 3ZM24 2.5L4.5 2.5L4.5 3.5L24 3.5L24 2.5Z" fill="black"/></svg>');
-  margin: 0 24px 0 0;
+
 }
 
 html[dir="rtl"] .btn-hover.white:hover::after {
-  content: '';
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="6" viewBox="0 0 24 6" fill="none"><path d="M0 3L5 5.88675L5 0.113247L0 3ZM24 2.5L4.5 2.5L4.5 3.5L24 3.5L24 2.5Z" fill="white"/></svg>');
+
 }
 
 /* Spinner */

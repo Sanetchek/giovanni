@@ -21,7 +21,14 @@
           <p><?php echo $item['description']; ?></p>
 
           <?php if ($item['link']) : ?>
-            <a href="<?php echo $item['link'] ?>" class="btn btn-hover"><?php echo $item['link_label'] ?></a>
+          <div class="button-animation-effect">
+            <a href="<?php echo $item['link'] ?>" class="btn btn-hover">
+              <div class="animation-label-container">
+                <p class="cta-text"><?php echo $item['link_label'] ?></p>
+                <p aria-hidden="true" class="cta-text animation-label-text"><?php echo $item['link_label'] ?></p>
+              </div>
+            </a>
+          </div>
           <?php endif; ?>
         </div>
       </div>
