@@ -1,3 +1,20 @@
+header.is-sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: #fff;
+}
+
+.main-navigation.scroll-down {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  transform: translateY(-100%);
+  z-index: 5;
+}
+
 .main-wrap.header-wrap {
   overflow: visible;
   padding-left: 64px;

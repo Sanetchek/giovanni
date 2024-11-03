@@ -14,7 +14,14 @@
     <div class="container">
       <div class="block1-content">
         <?php if (get_field('block2_link')) : ?>
-          <a href="<?= get_field('block2_link') ?>" class="btn btn-no-border btn-hover"><?= get_field('block2_link_label') ?></a>
+        <div class="button-animation-effect">
+          <a href="<?= get_field('block2_link') ?>" class="btn btn-no-border btn-hover">
+            <div class="animation-label-container">
+              <p class="cta-text"><?= get_field('block2_link_label') ?></p>
+              <p aria-hidden="true" class="cta-text animation-label-text"><?= get_field('block2_link_label') ?></p>
+            </div>
+          </a>
+        </div>
         <?php endif ?>
       </div>
 

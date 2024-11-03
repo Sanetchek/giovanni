@@ -1,4 +1,4 @@
-<?php
+<?php 
 $bg = get_field('hero_image');
 $bg_mob = get_field('hero_image_mob');
 ?>
@@ -17,8 +17,10 @@ $bg_mob = get_field('hero_image_mob');
         ?>
 
         <h1>
-          <span class="hero-label"><?= $label ?></span>
-          <span class="hero-spacer">|</span>
+          <?php if ($label): ?>
+            <span class="hero-label"><?= $label ?></span>
+            <span class="hero-spacer">|</span>
+          <?php endif; ?>
           <span class="hero-title"><?= $title ?></span>
         </h1>
 

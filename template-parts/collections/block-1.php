@@ -5,7 +5,14 @@
       <p><?= get_field('block1_description') ?></p>
 
       <?php if (get_field('block1_link')) : ?>
-        <a href="<?= get_field('block1_link') ?>" class="btn btn-no-border btn-hover"><?= get_field('block1_link_label') ?></a>
+        <div class="button-animation-effect">
+          <a href="<?= get_field('block1_link') ?>" class="btn btn-no-border btn-hover">
+            <div class="animation-label-container">
+              <p class="cta-text"><?= get_field('block1_link_label') ?></p>
+              <p aria-hidden="true" class="cta-text animation-label-text"><?= get_field('block1_link_label') ?></p>
+            </div>
+          </a>
+        </div>
       <?php endif ?>
     </div>
 
@@ -15,3 +22,6 @@
     <?php endif ?>
   </div>
 </section>
+
+
+

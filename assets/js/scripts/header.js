@@ -180,3 +180,27 @@
     }
 
 }(jQuery));
+
+//Dynamic text length detection
+document.querySelectorAll('.animation-label-container').forEach(container => {
+  const textElement = container.querySelector('.cta-text');
+  if (textElement) {
+      const charCount = textElement.textContent.length;
+      container.style.setProperty('--char-count', charCount);
+  }
+});
+
+//Sticky Header After Scroll Down
+document.addEventListener('scroll', () => {
+  const header = document.getElementById('masthead');
+  const nav = document.querySelector('.main-navigation');
+  
+  if (window.scrollY > 0) {
+      header.classList.add('is-sticky');
+      nav.classList.add('scroll-down');
+  } else {
+      header.classList.remove('is-sticky');
+      nav.classList.remove('scroll-down');
+  }
+});
+
