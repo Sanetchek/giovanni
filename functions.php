@@ -52,7 +52,7 @@ function giovanni_setup() {
 			'menu-1' => esc_html__( 'Primary', 'giovanni' ),
 			'footer' => esc_html__( 'Footer', 'giovanni' ),
 			'footer-2' => esc_html__( 'Footer-2', 'giovanni' ),
-			'themes' => esc_html__( 'Themes', 'giovanni' ),
+			'themes' => esc_html__( 'Collections', 'giovanni' ),
 			'featured' => esc_html__( 'Featured', 'giovanni' ),
 			'men' => esc_html__( 'Men', 'giovanni' ),
 			'women' => esc_html__( 'Women', 'giovanni' ),
