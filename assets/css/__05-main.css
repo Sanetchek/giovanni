@@ -69,6 +69,7 @@ picture,
 video {
   display: block;
   max-width: 100%;
+  width: 100%;
   height: auto;
 }
 
@@ -131,8 +132,8 @@ textarea {
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  height: 2.5em; 
-  min-width: calc(1ch * var(--char-count, 10)); 
+  height: 2.5em;
+  min-width: calc(1ch * var(--char-count, 10));
 }
 
 .animation-label-container .cta-text {
@@ -162,7 +163,7 @@ textarea {
 }
 
 .btn-hover.white:hover::after {
- 
+
 }
 
 html[dir="rtl"] .btn-hover:hover::after {
