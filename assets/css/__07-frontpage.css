@@ -382,7 +382,7 @@ li.product-card-big.banner img {
 .main-posts-picture {
   position: relative;
   min-height: 546px;
-  width: 1184px;
+  width: 1280px;
 }
 
 .main-posts-art.second .main-posts-picture {
@@ -396,10 +396,6 @@ li.product-card-big.banner img {
 
 .main-posts-art.first .main-post-image {
   right: 11%;
-}
-
-.main-posts-art.second .main-post-image {
-  left: 11%;
 }
 
 .main-posts-content {
