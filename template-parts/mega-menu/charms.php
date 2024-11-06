@@ -8,10 +8,29 @@
   <div class="mega-menu-container">
     <div class="menu-wrap">
       <div class="menu-1">
+        <!-- <p class="menu-title"><?= __('נשים', 'giovanni') ?></p> -->
+
         <?php
           wp_nav_menu([
             'theme_location' => 'charms',
             'menu_id'        => 'charms-menu',
+            'container'			 => ''
+          ]);
+        ?>
+
+        <div class="menu-btns">
+          <a href="/collections/%d7%a6%d7%90%d7%a8%d7%9e%d7%a1/" class="btn-black"><?= __('פופולרי', 'giovanni') ?></a>
+          <a href="/collections/%d7%a6%d7%90%d7%a8%d7%9e%d7%a1/" class="btn-black"><?= __('חדש ב', 'giovanni') ?></a>
+        </div>
+      </div>
+
+      <div class="menu-2">
+         <!-- <p class="menu-title"><?= __('גברים', 'giovanni') ?></p>-->
+
+        <?php
+          wp_nav_menu([
+            'theme_location' => 'charms-2',
+            'menu_id'        => 'charms-2',
             'container'			 => ''
           ]);
         ?>
@@ -27,6 +46,7 @@
   </div>
 </div>
 
+
 <div id="charms_menu_mobile" class="mobile-charms mobile-dropdown-menu">
 
   <div class="page-mob">
@@ -40,6 +60,13 @@
         wp_nav_menu([
           'theme_location' => 'charms',
           'menu_id'        => 'charms-menu',
+          'container'			 => ''
+        ]);
+      ?>
+      <?php
+        wp_nav_menu([
+          'theme_location' => 'charms-2',
+          'menu_id'        => 'charms-2',
           'container'			 => ''
         ]);
       ?>
