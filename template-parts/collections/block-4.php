@@ -9,7 +9,7 @@ $bg_mob = get_field('block4_image_mob');
       <?php show_image($bg, '1920-865', ['class' => 'page-desk']) ?>
       <?php
         $bg_mob = $bg_mob ? $bg_mob : $bg;
-        show_image($bg_mob, '880-880', ['class' => 'page-mob']);
+        show_image($bg_mob, '768-865', ['class' => 'page-mob']);
       ?>
       <h1 class="visually-hidden">Collections Page</h1>
     </div>

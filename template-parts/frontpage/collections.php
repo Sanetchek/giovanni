@@ -7,7 +7,7 @@
       show_image($img, '1920-920', ['class' => 'collections-bg page-desk']);
 
       $img_mob = $img_mob ? $img_mob : $img;
-      show_image($img_mob, '880-880', ['class' => 'page-mob']);
+      show_image($img_mob, '768-865', ['class' => 'page-mob']);
     ?>
   </div>
 
