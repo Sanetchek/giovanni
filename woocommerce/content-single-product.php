@@ -52,6 +52,8 @@ if ( post_password_required() ) {
 
 				// Output the product sub title
 				echo '<p class="product-short-description">' . get_field('sub_title') . '</p>';
+				echo '<p class="product-short-description">' . apply_filters( 'woocommerce_short_description', $post->post_excerpt ) . '</p>';
+
 
 				// Output the product price
 				woocommerce_template_single_price();
