@@ -516,6 +516,10 @@ li.product-card-big.banner img {
   margin: 0;
 }
 
+.signature {
+  max-width: 300px;
+}
+
 .popular {
   padding-bottom: 90px;
 }

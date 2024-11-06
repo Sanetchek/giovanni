@@ -24,7 +24,7 @@
           <?php endif ?>
 
           <?php if ($signature) : ?>
-            <?php show_image($signature, 'medium', ['class'=> '']) ?>
+            <?php show_image($signature, 'medium', ['class'=> 'signature']) ?>
           <?php endif ?>
         </div>
       </div>
