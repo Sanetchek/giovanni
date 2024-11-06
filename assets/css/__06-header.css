@@ -596,7 +596,7 @@ form.header-form-search button {
   z-index: 99999;
   right: 0px;
   padding: 30px;
-  top: 100px;
+  top: 0;
   width: 100%;
   height: 100%;
   background: #fff;
