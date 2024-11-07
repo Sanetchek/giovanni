@@ -6,7 +6,7 @@
   $label = get_field('exh_button_label');
   $link = get_field('exh_link');
   ?>
-  <div class="main-wrap">
+  <div class="main-wrap exhibition-container">
     <div class="exhibition-wrap">
       <div class="exhibition-side exhibition-content-wrap">
         <div class="exhibition-content">
