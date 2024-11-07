@@ -385,6 +385,12 @@ li.product-card-big.banner img {
   width: 1280px;
 }
 
+.main-posts-art {
+  max-width: 1600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .main-posts-art.second .main-posts-picture {
   margin-right: auto;
 }
