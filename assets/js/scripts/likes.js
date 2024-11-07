@@ -4,7 +4,9 @@
   const ajax_url = window.giovanni.ajax_url;
 
   // Like button
-  $('.post-review__like').on('click', function () {
+  $('.post-review__like').on('click', function (e) {
+    e.preventDefault();
+
     const security = $(this).attr('data-nonce'),
       likeCount = $(this).find('.post-review__like-count'),
       likeIcon = $(this).find('.post-review__like-icon'),
