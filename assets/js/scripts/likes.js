@@ -3,6 +3,18 @@
 (function ($) {
   const ajax_url = window.giovanni.ajax_url;
 
+  $('.product-remove-like').on('click', function () {
+    const parent = $(this).closest('.product-card');
+    const likeBtn = $(parent).find('.post-review__like');
+
+    $(likeBtn).click();
+    $(parent).remove();
+
+    if ($('.product-card').length === 0) {
+      window.location.reload();
+    }
+  });
+
   // Like button
   $('.post-review__like').on('click', function (e) {
     e.preventDefault();
