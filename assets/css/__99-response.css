@@ -273,11 +273,12 @@
     position: relative;
     left: unset;
     transform: none;
-    margin-bottom: 24px;
+    margin-bottom: 5px;
   }
 
   .header-top {
     flex-direction: column;
+    padding: 10px 0 4px 0;
   }
 
   nav.main-navigation {
@@ -603,10 +604,28 @@
   .main-posts-picture,
   .single-product-post .main-posts-picture {
     margin-bottom: 0;
+    min-height: auto !important;
+  }
+
+  .single-product-post .main-posts-container {
+    min-height: auto;
+  }
+
+  .single-product .taxonomies {
+    padding: 10px 0 5px;
+  }
+
+  .slick-slider .product-link .product-button-cart {
+    display:none;
+  }
+
+  .single-product .single-product-post {
+    margin-top: 10px;
   }
 
   .product-container .product-summary.sticky {
     position: relative;
+    padding-top: 0;
   }
 
   .bottom-stop {
@@ -630,7 +649,7 @@
   }
 
   .admin-bar nav.main-navigation {
-    top: 46px;
+    top: 32px;
   }
 }
 
@@ -884,7 +903,7 @@
 
   form.header-form-search {
     position: fixed;
-    top: 14rem;
+    top: 110px;
     left: 0;
     height: 65px;
     width: 100%;
@@ -907,7 +926,7 @@
 
   #search_overlay {
     position: fixed;
-    top: 14rem;
+    top: 110px;
     left: 0;
     right: 0;
     bottom: 0;
@@ -922,7 +941,7 @@
     overflow-y: scroll;
     width: 100%;
     position: fixed;
-    top: 18rem;
+    top: 160px;
     right: 0;
     z-index: 999999;
   }

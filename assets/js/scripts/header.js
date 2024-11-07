@@ -110,8 +110,9 @@
     e.preventDefault();
     $('body').toggleClass('is-block');
     $('.main-navigation').toggleClass('is-show');
+    $('.main-navigation').removeClass('scroll-down');
   })
-
+  
   /**
    * Show/Hide Mini Cart
    */
@@ -203,4 +204,3 @@ document.addEventListener('scroll', () => {
       nav.classList.remove('scroll-down');
   }
 });
-
