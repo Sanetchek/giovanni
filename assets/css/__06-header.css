@@ -3,7 +3,7 @@ header.is-sticky {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: 1010;
   background: #fff;
 }
 
@@ -592,7 +592,7 @@ form.header-form-search button {
 
 .mobile-dropdown-menu {
   display: none;
-  position: absolute;
+  position: fixed;
   z-index: 99999;
   right: 0px;
   padding: 30px;

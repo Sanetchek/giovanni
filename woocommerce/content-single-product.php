@@ -51,8 +51,14 @@ if ( post_password_required() ) {
 				woocommerce_template_single_title();
 
 				// Output the product sub title
-				echo '<p class="product-short-description">' . get_field('sub_title') . '</p>';
-				echo '<p class="product-short-description">' . apply_filters( 'woocommerce_short_description', $post->post_excerpt ) . '</p>';
+				$sub_title = get_field('sub_title');
+				$short_description = apply_filters('woocommerce_short_description', $post->post_excerpt);
+				
+				if (!empty($sub_title)) {
+					echo '<p class="product-short-description">' . $sub_title . '</p>';
+				} elseif (!empty($short_description)) {
+					echo '<p class="product-short-description">' . $short_description . '</p>';
+				}
 
 
 				// Output the product price
