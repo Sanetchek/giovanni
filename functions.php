@@ -230,14 +230,21 @@ function giovanni_scripts() {
 
 	global $wp_query;
 
-	// wordpress localize
+	$category_id = '';
+	if (is_product_category()) {
+		$category = get_queried_object();
+		$category_id = $category->term_id;
+	}
+
+	// Localize script with additional parameters
 	wp_localize_script('giovanni-script', 'giovanni', [
 		'ajax_url' => admin_url('admin-ajax.php'),
 		'site_url' => get_home_url(),
-		'current_page' => max( 1, get_query_var('paged') ),
+		'current_page' => max(1, get_query_var('paged')),
 		'max_page' => $wp_query->max_num_pages,
 		'search_nonce' => wp_create_nonce('giovanni_search_nonce'),
 		'product_filter_nonce' => wp_create_nonce('giovanni_product_filter_nonce'),
+		'current_category_id' => $category_id, // Include current category ID if on a product category page
 	]);
 
 	// dequeue

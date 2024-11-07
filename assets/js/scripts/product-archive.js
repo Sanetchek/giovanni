@@ -19,6 +19,7 @@
           action: 'load_more_products',
           page: giovanni.current_page,
           formData: $('#product-filters').serialize(),
+          category_id: giovanni.current_category_id || '',
           nonce: giovanni.product_filter_nonce
         };
 

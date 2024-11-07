@@ -113,7 +113,7 @@ function display_product_filters($search_query = '') {
     echo '<input type="hidden" name="s" value="'.$search_query.'">';
   }
 
-  if (!empty($attributes)) {  
+  if (!empty($attributes)) {
     echo '<div class="filter-side">';
     foreach ($attributes as $attribute_name => $attribute_data) {
       display_filter_options($attribute_name, $attribute_data);
@@ -183,7 +183,7 @@ function display_sort_options() {
   echo '</ul></div></div></div>';
 }
 /**
- * Display sorting options in the filter form. 
+ * Display sorting options in the filter form.
  * Separate code for mobile version.
  */
 function display_sort_options_mobile() {
@@ -217,11 +217,12 @@ function load_more_products() {
   check_ajax_referer('giovanni_product_filter_nonce', 'nonce');
 
   $paged       = isset($_POST['page']) ? $_POST['page'] + 1 : 1;
+  $category_id = isset($_POST['category_id']) ? $_POST['category_id'] : false;
   $decoded_data = isset($_POST['formData']) ? urldecode($_POST['formData']) : '';
   parse_str($decoded_data, $form_data);
 
   // Build query arguments
-  $args  = build_product_query_args($form_data, $paged);
+  $args  = build_product_query_args($form_data, $paged, $category_id);
   $query = new WP_Query($args);
 
   display_products($query);
@@ -266,14 +267,14 @@ add_action('wp_ajax_nopriv_filter_products', 'handle_filter_products');
  * @param int   $paged     Current page number for pagination.
  * @return array Query arguments.
  */
-function build_product_query_args($form_data = [], $paged = 1) {
+function build_product_query_args($form_data = [], $paged = 1, $category_id = false) {
   $args = [
     'post_type'      => 'product',
     'paged'          => $paged,
     'posts_per_page' => !empty($form_data['posts_per_page']) ? $form_data['posts_per_page'] : 20,
     'meta_query'     => [],
     'tax_query'      => [
-      'relation' => 'OR', // Use 'OR' to match any of the taxonomy terms
+      'relation' => 'OR',
     ],
   ];
 
@@ -281,7 +282,14 @@ function build_product_query_args($form_data = [], $paged = 1) {
     $args['s'] = $form_data['s'];
   }
 
-  // Handle sorting options
+  if ($category_id) {
+    $args['tax_query'][] = [
+      'taxonomy' => 'product_cat',
+      'field'    => 'term_id',
+      'terms'    => $category_id,
+    ];
+  }
+
   if (!empty($form_data['sort'])) {
     switch ($form_data['sort']) {
       case 'popularity':
