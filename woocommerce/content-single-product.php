@@ -53,7 +53,7 @@ if ( post_password_required() ) {
 				// Output the product sub title
 				$sub_title = get_field('sub_title');
 				$short_description = apply_filters('woocommerce_short_description', $post->post_excerpt);
-				
+
 				if (!empty($sub_title)) {
 					echo '<p class="product-short-description">' . $sub_title . '</p>';
 				} elseif (!empty($short_description)) {
@@ -68,7 +68,7 @@ if ( post_password_required() ) {
 				if ( $product->is_type( 'variable' ) ) {
 					echo '<div class="product-size-container">';
 					echo '<div class="body-s-medium-u">זמין ב</div>';
-					
+
 					$radio_value = get_field('use_size_table_popup');
 					if ($radio_value !== 'none') {
 						echo '<a href="#" class="open-modal-btnsize">מצא את המידה שלך</a>';
