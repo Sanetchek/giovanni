@@ -32,14 +32,14 @@ $second_image_url = $second_image_id ? wp_get_attachment_image_url($second_image
   <div class="product-image">
     <a href="<?php echo esc_url($permalink); ?>">
       <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($title); ?>">
-
-      <div class="product-hidden product-hidden-img">
-        <?php echo simpleLikes($product_id); ?>
-        <?php if ($second_image_url) : ?>
-        <img src="<?php echo esc_url($second_image_url); ?>" alt="<?php echo esc_attr($title); ?>">
-        <?php endif ?>
-      </div>
     </a>
+
+    <div class="product-hidden product-hidden-img">
+      <?php echo simpleLikes($product_id); ?>
+      <?php if ($second_image_url) : ?>
+      <img src="<?php echo esc_url($second_image_url); ?>" alt="<?php echo esc_attr($title); ?>">
+      <?php endif ?>
+    </div>
   </div>
 
   <a href="<?php echo esc_url($permalink); ?>" class="product-info-box">
@@ -54,5 +54,13 @@ $second_image_url = $second_image_id ? wp_get_attachment_image_url($second_image
       <?php echo __('לקנות עכשיו', 'giovanni'); ?>
     </span>
   </a>
+
+  <?php if (is_page_template('templates/favorites.php')) : ?>
+    <button class="product-remove-like">
+      <span class="product-hidden product-remove-btn btn">
+        <?php echo __('לקנות עכשיו', 'giovanni'); ?>
+      </span>
+    </button>
+  <?php endif ?>
 </div>
 <?php endif; ?>

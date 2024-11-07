@@ -106,7 +106,6 @@ textarea {
   color: #000;
   text-transform: uppercase;
   padding: 16px 24px;
-  background-color: #fff;
   text-decoration: none;
 }
 
@@ -126,6 +125,16 @@ textarea {
 
 .block1-content .btn-hover::before {
   margin-bottom: 5px;
+}
+
+.product-remove-like {
+  margin: 0 20px 20px 20px;
+  background: transparent;
+  border: 0;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .animation-label-container {
