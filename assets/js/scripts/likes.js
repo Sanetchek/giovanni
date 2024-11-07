@@ -9,7 +9,11 @@
 
     $(likeBtn).click();
     $(parent).remove();
-  })
+
+    if ($('.product-card').length === 0) {
+      window.location.reload();
+    }
+  });
 
   // Like button
   $('.post-review__like').on('click', function (e) {
