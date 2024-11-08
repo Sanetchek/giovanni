@@ -36,8 +36,11 @@ $second_image_url = $second_image_id ? wp_get_attachment_image_url($second_image
 
     <div class="product-hidden product-hidden-img">
       <?php echo simpleLikes($product_id); ?>
+
       <?php if ($second_image_url) : ?>
-      <img src="<?php echo esc_url($second_image_url); ?>" alt="<?php echo esc_attr($title); ?>">
+        <a href="<?php echo esc_url($permalink); ?>">
+          <img src="<?php echo esc_url($second_image_url); ?>" alt="<?php echo esc_attr($title); ?>">
+        </a>
       <?php endif ?>
     </div>
   </div>

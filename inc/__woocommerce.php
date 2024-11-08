@@ -247,12 +247,14 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters('active_plugins', ge
   // Add 'is-active' class to the Favorites menu item when on the Favorites page
   add_filter( 'woocommerce_account_menu_item_classes', 'add_active_class_to_favorites_menu_item', 10, 2 );
   function add_active_class_to_favorites_menu_item( $classes, $endpoint ) {
-    // Remove 'is-active' class from all items
-    $classes = array_diff( $classes, array( 'is-active' ) );
+    if ( 'dashboard' === $endpoint && is_page( 616 ) ) {
+      // Remove 'is-active' class from all items
+      $classes = array_diff( $classes, array( 'is-active' ) );
+    }
 
-    // Check if the current endpoint is 'favorites'
+    // Check if the current endpoint is 'favorites' and if we're on the 'Favorites' page (ID 616)
     if ( 'favorites' === $endpoint && is_page( 616 ) ) {
-      $classes[] = 'is-active'; // Add 'is-active' class
+      $classes[] = 'is-active'; // Add 'is-active' class to the favorites menu item
     }
 
     return $classes;
