@@ -7,7 +7,7 @@
 <?php if ($item) : ?>
   <div class="main-posts-art <?php echo $class ?>">
     <div class="main-posts-picture">
-      <?php show_image($item['image'], '1184-865', ['class'=> 'main-post-image']) ?>
+      <?php show_image($item['image'], '1280-full', ['class'=> 'main-post-image']) ?>
     </div>
 
     <div class="main-posts-content">

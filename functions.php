@@ -107,6 +107,7 @@ function giovanni_setup() {
 	add_image_size( '1400-865', 1400, 865, true );
 	add_image_size( '1280-600', 1280, 600, true );
 	add_image_size( '1280-267', 1280, 300, true );
+	add_image_size( '1280-full', 1280, 0, false );
 	add_image_size( '1184-865', 1184, 865, true );
 	add_image_size( '812-812', 812, 812, true );
 	add_image_size('800-full', 800, 0, false);
