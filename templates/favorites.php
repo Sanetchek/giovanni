@@ -39,7 +39,21 @@ defined( 'ABSPATH' ) || exit; ?>
               <?php do_action( 'woocommerce_account_navigation' ); ?>
             <?php else : ?>
               <div class="profile-navigation">
+                <?php $group = get_field('section_not_registered_users') ?>
+                <?php if ($group) : ?>
+                  <ul class="my-account_sidebar--menu">
+                    <h3 class="sidebar-empty-title"><?= $group['title'] ?></h3>
+                    <?php if ($group['list']) : ?>
+                      <ul class="wishlist-create-account--description-empty">
+                        <?php foreach ($group['list'] as $item) : ?>
+                          <li><div class="disc"></div><p class="disc-list"><?= $item['text'] ?></p></li>
+                        <?php endforeach ?>
+                      </ul>
+                    <?php endif ?>
 
+                    <a class="button-wishlist button-hover" href="/my-account" role="button" tabindex="-1"><?= $group['link_label'] ?></a>
+                  </ul>
+                <?php endif ?>
               </div>
             <?php endif ?>
 
