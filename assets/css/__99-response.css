@@ -173,6 +173,10 @@
     flex-wrap: wrap;
   }
 
+  .profile-navigation li {
+    margin-bottom: 0;
+  }
+
   .profile-navigation .woocommerce-MyAccount-navigation-link--customer-logout {
     display: none;
   }
