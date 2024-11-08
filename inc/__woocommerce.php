@@ -199,21 +199,62 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters('active_plugins', ge
    */
   add_action('init', 'customize_woocommerce_breadcrumbs_for_category');
   function customize_woocommerce_breadcrumbs_for_category() {
-      if (function_exists('woocommerce_breadcrumb')) {
-          remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
-          add_action('woocommerce_before_main_content', 'custom_woocommerce_breadcrumb', 20);
-      }
+    if (function_exists('woocommerce_breadcrumb')) {
+      remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
+      add_action('woocommerce_before_main_content', 'custom_woocommerce_breadcrumb', 20);
+    }
   }
   function custom_woocommerce_breadcrumb() {
-      $breadcrumb_class = 'woocommerce-breadcrumb';
-      if (is_product_category()) {
-          $category = get_queried_object();
-          
-          if (function_exists('get_field') && get_field('use_black_title', 'product_cat_' . $category->term_id)) {
-              $breadcrumb_class .= ' black-color';
-          }
+    $breadcrumb_class = 'woocommerce-breadcrumb';
+    if (is_product_category()) {
+      $category = get_queried_object();
+
+      if (function_exists('get_field') && get_field('use_black_title', 'product_cat_' . $category->term_id)) {
+          $breadcrumb_class .= ' black-color';
       }
-      woocommerce_breadcrumb(['wrap_before' => '<nav class="' . esc_attr($breadcrumb_class) . '" aria-label="Breadcrumb">', 'wrap_after' => '</nav>']);
+    }
+    woocommerce_breadcrumb(['wrap_before' => '<nav class="' . esc_attr($breadcrumb_class) . '" aria-label="Breadcrumb">', 'wrap_after' => '</nav>']);
   }
 
+  // Add "Favorites" link with dynamic title from page ID 616 to WooCommerce account navigation menu before Logout
+  add_filter( 'woocommerce_account_menu_items', 'add_dynamic_favorites_link_before_logout', 10, 1 );
+  function add_dynamic_favorites_link_before_logout( $items ) {
+    // Get the title of page ID 616
+    $favorites_title = get_the_title( 616 );
+
+    // Define the new item with the dynamic title
+    $new_item = array( 'favorites' => $favorites_title );
+
+    // Insert the new item before 'customer-logout'
+    $logout = $items['customer-logout'];
+    unset( $items['customer-logout'] ); // Temporarily remove logout
+    $items = array_merge( $items, $new_item, array( 'customer-logout' => $logout ) );
+
+    return $items;
+  }
+
+  // Custom link for Favorites - Modify WooCommerce account URLs
+  add_filter( 'woocommerce_get_endpoint_url', 'custom_favorites_link', 10, 4 );
+  function custom_favorites_link( $url, $endpoint, $value, $permalink ) {
+    if ( 'favorites' === $endpoint ) {
+      // Redirect to /favorites page
+      return site_url( '/favorites' );
+    }
+
+    return $url;
+  }
+
+  // Add 'is-active' class to the Favorites menu item when on the Favorites page
+  add_filter( 'woocommerce_account_menu_item_classes', 'add_active_class_to_favorites_menu_item', 10, 2 );
+  function add_active_class_to_favorites_menu_item( $classes, $endpoint ) {
+    // Remove 'is-active' class from all items
+    $classes = array_diff( $classes, array( 'is-active' ) );
+
+    // Check if the current endpoint is 'favorites'
+    if ( 'favorites' === $endpoint && is_page( 616 ) ) {
+      $classes[] = 'is-active'; // Add 'is-active' class
+    }
+
+    return $classes;
+  }
 }

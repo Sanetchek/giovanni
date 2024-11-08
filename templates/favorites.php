@@ -13,30 +13,65 @@
  */
 
 get_header();
-?>
 
-<main id="primary" class="site-main favoritespage">
+defined( 'ABSPATH' ) || exit; ?>
 
-  <ul id="product-list" class="products products-list products-container">
-    <?php $favorites = query_user_liked_posts(); ?>
+<main id="primary" class="site-main">
+  <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+    <header class="entry-header">
+      <?php
+        echo '<div class="my-account-header">';
+          if ( is_user_logged_in() ) {
+            $current_user = wp_get_current_user();
+            echo '<p>' . esc_html( $current_user->display_name ) . '</p>'; // Display user name
+          }
+          the_title( '<h1 class="entry-title">', '</h1>' );
+        echo '</div>';
+      ?>
+    </header><!-- .entry-header -->
 
-    <?php if ($favorites['query']) : ?>
-      <?php foreach ($favorites['query'] as $item) : ?>
+    <div class="container">
 
-        <li class="product-card">
+      <div class="entry-content">
+        <div class="profile-container">
+          <div class="woocommerce">
+            <?php if (is_user_logged_in()) : ?>
+              <?php do_action( 'woocommerce_account_navigation' ); ?>
+            <?php else : ?>
+              <div class="profile-navigation">
 
-          <?php get_template_part('template-parts/product', 'card', ['product_id' => $item->ID]); ?>
+              </div>
+            <?php endif ?>
 
-        </li>
+            <div class="profile-content">
 
-      <?php endforeach ?>
-    <?php else : ?>
-      <li class="no-favorites-message">
-        <p><?= __('אין מוצרים במועדפים שלך', 'giovanni') ?></p>
-      </li>
-    <?php endif ?>
-  </ul>
+              <ul id="product-list" class="products products-list products-container">
+                <?php $favorites = query_user_liked_posts(); ?>
 
+                <?php if ($favorites['query']) : ?>
+                  <?php foreach ($favorites['query'] as $item) : ?>
+
+                    <li class="product-card">
+
+                      <?php get_template_part('template-parts/product', 'card', ['product_id' => $item->ID]); ?>
+
+                    </li>
+
+                  <?php endforeach ?>
+                <?php else : ?>
+                  <li class="no-favorites-message">
+                    <p class="message-primary"><?= __('עדיין אין לך פריטים שמורים', 'giovanni') ?></p>
+                    <p class="message-secondary"><?= __('אתה צריך קצת השראה? יש לנו כמה הצעות שתאהבו.', 'giovanni') ?></p>
+                  </li>
+                <?php endif ?>
+              </ul>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
 </main><!-- #main -->
 
 <?php get_footer(); ?>

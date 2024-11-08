@@ -26,9 +26,13 @@
 }
 
 .profile-navigation {
-  width: 300px;
+  width: 400px;
   padding: 60px 20px 60px 0;
   background-color: #f6f6f6;
+}
+
+.profile-navigation li {
+  margin-bottom: 27px;
 }
 
 .profile-navigation a {
@@ -50,7 +54,7 @@
 
 .profile-content {
   padding: 60px 0;
-  width: calc(100% - 340px);
+  width: calc(100% - 440px);
 }
 
 .profile-content input {

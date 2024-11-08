@@ -58,7 +58,7 @@ $second_image_url = $second_image_id ? wp_get_attachment_image_url($second_image
   <?php if (is_page_template('templates/favorites.php')) : ?>
     <button class="product-remove-like">
       <span class="product-hidden product-remove-btn btn">
-        <?php echo __('לקנות עכשיו', 'giovanni'); ?>
+        <?php echo __('להסיר מוצר', 'giovanni'); ?>
       </span>
     </button>
   <?php endif ?>
