@@ -11,7 +11,7 @@ header.is-sticky {
   position: absolute;
   bottom: 0;
   width: 100%;
-  transform: translateY(-100%);
+  transform: translateY(-200%);
   z-index: 5;
 }
 
