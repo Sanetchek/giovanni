@@ -1,4 +1,4 @@
-<?php
+<?php 
   $item = isset($args['item']) ? $args['item'] : false;
   $class = isset($args['class']) ? $args['class'] : 'first';
   $shadow = isset($args['shadow']) ? $args['shadow'] : 1;
@@ -7,7 +7,8 @@
 <?php if ($item) : ?>
   <div class="main-posts-art <?php echo $class ?>">
     <div class="main-posts-picture">
-      <?php show_image($item['image'], '1280-full', ['class'=> 'main-post-image']) ?>
+        <?php show_image($item['image_mob'], '800-full', ['class'=> 'main-post-image main-post-image-mobile']) ?>
+        <?php show_image($item['image'], '1280-full', ['class'=> 'main-post-image main-post-image-desktop']) ?>
     </div>
 
     <div class="main-posts-content">

@@ -50,8 +50,7 @@
     </button>
   </div>
 
-  <div class="mega-menu-container">
-    <div class="menu-wrap">
+  
       <div class="menu-1">
         <p class="menu-title"><?= __('מתנות עבור', 'giovanni') ?></p>
 
@@ -62,9 +61,7 @@
             'container'			 => ''
           ]);
         ?>
-      </div>
 
-      <div class="menu-2">
         <p class="menu-title"><?= __('מקרים', 'giovanni') ?></p>
 
         <?php
@@ -75,7 +72,8 @@
           ]);
         ?>
       </div>
-    </div>
+
+    
 
     <div class="links-wrap mobile-links-wrap">
     <?php
@@ -83,6 +81,6 @@
       get_template_part('template-parts/mega-menu/links-mobile', '', ['links' => $links]);
     ?>
   </div>
-  </div>
+ 
 
 </div>
