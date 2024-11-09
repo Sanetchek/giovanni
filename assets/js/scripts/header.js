@@ -183,13 +183,15 @@
 }(jQuery));
 
 //Dynamic text length detection
-document.querySelectorAll('.animation-label-container').forEach(container => {
+document.querySelectorAll('.animation-label-container').forEach(container => { 
   const textElement = container.querySelector('.cta-text');
   if (textElement) {
-      const charCount = textElement.textContent.length;
+      const segmenter = new Intl.Segmenter('he', { granularity: 'grapheme' });
+      const charCount = [...segmenter.segment(textElement.textContent)].length + 3;
       container.style.setProperty('--char-count', charCount);
   }
 });
+
 
 //Sticky Header After Scroll Down
 document.addEventListener('scroll', () => {

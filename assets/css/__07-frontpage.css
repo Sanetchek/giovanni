@@ -568,7 +568,7 @@ li.product-card-big.banner img {
 
 span.slide-indicator {
   position: relative;
-  font-size: 16px;
+  font-size: 14px;
   top: -9px;
   right: -2px;
 }
@@ -576,7 +576,7 @@ span.slide-indicator {
 span.slide-total {
   position: relative;
   line-height: 0;
-  font-size: 16px;
+  font-size: 14px;
   bottom: -3px;
   left: 0px;
 }
