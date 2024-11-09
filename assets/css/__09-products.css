@@ -43,7 +43,7 @@
 }
 
 .archive-header-content header.woocommerce-products-header h1 {
-  font-weight: 600;
+  font-weight: 500;
   font-size: 36px;
   line-height: 1;
   letter-spacing: 0.14em;
@@ -457,13 +457,17 @@ form.cart .button {
 
 .product-summary nav.woocommerce-breadcrumb * {
   font-weight: 600;
-  font-size: 15px;
+  font-size: 12px;
   line-height: 1.6;
   letter-spacing: 0.07em;
   text-decoration: none;
   text-transform: uppercase;
   text-align: right;
   color: #000;
+}
+
+.woocommerce:where(body:not(.woocommerce-uses-block-theme)) .woocommerce-breadcrumb {
+  font-size: 12px;
 }
 
 .product-summary nav.woocommerce-breadcrumb a:hover {
@@ -490,7 +494,7 @@ form.cart .button {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   text-align: right;
-  color: #000;
+  color: #515151;
 }
 
 .single-product-description {
@@ -505,7 +509,7 @@ form.cart .button {
 
 .single-product-title {
   font-weight: 700;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1.5;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -570,7 +574,7 @@ form.cart .button {
 
 .product-info-title {
   font-weight: 600;
-  font-size: 24px;
+  font-size: 22px;
   line-height: 1;
   text-transform: uppercase;
   color: #000;
@@ -578,8 +582,8 @@ form.cart .button {
 }
 
 .btn.product-info-link {
-  font-weight: 600;
-  font-size: 18px;
+  font-weight: 400;
+  font-size: 15px;
   line-height: 0.88889;
   letter-spacing: 0.06em;
   text-transform: uppercase;

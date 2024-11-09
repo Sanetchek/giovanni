@@ -176,8 +176,6 @@
   transition: all 0.5s ease;
 }
 
-.taxonomies-content:hover .taxonomies-hidden {}
-
 .taxonomies-hidden-title {
   position: absolute;
   bottom: 0;

@@ -5,6 +5,7 @@ header.is-sticky {
   width: 100%;
   z-index: 1010;
   background: #fff;
+  border-bottom: 1px solid #e2e2e2;
 }
 
 .main-navigation.scroll-down {

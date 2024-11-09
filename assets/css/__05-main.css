@@ -419,6 +419,11 @@ html[dir="rtl"] .button-hover.white::after {
   padding: 0;
 }
 
+.btn-filter, .open-filter {
+  background: transparent; 
+}
+
+
 @keyframes animloader {
   0% {
     box-shadow: -38px -12px, -14px 0, 14px 0, 38px 0;
