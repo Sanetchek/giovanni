@@ -14,10 +14,39 @@
  * @package WooCommerce\Templates
  * @version 50.0.0
  */
-
 defined( 'ABSPATH' ) || exit;
+get_header( 'shop' ); 
 
-get_header( 'shop' ); ?>
+$current_term = get_queried_object();
+$has_attributes = false;
+if ($current_term && is_a($current_term, 'WP_Term')) {
+    $args = array(
+        'post_type' => 'product',
+        'posts_per_page' => -1,
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'product_cat',
+                'field'    => 'term_id',
+                'terms'    => $current_term->term_id,
+            ),
+        ),
+    );
+    $products = new WP_Query($args);
+
+    if ($products->have_posts()) {
+        while ($products->have_posts()) {
+            $products->the_post();
+            $product = wc_get_product(get_the_ID());
+
+            if ($product && $product->get_attributes()) {
+                $has_attributes = true;
+                break; 
+            }
+        }
+    }
+    wp_reset_postdata();
+}
+?>
 
 	<div class="archive-header">
 		<?php
@@ -112,14 +141,15 @@ get_header( 'shop' ); ?>
 
 		<div id="products-filter" class="products-filter">
 			<div class="filters-sort-row-mob">
-				<div class="filter-mob">
+				<div class="filter-mob <?php if (!$has_attributes) : ?>empty-filter-button<?php endif; ?>">
 					<button type="button" class="btn btn-no-border open-filter">
-						<span class="filter-label"><?= __('מסנן', 'giovanni') ?></span>
 						<svg class='icon-filter' width='18' height='18' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 16'><path fill-rule='evenodd' clip-rule='evenodd' d='M7.5 8.5V16h1V8.5H16v-1H8.5V0h-1v7.5H0v1h7.5z' fill='black'/></svg>
+						<span class="filter-label"><?= __('מסנן', 'giovanni') ?></span>
 					</button>
 				</div>
+				
 				<div class="sorting-mob">
-					<?php display_sort_options_mobile(); ?>
+					<?php display_sort_options(); ?>
 				</div>
 			</div>
 

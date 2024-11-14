@@ -203,7 +203,7 @@ function display_sort_options_mobile() {
         'price-desc' => __('מחיר: מהגבוה לנמוך', 'giovanni'),
     ];
     foreach ($sort_options as $value => $label) {
-        echo '<li><button type="button" data-sort="' . esc_attr($value) . '" class="filter-sort-item">' . esc_html($label) . '</button></li>';
+        echo '<li><button type="button" data-sort="' . esc_attr($value) . '" class="filter-sort-item filter-sort-item-mobile">' . esc_html($label) . '</button></li>';
     }
     echo '</ul></div></div></div>';
 }

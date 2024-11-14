@@ -57,46 +57,38 @@
     </button>
   </div>
 
+  <div class="menu-1">
+    <p class="menu-title"><?= __('נשים', 'giovanni') ?></p>
 
-  <div class="mega-menu-container">
-    <div class="menu-wrap">
-      <div class="menu-1">
-        <p class="menu-title"><?= __('נשים', 'giovanni') ?></p>
+    <?php
+      wp_nav_menu([
+        'theme_location' => 'women',
+        'menu_id'        => 'women-menu',
+        'container'			 => ''
+      ]);
+    ?>
 
-        <?php
-          wp_nav_menu([
-            'theme_location' => 'women',
-            'menu_id'        => 'women-menu',
-            'container'			 => ''
-          ]);
-        ?>
+    <p class="menu-title"><?= __('גברים', 'giovanni') ?></p>
 
-        <div class="menu-btns">
-          <a href="#" class="btn-black"><?= __('פופולרי', 'giovanni') ?></a>
-          <a href="#" class="btn-black"><?= __('חדש ב', 'giovanni') ?></a>
-        </div>
-      </div>
+    <?php
+      wp_nav_menu([
+        'theme_location' => 'men',
+        'menu_id'        => 'men-menu',
+        'container'			 => ''
+      ]);
+    ?>
 
-      <div class="menu-2">
-        <p class="menu-title"><?= __('גברים', 'giovanni') ?></p>
-
-        <?php
-          wp_nav_menu([
-            'theme_location' => 'men',
-            'menu_id'        => 'men-menu',
-            'container'			 => ''
-          ]);
-        ?>
-      </div>
-    </div>
-
-    <div class="links-wrap mobile-links-wrap">
-      <?php
-        $links = get_field('menu_gifts', 'options');
-        get_template_part('template-parts/mega-menu/links-mobile', '', ['links' => $links]);
-      ?>
+    <div class="menu-btns">
+      <a href="#" class="btn-black"><?= __('פופולרי', 'giovanni') ?></a>
+      <a href="#" class="btn-black"><?= __('חדש ב', 'giovanni') ?></a>
     </div>
   </div>
 
+  <div class="links-wrap mobile-links-wrap">
+    <?php
+      $links = get_field('menu_gifts', 'options');
+      get_template_part('template-parts/mega-menu/links-mobile', '', ['links' => $links]);
+    ?>
   </div>
+
 </div>
