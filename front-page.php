@@ -22,8 +22,9 @@ get_header();
   <?php get_template_part('template-parts/frontpage/taxonomies'); ?>
   <?php get_template_part('template-parts/frontpage/collections'); ?>
   <?php get_template_part('template-parts/frontpage/home-posts'); ?>
-  <?php get_template_part('template-parts/frontpage/exhibition'); ?>
   <?php get_template_part('template-parts/frontpage/popular'); ?>
+  <?php get_template_part('template-parts/frontpage/signature'); ?>
+  <?php get_template_part('template-parts/frontpage/exhibition'); ?>
 
 </main><!-- #main -->
 
