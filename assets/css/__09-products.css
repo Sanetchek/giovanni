@@ -341,6 +341,11 @@ button.filter-item:hover {
   border-right: .5rem solid #000;
 }
 
+.product-gallery__image,
+.product-gallery__image img {
+  width: 100%;
+}
+
 .product-gallery__image.half {
   width: calc((100% - 8px) / 2);
 }

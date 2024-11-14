@@ -70,6 +70,7 @@
       data: {
         action: 'filter_products',
         formData: formData,
+        category_id: giovanni.current_category_id || '',
         nonce: giovanni.product_filter_nonce
       },
       success: function (response) {

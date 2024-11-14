@@ -240,11 +240,12 @@ add_action('wp_ajax_nopriv_load_more_products', 'load_more_products');
 function handle_filter_products() {
   check_ajax_referer('giovanni_product_filter_nonce', 'nonce');
 
+  $category_id = isset($_POST['category_id']) ? $_POST['category_id'] : false;
   $decoded_data = urldecode($_POST['formData']);
   parse_str($decoded_data, $form_data);
 
   // Build query arguments
-  $query_args = build_product_query_args($form_data);
+  $query_args = build_product_query_args($form_data, 1, $category_id);
   $query      = new WP_Query($query_args);
 
   // Start output buffering to capture the HTML
