@@ -20,12 +20,20 @@
   width: fit-content;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  padding: 0 5px 91px 0;
+  align-items: flex-start;
+  padding: 0 45px 91px 0;
+  border-right: 1px solid #000000;
+}
+
+.hero-content a {
+  border: 1px solid #000;
+}
+.hero-content a:before {
+  display:none; 
 }
 
 .hero-content h1 {
-  font-size: 34px;
+  font-size: 38px;
   padding-bottom: 20px;
 }
 
@@ -220,7 +228,7 @@
 }
 
 .collections-container {
-  padding: 65px 0 41px;
+  padding: 35px 0 41px;
   background: #fff;
   position: relative;
 }
@@ -240,7 +248,7 @@
 
 .collections-container>p {
   font-family: "Heebo", sans-serif;
-  font-weight: 600;
+  font-weight: 300;
   line-height: 0.88889;
   letter-spacing: 0.06em;
   text-align: center;
@@ -374,7 +382,7 @@ li.product-card-big.banner img {
 
 .main-posts {
   max-width: 1600px;
-  margin: 70px auto 50px;
+  margin: 25px auto 5px;
 }
 
 .main-posts-picture {
@@ -432,7 +440,7 @@ li.product-card-big.banner img {
 }
 
 .main-posts-art.first {
-  margin-bottom: 100px;
+  margin-bottom: 10px;
 }
 
 .main-posts-art.first .main-posts-shadow {
@@ -446,11 +454,23 @@ li.product-card-big.banner img {
 }
 
 .main-posts-wrap {
-  max-width: 673px;
+  max-width: 585px;
   display: flex;
   margin: 0;
   flex-direction: column;
-  gap: 25px;
+}
+
+.main-posts-wrap h2 {
+  margin-bottom: 13px;
+}
+
+.main-posts-wrap > p{
+  margin-bottom: 0;
+  font-size: 15px;
+}
+
+.main-posts-wrap a {
+  font-size: 18px;
 }
 
 .main-posts-art.first .main-posts-wrap {
@@ -459,10 +479,6 @@ li.product-card-big.banner img {
 
 .main-posts-art.second .main-posts-wrap {
   margin-right: auto;
-}
-
-.main-posts-wrap h2 {
-  margin: 0;
 }
 
 .exhibition-container::after {
@@ -526,11 +542,20 @@ li.product-card-big.banner img {
   flex-direction: column;
   gap: 64px;
   padding: 65px 20px 36px;
+  padding-right: 13%;
 }
 
 .exhibition-content p,
 .exhibition-content h2 {
   margin: 0;
+}
+
+.exhibition-content p {
+  font-size: 15px;
+}
+
+.exhibition-content a.btn {
+  font-size: 18px;
 }
 
 .signature {
@@ -650,4 +675,25 @@ p.popular-price {
   text-transform: uppercase;
   text-align: center;
   color: #000;
+}
+
+
+.home .popular {
+  padding-bottom: 0 !important;
+}
+.signature_pieces {
+  padding-bottom: 90px;
+  text-align: center;
+}
+.signature_pieces .article-paragraph {
+  margin: 40px 0 55px 40px;
+}
+.signature_pieces-title {
+  margin: 0;
+  margin-bottom: 32px;
+  text-align: center;
+}
+.signature_pieces .button-animation-effect {
+  display: flex;
+  justify-content: center;
 }

@@ -35,7 +35,7 @@ h1 {
 }
 
 h2 {
-  font-size: 36px;
+  font-size: 30px;
 }
 
 h3 {
@@ -141,7 +141,7 @@ textarea {
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  height: 2.3em;
+  height: 2em;
   min-width: calc(1ch * var(--char-count, 10));
 }
 

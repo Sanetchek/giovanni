@@ -60,11 +60,11 @@
 					</nav><!-- #site-navigation -->
 				</div>
 
-			</div>
+				<?php get_template_part('template-parts/mega-menu/collections') ?>
+				<?php get_template_part('template-parts/mega-menu/jewellry') ?>
+				<?php get_template_part('template-parts/mega-menu/charms') ?>
+				<?php get_template_part('template-parts/mega-menu/gifts') ?>
+				<?php get_template_part('template-parts/mega-menu/about') ?>
+			</div><!-- .site-header -->
 		</header><!-- #masthead -->
 
-		<?php get_template_part('template-parts/mega-menu/collections') ?>
-		<?php get_template_part('template-parts/mega-menu/jewellry') ?>
-		<?php get_template_part('template-parts/mega-menu/charms') ?>
-		<?php get_template_part('template-parts/mega-menu/gifts') ?>
-		<?php get_template_part('template-parts/mega-menu/about') ?>

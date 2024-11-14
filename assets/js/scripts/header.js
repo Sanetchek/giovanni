@@ -196,7 +196,7 @@ document.querySelectorAll('.animation-label-container').forEach(container => {
 //Sticky Header After Scroll Down
 document.addEventListener('scroll', () => {
   const header = document.getElementById('masthead');
-  const nav = document.querySelector('.main-navigation');
+  const nav = document.querySelector('.header-wrap');
   
   if (window.scrollY > 0) {
       header.classList.add('is-sticky');

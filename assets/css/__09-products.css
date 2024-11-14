@@ -39,7 +39,6 @@
 
 .archive-header-content header.woocommerce-products-header {
   max-width: 880px;
-  margin-right: 150px;
 }
 
 .archive-header-content header.woocommerce-products-header h1 {
@@ -592,8 +591,8 @@ form.cart .button {
 }
 
 .related-title {
-  font-weight: 700;
-  font-size: 36px;
+  font-weight: 400;
+  font-size: 30px;
   line-height: 1;
   letter-spacing: 0.14em;
   text-transform: uppercase;
