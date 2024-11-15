@@ -69,7 +69,6 @@ picture,
 video {
   display: block;
   max-width: 100%;
-  width: 100%;
   height: auto;
 }
 
@@ -420,7 +419,7 @@ html[dir="rtl"] .button-hover.white::after {
 }
 
 .btn-filter, .open-filter {
-  background: transparent; 
+  background: transparent;
 }
 
 
