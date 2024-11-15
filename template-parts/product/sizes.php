@@ -17,15 +17,13 @@ global $product;
     } else {
     ?>
         <div class="block-default">
-            <h4>Fill in the field for the size chart</h4>            
+            <h4>Fill in the field for the size chart</h4>
         </div>
     <?php
     }
     ?>
- 
-</div>
 
-<div id="modal-overlay" class="modal-overlay"></div>
+</div>
 
 <?php
     if ( $product->is_type( 'variable' ) ) {
@@ -53,5 +51,5 @@ const openModalBtn = document.querySelector('.open-modal-btnsize');
 </script>
 <?php
         }
-    }    
+    }
 ?>
