@@ -21,16 +21,18 @@ $attachment_ids = $product->get_gallery_image_ids();
       $thumb = 'full';
 
       if ( $post_thumbnail_id ) {
+        $image_url = wp_get_attachment_image_url($post_thumbnail_id, $thumb);
         echo '<div class="product-modal__image">';
-        show_image($post_thumbnail_id, $thumb, ['class' => 'modal-image']);
+        echo '<img src="' . esc_url($image_url) . '" class="modal-image" alt="">';
         echo '</div>';
       }
 
       // Display the gallery images.
       if ( $attachment_ids && $product->get_image_id() ) {
         foreach ( $attachment_ids as $key => $attachment_id ) {
+          $image_url = wp_get_attachment_image_url($attachment_id, $thumb);
           echo '<div class="product-modal__image">';
-          show_image($attachment_id, $thumb, ['class' => 'modal-image']);
+          echo '<img src="' . esc_url($image_url) . '" class="modal-image" alt="">';
           echo '</div>';
         }
       }
