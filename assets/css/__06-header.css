@@ -1,10 +1,14 @@
-header.is-sticky {
+header#masthead {
+  position: relative;
+  z-index: 9999;
+  background: #fff;
+}
+
+header#masthead.is-sticky {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1010;
-  background: #fff;
   border-bottom: 1px solid #e2e2e2;
 }
 
@@ -159,7 +163,7 @@ header.is-sticky {
 }
 
 .admin-bar .mega-menu {
-  top: calc(170px + 32px);
+  top: calc(138px + 32px);
 }
 
 .admin-bar header#masthead.is-sticky .mega-menu {
@@ -168,7 +172,8 @@ header.is-sticky {
 
 .mega-menu-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 24px;
 }
 
 .menu-wrap {

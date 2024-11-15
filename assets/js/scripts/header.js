@@ -22,11 +22,19 @@
    * @param {string} menuSelector - The selector for the menu to be shown/hidden.
    */
   function setupHoverHandler(triggerSelector, menuSelector) {
-    $(triggerSelector).on('mouseenter', () => toggleMenu(menuSelector, true));
-    $(triggerSelector).on('mouseleave', () => toggleMenu(menuSelector, false));
+    const overlaySelector = '.modal-overlay'; // Selector for the overlay
 
-    $(menuSelector).on('mouseenter', () => toggleMenu(menuSelector, true));
-    $(menuSelector).on('mouseleave', () => toggleMenu(menuSelector, false));
+    // Function to toggle menu and overlay visibility
+    function toggleMenuAndOverlay(menu, overlay, show) {
+      toggleMenu(menu, show); // Existing function to handle menu visibility
+      $(overlay).toggleClass('is-visible', show); // Toggle overlay visibility
+    }
+
+    $(triggerSelector).on('mouseenter', () => toggleMenuAndOverlay(menuSelector, overlaySelector, true));
+    $(triggerSelector).on('mouseleave', () => toggleMenuAndOverlay(menuSelector, overlaySelector, false));
+
+    $(menuSelector).on('mouseenter', () => toggleMenuAndOverlay(menuSelector, overlaySelector, true));
+    $(menuSelector).on('mouseleave', () => toggleMenuAndOverlay(menuSelector, overlaySelector, false));
   }
 
   /**
@@ -112,7 +120,7 @@
     $('.main-navigation').toggleClass('is-show');
     $('.main-navigation').removeClass('scroll-down');
   })
-  
+
   /**
    * Show/Hide Mini Cart
    */
@@ -183,7 +191,7 @@
 }(jQuery));
 
 //Dynamic text length detection
-document.querySelectorAll('.animation-label-container').forEach(container => { 
+document.querySelectorAll('.animation-label-container').forEach(container => {
   const textElement = container.querySelector('.cta-text');
   if (textElement) {
       const segmenter = new Intl.Segmenter('he', { granularity: 'grapheme' });
@@ -197,7 +205,7 @@ document.querySelectorAll('.animation-label-container').forEach(container => {
 document.addEventListener('scroll', () => {
   const header = document.getElementById('masthead');
   const nav = document.querySelector('.header-wrap');
-  
+
   if (window.scrollY > 0) {
       header.classList.add('is-sticky');
       nav.classList.add('scroll-down');

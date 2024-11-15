@@ -84,6 +84,8 @@
 		</div>
 	</footer><!-- #colophon -->
 
+	<div id="modal-overlay" class="modal-overlay"></div>
+
 <?php wp_footer(); ?>
 
 </body>
