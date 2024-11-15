@@ -342,10 +342,6 @@ function build_product_query_args($form_data = [], $paged = 1, $category_id = fa
     $args['tax_query'] = array_merge($args['tax_query'], $attribute_tax_query);
   }
 
-  echo '<pre>';
-  print_r($args);
-  echo '</pre>';
-
   return $args;
 }
 
