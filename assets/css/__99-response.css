@@ -644,6 +644,14 @@
     gap: 10px;
     justify-content: space-between;
   }
+
+  .filter-dropdown {
+    position: relative;
+    top: 0;
+    width: 100%;
+    padding: 20px 20px;
+    box-shadow: none;
+  }
 }
 
 @media screen and (max-width: 992px) {
@@ -1001,14 +1009,6 @@
 
   .single-product .product-summary .product-summary-content .woocommerce-breadcrumb {
     display: none !important;
-  }
-
-  .filter-dropdown {
-    position: relative;
-    top: 0;
-    width: 100%;
-    padding: 20px 20px;
-    box-shadow: none;
   }
 
   .filter-sort {
