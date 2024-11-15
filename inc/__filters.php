@@ -275,7 +275,7 @@ function build_product_query_args($form_data = [], $paged = 1, $category_id = fa
     'posts_per_page' => !empty($form_data['posts_per_page']) ? $form_data['posts_per_page'] : 20,
     'meta_query'     => [],
     'tax_query'      => [
-      'relation' => 'OR',
+      'relation' => 'AND', // Ensure all conditions are met
     ],
   ];
 
@@ -283,6 +283,7 @@ function build_product_query_args($form_data = [], $paged = 1, $category_id = fa
     $args['s'] = $form_data['s'];
   }
 
+  // Add category filtering if category_id is provided
   if ($category_id) {
     $args['tax_query'][] = [
       'taxonomy' => 'product_cat',
@@ -291,6 +292,7 @@ function build_product_query_args($form_data = [], $paged = 1, $category_id = fa
     ];
   }
 
+  // Handle sorting options
   if (!empty($form_data['sort'])) {
     switch ($form_data['sort']) {
       case 'popularity':
@@ -323,11 +325,11 @@ function build_product_query_args($form_data = [], $paged = 1, $category_id = fa
   }
 
   // Handle attribute filtering
-  $tax_query = [];
+  $attribute_tax_query = [];
   foreach ($form_data as $key => $value) {
     if (strpos($key, 'filter_') === 0 && !empty($value)) {
       $taxonomy = str_replace('filter_', '', $key);
-      $tax_query[] = [
+      $attribute_tax_query[] = [
         'taxonomy' => $taxonomy,
         'field'    => 'slug',
         'terms'    => $value,
@@ -335,13 +337,18 @@ function build_product_query_args($form_data = [], $paged = 1, $category_id = fa
     }
   }
 
-  // Add tax queries if there are any
-  if (!empty($tax_query)) {
-    $args['tax_query'] = array_merge($args['tax_query'], $tax_query);
+  // Merge attribute filters into tax_query
+  if (!empty($attribute_tax_query)) {
+    $args['tax_query'] = array_merge($args['tax_query'], $attribute_tax_query);
   }
+
+  echo '<pre>';
+  print_r($args);
+  echo '</pre>';
 
   return $args;
 }
+
 
 
 /**
