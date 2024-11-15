@@ -41,16 +41,46 @@
     const sortText = $(parent).find('.filter-sort-text');
     const dropdown = $(parent).find('.filter-dropdown');
 
-    $('#sort-mobile').val(filter);
+    $('#sort').val(filter);
     $(sortText).html($(this).text());
     $(dropdown).slideUp();
 
-    $('#product-filters').submit(); // Trigger form submission
+    setTimeout(() => {
+      $('#product-filters').submit(); // Trigger form submission
+    }, 500)
   });
 
   // Handle checkbox change
   $('.filter-checkbox').on('change', function (e) {
+    const parent = $(this).closest('.filter-dropdown');
+    const label = $(this).closest('.dropdown-filter-item');
+    const name = $(label).find('.dropdown-filter-value').text();
+    const attr = $(this).attr('data-attr');
+
+    if ($(this).is(':checked')) {
+      // Add the button when the checkbox is checked
+      $('#filter_attr_list').prepend(`<button type="button" class="filter-value" data-attr="${attr}">${name}</button>`);
+    } else {
+      // Remove the button when the checkbox is unchecked
+      $(`#filter_attr_list .filter-value[data-attr="${attr}"]`).remove();
+    }
+
+    $(parent).slideUp();
+    $('.filter-attr.is-show').removeClass('is-show');
     $('#product-filters').submit(); // Trigger form submission
+  });
+
+  $(document).on('click', '.filter-value', function () {
+    const attr = $(this).attr('data-attr');
+
+    // Find and uncheck the corresponding checkbox
+    $(`.filter-checkbox[data-attr="${attr}"]`).prop('checked', false);
+
+    // Remove the button
+    $(this).remove();
+
+    // Optionally trigger form submission
+    $('#product-filters').submit();
   });
 
   // Handle form submission
@@ -73,13 +103,24 @@
         category_id: giovanni.current_category_id || '',
         nonce: giovanni.product_filter_nonce
       },
+      beforeSend: function () {
+        $('#product-list').addClass('blur');
+      },
       success: function (response) {
         $('#product-list').html(response);
+        $('#product-list').removeClass('blur');
       },
       error: function (error) {
         console.error('Error fetching products:', error);
       }
     });
+  });
+
+  /**
+   * Open Filter event on shop/archive page
+   */
+  $('.open-filter').on('click', function () {
+    $('.filter-attr').toggleClass('is-show');
   });
 
   $('.mobile-header .reset.js-reset').on('click', function() {

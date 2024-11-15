@@ -15,7 +15,7 @@
  * @version 50.0.0
  */
 defined( 'ABSPATH' ) || exit;
-get_header( 'shop' ); 
+get_header( 'shop' );
 ?>
 <?php
 $category_id = 314; // ID charms category
@@ -42,7 +42,7 @@ if ($current_term && is_a($current_term, 'WP_Term')) {
 
             if ($product && $product->get_attributes()) {
                 $has_attributes = true;
-                break; 
+                break;
             }
         }
     }
@@ -140,21 +140,8 @@ if ($current_term && is_a($current_term, 'WP_Term')) {
 				?>
 			</div>
 		<?php endif ?>
-		
-		<div id="products-filter" class="products-filter <?php if ( has_term( $category_id, 'product_cat' ) || has_term( get_term_children( $category_id, 'product_cat' ), 'product_cat' ) ) { echo 'charms-cat'; } ?>">
-			<div class="filters-sort-row-mob">
-				<div class="filter-mob <?php if (!$has_attributes) : ?>empty-filter-button<?php endif; ?>">
-					<button type="button" class="btn btn-no-border open-filter">
-						<svg class='icon-filter' width='18' height='18' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 16'><path fill-rule='evenodd' clip-rule='evenodd' d='M7.5 8.5V16h1V8.5H16v-1H8.5V0h-1v7.5H0v1h7.5z' fill='black'/></svg>
-						<span class="filter-label"><?= __('מסנן', 'giovanni') ?></span>
-					</button>
-				</div>
-				
-				<div class="sorting-mob">
-					<?php display_sort_options(); ?>
-				</div>
-			</div>
 
+		<div id="products-filter" class="products-filter <?php if ( has_term( $category_id, 'product_cat' ) || has_term( get_term_children( $category_id, 'product_cat' ), 'product_cat' ) ) { echo 'charms-cat'; } ?>">
 			<div class="products-container">
 				<?php display_product_filters(); ?>
 			</div>
