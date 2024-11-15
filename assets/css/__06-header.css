@@ -2,14 +2,23 @@ header#masthead {
   position: relative;
   z-index: 9999;
   background: #fff;
+  transition: top 0.3s ease-in-out;
+  /* Smooth transition for sticky effect */
 }
 
+/* Sticky header styles */
 header#masthead.is-sticky {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   border-bottom: 1px solid #e2e2e2;
+}
+
+/* Main navigation */
+.main-navigation {
+  transition: all 0.3s ease;
+  /* Smooth slide animation */
 }
 
 .main-navigation.scroll-down {
