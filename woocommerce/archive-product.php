@@ -16,7 +16,30 @@
  */
 defined( 'ABSPATH' ) || exit;
 get_header( 'shop' ); 
-
+?>
+<?php
+$category_id = 314; // ID charms category
+if ( has_term( $category_id, 'product_cat' ) || has_term( get_term_children( $category_id, 'product_cat' ), 'product_cat' ) ) {
+?> 
+<style>
+.product-card .product-link a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.product-card .product-image img {
+  height: 70%;
+}
+@media screen and (max-width: 1024px) {
+.product-card .product-image img {
+  height: 100%;
+}
+}
+</style>
+<?php
+}
+?>
+<?php
 $current_term = get_queried_object();
 $has_attributes = false;
 if ($current_term && is_a($current_term, 'WP_Term')) {
@@ -206,12 +229,18 @@ if ($current_term && is_a($current_term, 'WP_Term')) {
 		 */
 		do_action( 'woocommerce_after_shop_loop' ); ?>
 
+
+		<?php
+		/* hidden block */
+		/*
 		<div class="products-container archive-bottom-text">
 			<div class="archive-text-container">
 				<div class="archive-text"><?= get_field('bottom_test', 'option') ?></div>
 			</div>
 			<button type="button" id="show-archive-text" class="btn btn-no-border btn-hover"><?= __('קרא עוד', 'giovanni') ?></button>
 		</div>
+		*/
+		?>
 
 		<?php
 	} else {
