@@ -19,27 +19,6 @@ get_header( 'shop' );
 ?>
 <?php
 $category_id = 314; // ID charms category
-if ( has_term( $category_id, 'product_cat' ) || has_term( get_term_children( $category_id, 'product_cat' ), 'product_cat' ) ) {
-?> 
-<style>
-.product-card .product-link a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.product-card .product-image img {
-  height: 70%;
-}
-@media screen and (max-width: 1024px) {
-.product-card .product-image img {
-  height: 100%;
-}
-}
-</style>
-<?php
-}
-?>
-<?php
 $current_term = get_queried_object();
 $has_attributes = false;
 if ($current_term && is_a($current_term, 'WP_Term')) {
@@ -161,8 +140,8 @@ if ($current_term && is_a($current_term, 'WP_Term')) {
 				?>
 			</div>
 		<?php endif ?>
-
-		<div id="products-filter" class="products-filter">
+		
+		<div id="products-filter" class="products-filter <?php if ( has_term( $category_id, 'product_cat' ) || has_term( get_term_children( $category_id, 'product_cat' ), 'product_cat' ) ) { echo 'charms-cat'; } ?>">
 			<div class="filters-sort-row-mob">
 				<div class="filter-mob <?php if (!$has_attributes) : ?>empty-filter-button<?php endif; ?>">
 					<button type="button" class="btn btn-no-border open-filter">
