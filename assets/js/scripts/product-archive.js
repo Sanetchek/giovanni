@@ -56,11 +56,4 @@
     $(this).hide();
   });
 
-  /**
-   * Open Filter event on shop/archive page
-   */
-  $('.open-filter').on('click', function () {
-    $('.products-filter-container').toggleClass('is-show');
-  });
-
 }(jQuery));

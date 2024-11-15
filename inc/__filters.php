@@ -107,24 +107,35 @@ function collect_product_attributes($products) {
 function display_product_filters($search_query = '') {
   $attributes = get_products_with_attributes($search_query);
 
-  echo '<form id="product-filters" method="get">';
-  echo '<div class="products-filter-container">';
-  if ($search_query) {
-    echo '<input type="hidden" name="s" value="'.$search_query.'">';
-  }
+  echo '<form id="product-filters">';
+    echo '<div class="products-filter-container">';
+      if ($search_query) {
+        echo '<input type="hidden" name="s" value="'.$search_query.'">';
+      }
 
-  if (!empty($attributes)) {
-    echo '<div class="filter-side">';
-    foreach ($attributes as $attribute_name => $attribute_data) {
-      display_filter_options($attribute_name, $attribute_data);
-    }
+      echo '<div class="filter-side open-btn">';
+      echo '<button type="button" class="btn btn-no-border open-filter"><svg class="icon-filter" width="18" height="18" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 8.5V16h1V8.5H16v-1H8.5V0h-1v7.5H0v1h7.5z" fill="black"/></svg><span class="filter-label">'. __('מסנן', 'giovanni') .'</span></button>';
+      echo '</div>';
+
+      if (!empty($attributes)) {
+        echo '<div class="filter-attr">';
+          echo '<div class="mobile-header"><button class="reset js-reset"> אִתחוּל</button><div class="title">סינון לפי:</div><button class="js-close-filters icon-close" aria-label="close"></button></div>';
+
+          echo '<div class="filter-side">';
+          foreach ($attributes as $attribute_name => $attribute_data) {
+            display_filter_options($attribute_name, $attribute_data);
+          }
+          echo '</div>';
+        echo '</div>';
+      }
+
+      echo '<div class="filter-sorting">';
+      display_sort_options();
+      echo '</div>';
+
     echo '</div>';
-    echo '<div class="mobile-header"><button class="reset js-reset"> אִתחוּל</button><div class="title">סינון לפי:</div><button class="js-close-filters icon-close" aria-label="close"></button></div>';
-  }
 
-  display_sort_options();
-
-  echo '</input>';
+    echo '<div id="filter_attr_list" class="filter-attr-list"></div>';
   echo '</form>';
 }
 
@@ -147,10 +158,12 @@ function display_filter_options($attribute_name, $attribute_data) {
   foreach ($attribute_data['options'] as $term_id) {
     $term = get_term($term_id);
     if ($term && !is_wp_error($term)) {
-      echo '<label>';
-      echo '<input type="checkbox" name="filter_' . esc_attr($attribute_name) . '[]" value="' . esc_attr($term->slug) . '" class="filter-checkbox"> ';
+      echo '<label class="dropdown-filter-item">';
+      echo '<input type="checkbox" name="filter_' . esc_attr($attribute_name) . '[]" value="' . esc_attr($term->slug) . '" class="filter-checkbox" data-attr="'.$term_id.'"> ';
       echo '<span class="fake-checkbox"></span>';
+      echo '<span class="dropdown-filter-value">';
       echo esc_html($term->name);
+      echo '</span>';
       echo '</label>';
     }
   }
@@ -169,43 +182,18 @@ function display_sort_options() {
   echo '<span class="filter-sort-text">' . __('המלצות', 'giovanni') . '</span>';
   echo '<svg class="icon-chevron-down" width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 16"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 13.293l3.646-3.647.707.708L6 14.707l-4.354-4.353.708-.708L6 13.293zM6 2.707L2.354 6.354l-.708-.708L6 1.293l4.354 4.353-.708.708L6 2.707z" fill="black"/></svg>';
   echo '</button>';
-  echo '<input type="hidden" name="sort" id="sort" value="popularity">';
+  echo '<input type="hidden" name="sort" class="sort-filter-input" id="sort" value="popularity">';
   echo '<div class="filter-dropdown"><ul>';
   $sort_options = [
-      'menu_order' => __('מומלץ', 'giovanni'),
-      'date'       => __('חדשים ביותר', 'giovanni'),
-      'price'      => __('מחיר: מהנמוך לגבוה', 'giovanni'),
-      'price-desc' => __('מחיר: מהגבוה לנמוך', 'giovanni'),
+    'menu_order' => __('מומלץ', 'giovanni'),
+    'date'       => __('חדשים ביותר', 'giovanni'),
+    'price'      => __('מחיר: מהנמוך לגבוה', 'giovanni'),
+    'price-desc' => __('מחיר: מהגבוה לנמוך', 'giovanni'),
   ];
   foreach ($sort_options as $value => $label) {
-      echo '<li><button type="button" data-sort="' . esc_attr($value) . '" class="filter-sort-item">' . esc_html($label) . '</button></li>';
+    echo '<li><button type="button" data-sort="' . esc_attr($value) . '" class="filter-sort-item">' . esc_html($label) . '</button></li>';
   }
   echo '</ul></div></div></div>';
-}
-/**
- * Display sorting options in the filter form.
- * Separate code for mobile version.
- */
-function display_sort_options_mobile() {
-    echo '<div class="filter-side">';
-    echo '<div class="filter-wrap filter-sort">';
-    echo '<span class="filter-label">' . __('מיין לפי', 'giovanni') . '</span>';
-    echo '<button type="button" class="btn btn-no-border btn-filter">';
-    echo '<span class="filter-sort-text">' . __('המלצות', 'giovanni') . '</span>';
-    echo '<svg class="icon-chevron-down" width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 16"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 13.293l3.646-3.647.707.708L6 14.707l-4.354-4.353.708-.708L6 13.293zM6 2.707L2.354 6.354l-.708-.708L6 1.293l4.354 4.353-.708.708L6 2.707z" fill="black"/></svg>';
-    echo '</button>';
-    echo '<input type="hidden" name="sort" id="sort-mobile" value="popularity">';
-    echo '<div class="filter-dropdown"><ul>';
-    $sort_options = [
-        'menu_order' => __('מומלץ', 'giovanni'),
-        'date'       => __('חדשים ביותר', 'giovanni'),
-        'price'      => __('מחיר: מהנמוך לגבוה', 'giovanni'),
-        'price-desc' => __('מחיר: מהגבוה לנמוך', 'giovanni'),
-    ];
-    foreach ($sort_options as $value => $label) {
-        echo '<li><button type="button" data-sort="' . esc_attr($value) . '" class="filter-sort-item filter-sort-item-mobile">' . esc_html($label) . '</button></li>';
-    }
-    echo '</ul></div></div></div>';
 }
 
 /**
@@ -273,7 +261,7 @@ function build_product_query_args($form_data = [], $paged = 1, $category_id = fa
     'post_type'      => 'product',
     'paged'          => $paged,
     'posts_per_page' => !empty($form_data['posts_per_page']) ? $form_data['posts_per_page'] : 20,
-    'meta_query'     => [],
+    'meta_query'     => [], // Prepare for any meta queries needed
     'tax_query'      => [
       'relation' => 'AND', // Ensure all conditions are met
     ],
@@ -298,28 +286,30 @@ function build_product_query_args($form_data = [], $paged = 1, $category_id = fa
       case 'popularity':
         $args['orderby']  = 'meta_value_num';
         $args['meta_key'] = 'total_sales';
+        $args['order']    = 'DESC'; // Popularity typically needs descending order
         break;
       case 'rating':
         $args['orderby']  = 'meta_value_num';
         $args['meta_key'] = '_wc_average_rating';
+        $args['order']    = 'DESC'; // Ratings sorted in descending order
         break;
       case 'date':
         $args['orderby'] = 'date';
-        $args['order']   = 'DESC';
+        $args['order']   = 'DESC'; // Newest products first
         break;
       case 'price':
         $args['orderby']  = 'meta_value_num';
         $args['meta_key'] = '_price';
-        $args['order']    = 'ASC';
+        $args['order']    = 'ASC'; // Lowest price first
         break;
       case 'price-desc':
         $args['orderby']  = 'meta_value_num';
         $args['meta_key'] = '_price';
-        $args['order']    = 'DESC';
+        $args['order']    = 'DESC'; // Highest price first
         break;
       default:
         $args['orderby'] = 'menu_order';
-        $args['order']   = 'ASC';
+        $args['order']   = 'ASC'; // Default WooCommerce ordering
         break;
     }
   }
@@ -344,8 +334,6 @@ function build_product_query_args($form_data = [], $paged = 1, $category_id = fa
 
   return $args;
 }
-
-
 
 /**
  * Display Products Based on Query

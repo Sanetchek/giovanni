@@ -198,8 +198,40 @@ body.rtl .product-count {
   align-items: center
 }
 
+.filter-attr-list {
+  padding: 0 24px;
+  display: flex;
+  gap: 24px;
+}
+
+.filter-value {
+  background: transparent;
+  border: 0;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.filter-value::before {
+  content: '';
+  background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 8 8'%3e%3cpath fill-rule='evenodd' clip-rule='evenodd' d='M4 4.707l2.646 2.647.708-.708L4.707 4l2.647-2.646-.707-.708L4 3.293 1.354.646l-.708.708L3.293 4 .647 6.646l.707.708L4 4.707z' fill='black'/%3e%3c/svg%3e") center no-repeat;
+  width: .8rem;
+  height: .8rem;
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
+#product-list.blur {
+  filter: blur(5px);
+  pointer-events: none;
+}
+
 .filter-side {
   display: flex;
+}
+
+.filter-side.open-btn {
+  display: none;
 }
 
 .filter-wrap {
@@ -828,6 +860,7 @@ body.modal-open {
   border: none;
   cursor: pointer;
 }
+
 .modal-size-guide .sub-title {
   color: #515151;
   font-size: 14px;
@@ -850,7 +883,8 @@ body.modal-open {
   padding-bottom: .8rem
 }
 
-.modal-size-guide .list .diametro li,.modal-size-guide .list .circonferenza li {
+.modal-size-guide .list .diametro li,
+.modal-size-guide .list .circonferenza li {
   color: #515151
 }
 
@@ -878,11 +912,13 @@ body.modal-open {
 .modal-size-guide .modal-end a {
   color: #000
 }
+
 .modal-size-guide .modal-title {
   padding-top: 15px;
   font-size: 22px;
   padding-bottom: 18px;
 }
+
 .modal-size-guide .modal-main-title {
   font-size: 22px;
 }
