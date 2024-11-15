@@ -15,7 +15,7 @@
  * @version 50.0.0
  */
 defined( 'ABSPATH' ) || exit;
-get_header( 'shop' );
+get_header( 'shop' ); 
 
 $current_term = get_queried_object();
 $has_attributes = false;
@@ -40,7 +40,7 @@ if ($current_term && is_a($current_term, 'WP_Term')) {
 
             if ($product && $product->get_attributes()) {
                 $has_attributes = true;
-                break;
+                break; 
             }
         }
     }
@@ -147,7 +147,7 @@ if ($current_term && is_a($current_term, 'WP_Term')) {
 						<span class="filter-label"><?= __('מסנן', 'giovanni') ?></span>
 					</button>
 				</div>
-
+				
 				<div class="sorting-mob">
 					<?php display_sort_options(); ?>
 				</div>
@@ -206,14 +206,12 @@ if ($current_term && is_a($current_term, 'WP_Term')) {
 		 */
 		do_action( 'woocommerce_after_shop_loop' ); ?>
 
-		<?php if (get_field('bottom_test', 'option')) : ?>
-			<div class="products-container archive-bottom-text">
-				<div class="archive-text-container">
-					<div class="archive-text"><?= get_field('bottom_test', 'option') ?></div>
-				</div>
-				<button type="button" id="show-archive-text" class="btn btn-no-border btn-hover"><?= __('קרא עוד', 'giovanni') ?></button>
+		<div class="products-container archive-bottom-text">
+			<div class="archive-text-container">
+				<div class="archive-text"><?= get_field('bottom_test', 'option') ?></div>
 			</div>
-		<?php endif ?>
+			<button type="button" id="show-archive-text" class="btn btn-no-border btn-hover"><?= __('קרא עוד', 'giovanni') ?></button>
+		</div>
 
 		<?php
 	} else {
