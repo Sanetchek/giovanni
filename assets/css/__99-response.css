@@ -221,6 +221,16 @@
 }
 
 @media screen and (max-width: 1024px) {
+  .slick-initialized .slick-slide {
+    margin: 0 5px;
+  }
+  .taxonomies-category-boxes h3.taxonomies-content-title {
+    font-size: 14px;
+  }
+  .taxonomies-category-boxes .woocommerce-products-header {
+    margin-bottom: 10px;
+  }
+
   header#masthead {
     border-bottom: 1px solid #e2e2e2;
   }
@@ -843,6 +853,10 @@
 @media screen and (max-width: 768px) {
   .hero-content {
     border-right: none;
+  }
+
+  .taxonomies-category-boxes h3.taxonomies-content-title {
+    font-size: 14px;
   }
 
   .product-item {

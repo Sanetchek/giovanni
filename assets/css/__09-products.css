@@ -302,6 +302,44 @@ button.filter-item:hover {
   display: none;
 }
 
+.taxonomies-container-boxes {
+  margin-bottom: 30px;
+}
+
+.taxonomies-category-boxes.taxonomies {
+  padding: 5px 0 5px;
+}
+
+.taxonomies-category-boxes .woocommerce-products-header {
+  margin-bottom: 50px;
+}
+.taxonomies-category-boxes .page-title {
+  text-align: center;
+  font-size: 38px;
+}
+.taxonomies-category-boxes .page-title .product-count { 
+  color: #000;
+  font-size: 18px;
+}
+
+.taxonomies-category-boxes h3.taxonomies-content-title {
+  font-size:16px;
+}
+
+.taxonomies-category-boxes .taxonomies-content-image {
+  text-align: center;
+}
+
+.taxonomies-category-boxes .slick-slide picture {
+  max-width: 230px;
+  display: inline-block;
+}
+
+.custom-archive-description p {
+  text-align: center;
+  font-size: 15px;
+}
+
 .product-summary-wrap {
   margin-top: 22px;
   position: relative;
