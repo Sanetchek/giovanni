@@ -50,6 +50,44 @@ if ($current_term && is_a($current_term, 'WP_Term')) {
 }
 ?>
 
+  	<?php 
+  	//show category boxes instead of .archive-header
+	$category = get_queried_object();
+	if (function_exists('get_field') && get_field('activate_category_boxes', 'product_cat_' . $category->term_id)) {
+  	?>
+	<div class="taxonomies page-container taxonomies-category-boxes">
+		<?php
+		/**
+		 * Hook: woocommerce_before_main_content.
+		 *
+		 * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
+		 * @hooked woocommerce_breadcrumb - 20
+		 * @hooked WC_Structured_Data::generate_website_data() - 30
+		 */
+		do_action( 'woocommerce_before_main_content' );
+
+		/**
+		 * Hook: woocommerce_shop_loop_header.
+		 *
+		 * @since 8.6.0
+		 *
+		 * @hooked woocommerce_product_taxonomy_archive_header - 10
+		 */
+		do_action( 'woocommerce_shop_loop_header' );
+		?>
+		<?php
+		$term_id = get_queried_object_id();
+		$taxonomies_category_box = get_field('category_taxonomies_boxes', 'product_cat_' . $term_id);
+		if (!empty($taxonomies_category_box)) :
+			get_template_part('template-parts/sections/taxonomies_boxes', '', ['taxonomies' => $taxonomies_category_box]);
+		else :
+			echo '<p>No categories available.</p>';
+		endif;
+		?>
+	</div>
+
+	<?php } else { ?>
+
 	<div class="archive-header">
 		<?php
 			$term = get_queried_object();
@@ -113,6 +151,8 @@ if ($current_term && is_a($current_term, 'WP_Term')) {
 			</div>
 		</div>
 	</div>
+	<?php } ?>
+
 	</div>
 
 	<?php

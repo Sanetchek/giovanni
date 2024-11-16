@@ -251,6 +251,12 @@ function giovanni_scripts() {
 	// dequeue
 	wp_dequeue_style( 'wp-block-library' );
 	wp_dequeue_style( 'wp-block-library-theme' );
+	wp_enqueue_style(
+        'giovanni-slick-css',
+        get_template_directory_uri() . '/assets/js/slick/slick.css',
+        array(),
+        '1.0.0'
+    );
 	// wp_dequeue_style( 'wc-blocks-style' ); // Remove WooCommerce block CSS
 }
 add_action( 'wp_enqueue_scripts', 'giovanni_scripts' );

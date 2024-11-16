@@ -56,4 +56,36 @@
     $(this).hide();
   });
 
+  /**
+   *  Slider Category Boxes
+   */
+  $('.slick-slider-boxes').slick({
+    slidesToShow: 6,
+    slidesToScroll: 1,
+    infinite: false,
+    rows: 0, 
+    draggable: true, 
+    swipe: true,
+    rtl: true,
+    touchThreshold: 10,
+    dots: false,
+    arrows: false,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 6,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  });
+
 }(jQuery));
