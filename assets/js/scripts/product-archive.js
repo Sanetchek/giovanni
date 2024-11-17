@@ -67,7 +67,6 @@
     draggable: true, 
     swipe: true,
     rtl: true,
-    touchThreshold: 10,
     dots: false,
     arrows: false,
     responsive: [
@@ -81,7 +80,7 @@
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 4,
           slidesToScroll: 1
         }
       }

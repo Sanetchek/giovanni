@@ -331,8 +331,17 @@ button.filter-item:hover {
 }
 
 .taxonomies-category-boxes .slick-slide picture {
-  max-width: 230px;
+  width: 250px;
+  height: 230px;
+  overflow: hidden;
+  position: relative;
   display: inline-block;
+}
+
+.taxonomies-category-boxes .slick-slide picture  img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .custom-archive-description p {

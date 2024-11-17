@@ -230,6 +230,11 @@
   .taxonomies-category-boxes .woocommerce-products-header {
     margin-bottom: 10px;
   }
+  .taxonomies-category-boxes .slick-slide picture {
+    width: 112px;
+    height: 112px;
+  }
+
 
   header#masthead {
     border-bottom: 1px solid #e2e2e2;
@@ -856,7 +861,7 @@
   }
 
   .taxonomies-category-boxes h3.taxonomies-content-title {
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .product-item {
