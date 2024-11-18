@@ -181,12 +181,14 @@ if ($current_term && is_a($current_term, 'WP_Term')) {
 			</div>
 		<?php endif ?>
 
-		<div id="products-filter" class="products-filter <?php if ( has_term( $category_id, 'product_cat' ) || has_term( get_term_children( $category_id, 'product_cat' ), 'product_cat' ) ) { echo 'charms-cat'; } ?>">
+		<div id="products-filter" class="products-filter">
 			<div class="products-container">
 				<?php display_product_filters(); ?>
 			</div>
 		</div>
 
+		<div class="product-container <?php if ( has_term( $category_id, 'product_cat' ) || has_term( get_term_children( $category_id, 'product_cat' ), 'product_cat' ) ) { echo 'charms-cat'; } ?>">
+	
 		<?php
 		woocommerce_product_loop_start();
 
@@ -224,7 +226,7 @@ if ($current_term && is_a($current_term, 'WP_Term')) {
 		}
 
 		woocommerce_product_loop_end(); ?>
-
+		</div>
 		<div id="page-loader" class="page-loader hidden"></div>
 
 		<?php
