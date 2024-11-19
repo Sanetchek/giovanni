@@ -17,8 +17,20 @@ header#masthead.is-sticky {
 
 /* Main navigation */
 .main-navigation {
-  transition: all 0.3s ease;
-  /* Smooth slide animation */
+  transform: translateY(0); /* Default visible position */
+  opacity: 1;
+  height: auto;
+  overflow: hidden; /* Prevent content overflow during transition */
+  transition: transform 0.3s ease, opacity 0.3s ease, height 0.3s ease;
+}
+
+.overflow-in {
+  overflow: hidden;
+}
+.main-navigation.hide {
+  transform: translateY(-100%); /* Slide up */
+  opacity: 0; /* Fade out */
+  height: 0; /* Collapse height */
 }
 
 .main-navigation.scroll-down {

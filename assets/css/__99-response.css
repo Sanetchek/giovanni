@@ -567,6 +567,10 @@
   .charms-cat li.product-card .product-image img {
     height: 100%;
   }
+  .page-id-3494 li.product-card .product-image img,
+  .page-id-3494 .slick-slide .product-image img {
+    padding: 0;
+  }
 
   .filter-sorting .filter-label,
   .filter-attr-list {
@@ -925,9 +929,6 @@
     border: 1px solid;
   }
 
-  .hero-content a.btn::before {
-    display: none;
-  }
 
   h2 {
     font-size: 24px;

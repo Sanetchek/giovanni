@@ -25,7 +25,7 @@ $bg_mob = get_field('hero_image_mob');
         </h1>
 
         <?php if ($link) : ?>
-          <a href="<?= $link ?>" class="btn hero-link btn-hover">
+          <a href="<?= $link ?>" class="btn hero-link btn-hover button-hover">
             <span><?= $link_label ?></span>
           </a>
         <?php endif ?>

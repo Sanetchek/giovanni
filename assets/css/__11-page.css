@@ -196,6 +196,16 @@
   width: calc((100% - 80px) / 3);
 }
 
+.page-id-4565 .container.center-mode-box {
+  max-width: 1480px;
+}
+.page-id-4565 .container.center-mode-box .article-list-wrap {
+  align-items: center;
+}
+.page-id-4565 .container.center-mode-box .article-list-wrap p {
+  font-size: 16px;
+}
+
 .article-list-wrap {
   display: flex;
   gap: 40px;
@@ -242,10 +252,10 @@
 }
 
 h2.list-title {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   font-weight: 400;
-  font-size: 40px;
-  line-height: 48px;
+  font-size: 38px;
+  line-height: 44px;
   letter-spacing: 0;
 }
 
