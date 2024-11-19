@@ -26,8 +26,10 @@
 }
 
 .hero-content a {
-  border: 1px solid #000;
+  border: 1px solid #ffffff;
+  background: #fff;
 }
+
 .hero-content a:before {
   display:none;
 }
@@ -279,13 +281,19 @@ li.product-card-big.banner img {
   object-fit: cover;
 }
 
-.charms-cat li.product-card .product-link a {
+.charms-cat li.product-card .product-link a,
+.page-id-3494 li.product-card .product-link a,
+.page-id-3494 .slick-slide .product-image a {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .charms-cat li.product-card .product-image img {
   height: 60%;
+}
+.page-id-3494 li.product-card .product-image img,
+.page-id-3494 .slick-slide .product-image img {
+  padding: 20%;
 }
 
 .product-link {

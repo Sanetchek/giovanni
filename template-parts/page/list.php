@@ -19,7 +19,7 @@ switch($columns) {
 
 <div class="article-list">
 
-  <div class="container">
+  <div class="container center-mode-box">
     <ul class="article-list-wrap">
       <?php foreach ($rows as $key => $item) : ?>
         <?php $padding = ($use_numeration) ? 'pad' : ''; ?>

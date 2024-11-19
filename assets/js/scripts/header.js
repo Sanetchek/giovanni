@@ -191,9 +191,9 @@
   var header = $('#masthead');
   var mainNavigation = $('.main-navigation');
   var siteHeader = $('.site-header');
-  var stickyThreshold = 10; // Minimum scroll distance for sticky header
+  var stickyThreshold = 10;
   var lastKnownScrollPosition = 0;
-  var ticking = false; // Flag to prevent multiple scroll handler calls
+  var ticking = false;
   
   // Function to handle sticky and navigation logic
   function handleStickyAndNavigation(scrollPosition) {
@@ -208,14 +208,13 @@
     if (scrollPosition > lastScrollTop) {
       // Scrolling down
       siteHeader.addClass('notshowmenu');
-      mainNavigation.stop(true, true).slideUp();
+      mainNavigation.addClass('hide'); // Slide up
     } else {
       // Scrolling up
       siteHeader.removeClass('notshowmenu');
-      mainNavigation.stop(true, true).slideDown();
+      mainNavigation.removeClass('hide'); // Slide down
     }
   
-    // Update the last scroll position for future comparisons
     lastScrollTop = scrollPosition;
   }
   
@@ -231,7 +230,9 @@
   
       ticking = true;
     }
-  });  
+  });
+  
+  
 
 }(jQuery));
 
