@@ -221,6 +221,9 @@
 }
 
 @media screen and (max-width: 1024px) {
+  .taxonomies-category-boxes .slick-slider {
+    padding: 0;
+  }
   .slick-initialized .slick-slide {
     margin: 0 5px;
   }
@@ -479,6 +482,15 @@
 
   .products-filter {
     margin-top: 75px;
+  }
+  
+  #block9.block9 .slick-slide img,
+  #block5.block5 .slick-slide img {
+    padding: 0;
+  }
+
+  .term-298 .products-filter {
+    margin-top: 0;
   }
 
   li.product-card-big {
@@ -864,6 +876,10 @@
     border-right: none;
   }
 
+  .page-id-4565 .container.center-mode-box .article-list-wrap {
+    flex-direction: column-reverse;
+  }
+
   .taxonomies-category-boxes h3.taxonomies-content-title {
     font-size: 12px;
   }
@@ -928,7 +944,6 @@
   .hero-content a.btn {
     border: 1px solid;
   }
-
 
   h2 {
     font-size: 24px;
@@ -1255,6 +1270,14 @@
 
   .mobile-only {
     display: block;
+  }
+    
+  .page-id-4565 .article-list {
+    margin: 10px 0;
+  }
+  .page-id-4565 .article-page-list {
+    margin-top: 30px;
+    margin-bottom: 30px;
   }
 }
 

@@ -23,8 +23,15 @@ get_header();
   <?php get_template_part('template-parts/collections/block', '2'); ?>
   <?php get_template_part('template-parts/collections/block', '3'); ?>
 
-</main><!-- #main -->
+  <?php get_template_part('template-parts/collections/block', '5'); ?>
 
-<?php get_template_part('template-parts/collections/block', '4'); ?>
+  <?php get_template_part('template-parts/collections/block', '4'); ?>
+  <?php get_template_part('template-parts/collections/block', '6'); ?>
+  <?php get_template_part('template-parts/collections/block', '7'); ?>
+  <?php get_template_part('template-parts/collections/block', '8'); ?>
+  <?php get_template_part('template-parts/collections/block', '9'); ?>
+  <?php get_template_part('template-parts/collections/block', '10'); ?>
+
+</main><!-- #main -->
 
 <?php get_footer(); ?>

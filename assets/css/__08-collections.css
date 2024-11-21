@@ -19,8 +19,8 @@
 .collectionspage .block1-content > p {
   text-align: center;
   font-weight: 400;
-  font-size: 16px;
-  line-height: 0.88889;
+  font-size: 15px;
+  line-height: 28px; 
   text-align: center;
   color: #000;
   margin-bottom: 30px;
@@ -30,7 +30,20 @@
   margin: 0 auto 16px;
 }
 
-.collectionspage .block1,
-.collectionspage .block2 {
-  margin-bottom: 64px;
+.block9 .block1-content:last-child {
+  margin-bottom: 50px;
+}
+
+.page-template-collections .slider-container {
+  margin-top: 30px;
+  margin-bottom: 0;
+}
+
+#block4.block4 {
+  margin-top: 50px;
+}
+
+#block9.block9 .slick-slide img,
+#block5.block5 .slick-slide img {
+  padding: 23%;
 }

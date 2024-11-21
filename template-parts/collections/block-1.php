@@ -22,6 +22,3 @@
     <?php endif ?>
   </div>
 </section>
-
-
-

@@ -330,8 +330,12 @@ button.filter-item:hover {
   text-align: center;
 }
 
+.taxonomies-category-boxes .slick-slider {
+  padding: 10px 80px 20px 80px;
+}
+
 .taxonomies-category-boxes .slick-slide picture {
-  width: 250px;
+  width: 220px;
   height: 230px;
   overflow: hidden;
   position: relative;
