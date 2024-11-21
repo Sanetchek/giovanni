@@ -21,17 +21,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 do_action( 'woocommerce_before_customer_login_form' ); ?>
 
-<?php if ( 'yes' === get_option( 'woocommerce_enable_myaccount_registration' ) ) : ?>
-
 <div class="u-columns col2-set" id="customer_login">
 
 	<div class="u-column1 col-1">
 
-<?php endif; ?>
-
-	<?php get_template_part('template-parts/woocommerce/login'); ?>
-
-<?php if ( 'yes' === get_option( 'woocommerce_enable_myaccount_registration' ) ) : ?>
+		<?php get_template_part('template-parts/woocommerce/register', 'info'); ?>
 
 	</div>
 
@@ -42,6 +36,5 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 	</div>
 
 </div>
-<?php endif; ?>
 
 <?php do_action( 'woocommerce_after_customer_login_form' ); ?>

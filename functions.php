@@ -245,6 +245,7 @@ function giovanni_scripts() {
 		'max_page' => $wp_query->max_num_pages,
 		'search_nonce' => wp_create_nonce('giovanni_search_nonce'),
 		'product_filter_nonce' => wp_create_nonce('giovanni_product_filter_nonce'),
+		'registration_nonce'   => wp_create_nonce('register_nonce'),
 		'current_category_id' => $category_id, // Include current category ID if on a product category page
 	]);
 
@@ -340,6 +341,16 @@ require get_template_directory() . '/inc/__custom-functions.php';
  * Customizer.
  */
 require get_template_directory() . '/inc/__customizer.php';
+
+/**
+ * Registration.
+ */
+require get_template_directory() . '/inc/__registration.php';
+
+/**
+ * User Profile.
+ */
+require get_template_directory() . '/inc/__user-profile.php';
 
 /**
  * Woocommerce.

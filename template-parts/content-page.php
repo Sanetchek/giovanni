@@ -10,21 +10,17 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
-		<?php
-			if ( is_account_page() && is_user_logged_in() ) {
+	<?php if (is_account_page() && is_user_logged_in()) : ?>
+		<header class="entry-header">
+			<?php
 				$current_user = wp_get_current_user();
 				echo '<div class="my-account-header">';
 				echo '<p>' . esc_html( $current_user->display_name ) . '</p>'; // Display user name
 				the_title( '<h1 class="entry-title">', '</h1>' );
 				echo '</div>';
-			} else {
-				echo '<div class="container">';
-				the_title( '<h1 class="entry-title">', '</h1>' );
-				echo '</div>';
-			}
-		?>
-	</header><!-- .entry-header -->
+			?>
+		</header><!-- .entry-header -->
+	<?php endif ?>
 
 	<div class="container">
 		<?php the_post_thumbnail(); ?>

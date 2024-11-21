@@ -78,8 +78,6 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters('active_plugins', ge
   remove_action( 'woocommerce_archive_description', 'woocommerce_taxonomy_archive_description', 10 );
   add_action( 'custom_woocommerce_archive_description', 'custom_archive_description', 10 );
 
-
-
   /**
    * Remove woocommerce actions
    *

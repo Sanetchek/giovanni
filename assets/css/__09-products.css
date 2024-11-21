@@ -290,7 +290,7 @@ button.filter-sort-item {
   border: 1px solid #000;
 }
 
-.filter-dropdown input[type="checkbox"]:checked+.fake-checkbox {
+input[type="checkbox"]:checked+.fake-checkbox {
   background: #000 url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIGZpbGw9J25vbmUnIHZpZXdCb3g9JzAgMCAxNiAxNic+PHBhdGggZmlsbC1ydWxlPSdldmVub2RkJyBjbGlwLXJ1bGU9J2V2ZW5vZGQnIGQ9J00xMi4xODggNS4zMTJMNy4wNCAxMS43NSAzLjY0NSA4LjM1NGwuNzA3LS43MDggMi42MDUgMi42MDUgNC40NS01LjU2My43ODEuNjI0eicgZmlsbD0nd2hpdGUnLz48L3N2Zz4=) center no-repeat;
 }
 
@@ -317,7 +317,7 @@ button.filter-item:hover {
   text-align: center;
   font-size: 38px;
 }
-.taxonomies-category-boxes .page-title .product-count { 
+.taxonomies-category-boxes .page-title .product-count {
   color: #000;
   font-size: 18px;
 }
