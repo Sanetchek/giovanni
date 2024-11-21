@@ -150,6 +150,7 @@
   left: 0;
   top: 0;
   width: 100%;
+  font-weight: 400;
   text-align: center;
   transition: transform 0.2s ease-in-out;
 }
@@ -158,11 +159,13 @@
   transform: translateY(-100%);
 }
 
-.taxonomies-content:hover .taxonomies-content-title:not(.animation-text) {
+.taxonomies-content:hover .taxonomies-content-title:not(.animation-text),
+.slick-item a:hover .taxonomies-content-title:not(.animation-text) {
   transform: translateY(100%);
 }
 
-.taxonomies-content:hover .animation-text {
+.taxonomies-content:hover .animation-text,
+.slick-item a:hover .animation-text {
   transform: translateY(0);
 }
 
@@ -412,6 +415,10 @@ li.product-card-big.banner img {
   max-width: 1600px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.page-template-collections .main-posts-art {
+  margin-top: 55px;
 }
 
 .main-posts-art.second .main-posts-picture {

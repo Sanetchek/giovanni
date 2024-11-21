@@ -64,6 +64,8 @@
     slidesToScroll: 1,
     infinite: false,
     rows: 0, 
+    centerMode: true,
+    centerPadding: '0px',
     draggable: true, 
     swipe: true,
     rtl: true,
@@ -80,7 +82,7 @@
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 3,
           slidesToScroll: 1
         }
       }
