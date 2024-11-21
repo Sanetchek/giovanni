@@ -249,6 +249,11 @@ html[dir="rtl"] .button-hover.white::after {
   font-size: 15px;
   letter-spacing: 0.07em;
   text-transform: uppercase;
+  border: 1px solid transparent;
+}
+.btn-black:hover {
+  background-color: #454545;
+  border: 1px solid #454545;
 }
 
 .slick-arrow {
