@@ -8,11 +8,8 @@
 
         <p class="link-item-title"><?= $item['title'] ?></p>
         <p><?= $item['description'] ?></p>
-        <p>
-          <svg class='icon-arrow-left' width='24' height='24'>
-            <use href='<?= assets('img/sprite.svg#icon-arrow-left') ?>'></use>
-          </svg>
-        </p>
+        <div class="arrow-animation-container">
+        </div>
       </a>
     <?php endif ?>
   <?php endforeach ?>
