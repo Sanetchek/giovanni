@@ -51,7 +51,7 @@ $allowed_html = array(
 				echo '<p>' . __('אין הזמנות ממתינות', 'giovanni') . '</p>';
 			}
 			?>
-	</div>
+		</div>
 	</div>
 	<div class="dashboard-item">
 		<a href="/my-account/edit-account/" class="dashboard-link">
