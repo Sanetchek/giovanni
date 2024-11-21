@@ -187,9 +187,14 @@ body.rtl .product-count {
 }
 
 .products-filter {
-  padding: 18px 0;
+  padding: 4px 0;
   border-top: 1px solid #dedede;
   border-bottom: 1px solid #dedede;
+}
+
+.products-filter .filter-wrap .btn {
+  font-size: 15px;
+  font-weight: 400;
 }
 
 .products-filter-container {
@@ -323,7 +328,7 @@ button.filter-item:hover {
 }
 
 .taxonomies-category-boxes h3.taxonomies-content-title {
-  font-size:16px;
+  font-size:15px;
 }
 
 .taxonomies-category-boxes .taxonomies-content-image {
@@ -331,11 +336,11 @@ button.filter-item:hover {
 }
 
 .taxonomies-category-boxes .slick-slider {
-  padding: 10px 80px 20px 80px;
+  padding: 10px 120px 0 120px;
 }
 
 .taxonomies-category-boxes .slick-slide picture {
-  width: 220px;
+  width: 210px;
   height: 230px;
   overflow: hidden;
   position: relative;
