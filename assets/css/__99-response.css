@@ -57,10 +57,6 @@
     gap: 40px;
   }
 
-  .menu-wrap>div {
-    width: calc((100% - 40px) / 2);
-  }
-
   .mega-menu-container {
     display: flex;
     justify-content: space-between;
@@ -234,7 +230,6 @@
   .taxonomies-category-boxes .slick-slider {
     padding: 0;
   }
-
   .slick-initialized .slick-slide {
     margin: 0 5px;
   }
@@ -593,7 +588,6 @@
   .charms-cat li.product-card .product-image img {
     height: 100%;
   }
-
   .page-id-3494 li.product-card .product-image img,
   .page-id-3494 .slick-slide .product-image img {
     padding: 0;
@@ -1290,7 +1284,6 @@
   .page-id-4565 .article-list {
     margin: 10px 0;
   }
-
   .page-id-4565 .article-page-list {
     margin-top: 30px;
     margin-bottom: 30px;
