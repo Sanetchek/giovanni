@@ -194,7 +194,7 @@
   var stickyThreshold = 10;
   var lastKnownScrollPosition = 0;
   var ticking = false;
-  
+
   // Function to handle sticky and navigation logic
   function handleStickyAndNavigation(scrollPosition) {
     // Toggle sticky class based on scroll position
@@ -203,7 +203,7 @@
     } else {
       header.removeClass('is-sticky');
     }
-  
+
     // Scroll direction logic for adding/removing .notshowmenu class
     if (scrollPosition > lastScrollTop) {
       // Scrolling down
@@ -214,25 +214,25 @@
       siteHeader.removeClass('notshowmenu');
       mainNavigation.removeClass('hide'); // Slide down
     }
-  
+
     lastScrollTop = scrollPosition;
   }
-  
+
   // Monitor scroll events and use requestAnimationFrame for smoother behavior
   $(window).on('scroll', function () {
     lastKnownScrollPosition = $(this).scrollTop();
-  
+
     if (!ticking) {
       window.requestAnimationFrame(function () {
         handleStickyAndNavigation(lastKnownScrollPosition);
         ticking = false;
       });
-  
+
       ticking = true;
     }
   });
-  
-  
+
+
 
 }(jQuery));
 
