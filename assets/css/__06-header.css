@@ -202,18 +202,18 @@ header#masthead.is-sticky .notshowmenu .mega-menu {
 .mega-menu-container {
   display: flex;
   justify-content: center;
-  gap: 40px;
+  gap: 24px;
   max-width: 1366px;
   margin: 0 auto;
 }
 
 .menu-wrap {
   display: flex;
-  gap: 90px;
+  gap: 24px;
 }
 
 .menu-wrap>div {
-  width: calc((100% - 90px) / 2);
+  width: calc((100% - 24px) / 2);
 }
 
 .links-wrap {
