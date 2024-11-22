@@ -789,12 +789,10 @@ form.cart .button {
   transition: transform 0.3s ease;
 }
 
-.slider-main .product-modal__image {
-  display: none;
-}
-
+.slider-main .product-modal__image,
 .slider-main .product-modal__image.slick-slide {
   height: 0;
+  display: none;
 }
 
 .slider-main .product-modal__image.slick-active {
