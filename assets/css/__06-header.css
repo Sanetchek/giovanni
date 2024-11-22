@@ -208,6 +208,7 @@ header#masthead.is-sticky .notshowmenu .mega-menu {
 }
 
 .menu-wrap {
+  min-width: 365px;
   display: flex;
   gap: 24px;
 }
