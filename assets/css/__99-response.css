@@ -61,6 +61,10 @@
     width: calc((100% - 40px) / 2);
   }
 
+  .menu-wrap>div {
+    width: calc((100% - 40px) / 2);
+  }
+
   .mega-menu-container {
     display: flex;
     justify-content: space-between;

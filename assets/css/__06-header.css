@@ -168,7 +168,7 @@ header#masthead.is-sticky {
   right: 0;
   z-index: 999;
   background: #fff;
-  padding: 33px 215px 22px 64px;
+  padding: 33px 15px 22px;
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
@@ -202,12 +202,18 @@ header#masthead.is-sticky .notshowmenu .mega-menu {
 .mega-menu-container {
   display: flex;
   justify-content: center;
-  gap: 24px;
+  gap: 40px;
+  max-width: 1366px;
+  margin: 0 auto;
 }
 
 .menu-wrap {
   display: flex;
   gap: 90px;
+}
+
+.menu-wrap>div {
+  width: calc((100% - 90px) / 2);
 }
 
 .links-wrap {
@@ -230,6 +236,7 @@ header#masthead.is-sticky .notshowmenu .mega-menu {
   color: #000;
   text-decoration: none;
 }
+
 .mega-menu-container .menu a:hover {
   color: #454545;
 }
@@ -547,6 +554,7 @@ h2.search-result-title {
 button.btn.search-form-submit {
   padding: 11px 24px;
 }
+
 .search-modal-error {
   display: none;
   margin: 60px;
