@@ -54,21 +54,17 @@
   }
 
   .menu-wrap {
-    gap: 40px;
+    gap: 24px;
   }
 
   .menu-wrap>div {
-    width: calc((100% - 40px) / 2);
-  }
-
-  .menu-wrap>div {
-    width: calc((100% - 40px) / 2);
+    width: calc((100% - 24px) / 2);
   }
 
   .mega-menu-container {
     display: flex;
     justify-content: space-between;
-    gap: 40px;
+    gap: 24px;
   }
 
   .collections-shadow,
