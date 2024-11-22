@@ -22,8 +22,7 @@ $attachment_ids = $product->get_gallery_image_ids();
 
       if ( $post_thumbnail_id ) {
         $image_url = wp_get_attachment_image_url($post_thumbnail_id, $thumb);
-        echo '<div class="product-modal__image">';
-        echo '<img src="' . esc_url($image_url) . '" class="modal-image" alt="">';
+        echo '<div class="product-modal__image zoomable" style="background-image: url(' . esc_url($image_url) . ');">';
         echo '</div>';
       }
 
@@ -31,8 +30,7 @@ $attachment_ids = $product->get_gallery_image_ids();
       if ( $attachment_ids && $product->get_image_id() ) {
         foreach ( $attachment_ids as $key => $attachment_id ) {
           $image_url = wp_get_attachment_image_url($attachment_id, $thumb);
-          echo '<div class="product-modal__image">';
-          echo '<img src="' . esc_url($image_url) . '" class="modal-image" alt="">';
+          echo '<div class="product-modal__image zoomable" style="background-image: url(' . esc_url($image_url) . ');">';
           echo '</div>';
         }
       }
