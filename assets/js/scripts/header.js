@@ -188,6 +188,7 @@
   }
 
   var lastScrollTop = 0;
+  var body = $('body');
   var header = $('#masthead');
   var mainNavigation = $('.main-navigation');
   var siteHeader = $('.site-header');
@@ -200,8 +201,10 @@
     // Toggle sticky class based on scroll position
     if (scrollPosition > stickyThreshold) {
       header.addClass('is-sticky');
+      body.addClass('sticky-header');
     } else {
       header.removeClass('is-sticky');
+      body.removeClass('sticky-header');
     }
 
     // Scroll direction logic for adding/removing .notshowmenu class

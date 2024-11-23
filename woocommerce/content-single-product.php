@@ -129,7 +129,7 @@ if ( post_password_required() ) {
 	</div>
 
 	<div class="product-user-info-wrap">
-		<div class="product-container">
+		<div class="product-container single-product-advcards">
 			<div class="product-user-info">
 				<?php $group = get_field('free_return', 'option') ?>
 				<?php if ($group) : ?>

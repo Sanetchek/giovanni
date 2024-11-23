@@ -497,7 +497,7 @@ span.social_share_svg {
 
 .product-summary .product-short-description {
   font-weight: 400;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.33333;
   text-align: right;
   color: #000;
@@ -583,7 +583,7 @@ form.cart .button {
 
 .single-product-content-wrap * {
   font-weight: 400;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.77778;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -619,9 +619,25 @@ form.cart .button {
 
 .product-user-info {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
-  gap: 15px;
+  gap: 25px;
+}
+
+.single-product-advcards {
+  max-width: 1640px;
+}
+
+.single-product-advcards .product-info-item {
+  max-width: 100%;
+}
+
+.taxonomies.single-product-taxonomies .taxonomies-content h3.taxonomies-content-title {
+  font-size: 18px;
+}
+
+.product-container.single-product-related {
+  padding-top: 40px;
 }
 
 .product-info-item {
@@ -672,7 +688,7 @@ form.cart .button {
   line-height: 1;
   text-transform: uppercase;
   color: #000;
-  margin: 16px 0;
+  margin: 16px 0 0 0;
 }
 
 .btn.product-info-link {
@@ -855,6 +871,11 @@ form.cart .button {
   margin-bottom: -2em;
   padding-top: 4em;
   height: 100%;
+}
+
+body.sticky-header .product-container .product-summary {
+  top: 110px;
+  transition: all 0.5s ease;
 }
 
 .product-container .product-size-container {
