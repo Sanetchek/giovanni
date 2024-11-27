@@ -200,9 +200,11 @@
 .page-id-4565 .container.center-mode-box {
   max-width: 1480px;
 }
+
 .page-id-4565 .container.center-mode-box .article-list-wrap {
   align-items: center;
 }
+
 .page-id-4565 .container.center-mode-box .article-list-wrap p {
   font-size: 16px;
 }
@@ -281,6 +283,7 @@ h2.list-title {
   display: flex;
   gap: 40px;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .post-wrap.reverse {

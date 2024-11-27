@@ -257,4 +257,42 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters('active_plugins', ge
 
     return $classes;
   }
+
+  function product_collection_categories() {
+    global $post;
+		$categories = wp_get_post_terms($post->ID, 'product_cat');
+
+		if (!empty($categories)) {
+			$target_parent = 26; // ID of the parent category to check for
+			$sorted_categories = [];
+
+			// Recursive function to check parent category
+			function has_target_parent($term, $target_parent) {
+				if ($term->parent == 0) {
+					return false; // Reached top-level category
+				}
+				if ($term->parent == $target_parent) {
+					return true; // Found target parent
+				}
+				// Get parent term and continue checking
+				$parent = get_term($term->parent, 'product_cat');
+				return has_target_parent($parent, $target_parent);
+			}
+
+			// Sort categories into the appropriate array
+			foreach ($categories as $category) {
+				if ($category->term_id === $target_parent) {
+					$sorted_categories[] = $category->term_id;
+				}
+
+				if (has_target_parent($category, $target_parent)) {
+					$sorted_categories[] = $category->term_id;
+				}
+			}
+
+      return $sorted_categories;
+		} else {
+      return;
+    }
+  }
 }

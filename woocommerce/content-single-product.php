@@ -30,6 +30,8 @@ if ( post_password_required() ) {
 	echo get_the_password_form(); // WPCS: XSS ok.
 	return;
 }
+
+$categories_array = product_collection_categories();
 ?>
 <div id="product-<?php the_ID(); ?>" <?php wc_product_class( '', $product ); ?>>
 
@@ -159,7 +161,6 @@ if ( post_password_required() ) {
 	</div>
 
 	<div class="product-container single-product-related">
-
 		<h2 class="related-title"><?php echo __('מומלצים ביחד', 'giovanni') ?></h2>
 
 		<?php
@@ -180,46 +181,52 @@ if ( post_password_required() ) {
 		?>
 	</div>
 
-	<div class="main-wrap">
+	<div class="main-wrap single-product-container">
 		<div class="single-product-post">
 			<?php
-				// Get WooCommerce product category IDs
-				$product_categories = $product->get_category_ids();
+			if ($categories_array) {
+				foreach ($categories_array as $key => $term_id) {
+					// Get post from ACF field
+					$post_list = get_field('post_list', 'product_cat_' . $term_id);
 
-				// Get collections from ACF field
-				$collections = get_field('collection_settings', 'option');
+					if ($post_list) {
+						foreach ($post_list as $item) {
+							get_template_part('template-parts/page/post', '', ['block' => $item]);
+						}
+					}
+				}
+			}
+			?>
+		</div>
+	</div>
 
-				foreach ($collections as $key => $collection) {
-					/**
-					 * 'item' -> Group of ACF fields (names: image, title, description, link_label, link)
-					 * 'class' -> (string) first/second (default: first)
-					 * 'shadow' -> (number) 0/1 - it puts shadow on left or right (default: 1)
-					 * 'choose_category' -> Array of category IDs chosen for the collection
-					 */
-
-					// Check if any of the product categories exist in the 'choose_category' field
-					if (!empty($collection['choose_category']) && array_intersect($product_categories, $collection['choose_category'])) {
+	<div class="main-wrap single-product-container">
+		<div class="single-product-post">
+			<?php
+				if ($categories_array) {
+					foreach ($categories_array as $key => $term_id) {
+						// Get collection from ACF field
+						$collection_list = get_field('collection_list', 'product_cat_' . $term_id);
 						$class = $key % 2 ? 'second' : 'first';
 						$shadow = $key % 2 ? 0 : 1;
 
-						// Load the template part
-						get_template_part('template-parts/main', 'post', [
-							'item' => $collection,
-							'class' => $class,
-							'shadow' => $shadow
-						]);
+						if ($collection_list) {
+							foreach ($collection_list as $item) {
+								/**
+								 * 'item' -> Group of ACF fields (names: image, title, description, link_label, link)
+								 * 'class' -> (string) first/second (default: first)
+								 * 'shadow' -> (number) 0/1 - it puts shadow on left or right (default: 1)
+								 * 'choose_category' -> Array of category IDs chosen for the collection
+								 */
+								get_template_part('template-parts/main', 'post', [
+									'item' => $item,
+									'class' => $class,
+									'shadow' => $shadow
+								]);
+							}
+						}
 					}
 				}
-			?>
-		</div>
-
-
-		<div class="taxonomies page-container single-product-taxonomies">
-			<?php
-				$title = get_field('taxonomies_title', 'option');
-				$taxonomies = get_field('category_taxonomies', 'option');
-
-				get_template_part('template-parts/sections/taxonomies', '', ['title' => $title, 'taxonomies' => $taxonomies]);
 			?>
 		</div>
 	</div>
