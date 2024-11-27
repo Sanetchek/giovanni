@@ -1,15 +1,19 @@
-<?php 
+<?php
   $item = isset($args['item']) ? $args['item'] : false;
+  $image = $item['image'];
+  $image_mob = $item['image_mob'] ? $item['image_mob'] : $item['image'];
   $class = isset($args['class']) ? $args['class'] : 'first';
   $shadow = isset($args['shadow']) ? $args['shadow'] : 1;
 ?>
 
 <?php if ($item) : ?>
   <div class="main-posts-art <?php echo $class ?>">
-    <div class="main-posts-picture">
-        <?php show_image($item['image_mob'], '800-full', ['class'=> 'main-post-image main-post-image-mobile']) ?>
-        <?php show_image($item['image'], '1280-full', ['class'=> 'main-post-image main-post-image-desktop']) ?>
-    </div>
+    <?php if ($image) : ?>
+      <div class="main-posts-picture">
+          <?php show_image($image_mob, '800-full', ['class'=> 'main-post-image main-post-image-mobile']) ?>
+          <?php show_image($image, '1280-full', ['class'=> 'main-post-image main-post-image-desktop']) ?>
+      </div>
+    <?php endif ?>
 
     <div class="main-posts-content">
       <div class="main-posts-shadow">

@@ -415,6 +415,7 @@ li.product-card-big.banner img {
   max-width: 1600px;
   margin-left: auto;
   margin-right: auto;
+  overflow: hidden;
 }
 
 .page-template-collections .main-posts-art {
