@@ -181,10 +181,10 @@ $categories_array = product_collection_categories();
 		?>
 	</div>
 
-	<div class="main-wrap single-product-container">
-		<div class="single-product-post">
-			<?php
-			if ($categories_array) {
+	<?php if ($categories_array) : ?>
+		<div class="main-wrap single-product-container">
+			<div class="single-product-post">
+				<?php
 				foreach ($categories_array as $key => $term_id) {
 					// Get post from ACF field
 					$post_list = get_field('post_list', 'product_cat_' . $term_id);
@@ -195,15 +195,15 @@ $categories_array = product_collection_categories();
 						}
 					}
 				}
-			}
-			?>
+				?>
+			</div>
 		</div>
-	</div>
+	<?php endif ?>
 
-	<div class="main-wrap single-product-container">
-		<div class="single-product-post">
-			<?php
-				if ($categories_array) {
+	<?php if ($categories_array) : ?>
+		<div class="main-wrap single-product-container">
+			<div class="single-product-post">
+				<?php
 					foreach ($categories_array as $key => $term_id) {
 						// Get collection from ACF field
 						$collection_list = get_field('collection_list', 'product_cat_' . $term_id);
@@ -226,10 +226,10 @@ $categories_array = product_collection_categories();
 							}
 						}
 					}
-				}
-			?>
+				?>
+			</div>
 		</div>
-	</div>
+	<?php endif ?>
 </div>
 
 <?php
