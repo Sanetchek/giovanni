@@ -56,4 +56,19 @@
     return false;
   });
 
+
 }(jQuery));
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const radioGroups = document.querySelectorAll('ul[role="radiogroup"]');
+
+  radioGroups.forEach(function (ul) {
+      const listItems = ul.querySelectorAll('li');
+      
+      if (listItems.length < 2) {
+          ul.style.display = "none";
+      }
+  });
+});
