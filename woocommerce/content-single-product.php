@@ -67,11 +67,11 @@ $categories_array = product_collection_categories();
 				woocommerce_template_single_price();
 
 				// Add Find your size Popup
-				if ( $product->is_type( 'variable' ) ) {
+				$radio_value = get_field('use_size_table_popup');
+				if ( $radio_value ) {
 					echo '<div class="product-size-container">';
 					echo '<div class="body-s-medium-u">זמין ב</div>';
 
-					$radio_value = get_field('use_size_table_popup');
 					if ($radio_value !== 'none') {
 						echo '<a href="#" class="open-modal-btnsize">מצא את המידה שלך</a>';
 					}
