@@ -725,12 +725,6 @@ form.cart .button {
   margin: 80px 0;
 }
 
-.single-product-post {
-  display: flex;
-  flex-direction: column;
-  gap: 80px;
-}
-
 .single-product-post .article-post {
   margin: 0;
 }
