@@ -15,12 +15,14 @@
         <div class="post-content"><?= $block['text'] ?></div>
 
         <?php if ($block['link']) : ?>
-          <a href="<?= $block['link'] ?>" class="paragraph-link">
-            <div class="paragraph-link-animation">
-              <span><?= $block['link_label'] ?></span>
-              <span><?= $block['link_label'] ?></span>
-            </div>
-          </a>
+          <div class="button-animation-effect paragraph-link">
+            <a href="<?php echo $block['link'] ?>" class="btn btn-hover">
+              <div class="animation-label-container">
+                <p class="cta-text"><?php echo $block['link_label'] ?></p>
+                <p aria-hidden="true" class="cta-text animation-label-text"><?php echo $block['link_label'] ?></p>
+              </div>
+            </a>
+          </div>
         <?php endif ?>
       </div>
     </div>

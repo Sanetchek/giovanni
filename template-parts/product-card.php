@@ -53,7 +53,7 @@ $second_image_url = $second_image_id ? wp_get_attachment_image_url($second_image
   </a>
 
   <a href="<?php echo esc_url($permalink); ?>" class="product-button-cart">
-    <span class="product-hidden product-hidden-btn btn-hover white">
+    <span class="product-hidden product-hidden-btn button button-hover white">
       <?php echo __('לקנות עכשיו', 'giovanni'); ?>
     </span>
   </a>
