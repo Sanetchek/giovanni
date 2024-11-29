@@ -400,7 +400,7 @@ li.product-card-big.banner img {
 
 .main-posts {
   max-width: 1600px;
-  margin: 25px auto 5px;
+  margin: 80px auto;
 }
 
 .main-posts-picture {
@@ -414,6 +414,10 @@ li.product-card-big.banner img {
   margin-left: auto;
   margin-right: auto;
   overflow: hidden;
+}
+
+.main-posts-art:nth-child(n + 2) {
+  margin-top: 80px;
 }
 
 .page-template-collections .main-posts-art {
