@@ -17,13 +17,15 @@
       </span></div>
   </div>
 
-  <div class="popular-product">
-    <?php foreach ($productArray as $product_id) :
-      $product = wc_get_product($product_id); ?>
-    <div class="product-item">
-      <?php $args = ['product_id' => $product_id]; ?>
-      <?php get_template_part( 'template-parts/product', 'card', $args ) ?>
+  <?php if ($productArray) : ?>
+    <div class="popular-product">
+      <?php foreach ($productArray as $product_id) :
+        $product = wc_get_product($product_id); ?>
+        <div class="product-item">
+          <?php $args = ['product_id' => $product_id]; ?>
+          <?php get_template_part( 'template-parts/product', 'card', $args ) ?>
+        </div>
+      <?php endforeach; ?>
     </div>
-    <?php endforeach; ?>
-  </div>
+  <?php endif ?>
 </div>

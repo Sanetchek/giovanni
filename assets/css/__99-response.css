@@ -44,7 +44,7 @@
 
 @media screen and (min-width: 1601px) {
   .menu-wrap {
-    width: calc(100% - 920px);
+    width: calc(100% - 880px);
   }
 }
 

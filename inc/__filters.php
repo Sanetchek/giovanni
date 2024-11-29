@@ -46,15 +46,17 @@ function build_query_args($search_query = '') {
   }
 
   // Add attribute filters from URL
-  foreach ($_GET as $key => $value) {
-    if (strpos($key, 'filter_') === 0 && !empty($value)) {
-      $taxonomy = str_replace('filter_', '', $key);
-      $args['tax_query'][] = [
-        'taxonomy' => $taxonomy,
-        'field'    => 'slug',
-        'terms'    => explode(',', sanitize_text_field($value)),
-        'operator' => 'IN',
-      ];
+  if ($_GET) {
+    foreach ($_GET as $key => $value) {
+      if (strpos($key, 'filter_') === 0 && !empty($value)) {
+        $taxonomy = str_replace('filter_', '', $key);
+        $args['tax_query'][] = [
+          'taxonomy' => $taxonomy,
+          'field'    => 'slug',
+          'terms'    => explode(',', sanitize_text_field($value)),
+          'operator' => 'IN',
+        ];
+      }
     }
   }
 
@@ -149,7 +151,7 @@ function display_filter_options($attribute_name, $attribute_data) {
   echo '<div class="filter-wrap filter-collection">';
   echo '<button type="button" class="btn btn-no-border btn-filter">';
   echo '<span>' . esc_html($attribute_data['label']) . '</span>';
-  echo '<svg class="icon-chevron-down" width="24" height="24">';
+  echo '<svg class="icon-chevron-down" width="16" height="16">';
   echo '<use href="' . esc_url(assets('img/sprite.svg#icon-chevron-down')) . '"></use>';
   echo '</svg>';
   echo '</button>';
@@ -178,9 +180,9 @@ function display_sort_options() {
   echo '<div class="filter-side">';
   echo '<div class="filter-wrap filter-sort">';
   echo '<span class="filter-label">' . __('מיין לפי', 'giovanni') . '</span>';
-  echo '<button type="button" class="btn btn-no-border btn-filter">';
+  echo '<button type="button" class="btn btn-no-border btn-filter btn-filter-sort">';
   echo '<span class="filter-sort-text">' . __('המלצות', 'giovanni') . '</span>';
-  echo '<svg class="icon-chevron-down" width="20" height="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 16"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 13.293l3.646-3.647.707.708L6 14.707l-4.354-4.353.708-.708L6 13.293zM6 2.707L2.354 6.354l-.708-.708L6 1.293l4.354 4.353-.708.708L6 2.707z" fill="black"/></svg>';
+  echo '<svg class="icon-chevron-down" width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 16"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 13.293l3.646-3.647.707.708L6 14.707l-4.354-4.353.708-.708L6 13.293zM6 2.707L2.354 6.354l-.708-.708L6 1.293l4.354 4.353-.708.708L6 2.707z" fill="black"/></svg>';
   echo '</button>';
   echo '<input type="hidden" name="sort" class="sort-filter-input" id="sort" value="popularity">';
   echo '<div class="filter-dropdown"><ul>';

@@ -26,7 +26,14 @@
     <h2 class="product-info-title"><?= $group['title'] ?></h2>
 
     <?php if ($group['link']) : ?>
-      <a href="<?= $group['link'] ?>" class="product-info-link btn btn-no-border btn-hover" target="_blank"><?= $group['link_label'] ?></a>
+      <div class="button-animation-effect">
+        <a href="<?php echo $group['link'] ?>" class="btn btn-hover">
+          <div class="animation-label-container">
+            <p class="cta-text"><?php echo $group['link_label'] ?></p>
+            <p aria-hidden="true" class="cta-text animation-label-text"><?php echo $group['link_label'] ?></p>
+          </div>
+        </a>
+      </div>
     <?php endif ?>
   </div>
 </div>

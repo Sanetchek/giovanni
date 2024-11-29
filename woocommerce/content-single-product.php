@@ -182,7 +182,7 @@ $categories_array = product_collection_categories();
 	</div>
 
 	<?php if ($categories_array) : ?>
-		<div class="main-wrap single-product-container">
+		<div class="main-wrap">
 			<div class="single-product-post">
 				<?php
 				foreach ($categories_array as $key => $term_id) {
@@ -190,9 +190,11 @@ $categories_array = product_collection_categories();
 					$post_list = get_field('post_list', 'product_cat_' . $term_id);
 
 					if ($post_list) {
+						echo '<div class="single-product-container">';
 						foreach ($post_list as $item) {
 							get_template_part('template-parts/page/post', '', ['block' => $item]);
 						}
+						echo '</div>';
 					}
 				}
 				?>
@@ -201,7 +203,7 @@ $categories_array = product_collection_categories();
 	<?php endif ?>
 
 	<?php if ($categories_array) : ?>
-		<div class="main-wrap single-product-container">
+		<div class="main-wrap">
 			<div class="single-product-post">
 				<?php
 					foreach ($categories_array as $key => $term_id) {
@@ -211,6 +213,7 @@ $categories_array = product_collection_categories();
 						$shadow = $key % 2 ? 0 : 1;
 
 						if ($collection_list) {
+							echo '<div class="single-product-container">';
 							foreach ($collection_list as $item) {
 								/**
 								 * 'item' -> Group of ACF fields (names: image, title, description, link_label, link)
@@ -224,6 +227,7 @@ $categories_array = product_collection_categories();
 									'shadow' => $shadow
 								]);
 							}
+							echo '</div>';
 						}
 					}
 				?>

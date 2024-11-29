@@ -1,6 +1,6 @@
 body {
   font-family: 'Heebo', sans-serif;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 400;
   line-height: 1.5;
   overflow-x: hidden;
@@ -31,11 +31,11 @@ h6 {
 }
 
 h1 {
-  font-size: 28px;
+  font-size: 38px !important;
 }
 
 h2 {
-  font-size: 30px;
+  font-size: 30px !important;
 }
 
 h3 {
@@ -47,7 +47,7 @@ h3 {
 
 p {
   font-weight: 400;
-  font-size: 18px;
+  font-size: 15px !important;
   line-height: 1.77778;
   letter-spacing: 0.06em;
   color: #000;
@@ -99,7 +99,7 @@ textarea {
   justify-content: center;
   font-family: "Heebo", sans-serif;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 12px;
   line-height: 1.06667;
   letter-spacing: 0.07em;
   color: #000;
@@ -115,11 +115,10 @@ textarea {
 
 .btn-hover::before {
   content: "";
-  width: 18px;
+  width: 16px;
   height: 1px;
   background-color: #000;
   margin-left: 11px;
-  margin-bottom: 3px;
 }
 
 .block1-content .btn-hover::before {
@@ -140,7 +139,7 @@ textarea {
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  height: 2em;
+  height: 21px;
   min-width: calc(1ch * var(--char-count, 10));
 }
 
@@ -149,7 +148,7 @@ textarea {
   left: 0;
   top: 0;
   width: 100%;
-  text-align: center;
+  font-size: 12px !important;
   margin-bottom: 0;
   transition: transform 0.2s ease-in-out;
 }

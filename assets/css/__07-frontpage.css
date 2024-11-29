@@ -31,7 +31,7 @@
 }
 
 .hero-content a:before {
-  display:none;
+  display: none;
 }
 
 .hero-content h1 {
@@ -123,14 +123,19 @@
 
 .taxonomies-content-title {
   margin: 0;
-  position: relative;
+  position: absolute;
+  left: 0;
+  top: 0;
   bottom: 0;
+  font-size: 20px;
+  font-weight: 400;
   line-height: 48px;
   width: 100%;
   text-align: center;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  transition: transform 0.2s ease-in-out;
 }
 
 .mobile-only {
@@ -143,16 +148,6 @@
   overflow: hidden;
   cursor: pointer;
   height: 2.5em;
-}
-
-.taxonomies-content-title {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  font-weight: 400;
-  text-align: center;
-  transition: transform 0.2s ease-in-out;
 }
 
 .animation-text {
@@ -291,9 +286,11 @@ li.product-card-big.banner img {
   align-items: center;
   justify-content: center;
 }
+
 .charms-cat li.product-card .product-image img {
   height: 60%;
 }
+
 .page-id-3494 li.product-card .product-image img,
 .page-id-3494 .slick-slide .product-image img {
   padding: 20%;
@@ -320,7 +317,7 @@ li.product-card-big.banner img {
 .product-title {
   font-family: "Heebo", sans-serif;
   font-weight: 400;
-  font-size: 15px;
+  font-size: 12px;
   line-height: 1.33333;
   text-transform: uppercase;
   text-align: center;
@@ -342,7 +339,7 @@ li.product-card-big.banner img {
 .product-price {
   font-family: "Heebo", sans-serif;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1.33333;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -390,7 +387,7 @@ li.product-card-big.banner img {
   width: 100%;
   background: #000;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 12px;
   line-height: 48px;
   letter-spacing: 0.07em;
   text-transform: uppercase;
@@ -398,6 +395,7 @@ li.product-card-big.banner img {
   color: #fff;
   margin-top: 16px;
   direction: rtl;
+  padding: 0 !important;
 }
 
 .main-posts {
@@ -407,7 +405,7 @@ li.product-card-big.banner img {
 
 .main-posts-picture {
   position: relative;
-  min-height: 546px;
+  min-height: 400px;
   width: 1280px;
 }
 
@@ -489,7 +487,7 @@ li.product-card-big.banner img {
   margin-bottom: 13px;
 }
 
-.main-posts-wrap > p{
+.main-posts-wrap>p {
   margin-bottom: 0;
   font-size: 15px;
 }
@@ -517,6 +515,11 @@ li.product-card-big.banner img {
   width: 100%;
   height: 450px;
   z-index: -1;
+}
+
+.exhibition-container.reversed::after {
+  left: unset;
+  right: 0;
 }
 
 .exhibition-wrap {
@@ -582,7 +585,7 @@ li.product-card-big.banner img {
 
 .exhibition-content a.btn {
   margin-top: 8px;
-  font-size: 18px;
+  font-weight: 400;
 }
 
 .signature {
@@ -675,15 +678,10 @@ span.slide-total {
 .product-item h3 {
   text-align: center;
   font-weight: 400;
-  font-size: 15px;
   line-height: 1.33333;
   text-transform: uppercase;
   text-align: center;
   color: #000;
-}
-
-.single-product .product-item h3 {
-  font-size: 16px;
 }
 
 .product-link .product-info-box {
@@ -708,18 +706,22 @@ p.popular-price {
 .home .popular {
   padding-bottom: 0 !important;
 }
+
 .signature_pieces {
   padding-bottom: 90px;
   text-align: center;
 }
+
 .signature_pieces .article-paragraph {
   margin: 40px 0 55px 40px;
 }
+
 .signature_pieces-title {
   margin: 0;
   margin-bottom: 32px;
   text-align: center;
 }
+
 .signature_pieces .button-animation-effect {
   display: flex;
   justify-content: center;

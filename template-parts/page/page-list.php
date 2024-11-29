@@ -7,9 +7,11 @@
     <h2 class="page-list-title"><?= $block['title'] ?></h2>
   <?php endif ?>
 
-  <ul class="page-list">
-    <?php foreach ($block['pages'] as $item_id) : ?>
-      <?php get_template_part('template-parts/page', 'card', ['id' => $item_id]); ?>
-    <?php endforeach ?>
-  </ul>
+  <?php if ($block['pages']) : ?>
+    <ul class="page-list">
+      <?php foreach ($block['pages'] as $item_id) : ?>
+        <?php get_template_part('template-parts/page', 'card', ['id' => $item_id]); ?>
+      <?php endforeach ?>
+    </ul>
+  <?php endif ?>
 </div>

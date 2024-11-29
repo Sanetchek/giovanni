@@ -64,9 +64,9 @@ header#masthead.is-sticky {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: 24px 0;
+  padding: 14px 0;
   position: relative;
-  min-height: 76px;
+  min-height: 66px;
 }
 
 .site-branding {
@@ -75,7 +75,7 @@ header#masthead.is-sticky {
   transform: translateX(-50%);
   font-family: "Libre Caslon Text", sans-serif;
   font-weight: 700;
-  font-size: 32px;
+  font-size: 24px;
   line-height: 1;
   text-transform: uppercase;
   color: #000;
@@ -90,7 +90,7 @@ header#masthead.is-sticky {
   background: #000;
   font-family: "Jost", sans-serif;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 10px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #fff;
@@ -147,7 +147,7 @@ header#masthead.is-sticky {
   display: block;
   padding: 16px 20px;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 12px;
   line-height: 1.6;
   letter-spacing: 0.07em;
   text-transform: uppercase;
@@ -163,7 +163,7 @@ header#masthead.is-sticky {
 
 .mega-menu {
   position: absolute;
-  top: 171px;
+  top: 150px;
   left: 0;
   right: 0;
   z-index: 999;
@@ -188,15 +188,15 @@ header#masthead.is-sticky .notshowmenu .mega-menu {
 
 
 .admin-bar .mega-menu {
-  top: calc(138px + 32px);
+  top: calc(116px + 32px);
 }
 
 .admin-bar header#masthead.is-sticky .mega-menu {
-  top: calc(149px + 22px) !important;
+  top: calc(128px + 22px) !important;
 }
 
 .admin-bar header#masthead.is-sticky .notshowmenu .mega-menu {
-  top: calc(92px + 22px) !important;
+  top: calc(71px + 22px) !important;
 }
 
 .mega-menu-container {
@@ -230,7 +230,7 @@ header#masthead.is-sticky .notshowmenu .mega-menu {
 
 .mega-menu-container .menu a {
   font-weight: 400;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.06667;
   letter-spacing: 0.07em;
   text-transform: capitalize;
@@ -262,7 +262,7 @@ header#masthead.is-sticky .notshowmenu .mega-menu {
 
 .menu-title {
   font-weight: 700;
-  font-size: 15px;
+  font-size: 14px !important;
   line-height: 1.06667;
   letter-spacing: 0.07em;
   text-transform: uppercase;
@@ -531,12 +531,17 @@ p.link-item-title {
   width: 60%;
   border: 1px solid #000;
   padding: 16px 40px 16px 20px;
-  font-size: 24px;
+  font-size: 20px;
 }
 
-button.btn.search-form-submit {
+button.button.search-form-submit {
   min-width: 150px;
-  font-size: 24px;
+  font-size: 20px;
+  background: #000;
+  color: #fff;
+  border: 0;
+  height: 50px;
+  padding: 0;
 }
 
 .search-modal-content {

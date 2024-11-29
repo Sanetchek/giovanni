@@ -12,7 +12,7 @@
   $link = $block['link'];
   $signature = $block['signature'];
   ?>
-  <div class="main-wrap exhibition-container">
+  <div class="main-wrap exhibition-container <?= $direction ?>">
     <div class="exhibition-wrap <?= $direction ?>">
       <div class="exhibition-side exhibition-content-wrap">
         <div class="exhibition-content">

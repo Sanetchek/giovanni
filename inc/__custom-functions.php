@@ -473,9 +473,11 @@ function giovanni_breadcrumbs() {
 				// If child page, get parents
 				$anc = get_post_ancestors($post->ID);
 				$anc = array_reverse($anc);
-				foreach ($anc as $ancestor) {
-					echo '<li class="item-parent item-parent-' . $ancestor . '"><a class="bread-parent bread-parent-' . $ancestor . '" href="' . get_permalink($ancestor) . '" title="' . get_the_title($ancestor) . '">' . get_the_title($ancestor) . '</a></li>';
-					echo '<li class="separator separator-' . $ancestor . '"> ' . $separator . ' </li>';
+				if ($anc) {
+					foreach ($anc as $ancestor) {
+						echo '<li class="item-parent item-parent-' . $ancestor . '"><a class="bread-parent bread-parent-' . $ancestor . '" href="' . get_permalink($ancestor) . '" title="' . get_the_title($ancestor) . '">' . get_the_title($ancestor) . '</a></li>';
+						echo '<li class="separator separator-' . $ancestor . '"> ' . $separator . ' </li>';
+					}
 				}
 				// Current page
 				echo '<li class="item-current item-' . $post->ID . '"><span title="' . get_the_title() . '"> ' . get_the_title() . '</span></li>';

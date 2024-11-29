@@ -193,7 +193,6 @@ body.rtl .product-count {
 }
 
 .products-filter .filter-wrap .btn {
-  font-size: 15px;
   font-weight: 400;
 }
 
@@ -255,6 +254,14 @@ body.rtl .product-count {
   gap: 7px;
 }
 
+.btn-filter.btn-filter-sort {
+  padding-right: 0;
+}
+
+.filter-label {
+  font-size: 12px;
+}
+
 .filter-dropdown {
   position: absolute;
   top: 50px;
@@ -271,6 +278,7 @@ body.rtl .product-count {
   gap: 10px;
   align-items: center;
   min-width: max-content;
+  font-size: 12px;
 }
 
 button.filter-sort-item {
@@ -353,11 +361,6 @@ button.filter-item:hover {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.custom-archive-description p {
-  text-align: center;
-  font-size: 15px;
 }
 
 .product-summary-wrap {
