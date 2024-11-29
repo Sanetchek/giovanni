@@ -891,6 +891,11 @@ body.sticky-header .product-container .product-summary {
   transition: all 0.5s ease;
 }
 
+nav.woocommerce-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .product-container .product-size-container {
   display: flex;
   justify-content: space-between;

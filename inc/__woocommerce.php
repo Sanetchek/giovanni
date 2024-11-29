@@ -295,4 +295,112 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters('active_plugins', ge
       return;
     }
   }
+
+  /**
+   * WooCommerce: Customize Breadcrumbs to Include Last Subcategory in Priority Category Hierarchy
+   */
+
+  /**
+   * Get the full category hierarchy starting from the product's category, going up to the priority category.
+   *
+   * @param int $product_id The ID of the product.
+   * @param array $priority_categories Array of priority category IDs.
+   * @return array The breadcrumb items for the category hierarchy.
+   */
+  function get_last_subcategory_hierarchy($product_id, $priority_categories) {
+    $category_hierarchy = [];
+    $product_categories = get_the_terms($product_id, 'product_cat');
+
+    if ($product_categories && !is_wp_error($product_categories)) {
+      // Iterate over product categories and check if they belong to the priority categories
+      foreach ($product_categories as $category) {
+        // Check if the category belongs to any of the priority categories or their ancestors
+        foreach ($priority_categories as $priority_category_id) {
+          if ($category->term_id == $priority_category_id || term_is_ancestor_of($priority_category_id, $category->term_id, 'product_cat')) {
+            // Get the full hierarchy starting from the priority category
+            $category_hierarchy = get_category_hierarchy($category->term_id, $priority_category_id);
+            break 2; // Stop once we find the category within the priority hierarchy
+          }
+        }
+      }
+    }
+
+    return $category_hierarchy;
+  }
+
+  /**
+   * Get the full category hierarchy (ancestors) for a given category, including the priority category.
+   *
+   * @param int $category_id The ID of the category.
+   * @param int $priority_category_id The ID of the priority category.
+   * @return array The breadcrumb items for the category hierarchy.
+   */
+  function get_category_hierarchy($category_id, $priority_category_id) {
+    $category_hierarchy = [];
+    $category = get_term($category_id, 'product_cat');
+
+    if ($category && !is_wp_error($category)) {
+      $parents = [];
+
+      // Collect all parent categories up to the priority category
+      while ($category->parent != 0) {
+        $category = get_term($category->parent, 'product_cat');
+        array_unshift($parents, [$category->name, get_term_link($category)]);
+
+        // Stop once we reach the priority category
+        if ($category->term_id == $priority_category_id) {
+          break;
+        }
+      }
+
+      // Add the priority category itself at the beginning
+      array_unshift($parents, [$category->name, get_term_link($category)]);
+
+      // Add the last subcategory (the current category)
+      $parents[] = [$category->name, get_term_link($category)];
+
+      $category_hierarchy = $parents;
+    }
+
+    return $category_hierarchy;
+  }
+
+  /**
+   * Modify WooCommerce breadcrumbs to include the last subcategory in the priority category hierarchy.
+   *
+   * @param array $crumbs The original breadcrumb array.
+   * @param object $breadcrumb The WooCommerce breadcrumb object.
+   * @return array Modified breadcrumb array.
+   */
+  add_filter('woocommerce_get_breadcrumb', 'customize_breadcrumbs_with_last_subcategory', 20, 2);
+  function customize_breadcrumbs_with_last_subcategory($crumbs, $breadcrumb) {
+    global $post;
+
+    // Check if we're on a single product page
+    if (is_singular('product') && isset($post->ID)) {
+      // Priority category IDs in desired order
+      $priority_categories = [26, 314]; // Replace with your actual category IDs
+
+      // Get the category hierarchy for the product
+      $category_hierarchy = get_last_subcategory_hierarchy($post->ID, $priority_categories);
+
+      // If no hierarchy was found, use the fallback (first product category)
+      if (empty($category_hierarchy)) {
+        $product_categories = get_the_terms($post->ID, 'product_cat');
+        $first_category = reset($product_categories);
+        $category_hierarchy = get_category_hierarchy($first_category->term_id, $first_category->term_id);
+      }
+
+      // Reconstruct the breadcrumbs by merging with the modified category hierarchy
+      $new_crumbs = array_merge(
+        [$crumbs[0]],              // "Home" breadcrumb
+        array_unique($category_hierarchy, SORT_REGULAR), // Remove duplicates and merge categories
+        [end($crumbs)]             // Product title
+      );
+
+      return $new_crumbs;
+    }
+
+    return $crumbs;
+  }
 }
