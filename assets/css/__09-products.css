@@ -436,8 +436,12 @@ button.filter-item:hover {
 .product-gallery__image,
 .product-gallery__image img {
   width: 100%;
-  margin-top: -3em;
   overflow: hidden;
+}
+
+.product-gallery__image:first-child,
+.product-gallery__image:first-child img {
+  margin-top: -3em;
 }
 
 .product-gallery__image img {
