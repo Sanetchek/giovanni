@@ -27,6 +27,7 @@ $videos = get_field('gallery_media');
 
     $gallery_items = [];
 
+    // Collect gallery images.
     if ($attachment_ids && $product->get_image_id()) {
       foreach ($attachment_ids as $key => $attachment_id) {
         $gallery_items[] = [
@@ -37,6 +38,7 @@ $videos = get_field('gallery_media');
       }
     }
 
+    // Collect videos.
     if ($videos) {
       foreach ($videos as $key => $item) {
         $gallery_items[] = [
@@ -47,9 +49,12 @@ $videos = get_field('gallery_media');
       }
     }
 
+    // Determine if "half" class should be applied.
+    $has_videos = !empty($videos);
+
     foreach ($gallery_items as $key => $item) {
-      $class = $key > 0 ? 'half' : '';
-      echo '<div class="product-gallery__image ' . $class . '">';
+      $class = ($key > 0 && $has_videos) ? 'half' : '';
+      echo '<div class="product-gallery__image ' . esc_attr($class) . '">';
       if ($item['type'] === 'image') {
         show_image($item['id'], $thumb, ['class' => 'show-product-modal']);
       } elseif ($item['type'] === 'video') {
@@ -58,8 +63,10 @@ $videos = get_field('gallery_media');
       echo '</div>';
     }
 
-    echo '<div class="product-gallery__image half">';
-    echo do_shortcode( '[wp360view product_id=' .  $product_id . ']');
+    // Show the 360-view element with "half" class only if videos exist.
+    $class = $has_videos ? 'half' : '';
+    echo '<div class="product-gallery__image ' . esc_attr($class) . '">';
+    echo do_shortcode('[wp360view product_id=' .  $product_id . ']');
     echo '</div>';
     ?>
   </div>

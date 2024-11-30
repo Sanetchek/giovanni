@@ -79,24 +79,29 @@ function collect_product_attributes($products) {
 
       if (!$product) continue;
 
-      foreach ($product->get_attributes() as $attribute) {
-        $attribute_name = $attribute->get_name();
-        $attribute_label = wc_attribute_label($attribute_name);
-        $attribute_options = $attribute->get_options();
-
-        if (!isset($attributes[$attribute_name])) {
-          $attributes[$attribute_name] = [
-            'label'   => $attribute_label,
-            'options' => [],
-          ];
-        }
-
-        foreach ($attribute_options as $option) {
-          if (!in_array($option, $attributes[$attribute_name]['options'])) {
-            $attributes[$attribute_name]['options'][] = $option;
+        foreach ($product->get_attributes() as $attribute) {
+          $attribute_name = $attribute->get_name();
+      
+          // Skip custom/local attributes to avoid duplicates
+          if (!$attribute->is_taxonomy()) {
+              continue;
+          }
+      
+          // Process global taxonomy-based attributes
+          if (!isset($attributes[$attribute_name])) {
+              $attributes[$attribute_name] = [
+                  'label'   => wc_attribute_label($attribute_name),
+                  'options' => [],
+              ];
+          }
+      
+          foreach ($attribute->get_options() as $option) {
+              if (!in_array($option, $attributes[$attribute_name]['options'])) {
+                  $attributes[$attribute_name]['options'][] = $option;
+              }
           }
         }
-      }
+      
     }
   }
 
@@ -124,8 +129,15 @@ function display_product_filters($search_query = '') {
           echo '<div class="mobile-header"><button class="reset js-reset"> אִתחוּל</button><div class="title">סינון לפי:</div><button class="js-close-filters icon-close" aria-label="close"></button></div>';
 
           echo '<div class="filter-side">';
+          $rendered_filters = []; // Track rendered attributes
+
           foreach ($attributes as $attribute_name => $attribute_data) {
-            display_filter_options($attribute_name, $attribute_data);
+              if (in_array($attribute_name, $rendered_filters)) {
+                  continue; // Skip already-rendered attributes
+              }
+          
+              display_filter_options($attribute_name, $attribute_data);
+              $rendered_filters[] = $attribute_name;
           }
           echo '</div>';
         echo '</div>';
@@ -150,28 +162,32 @@ function display_product_filters($search_query = '') {
 function display_filter_options($attribute_name, $attribute_data) {
   echo '<div class="filter-wrap filter-collection">';
   echo '<button type="button" class="btn btn-no-border btn-filter">';
-  echo '<span>' . esc_html($attribute_data['label']) . '</span>';
+  $attribute_label = wc_attribute_label($attribute_name); // Get the readable label
+  echo '<span>' . esc_html($attribute_label) . '</span>';
   echo '<svg class="icon-chevron-down" width="16" height="16">';
   echo '<use href="' . esc_url(assets('img/sprite.svg#icon-chevron-down')) . '"></use>';
   echo '</svg>';
   echo '</button>';
   echo '<div class="filter-dropdown">';
 
-  foreach ($attribute_data['options'] as $term_id) {
-    $term = get_term($term_id);
-    if ($term && !is_wp_error($term)) {
-      echo '<label class="dropdown-filter-item">';
-      echo '<input type="checkbox" name="filter_' . esc_attr($attribute_name) . '[]" value="' . esc_attr($term->slug) . '" class="filter-checkbox" data-attr="'.$term_id.'"> ';
-      echo '<span class="fake-checkbox"></span>';
-      echo '<span class="dropdown-filter-value">';
-      echo esc_html($term->name);
-      echo '</span>';
-      echo '</label>';
-    }
+  foreach ($attribute_data['options'] as $option) {
+      $term = is_numeric($option) ? get_term($option) : get_term_by('slug', $option, $attribute_name);
+      if ($term && !is_wp_error($term)) {
+          $unique_id = 'filter_' . sanitize_html_class($attribute_name) . '_' . $term->term_id;
+          $product_attribute_id = $term->term_id; // Attribute term ID
+          echo '<label class="dropdown-filter-item" for="' . esc_attr($unique_id) . '" data-attribute-id="' . esc_attr($product_attribute_id) . '">';
+          echo '<input id="' . esc_attr($unique_id) . '" type="checkbox" name="filter_' . esc_attr($attribute_name) . '[]" value="' . esc_attr($term->slug) . '" class="filter-checkbox" data-attr="' . esc_attr($term->term_id) . '"> ';
+          echo '<span class="fake-checkbox"></span>';
+          echo '<span class="dropdown-filter-value">';
+          echo esc_html($term->name);
+          echo '</span>';
+          echo '</label>';
+      }
   }
 
   echo '</div></div>';
 }
+
 
 /**
  * Display sorting options in the filter form.
