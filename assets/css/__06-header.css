@@ -629,7 +629,7 @@ form.header-form-search button {
   padding: 16px 24px;
   margin-bottom: 16px;
   letter-spacing: 0.05rem;
-  font-size: 12px;
+  font-size: 12px !important;
   font-weight: 400;
   border-bottom: 1px solid #e2e2e2;
 }
@@ -640,6 +640,10 @@ form.header-form-search button {
   flex-direction: column;
   gap: 8px;
   margin-bottom: 16px;
+}
+
+.product-results h5 {
+ font-size: 14px;
 }
 
 .product-results li a {

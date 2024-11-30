@@ -117,7 +117,7 @@ function giovanni_search_suggestions() {
   $query_sku = new WP_Query($args_sku_search);
 
   if ($query_title->have_posts() || $query_sku->have_posts()) {
-    echo '<h2 class="search-header">' . __('הצעות:', 'giovanni') . '</h2>';
+    echo '<div class="search-header">' . __('הצעות:', 'giovanni') . '</div>';
     echo '<ul class="product-results">';
 
     // Выводим результаты поиска по названию
@@ -134,7 +134,7 @@ function giovanni_search_suggestions() {
       echo '<a href="' . esc_url($permalink) . '">';
       echo $thumbnail;
       echo '<div>';
-      echo '<h2>' . esc_html($name) . '</h2>';
+      echo '<h5>' . esc_html($name) . '</h5>';
       echo '<span>' . $price_html . '</span>';
       echo '</div>';
       echo '</a>';
@@ -155,7 +155,7 @@ function giovanni_search_suggestions() {
       echo '<a href="' . esc_url($permalink) . '">';
       echo $thumbnail;
       echo '<div>';
-      echo '<h2>' . esc_html($name) . '</h2>';
+      echo '<h5>' . esc_html($name) . '</h5>';
       echo '<span>' . $price_html . '</span>';
       echo '</div>';
       echo '</a>';
