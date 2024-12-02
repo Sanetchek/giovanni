@@ -414,6 +414,7 @@ li.product-card-big.banner img {
   margin-left: auto;
   margin-right: auto;
   overflow: hidden;
+  position: relative;
 }
 
 .main-posts-art:nth-child(n + 2) {
@@ -429,7 +430,7 @@ li.product-card-big.banner img {
 }
 
 .main-post-image {
-  position: absolute;
+  position: relative;
   z-index: 0;
 }
 
@@ -443,10 +444,10 @@ li.product-card-big.banner img {
 }
 
 .main-posts-container {
-  position: relative;
+  position: absolute;
+  bottom: 0;
   padding: 30px 45px 35px 25px;
   background-color: #fff;
-  min-height: 325px;
 }
 
 .main-posts-art.first .main-posts-content {
