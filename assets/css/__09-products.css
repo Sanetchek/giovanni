@@ -907,6 +907,21 @@ nav.woocommerce-breadcrumb {
   margin-bottom: 10px;
 }
 
+.single-product-breadcrumbs-bottom {
+  display: flex;
+  justify-content: center;
+  padding: 32px;
+  align-items: center;
+}
+
+.single-product-breadcrumbs-bottom .woocommerce-breadcrumb,
+.single-product-breadcrumbs-bottom .woocommerce-breadcrumb a {
+  font-size: 20px;
+  font-weight: 500;
+  text-decoration: none;
+  color: #000;
+}
+
 /* Product Size Popup */
 body.modal-open {
   overflow: hidden;
