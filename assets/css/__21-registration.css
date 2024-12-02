@@ -54,7 +54,7 @@ section.reg-info {
 }
 
 .reg-section {
-  width: 60%;
+  max-width: 444px;
   margin: 0 auto;
 }
 
