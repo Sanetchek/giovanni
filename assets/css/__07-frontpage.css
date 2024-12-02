@@ -444,6 +444,7 @@ li.product-card-big.banner img {
 }
 
 .main-posts-container {
+  width: 100%;
   position: absolute;
   bottom: 0;
   padding: 30px 45px 35px 25px;
