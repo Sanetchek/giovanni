@@ -234,6 +234,13 @@ $categories_array = product_collection_categories();
 			</div>
 		</div>
 	<?php endif ?>
+
+	<div class="single-product-breadcrumbs-bottom">
+		<?php
+			// Output the breadcrumbs
+			woocommerce_breadcrumb();
+		 ?>
+	</div>
 </div>
 
 <?php
