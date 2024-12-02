@@ -698,6 +698,12 @@
     padding: 20px 20px;
     box-shadow: none;
   }
+
+  .main-posts-container {
+    position: relative;
+    width: 94%;
+    margin: -30px auto 0;
+  }
 }
 
 @media screen and (max-width: 992px) {
