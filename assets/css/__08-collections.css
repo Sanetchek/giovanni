@@ -20,7 +20,7 @@
   text-align: center;
   font-weight: 400;
   font-size: 15px;
-  line-height: 28px; 
+  line-height: 28px;
   text-align: center;
   color: #000;
   margin-bottom: 30px;
@@ -41,9 +41,4 @@
 
 #block4.block4 {
   margin-top: 50px;
-}
-
-#block9.block9 .slick-slide img,
-#block5.block5 .slick-slide img {
-  padding: 23%;
 }

@@ -138,7 +138,9 @@ function simpleLikes($post_id, $field_count = '_likes_count', $field_user_liked 
 	} else {
 		$formatted = $number; // Number is less than 1000
 	}
-	$formatted = str_replace('.00', '', $formatted);
+	if (is_string($formatted)) {
+    $formatted = str_replace('.00', '', $formatted);
+  }
 
 	if (is_user_logged_in()) { // user is logged in
 		$user_id = get_current_user_id();

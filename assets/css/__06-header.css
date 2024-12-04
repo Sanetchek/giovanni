@@ -147,7 +147,7 @@ header#masthead.is-sticky {
   display: block;
   padding: 16px 20px;
   font-weight: 600;
-  font-size: 12px;
+  font-size: 15px;
   line-height: 1.6;
   letter-spacing: 0.07em;
   text-transform: uppercase;
@@ -192,7 +192,7 @@ header#masthead.is-sticky .notshowmenu .mega-menu {
 }
 
 .admin-bar header#masthead.is-sticky .mega-menu {
-  top: calc(128px + 22px) !important;
+  top: calc(120px + 22px) !important;
 }
 
 .admin-bar header#masthead.is-sticky .notshowmenu .mega-menu {

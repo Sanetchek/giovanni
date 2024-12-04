@@ -109,23 +109,25 @@ $categories_array = product_collection_categories();
 	<div class="single-product-content">
 		<div class="product-container">
 			<div class="single-product-content-wrap">
-				<div class="single-product-description">
-					<h2 class="single-product-title"><?= __('Description', 'giovanni') ?></h2>
-					<?php the_content() ?>
-				</div>
+				<?php if (get_the_content()) : ?>
+					<div class="single-product-description">
+						<h2 class="single-product-title"><?= __('Description', 'giovanni') ?></h2>
+						<?php the_content() ?>
+					</div>
+				<?php endif ?>
 
-				<div class="single-product-details">
-					<h2 class="single-product-title"><?= __('Details', 'giovanni') ?></h2>
+				<?php $details = get_field('details') ?>
+				<?php if ($details) : ?>
+					<div class="single-product-details">
+						<h2 class="single-product-title"><?= __('Details', 'giovanni') ?></h2>
 
-					<?php $details = get_field('details') ?>
-					<?php if ($details) : ?>
 						<ul class="product-details-list">
 							<?php foreach ($details as $item) : ?>
 								<li class="product-details-item"><?= $item['text'] ?></li>
 							<?php endforeach ?>
 						</ul>
-					<?php endif ?>
-				</div>
+					</div>
+				<?php endif ?>
 			</div>
 		</div>
 	</div>
@@ -203,37 +205,74 @@ $categories_array = product_collection_categories();
 	<?php endif ?>
 
 	<?php if ($categories_array) : ?>
-		<div class="main-wrap">
+    <div class="main-wrap">
 			<div class="single-product-post">
 				<?php
 					foreach ($categories_array as $key => $term_id) {
-						// Get collection from ACF field
-						$collection_list = get_field('collection_list', 'product_cat_' . $term_id);
+						// Get the term object for the category
+						$category = get_term($term_id, 'product_cat');
+
+						// Get default background images
+						$bg_image = get_field('background_image_default', 'option');
+						$bg_image_mob = get_field('background_image_default_mob', 'option');
+
+						// Initialize variables for the archive image logic
+						$archive_image = '';
+						$archive_image_mob = '';
+
+						// Check if the term has a 'hero' field
+						$category_image = get_field('category_image', 'term_' . $term_id);
+						$category_image_mob = get_field('category_image_mob', 'term_' . $term_id);
+						if ($category_image) {
+							$archive_image = $category_image;
+							$archive_image_mob = $category_image_mob;
+						}
+
+						// Determine which image to use
+						$image = $archive_image
+							? ($archive_image ?: $bg_image)
+							: $bg_image;
+						$image_mob = $archive_image
+							? ($archive_image_mob ?: $archive_image ?: $bg_image_mob)
+							: $bg_image_mob;
+
+						// Retrieve other data for the item
+						$title = $category->name;
+						$description = term_description($term_id, 'product_cat');
+						$link = get_term_link($term_id, 'product_cat');
+						$link_label = __('בקר בקטגוריה', 'giovanni');
+
+						// Create the $item array
+						$item = [
+							'image' => $image,
+							'image_mob' => $image_mob,
+							'title' => $title,
+							'description' => $description,
+							'link_label' => $link_label,
+							'link' => $link,
+						];
+
+						// Determine class and shadow based on key
 						$class = $key % 2 ? 'second' : 'first';
 						$shadow = $key % 2 ? 0 : 1;
 
-						if ($collection_list) {
-							echo '<div class="single-product-container">';
-							foreach ($collection_list as $item) {
+						echo '<div class="single-product-container">';
 								/**
 								 * 'item' -> Group of ACF fields (names: image, title, description, link_label, link)
 								 * 'class' -> (string) first/second (default: first)
 								 * 'shadow' -> (number) 0/1 - it puts shadow on left or right (default: 1)
-								 * 'choose_category' -> Array of category IDs chosen for the collection
 								 */
 								get_template_part('template-parts/main', 'post', [
-									'item' => $item,
-									'class' => $class,
-									'shadow' => $shadow
+										'item' => $item,
+										'class' => $class,
+										'shadow' => $shadow
 								]);
-							}
-							echo '</div>';
-						}
+						echo '</div>';
 					}
 				?>
 			</div>
-		</div>
-	<?php endif ?>
+    </div>
+	<?php endif; ?>
 
 	<div class="single-product-breadcrumbs-bottom">
 		<?php

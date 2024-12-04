@@ -19,9 +19,9 @@
       </div>
     </div>
     <?php
-    
+
     if (get_field('block9_link')) :
-      $block9_link = get_field('block9_post');
+      $block9_post = get_field('block9_post');
 
       /**
        * 'item' -> Group of ACF fields (names: image, title, description, link_label, link)
@@ -33,7 +33,7 @@
     ?>
 
     <div class="container">
-      
+
 
       <?php $productArray = get_field('block9_products') ?>
       <?php if ($productArray) : ?>

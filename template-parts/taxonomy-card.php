@@ -1,4 +1,4 @@
-<?php 
+<?php
 $category_id = $args['category_id'];
 $all_cat_count = $args['all_cat_count'];
 $count = $args['count'];
@@ -40,7 +40,6 @@ if ($category && !is_wp_error($category)) :
       <?= $mobile_image_url ?>
     </div>
   <?php endif; ?>
-
   <div class="taxonomies-hidden">
     <div class="taxonomies-hidden-img">
       <?= $hover_image_url ?>
