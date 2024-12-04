@@ -127,7 +127,6 @@
     min-height: auto;
     width: 100%;
     display: flex;
-    margin-bottom: -30%;
   }
 
   .main-post-image {
@@ -837,7 +836,6 @@
 
   .main-posts-picture,
   .single-product-post .main-posts-picture {
-    margin-bottom: 0;
     min-height: auto !important;
   }
 
