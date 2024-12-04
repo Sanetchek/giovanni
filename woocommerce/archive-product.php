@@ -53,6 +53,15 @@ get_header( 'shop' );
 	//show category boxes instead of .archive-header
 	$category = get_queried_object();
 	$term_id = get_queried_object_id();
+
+	echo '<pre>';
+	print_r($term_id);
+	echo '</pre>';
+
+	$page_id = !is_shop() ? $term_id : 'option';
+
+	$banner1 = get_field('banner_1', $page_id);
+	$banner2 = get_field('banner_2', $page_id);
 	if ($term_id) {
 	?>
 		<div class="taxonomies page-container taxonomies-category-boxes">
@@ -103,11 +112,6 @@ get_header( 'shop' );
 						$use_archive_image = $hero['use_page_background'];
 					}
 				}
-
-				$page_id = !is_shop() ? $term : 'option';
-
-				$banner1 = get_field('banner_1', $page_id);
-				$banner2 = get_field('banner_2', $page_id);
 			?>
 
 			<?php if ($use_archive_image) : ?>
