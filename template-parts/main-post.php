@@ -1,7 +1,7 @@
 <?php
   $item = isset($args['item']) ? $args['item'] : false;
-  $image = $item['image'];
-  $image_mob = $item['image_mob'] ? $item['image_mob'] : $item['image'];
+  $image = isset($item['image']) ? $item['image'] : '';
+  $image_mob = isset($item['image_mob']) ? $item['image_mob'] : $image; // Check if 'image_mob' exists, otherwise use 'image'
   $class = isset($args['class']) ? $args['class'] : 'first';
   $shadow = isset($args['shadow']) ? $args['shadow'] : 1;
 ?>

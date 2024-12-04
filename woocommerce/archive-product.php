@@ -16,141 +16,138 @@
  */
 defined( 'ABSPATH' ) || exit;
 get_header( 'shop' );
-?>
-<?php
-$category_id = 314; // ID charms category
-$current_term = get_queried_object();
-$has_attributes = false;
-if ($current_term && is_a($current_term, 'WP_Term')) {
-    $args = array(
-        'post_type' => 'product',
-        'posts_per_page' => -1,
-        'tax_query' => array(
-            array(
-                'taxonomy' => 'product_cat',
-                'field'    => 'term_id',
-                'terms'    => $current_term->term_id,
-            ),
-        ),
-    );
-    $products = new WP_Query($args);
 
-    if ($products->have_posts()) {
-        while ($products->have_posts()) {
-            $products->the_post();
-            $product = wc_get_product(get_the_ID());
 
-            if ($product && $product->get_attributes()) {
-                $has_attributes = true;
-                break;
-            }
-        }
-    }
-    wp_reset_postdata();
-}
-?>
+	$category_id = 314; // ID charms category
+	$current_term = get_queried_object();
+	$has_attributes = false;
+	if ($current_term && is_a($current_term, 'WP_Term')) {
+		$args = array(
+			'post_type' => 'product',
+			'posts_per_page' => -1,
+			'tax_query' => array(
+				array(
+					'taxonomy' => 'product_cat',
+					'field'    => 'term_id',
+					'terms'    => $current_term->term_id,
+				),
+			),
+		);
+		$products = new WP_Query($args);
 
-  	<?php 
-  	//show category boxes instead of .archive-header
+		if ($products->have_posts()) {
+			while ($products->have_posts()) {
+				$products->the_post();
+				$product = wc_get_product(get_the_ID());
+
+				if ($product && $product->get_attributes()) {
+					$has_attributes = true;
+					break;
+				}
+			}
+		}
+		wp_reset_postdata();
+	}
+
+
+	//show category boxes instead of .archive-header
 	$category = get_queried_object();
-	if (function_exists('get_field') && get_field('activate_category_boxes', 'product_cat_' . $category->term_id)) {
-  	?>
-	<div class="taxonomies page-container taxonomies-category-boxes">
-		<?php
-		/**
-		 * Hook: woocommerce_before_main_content.
-		 *
-		 * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
-		 * @hooked woocommerce_breadcrumb - 20
-		 * @hooked WC_Structured_Data::generate_website_data() - 30
-		 */
-		do_action( 'woocommerce_before_main_content' );
+	$term_id = get_queried_object_id();
+	if ($term_id) {
+	?>
+		<div class="taxonomies page-container taxonomies-category-boxes">
+			<?php
+			/**
+			 * Hook: woocommerce_before_main_content.
+			 *
+			 * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
+			 * @hooked woocommerce_breadcrumb - 20
+			 * @hooked WC_Structured_Data::generate_website_data() - 30
+			 */
+			do_action( 'woocommerce_before_main_content' );
 
-		/**
-		 * Hook: woocommerce_shop_loop_header.
-		 *
-		 * @since 8.6.0
-		 *
-		 * @hooked woocommerce_product_taxonomy_archive_header - 10
-		 */
-		do_action( 'woocommerce_shop_loop_header' );
-		?>
-		<?php
-		$term_id = get_queried_object_id();
-		$taxonomies_category_box = get_field('category_taxonomies_boxes', 'product_cat_' . $term_id);
-		if (!empty($taxonomies_category_box)) :
-			get_template_part('template-parts/sections/taxonomies_boxes', '', ['taxonomies' => $taxonomies_category_box]);
-		else :
-			echo '<p>No categories available.</p>';
-		endif;
-		?>
-	</div>
+			/**
+			 * Hook: woocommerce_shop_loop_header.
+			 *
+			 * @since 8.6.0
+			 *
+			 * @hooked woocommerce_product_taxonomy_archive_header - 10
+			 */
+			do_action( 'woocommerce_shop_loop_header' );
+			?>
+			<?php
+			$taxonomies_category_box = get_field('category_taxonomies_boxes', 'product_cat_' . $term_id);
+			if (!empty($taxonomies_category_box)) :
+				get_template_part('template-parts/sections/taxonomies_boxes', '', ['taxonomies' => $taxonomies_category_box]);
+			endif;
+			?>
+		</div>
 
 	<?php } else { ?>
 
-	<div class="archive-header">
-		<?php
-			$term = get_queried_object();
+		<div class="archive-header">
+			<?php
+				$term = get_queried_object();
 
-			$bg_image = get_field('background_image_default', 'option');
-			$bg_image_mob = get_field('background_image_default_mob', 'option');
-			$archive_image = '';
-			$archive_image_mob = '';
-			$use_archive_image = false;
+				$bg_image = get_field('background_image_default', 'option');
+				$bg_image_mob = get_field('background_image_default_mob', 'option');
+				$archive_image = '';
+				$archive_image_mob = '';
+				$use_archive_image = false;
 
-			if (!is_shop()) {
-				$hero = get_field('hero', $term);
-				if ($hero) {
-					$archive_image = $hero['page_background'];
-					$archive_image_mob = $hero['page_background_mob'];
-					$use_archive_image = $hero['use_page_background'];
+				if (!is_shop()) {
+					$hero = get_field('hero', $term);
+					if ($hero) {
+						$archive_image = $hero['page_background'];
+						$archive_image_mob = $hero['page_background_mob'];
+						$use_archive_image = $hero['use_page_background'];
+					}
 				}
-			}
 
-			$page_id = !is_shop() ? $term : 'option';
+				$page_id = !is_shop() ? $term : 'option';
 
-			$banner1 = get_field('banner_1', $page_id);
-			$banner2 = get_field('banner_2', $page_id);
-		?>
-
-		<?php if ($use_archive_image) : ?>
-			<?php show_image($archive_image, '1920-400', ['class' => 'page-desk']) ?>
-			<?php
-				$bg_mob = $archive_image_mob ? $archive_image_mob : $archive_image;
-				show_image($bg_mob, '768-400', ['class' => 'page-mob']);
+				$banner1 = get_field('banner_1', $page_id);
+				$banner2 = get_field('banner_2', $page_id);
 			?>
-		<?php else: ?>
-			<?php show_image($bg_image, '1920-400', ['class' => 'page-desk']) ?>
-			<?php
-				$bg_mob = $bg_image_mob ? $bg_image_mob : $bg_image;
-				show_image($bg_mob, '768-400', ['class' => 'page-mob']);
-			?>
-		<?php endif; ?>
 
-		<div class="archive-header-content">
-			<div class="container">
+			<?php if ($use_archive_image) : ?>
+				<?php show_image($archive_image, '1920-400', ['class' => 'page-desk']) ?>
 				<?php
-				/**
-				 * Hook: woocommerce_before_main_content.
-				 *
-				 * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
-				 * @hooked woocommerce_breadcrumb - 20
-				 * @hooked WC_Structured_Data::generate_website_data() - 30
-				 */
-				do_action( 'woocommerce_before_main_content' );
-
-				/**
-				 * Hook: woocommerce_shop_loop_header.
-				 *
-				 * @since 8.6.0
-				 *
-				 * @hooked woocommerce_product_taxonomy_archive_header - 10
-				 */
-				do_action( 'woocommerce_shop_loop_header' );
+					$bg_mob = $archive_image_mob ? $archive_image_mob : $archive_image;
+					show_image($bg_mob, '768-400', ['class' => 'page-mob']);
 				?>
+			<?php else: ?>
+				<?php show_image($bg_image, '1920-400', ['class' => 'page-desk']) ?>
+				<?php
+					$bg_mob = $bg_image_mob ? $bg_image_mob : $bg_image;
+					show_image($bg_mob, '768-400', ['class' => 'page-mob']);
+				?>
+			<?php endif; ?>
+
+			<div class="archive-header-content">
+				<div class="container">
+					<?php
+					/**
+					 * Hook: woocommerce_before_main_content.
+					 *
+					 * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
+					 * @hooked woocommerce_breadcrumb - 20
+					 * @hooked WC_Structured_Data::generate_website_data() - 30
+					 */
+					do_action( 'woocommerce_before_main_content' );
+
+					/**
+					 * Hook: woocommerce_shop_loop_header.
+					 *
+					 * @since 8.6.0
+					 *
+					 * @hooked woocommerce_product_taxonomy_archive_header - 10
+					 */
+					do_action( 'woocommerce_shop_loop_header' );
+					?>
+				</div>
 			</div>
 		</div>
-	</div>
 	<?php } ?>
 
 	</div>
@@ -188,7 +185,7 @@ if ($current_term && is_a($current_term, 'WP_Term')) {
 		</div>
 
 		<div class="product-container <?php if ( has_term( $category_id, 'product_cat' ) || has_term( get_term_children( $category_id, 'product_cat' ), 'product_cat' ) ) { echo 'charms-cat'; } ?>">
-	
+
 		<?php
 		woocommerce_product_loop_start();
 

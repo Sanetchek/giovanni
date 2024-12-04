@@ -490,7 +490,7 @@ li.product-card-big.banner img {
 }
 
 .main-posts-wrap h2 {
-  margin-bottom: 13px;
+  margin-bottom: 0;
 }
 
 .main-posts-wrap>p {
@@ -500,6 +500,8 @@ li.product-card-big.banner img {
 
 .main-posts-wrap a {
   font-size: 18px;
+  padding-top: 6px;
+  padding-bottom: 6px;
 }
 
 .main-posts-art.first .main-posts-wrap {

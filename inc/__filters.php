@@ -81,12 +81,12 @@ function collect_product_attributes($products) {
 
         foreach ($product->get_attributes() as $attribute) {
           $attribute_name = $attribute->get_name();
-      
+
           // Skip custom/local attributes to avoid duplicates
           if (!$attribute->is_taxonomy()) {
               continue;
           }
-      
+
           // Process global taxonomy-based attributes
           if (!isset($attributes[$attribute_name])) {
               $attributes[$attribute_name] = [
@@ -94,14 +94,14 @@ function collect_product_attributes($products) {
                   'options' => [],
               ];
           }
-      
+
           foreach ($attribute->get_options() as $option) {
               if (!in_array($option, $attributes[$attribute_name]['options'])) {
                   $attributes[$attribute_name]['options'][] = $option;
               }
           }
         }
-      
+
     }
   }
 
@@ -113,6 +113,7 @@ function collect_product_attributes($products) {
  */
 function display_product_filters($search_query = '') {
   $attributes = get_products_with_attributes($search_query);
+  $category_id = get_queried_object_id();
 
   echo '<form id="product-filters">';
     echo '<div class="products-filter-container">';
@@ -132,10 +133,15 @@ function display_product_filters($search_query = '') {
           $rendered_filters = []; // Track rendered attributes
 
           foreach ($attributes as $attribute_name => $attribute_data) {
+              // Check if the current category is 315 and skip the attribute 'pa_מִין'
+              if ($category_id == 315 && $attribute_name === 'pa_מִין') {
+                  continue; // Skip this attribute if category is 315
+              }
+
               if (in_array($attribute_name, $rendered_filters)) {
                   continue; // Skip already-rendered attributes
               }
-          
+
               display_filter_options($attribute_name, $attribute_data);
               $rendered_filters[] = $attribute_name;
           }
@@ -152,6 +158,7 @@ function display_product_filters($search_query = '') {
     echo '<div id="filter_attr_list" class="filter-attr-list"></div>';
   echo '</form>';
 }
+
 
 /**
  * Display individual filter options for attributes.
@@ -222,8 +229,8 @@ function display_sort_options() {
 function load_more_products() {
   check_ajax_referer('giovanni_product_filter_nonce', 'nonce');
 
-  $paged       = isset($_POST['page']) ? $_POST['page'] + 1 : 1;
-  $category_id = isset($_POST['category_id']) ? $_POST['category_id'] : false;
+  $paged = isset($_POST['page']) ? intval($_POST['page']) + 1 : 1;
+  $category_id = isset($_POST['category_id']) ? intval($_POST['category_id']) : false;
   $decoded_data = isset($_POST['formData']) ? urldecode($_POST['formData']) : '';
   parse_str($decoded_data, $form_data);
 
@@ -275,10 +282,12 @@ add_action('wp_ajax_nopriv_filter_products', 'handle_filter_products');
  * @return array Query arguments.
  */
 function build_product_query_args($form_data = [], $paged = 1, $category_id = false) {
+  $posts_per_page = !empty($form_data['posts_per_page']) ? intval($form_data['posts_per_page']) : 20;
+
   $args = [
     'post_type'      => 'product',
-    'paged'          => $paged,
-    'posts_per_page' => !empty($form_data['posts_per_page']) ? $form_data['posts_per_page'] : 20,
+    'paged'          => $paged, // Use the paged parameter for pagination
+    'posts_per_page' => $posts_per_page,
     'meta_query'     => [], // Prepare for any meta queries needed
     'tax_query'      => [
       'relation' => 'AND', // Ensure all conditions are met
@@ -304,30 +313,30 @@ function build_product_query_args($form_data = [], $paged = 1, $category_id = fa
       case 'popularity':
         $args['orderby']  = 'meta_value_num';
         $args['meta_key'] = 'total_sales';
-        $args['order']    = 'DESC'; // Popularity typically needs descending order
+        $args['order']    = 'DESC';
         break;
       case 'rating':
         $args['orderby']  = 'meta_value_num';
         $args['meta_key'] = '_wc_average_rating';
-        $args['order']    = 'DESC'; // Ratings sorted in descending order
+        $args['order']    = 'DESC';
         break;
       case 'date':
         $args['orderby'] = 'date';
-        $args['order']   = 'DESC'; // Newest products first
+        $args['order']   = 'DESC';
         break;
       case 'price':
         $args['orderby']  = 'meta_value_num';
         $args['meta_key'] = '_price';
-        $args['order']    = 'ASC'; // Lowest price first
+        $args['order']    = 'ASC';
         break;
       case 'price-desc':
         $args['orderby']  = 'meta_value_num';
         $args['meta_key'] = '_price';
-        $args['order']    = 'DESC'; // Highest price first
+        $args['order']    = 'DESC';
         break;
       default:
         $args['orderby'] = 'menu_order';
-        $args['order']   = 'ASC'; // Default WooCommerce ordering
+        $args['order']   = 'ASC';
         break;
     }
   }
@@ -352,6 +361,7 @@ function build_product_query_args($form_data = [], $paged = 1, $category_id = fa
 
   return $args;
 }
+
 
 /**
  * Display Products Based on Query
