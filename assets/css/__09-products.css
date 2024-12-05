@@ -706,6 +706,10 @@ form.cart .button {
   margin: 16px 0 0 0;
 }
 
+.taxonomies-category-boxes .woocommerce-products-header .custom-archive-description p {
+  text-align: center;
+}
+
 .btn.product-info-link {
   font-weight: 400;
   font-size: 15px;
