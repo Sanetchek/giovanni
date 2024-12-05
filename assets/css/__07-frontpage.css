@@ -219,6 +219,8 @@
 .product-image {
   display: flex;
   justify-content: center;
+  align-items: center;
+  min-height: 397px;
 }
 
 .collections-content {
