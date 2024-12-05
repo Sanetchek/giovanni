@@ -2,10 +2,6 @@
   padding: 80px 0;
 }
 
-.collectionspage .main-posts-container {
-  /*min-height: 580px;*/
-}
-
 .collectionspage h2 {
   margin: 0;
   margin-bottom: 24px;
@@ -16,7 +12,7 @@
   text-align: right;
 }
 
-.collectionspage .block1-content > p {
+.collectionspage .block1-content>p {
   text-align: center;
   font-weight: 400;
   font-size: 15px;
@@ -41,4 +37,13 @@
 
 #block4.block4 {
   margin-top: 50px;
+}
+
+.block8 {
+  margin-top: 80px;
+}
+
+#block9.block9 .product-image > a img,
+#block5.block5 .product-image > a img {
+  padding: 23%;
 }
