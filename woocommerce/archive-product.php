@@ -86,7 +86,7 @@ get_header( 'shop' );
 			<?php
 				$taxonomies_category_box = get_field('category_taxonomies_boxes', 'product_cat_' . $term_id);
 				if (!empty($taxonomies_category_box)) :
-					get_template_part('template-parts/sections/taxonomies', '', ['title' => '', 'taxonomies' => $taxonomies_category_box]);
+					get_template_part('template-parts/sections/taxonomies_boxes', '', ['taxonomies' => $taxonomies_category_box]);
 				endif;
 			?>
 		</div>
