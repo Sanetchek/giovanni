@@ -165,6 +165,11 @@ textarea {
   transform: translateY(0);
 }
 
+.button.button-black {
+  background-color: #000;
+  color: #fff;
+}
+
 .button-hover::after {
   content: '';
   background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 32 24'%3e%3cg clip-path='url(%23clip0)'%3e%3cpath fill-rule='evenodd' clip-rule='evenodd' d='M29 15.5l3-3.5-3-3.5v3H0v1h29v3z' fill='black'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='clip0'%3e%3cpath fill='white' d='M0 0h32v24H0z'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e") center no-repeat;
@@ -250,6 +255,7 @@ html[dir="rtl"] .button-hover.white::after {
   text-transform: uppercase;
   border: 1px solid transparent;
 }
+
 .btn-black:hover {
   background-color: #454545;
   border: 1px solid #454545;
@@ -422,7 +428,8 @@ html[dir="rtl"] .button-hover.white::after {
   padding: 0;
 }
 
-.btn-filter, .open-filter {
+.btn-filter,
+.open-filter {
   background: transparent;
 }
 

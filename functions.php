@@ -246,6 +246,7 @@ function giovanni_scripts() {
 		'search_nonce' => wp_create_nonce('giovanni_search_nonce'),
 		'product_filter_nonce' => wp_create_nonce('giovanni_product_filter_nonce'),
 		'registration_nonce'   => wp_create_nonce('register_nonce'),
+		'gift_nonce' => wp_create_nonce('add_gift_card_action'),
 		'current_category_id' => $category_id, // Include current category ID if on a product category page
 	]);
 
@@ -351,6 +352,11 @@ require get_template_directory() . '/inc/__registration.php';
  * User Profile.
  */
 require get_template_directory() . '/inc/__user-profile.php';
+
+/**
+ * Gift Card.
+ */
+require get_template_directory() . '/inc/__gift-card.php';
 
 /**
  * Woocommerce.
