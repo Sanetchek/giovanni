@@ -901,6 +901,11 @@
   .modal-side-image {
     display: none;
   }
+
+  .modal-subscription {
+    max-width: 90%;
+    min-width: 90%;
+  }
 }
 
 @media screen and (max-width: 782px) {
