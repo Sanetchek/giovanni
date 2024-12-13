@@ -20,9 +20,9 @@ get_header();
   <div class="container">
     <div class="gift-certificate-balance__form-container">
       <div class="gift-certificate-balance__title">
-        Check your gift card balance
+        <?= __('בדוק את יתרת כרטיס המתנה שלך', 'giovanni') ?>
       </div>
-      <p class="gift-certificate-balance__text">To check the balance of your Giovanni Raspini Gift Card, enter the 19-digit number associated with your card in the space below.</p>
+      <p class="gift-certificate-balance__text"><?= __('כדי לבדוק את יתרת כרטיס המתנה של Giovanni Raspini שלך, הזן את המספר בן 19 הספרות המשויך לכרטיס שלך במקום למטה.', 'giovanni') ?></p>
     </div>
 
     <div class="button-confirm">
@@ -32,21 +32,19 @@ get_header();
 
         <div class="wps_gift_card_balance_wrapper">
           <div class="gift_card_balance_email">
-              <label>Enter Recipient Email</label>
-              <input type="email" id="gift_card_balance_email" class="wps_gift_balance" placeholder="Enter Recipient Email/Name or Sender Email." required="required">
+              <label><?= __('הזן אימייל של נמען', 'giovanni') ?></label>
+              <input type="email" id="gift_card_balance_email" class="wps_gift_balance"  required="required">
           </div>
           <div class="gift_card_code">
-              <label>Enter Gift Card Code</label>
-              <input type="text" id="gift_card_code" class="wps_gift_balance" placeholder="Enter Gift Card Code" required="required">
+              <label><?= __('הזן קוד כרטיס מתנה', 'giovanni') ?></label>
+              <input type="text" id="gift_card_code" class="wps_gift_balance" required="required">
           </div>
           <p class="wps_check_balance">
-            <button type="button" id="wps_check_balance" class="wps_check_balance button button-black button-hover white"><?= __('Check Balance', 'giovanni') ?></button>
-              <!-- <input class="button wps_check_balance" type="button" id="wps_check_balance" value="Check Balance"> -->
-              <span id="wps_notification"></span>
+            <button type="button" id="wps_check_balance" class="wps_check_balance button button-black button-hover white"><?= __('בדוק יתרה', 'giovanni') ?></button>
+            <span id="wps_notification"></span>
           </p>
         </div>
         <div style="display: none;" class="loading-style-bg" id="wps_wgm_loader">
-            <img src="path-to-your-assets/assets/images/loading.gif">
         </div>
       </div>
 
