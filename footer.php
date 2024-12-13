@@ -87,8 +87,8 @@
 	<div id="modal_subscription" class="modal-subscription">
 		<span class="modal-close"></span>
 		<div class="modal-content">
-			<div class="modal-side">
-				<?php show_image(get_field('subscribe_image', 'option'), '800-full', [0,0], ['class'=> 'modal-subscribe-image']) ?>
+			<div class="modal-side modal-side-image">
+				<?php show_image(get_field('subscribe_image', 'option'), '800-full', ['class'=> 'modal-subscribe-image']) ?>
 			</div>
 
 			<div class="modal-side modal-side-content">
@@ -96,12 +96,13 @@
 				<p class="modal-subscribe-text"><?= get_field('subscribe_description', 'option') ?></p>
 
 				<div class="modal-subscribe-form">
-					<?php echo do_shortcode( get_field('subscribe_form_shortcode', 'option') ) ?>
+					<?php echo do_shortcode( get_field('subscibe_form_short_code', 'option') ) ?>
 				</div>
 			</div>
 		</div>
 	</div>
 
+	<div id="modal-subscribe-overlay" class="modal-overlay"></div>
 	<div id="modal-overlay" class="modal-overlay"></div>
 
 <?php wp_footer(); ?>

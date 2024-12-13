@@ -1,6 +1,6 @@
 jQuery(document).ready(function ($) {
   const $modal = $('#modal_subscription');
-  const $modalOverlay = $('#modal-overlay');
+  const $modalOverlay = $('#modal-subscribe-overlay');
 
   // Function to check if modal should be shown
   function shouldShowModal() {
@@ -19,7 +19,7 @@ jQuery(document).ready(function ($) {
 
         // Store the current date to prevent showing again today
         localStorage.setItem('modalLastShown', new Date().toDateString());
-      }, 10000); // 15 seconds delay
+      }, 10000); // 10 seconds delay
     }
   }
 
@@ -37,4 +37,12 @@ jQuery(document).ready(function ($) {
 
   // Show modal
   showModal();
+
+  $('.modal-subscribe-form input').on('input', function () {
+    if ($(this).val()) {
+      $('.modal-privacy').css('opacity', 1);
+    } else {
+      $('.modal-privacy').css('opacity', 0);
+    }
+  });
 });

@@ -893,6 +893,10 @@
   .wrapper-form {
     width: 100%;
   }
+
+  .modal-side-image {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 782px) {
