@@ -894,6 +894,10 @@
     width: 100%;
   }
 
+  .modal-side {
+    width: 100%;
+  }
+
   .modal-side-image {
     display: none;
   }
