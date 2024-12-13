@@ -1,77 +1,99 @@
 'use strict';
 
 (function ($) {
-  // Step 1: Manage visibility of sections
-  $('.gift-radio').on('change', function () {
-    $('.gift-certificate__form-section').hide();
-
-    $('.gift-certificate__next-step').on('click', function (e) {
-      e.preventDefault();
-
-      const selectedAmount = $('input[name="giftAmount"]:checked')
-        .siblings('.gift-amount')
-        .text()
-        .replace('₪', '') || $('.gift-certificate__custom-amount').val();
-
-      if (!validateAmount(selectedAmount)) {
-        $('.error-label').show();
-        return;
-      } else {
-        $('.error-label').hide();
-        $('.gift-certificate__form-section').slideDown();
-      }
-    });
-  });
-
-  // Step 2: Validate custom amount
-  function validateAmount(amount) {
+  // Function to validate amount
+  function isValidAmount(amount) {
     const numericAmount = parseFloat(amount);
     return numericAmount >= 50 && numericAmount <= 1000;
   }
 
-  // Step 3: Form submission
+  // Function to handle amount selection and validation
+  function handleAmountSelection() {
+    // Clear other selection when a radio button is selected
+    $('.gift-radio').on('change', function () {
+      $('.gift-certificate__custom-amount').val('');
+      $('.gift-certificate__form-section').hide();
+    });
+
+    // Clear radio selection when custom amount is entered
+    $('.gift-certificate__custom-amount').on('input', function () {
+      $('.gift-radio').prop('checked', false);
+      $('.gift-certificate__form-section').hide();
+    });
+
+    // Next step button click handler
+    $('.gift-certificate__next-step').on('click', function (e) {
+      e.preventDefault();
+
+      // Get selected amount from radio or custom input
+      const selectedAmount = $('input[name="giftAmount"]:checked').val() ||
+        $('.gift-certificate__custom-amount').val();
+
+      if (!isValidAmount(selectedAmount)) {
+        $('.error-label').show();
+        return;
+      }
+
+      // Hide error, show next section
+      $('.error-label').hide();
+      $('.gift-certificate__form-section').slideDown();
+    });
+  }
+
+  // Initialize amount selection handling
+  handleAmountSelection();
+
+  // Step 2: Validate custom amount
+  function isValidAmount(amount) {
+    const numericAmount = parseFloat(amount);
+
+    return !isNaN(numericAmount) && numericAmount >= 50 && numericAmount <= 1000;
+  }
+
+  // Step 3: Validate form fields
+  $('#senderName, #reciverEmail, #message').on('blur', function () {
+    const parent = $(this).closest('.form-group');
+
+    if ($(this).val()) {
+      $(this).removeClass('error');
+      $(parent).find('.invalid-feedback').hide();
+    } else {
+      $(this).addClass('error');
+      $(parent).find('.invalid-feedback').show();
+    }
+  });
+
+  // Step 4: Form submission
   $('#gift_form').on('submit', function (e) {
     e.preventDefault();
 
     // Collect form data
     const senderName = $('#senderName').val();
-    const recivererName = $('#recivererName').val();
     const reciverEmail = $('#reciverEmail').val();
-    const confirmReciverEmail = $('#confirmReciverEmail').val();
     const message = $('#message').val();
-    const selectedAmount = $('input[name="giftAmount"]:checked').val();
+    const selectedAmount = $('input[name="giftAmount"]:checked').val() || $('.gift-certificate__custom-amount').val();
 
-    if (reciverEmail !== confirmReciverEmail) {
-      $('#confirmReciverEmailFeedback').text('Emails do not match').show();
-      return;
-    } else {
-      $('#confirmReciverEmailFeedback').hide();
-    }
-
-    if (!senderName || !recivererName || !reciverEmail || !selectedAmount) {
-      alert('Please fill out all required fields.');
+    if (!senderName || !reciverEmail || !selectedAmount) {
       return;
     }
 
-    // Include nonce (replace 'your_nonce_variable' with the actual variable from the plugin or your theme)
-    const nonce = giovanni.gift_nonce;
-
+    console.log('ajax start')
     $.ajax({
-      url: '/wp-admin/admin-ajax.php',
+      url: giovanni.ajax_url, // Make sure this is defined in your wp_localize_script
       type: 'POST',
       data: {
         action: 'add_gift_card_to_cart',
         giftAmount: selectedAmount,
         senderName: senderName,
-        reciverName: recivererName,
         reciverEmail: reciverEmail,
         message: message,
-        _wpnonce: nonce, // Include nonce
+        _wpnonce: giovanni.gift_nonce,
       },
       success: function (response) {
+        console.log(response);
         if (response.success) {
           alert('Gift card added to cart!');
-          window.location.href = '/cart';
+          // window.location.href = '/cart';
         } else {
           alert(response.data || 'Failed to add gift card to cart.');
         }

@@ -129,34 +129,22 @@ get_header();
 
           <div class="button-confirm">
             <div class="wrapper-form">
-              <div>
+              <div class="form-group">
                 <label for="senderName" class="form-control-label"><?= __('השם שלך', 'giovanni') ?></label>
                 <input type="string" class="form-control" id="senderName" name="senderName" required="" aria-required="true" value="" maxlength="50">
-                <div class="invalid-feedback" id="senderNameFeedback"></div>
+                <div class="invalid-feedback" id="senderNameFeedback"><?= __('אנא מלא שדה זה', 'giovanni') ?></div>
               </div>
 
-              <div>
-                <label for="recivererName" class="form-control-label"><?= __('שם הנמען', 'giovanni') ?></label>
-                <input type="string" class="form-control" id="recivererName" name="reciverName" required="" aria-required="true" value="" maxlength="50">
-                <div class="invalid-feedback" id="reciverNameFeedback"></div>
-              </div>
-
-              <div class="form-group toHide required">
+              <div class="form-group">
                 <label for="reciverEmail" class="form-control-label"><?= __('האימייל של הנמען', 'giovanni') ?></label>
                 <input type="email" class="form-control" id="reciverEmail" name="reciverEmail" required="" aria-required="true" value="" maxlength="50" pattern="^[\w.%+-]+@[\w.-]+\.[\w]{2,6}$">
-                <div class="invalid-feedback" id="reciverEmailFeedback"></div>
+                <div class="invalid-feedback" id="reciverEmailFeedback"><?= __('אנא מלא שדה זה', 'giovanni') ?></div>
               </div>
 
-              <div class="form-group toHide required">
-                <label for="confirmReciverEmail" class="form-control-label"><?= __('אשר את האימייל של הנמען', 'giovanni') ?></label>
-                <input type="email" class="form-control" id="confirmReciverEmail" name="confirmReciverEmail" required="" aria-required="true" value="" maxlength="50" pattern="^[\w.%+-]+@[\w.-]+\.[\w]{2,6}$" data-listener="klaviyo">
-                <div class="invalid-feedback" id="confirmReciverEmailFeedback"></div>
-              </div>
-
-              <div>
+              <div class="form-group">
                 <label for="message" class="form-control-label"><?= __('הוסף הודעה אישית (אופציונלי)', 'giovanni') ?></label>
                 <input type="string" class="form-control" id="message" name="message" value="" maxlength="250">
-                <div class="invalid-feedback" id="messageFeedback"></div>
+                <div class="invalid-feedback" id="messageFeedback"><?= __('אנא מלא שדה זה', 'giovanni') ?></div>
               </div>
             </div>
 

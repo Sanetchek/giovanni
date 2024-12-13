@@ -13,48 +13,50 @@
   /**
    * Ajax update Single Product add to cart
    */
-  $('.single_add_to_cart_button').on('click', function (e) {
-    e.preventDefault();
+  if (!$('.product-type-wgm_gift_card').length) {
+    $('.single_add_to_cart_button').on('click', function (e) {
+      e.preventDefault();
 
-    var $thisbutton = $(this),
-      $form = $thisbutton.closest('form.cart'),
-      id = $thisbutton.val(),
-      product_qty = $form.find('input[name=quantity]').val() || 1,
-      product_id = $form.find('input[name=product_id]').val() || id,
-      variation_id = $form.find('input[name=variation_id]').val() || 0;
+      var $thisbutton = $(this),
+        $form = $thisbutton.closest('form.cart'),
+        id = $thisbutton.val(),
+        product_qty = $form.find('input[name=quantity]').val() || 1,
+        product_id = $form.find('input[name=product_id]').val() || id,
+        variation_id = $form.find('input[name=variation_id]').val() || 0;
 
-    var data = {
-      action: 'woocommerce_ajax_add_to_cart',
-      product_id: product_id,
-      product_sku: '',
-      quantity: product_qty,
-      variation_id: variation_id
-    };
+      var data = {
+        action: 'woocommerce_ajax_add_to_cart',
+        product_id: product_id,
+        product_sku: '',
+        quantity: product_qty,
+        variation_id: variation_id
+      };
 
-    $(document.body).trigger('adding_to_cart', [$thisbutton, data]);
+      $(document.body).trigger('adding_to_cart', [$thisbutton, data]);
 
-    $.ajax({
-      type: 'post',
-      url: ajax_url,
-      data: data,
-      beforeSend: function (response) {
-        $thisbutton.removeClass('added').addClass('loading');
-      },
-      complete: function (response) {
-        $thisbutton.addClass('added').removeClass('loading');
-      },
-      success: function (response) {
-        if (response.error & response.product_url) {
-          window.location = response.product_url;
-          return;
-        } else {
-          $(document.body).trigger('added_to_cart', [response.fragments, response.cart_hash, $thisbutton]);
+      $.ajax({
+        type: 'post',
+        url: ajax_url,
+        data: data,
+        beforeSend: function (response) {
+          $thisbutton.removeClass('added').addClass('loading');
+        },
+        complete: function (response) {
+          $thisbutton.addClass('added').removeClass('loading');
+        },
+        success: function (response) {
+          if (response.error & response.product_url) {
+            window.location = response.product_url;
+            return;
+          } else {
+            $(document.body).trigger('added_to_cart', [response.fragments, response.cart_hash, $thisbutton]);
+          }
         }
-      }
-    });
+      });
 
-    return false;
-  });
+      return false;
+    });
+  }
 
 
 }(jQuery));
@@ -66,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   radioGroups.forEach(function (ul) {
       const listItems = ul.querySelectorAll('li');
-      
+
       if (listItems.length < 2) {
           ul.style.display = "none";
       }
