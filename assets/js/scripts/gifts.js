@@ -77,7 +77,6 @@
       return;
     }
 
-    console.log('ajax start')
     $.ajax({
       url: giovanni.ajax_url, // Make sure this is defined in your wp_localize_script
       type: 'POST',
@@ -90,16 +89,14 @@
         _wpnonce: giovanni.gift_nonce,
       },
       success: function (response) {
-        console.log(response);
         if (response.success) {
-          alert('Gift card added to cart!');
-          // window.location.href = '/cart';
+          window.location.href = '/cart';
         } else {
-          alert(response.data || 'Failed to add gift card to cart.');
+          console.log('Failed to add gift card to cart.');
         }
       },
       error: function () {
-        alert('An error occurred. Please try again.');
+        console.log('Error:', 'An error occurred. Please try again.');
       },
     });
   });
