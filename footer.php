@@ -84,6 +84,24 @@
 		</div>
 	</footer><!-- #colophon -->
 
+	<div id="modal_subscription" class="modal-subscription">
+		<span class="modal-close"></span>
+		<div class="modal-content">
+			<div class="modal-side">
+				<?php show_image(get_field('subscribe_image', 'option'), '800-full', [0,0], ['class'=> 'modal-subscribe-image']) ?>
+			</div>
+
+			<div class="modal-side modal-side-content">
+				<h2 class="modal-subscribe-title"><?= get_field('subscribe_title', 'option') ?></h2>
+				<p class="modal-subscribe-text"><?= get_field('subscribe_description', 'option') ?></p>
+
+				<div class="modal-subscribe-form">
+					<?php echo do_shortcode( get_field('subscribe_form_shortcode', 'option') ) ?>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<div id="modal-overlay" class="modal-overlay"></div>
 
 <?php wp_footer(); ?>
