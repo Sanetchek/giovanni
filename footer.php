@@ -102,7 +102,7 @@
 		</div>
 	</div>
 
-	<div id="modal-subscribe-overlay" class="modal-overlay"></div>
+	<div id="modal-subscribe-overlay"></div>
 	<div id="modal-overlay" class="modal-overlay"></div>
 
 <?php wp_footer(); ?>
