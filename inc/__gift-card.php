@@ -9,6 +9,7 @@ function add_gift_card_to_cart() {
 
   $giftAmount = sanitize_text_field($_POST['giftAmount']);
   $senderName = sanitize_text_field($_POST['senderName']);
+  $reciverName = sanitize_text_field($_POST['reciverName']);
   $reciverEmail = sanitize_email($_POST['reciverEmail']);
   $message = sanitize_textarea_field($_POST['message']);
 
@@ -18,14 +19,12 @@ function add_gift_card_to_cart() {
 
   // Prepare the post data for the plugin's add to cart method
   $_POST['wps_wgm_single_nonce_field'] = wp_create_nonce('wps_wgm_single_nonce');
-  $_POST['wps_wgm_send_giftcard'] = 'Mail to recipient'; // or another delivery method supported by the plugin
+  $_POST['wps_wgm_send_giftcard'] = $reciverEmail; // or another delivery method supported by the plugin
   $_POST['wps_wgm_to_email'] = $reciverEmail;
   $_POST['wps_wgm_from_name'] = $senderName;
+  $_POST['wps_wgm_to_email_name'] = $reciverName;
   $_POST['wps_wgm_message'] = $message;
   $_POST['wps_wgm_price'] = $giftAmount;
-
-  // Optional: Select a template if required
-  // $_POST['wps_wgm_selected_temp'] = 'template_id';
 
   // Add the gift card to the cart
   WC()->cart->add_to_cart($product_id, 1);

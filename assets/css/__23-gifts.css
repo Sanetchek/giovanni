@@ -240,7 +240,8 @@ button#wps_check_balance {
 }
 
 span#wps_notification b,
-.invalid-feedback {
+.invalid-feedback,
+.emailError {
   color: #b04f4d !important;
   font-weight: 400;
   font-size: 11px;
@@ -248,7 +249,8 @@ span#wps_notification b,
   letter-spacing: 0.2px;
 }
 
-.invalid-feedback {
+.invalid-feedback,
+.emailError {
   display: none;
 }
 
@@ -265,4 +267,9 @@ span#wps_notification b,
 
 .giftpage-best-sellers {
   margin-top: 80px;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.3;
 }

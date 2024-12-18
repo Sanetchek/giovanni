@@ -91,6 +91,15 @@ textarea {
   padding: 8px 20px;
 }
 
+button[disabled],
+html input[disabled],
+html textarea[disabled],
+html select[disabled] {
+  cursor: default;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
 .btn,
 .button {
   display: flex;
@@ -106,6 +115,7 @@ textarea {
   text-transform: uppercase;
   padding: 16px 24px;
   text-decoration: none;
+  cursor: pointer !important;
 }
 
 .btn.btn-no-border,

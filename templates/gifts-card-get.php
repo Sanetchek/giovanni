@@ -13,6 +13,8 @@
  */
 
 get_header();
+
+$pattern = '^[a-zA-Z0-9.%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,6}$';
 ?>
 
 <main id="primary" class="site-main giftspage page-container">
@@ -111,12 +113,12 @@ get_header();
           </div>
         </div>
         <div class="wrapper-gift-certificate__next-step">
-          <button type="button" class="gift-certificate__button gift-certificate__next-step button button-black button-hover white continued"><?= __('המשיכו', 'giovanni') ?></button>
+          <button type="button" class="gift-certificate__button gift-certificate__next-step button button-black button-hover white" disabled><?= __('המשיכו', 'giovanni') ?></button>
         </div>
       </div>
     </div>
 
-    <div class="gift-certificate gift-certificate__form-section" style="display: none;">
+    <div class="gift-certificate gift-certificate__form-section disabled">
       <div class="container">
         <div class="gift-certificate__form-container">
           <div class="gift-certificate__step-counter">
@@ -136,15 +138,28 @@ get_header();
               </div>
 
               <div class="form-group">
+                <label for="reciverName" class="form-control-label"><?= __('שם הנמען', 'giovanni') ?></label>
+                <input type="string" class="form-control" id="reciverName" name="reciverName" required="" aria-required="true" value="" maxlength="50">
+                <div class="invalid-feedback" id="reciverNameFeedback"><?= __('אנא מלא שדה זה', 'giovanni') ?></div>
+              </div>
+
+              <div class="form-group">
                 <label for="reciverEmail" class="form-control-label"><?= __('האימייל של הנמען', 'giovanni') ?></label>
-                <input type="email" class="form-control" id="reciverEmail" name="reciverEmail" required="" aria-required="true" value="" maxlength="50" pattern="^[\w.%+-]+@[\w.-]+\.[\w]{2,6}$">
+                <input type="email" class="form-control" id="reciverEmail" name="reciverEmail" required="" aria-required="true" value="" maxlength="50" pattern="<?= $pattern ?>">
                 <div class="invalid-feedback" id="reciverEmailFeedback"><?= __('אנא מלא שדה זה', 'giovanni') ?></div>
+                <div class="emailError"><?= __('כתובות האימייל אינן תואמות.', 'giovanni') ?></div>
+              </div>
+
+              <div class="form-group">
+                <label for="reciverConfirmEmail" class="form-control-label"><?= __('אשר את האימייל של הנמען', 'giovanni') ?></label>
+                <input type="email" class="form-control" id="reciverConfirmEmail" name="reciverConfirmEmail" required="" aria-required="true" value="" maxlength="50" pattern="<?= $pattern ?>">
+                <div class="invalid-feedback" id="reciverConfirmEmailFeedback"><?= __('אנא מלא שדה זה', 'giovanni') ?></div>
+                <div class="emailError"><?= __('כתובות האימייל אינן תואמות.', 'giovanni') ?></div>
               </div>
 
               <div class="form-group">
                 <label for="message" class="form-control-label"><?= __('הוסף הודעה אישית (אופציונלי)', 'giovanni') ?></label>
                 <input type="string" class="form-control" id="message" name="message" value="" maxlength="250">
-                <div class="invalid-feedback" id="messageFeedback"><?= __('אנא מלא שדה זה', 'giovanni') ?></div>
               </div>
             </div>
 
