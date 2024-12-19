@@ -18,7 +18,7 @@ get_header();
 
 				show_image($bg, '1440-400', ['class' => 'page-desk']);
 				$bg_mob = $bg_mob ? $bg_mob : $bg;
-				show_image($bg_mob, '800-full', ['class' => 'page-mob']);
+				show_image($bg_mob, '768-400', ['class' => 'page-mob']);
 			?>
 		</div>
 
