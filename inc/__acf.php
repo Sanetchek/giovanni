@@ -30,5 +30,14 @@ if (function_exists('acf_add_options_page')) {
 		'menu_slug'   => 'giovanni-subscription-popup',
 		'capability'  => 'edit_posts'
 	));
+
+	// Subpage under Giovanni Settings
+	acf_add_options_sub_page(array(
+		'page_title'  => '404 Page',
+		'menu_title'  => '404 Page',
+		'parent_slug' => 'giovanni-general-settings', // Parent slug to nest under main options page
+		'menu_slug'   => 'giovanni-error-page',
+		'capability'  => 'edit_posts'
+	));
 }
 

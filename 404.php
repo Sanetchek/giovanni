@@ -11,17 +11,31 @@ get_header();
 ?>
 
 	<main id="primary" class="site-main">
+		<div class="error-404-image">
+			<?php
+				$bg = get_field('error_image', 'option');
+				$bg_mob = get_field('error_image_mob', 'option');
+
+				show_image($bg, '1440-400', ['class' => 'page-desk']);
+				$bg_mob = $bg_mob ? $bg_mob : $bg;
+				show_image($bg_mob, '800-full', ['class' => 'page-mob']);
+			?>
+		</div>
+
 		<div class="container">
 			<section class="error-404 not-found">
 
 				<header class="page-header">
-					<h1 class="page-title"><?php esc_html_e( 'אופס! לא ניתן למצוא את הדף הזה.', 'giovanni' ); ?></h1>
+
+					<h1 class="page-title"><?= get_field('error_title', 'option') ?></h1>
 				</header><!-- .page-header -->
 
 				<div class="page-content">
-					<p dir="ltr"><?php esc_html_e( 'נראה ששום דבר לא נמצא במקום הזה. אולי נסה אחד מהקישורים למטה או חיפוש?', 'giovanni' ); ?></p>
+					<p dir="ltr"><?= get_field('error_description', 'option') ?></p>
 
-						<?php get_search_form(); ?>
+					<?php if (get_field('error_link', 'option')) : ?>
+						<p class="error-404-link"><a href="<?= get_field('error_link', 'option') ?>" class="button button-hover error-link-button"><?= get_field('error_link_label', 'option') ?></a></p>
+					<?php endif ?>
 
 				</div><!-- .page-content -->
 
