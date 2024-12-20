@@ -204,7 +204,7 @@
   }
 
   .profile-navigation .woocommerce-MyAccount-navigation-link--customer-logout {
-    display: none;
+    display: none !important;
   }
 
   .profile-content {
@@ -465,7 +465,7 @@
   }
 
   .archive-header {
-    height: 240px;
+    height: auto;
   }
 
   .archive-header-content header.woocommerce-products-header {
@@ -755,10 +755,6 @@
     flex-direction: column-reverse;
   }
 
-  .article-exhibition {
-    margin: 300px 0 100px;
-  }
-
   .exhibition-content-wrap {
     max-width: 100%;
     width: 100%;
@@ -792,14 +788,11 @@
     height: calc(100% - 80px);
   }
 
+  .exhibition-wrap.reversed .exhibition-image-wrap .exhibition-image,
   .exhibition-image-wrap .exhibition-image {
     position: relative;
     top: unset;
     left: unset;
-  }
-
-  .exhibition-wrap.reversed .exhibition-image-wrap .exhibition-image {
-    top: -200px;
     right: unset;
   }
 
@@ -894,7 +887,7 @@
     width: 100%;
   }
 
-  .modal-side {
+  .modal-subscription .modal-side {
     width: 100%;
   }
 
@@ -1081,6 +1074,10 @@
 
   .product-gallery__wrapper {
     gap: 5px;
+  }
+
+  .product-image {
+    min-height: auto;
   }
 
   .single-product .site-main>nav.woocommerce-breadcrumb {
@@ -1331,6 +1328,60 @@
   .gift-amount-error {
     width: 100%;
   }
+
+  .customer-main,
+  .customer-dashbord-links {
+    flex-direction: column;
+  }
+
+  .customer-dashboard-item {
+    width: 100%;
+  }
+
+  .customer-side.menu {
+    padding: 16px 0;
+  }
+
+  ul.customer-menu-links {
+    flex-direction: row;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .customer-menu-item .customer-menu-link {
+    width: max-content;
+  }
+
+  .customer-menu-item {
+    margin-bottom: 0;
+  }
+
+  .form-container {
+    flex-direction: column;
+  }
+
+  .customer-main form.wpcf7-form label {
+    width: 100%;
+  }
+
+  .customer-side.content {
+    max-width: 90%;
+  }
+
+  .customer-table {
+    zoom: 0.7;
+  }
+
+  .profile-navigation ul .slick-track {
+    display: flex;
+    align-items: center;
+  }
+
+  .profile-navigation ul li,
+  .profile-navigation ul a {
+    width: max-content;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -1355,6 +1406,10 @@
   label.gift-amount-item {
     width: calc((100% - 24px) / 2);
   }
+
+  .customer-table {
+    zoom: 0.5;
+  }
 }
 
 @media screen and (max-width: 402px) {
@@ -1363,6 +1418,10 @@
   }
 
   label.gift-amount-item {
+    width: 100%;
+  }
+
+  li.product-card {
     width: 100%;
   }
 }

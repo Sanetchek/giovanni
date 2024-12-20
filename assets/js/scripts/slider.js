@@ -27,7 +27,8 @@
       rtl: false,
       prevArrow: $slider.closest('.slider-container').find('.slick-prev'),
       nextArrow: $slider.closest('.slider-container').find('.slick-next'),
-      responsive: [{
+      responsive: [
+        {
           breakpoint: 1279,
           settings: {
             slidesToShow: 2,
@@ -39,6 +40,14 @@
             centerMode: true,
             centerPadding: '100px',
             slidesToShow: 1
+          }
+        },
+        {
+          breakpoint: 400,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            infinite: true,
           }
         },
       ]
@@ -137,6 +146,59 @@
   // Re-enable transition after the mouse stops moving for smooth zoom effect
   $(document).on('mouseleave', '.zoomable', function () {
     $(this).css('transition', 'background-position 0.1s ease');
+  });
+
+  /**
+   * Initializes the customer menu slider on the customer page.
+   * This function is called on page load and on window resize.
+   * If the window width is less than or equal to 768px, the slider is initialized.
+   * If the window width is greater than 768px, the slider is destroyed.
+   * @function
+   */
+  function initCustomerMenuSlider() {
+    if ($(window).width() <= 768) {
+      if (!$('.customer-menu-links, .profile-navigation ul').hasClass('slick-initialized')) {
+        $('.customer-menu-links, .profile-navigation ul').slick({
+          dots: false,
+          arrows: false,
+          infinite: false,
+          slidesToShow: 5,
+          slidesToScroll: 1,
+          rtl: true,
+          responsive: [{
+              breakpoint: 600,
+              settings: {
+                slidesToShow: 4,
+              }
+            },
+            {
+              breakpoint: 500,
+              settings: {
+                slidesToShow: 3,
+              }
+            },
+            {
+              breakpoint: 400,
+              settings: {
+                slidesToShow: 2,
+              }
+            },
+          ]
+        });
+      }
+    } else {
+      if ($('.customer-menu-links').hasClass('slick-initialized')) {
+        $('.customer-menu-links').slick('unslick');
+      }
+    }
+  }
+
+  // Initialize on page load
+  initCustomerMenuSlider();
+
+  // Reinitialize on window resize
+  $(window).resize(function () {
+    initCustomerMenuSlider();
   });
 
 }(jQuery));

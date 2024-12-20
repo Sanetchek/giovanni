@@ -166,7 +166,7 @@
    * Footer accordion menu
    */
   if ($(window).width() <= 768) {
-    $('.js-accordion-trigger, .accordion-row h2').on('click', function() {
+    $('body').on('click', '.js-accordion-trigger, .accordion-row h2', function () {
       var $accordionRow = $(this).closest('.accordion-row');
       var $menuContainer1 = $accordionRow.next('.menu-footer-widget-1-container');
       var $menuContainer2 = $accordionRow.next('.menu-footer-widget-2-container');

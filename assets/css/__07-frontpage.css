@@ -217,6 +217,7 @@
 }
 
 .product-image {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -367,9 +368,18 @@ li.product-card-big.banner img {
   margin: 0 auto;
   position: absolute;
   top: 0;
+  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
+}
+
+.product-hidden-img a {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
 }
 
 .product-hidden-img img {
