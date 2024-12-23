@@ -2,6 +2,10 @@
   margin-bottom: 80px;
 }
 
+.error-404-image img {
+  width: 100%;
+}
+
 .error-404 .page-content,
 .error-404 .page-title {
   text-align: center;
