@@ -632,6 +632,10 @@ li.product-card-big.banner img {
   text-align: center;
 }
 
+.popular-title+.slider-container {
+  margin-top: 0;
+}
+
 .popular-nav {
   display: flex;
   flex-direction: row-reverse;
