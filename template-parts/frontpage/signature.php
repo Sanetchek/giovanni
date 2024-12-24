@@ -42,11 +42,13 @@ $image_link = get_field('sig_image_link') || 'javascript:void(0)';
   </section>
 <?php endif ?>
 
-<div class="container">
-  <h2 class="popular-title"><?= get_field('sig_prod_title') ?></h2>
+<?php $productArray = get_field('sig_prod_products') ?>
+<?php if ($productArray) : ?>
+  <div class="container">
+    <h2 class="popular-title"><?= get_field('sig_prod_title') ?></h2>
 
-  <?php $productArray = get_field('sig_prod_products') ?>
-  <?php if ($productArray) : ?>
-    <?php get_template_part('template-parts/product', 'slider', ['productArray' => $productArray]) ?>
-  <?php endif ?>
-</div>
+    <?php if ($productArray) : ?>
+      <?php get_template_part('template-parts/product', 'slider', ['productArray' => $productArray]) ?>
+    <?php endif ?>
+  </div>
+<?php endif ?>
