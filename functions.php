@@ -99,6 +99,7 @@ function giovanni_setup() {
 	// Add Image Sizes
 	add_image_size( '1920-920', 1920, 920, true );
 	add_image_size( '1920-865', 1920, 865, true );
+	add_image_size( '1920-560', 1920, 560, true );
 	add_image_size( '1920-400', 1920, 400, true );
 	add_image_size( '1780-full', 1920, 0, false );
 	add_image_size( '1440-690', 1440, 690, true );

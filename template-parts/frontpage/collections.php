@@ -31,6 +31,17 @@
       <h2><?= get_field('new_col_title') ?></h2>
       <p><?= get_field('new_col_subtitle') ?></p>
 
+      <?php if (get_field('new_col_link')) : ?>
+        <div class="button-animation-effect">
+          <a href="<?= get_field('new_col_link') ?>" class="btn btn-hover">
+            <div class="animation-label-container">
+              <p class="cta-text"><?= get_field('new_col_link_label') ?></p>
+              <p aria-hidden="true" class="cta-text animation-label-text"><?= get_field('new_col_link_label') ?></p>
+            </div>
+          </a>
+        </div>
+      <?php endif ?>
+
       <ul class="products-list">
         <?php
         $products = get_field('new_col_products');

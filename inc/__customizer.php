@@ -7,14 +7,14 @@ function custom_theme_customizer( $wp_customize ) {
 
   // Add an image field for Logo
   $wp_customize->add_setting( 'logo_setting', array(
-      'default' => '',
-  ) );
+    'default' => '',
+  ));
 
   $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'header_logo_control', array(
-      'label' => __( 'Logo', 'giovanni' ),
-      'section' => 'title_tagline',
-      'settings' => 'logo_setting',
-  ) ) );
+    'label' => __( 'Logo', 'giovanni' ),
+    'section' => 'title_tagline',
+    'settings' => 'logo_setting',
+  )));
 }
 add_action( 'customize_register', 'custom_theme_customizer' );
 
@@ -47,35 +47,35 @@ function social_theme_customizer( $wp_customize ) {
   ) );
 
   $wp_customize->add_control( 'whatsup_url_control', array(
-      'label' => __( 'Whatsup URL', 'giovanni' ),
-      'section' => 'social_media_section',
-      'settings' => 'whatsup_url_setting',
-      'type' => 'url',
-  ) );
+    'label' => __( 'Whatsup URL', 'giovanni' ),
+    'section' => 'social_media_section',
+    'settings' => 'whatsup_url_setting',
+    'type' => 'url',
+  ));
 
   // Telegram Field
   $wp_customize->add_setting( 'telegram_url_setting', array(
-      'default' => '',
-  ) );
+    'default' => '',
+  ));
 
   $wp_customize->add_control( 'telegram_url_control', array(
-      'label' => __( 'Telegram URL', 'giovanni' ),
-      'section' => 'social_media_section',
-      'settings' => 'telegram_url_setting',
-      'type' => 'url',
-  ) );
+    'label' => __( 'Telegram URL', 'giovanni' ),
+    'section' => 'social_media_section',
+    'settings' => 'telegram_url_setting',
+    'type' => 'url',
+  ));
 
   // LinkedIn Field
   $wp_customize->add_setting( 'linkedin_url_setting', array(
-      'default' => '',
-  ) );
+    'default' => '',
+  ));
 
   $wp_customize->add_control( 'linkedin_url_control', array(
       'label' => __( 'LinkedIn URL', 'giovanni' ),
       'section' => 'social_media_section',
       'settings' => 'linkedin_url_setting',
       'type' => 'url',
-  ) );
+  ));
 }
 add_action( 'customize_register', 'social_theme_customizer' );
 
