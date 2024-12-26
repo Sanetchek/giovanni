@@ -364,7 +364,6 @@ button.filter-item:hover {
 }
 
 .product-summary-wrap {
-  margin-top: 22px;
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -598,7 +597,7 @@ form.cart .button {
 
 .single-product-content-wrap * {
   font-weight: 400;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.77778;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -892,7 +891,7 @@ form.cart .button {
   position: sticky;
   top: 0;
   margin-bottom: -2em;
-  padding-top: 1em;
+  padding-top: 56px;
   height: 100%;
 }
 

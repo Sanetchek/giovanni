@@ -428,7 +428,8 @@ li.product-card-big.banner img {
 .main-posts-picture {
   position: relative;
   min-height: 400px;
-  width: 1280px;
+  width: 70.14vw;
+  max-width: 80%;
 }
 
 .main-posts-art {
@@ -473,6 +474,10 @@ li.product-card-big.banner img {
   width: 36.24vw;
   max-width: 45%;
   margin-left: 80px;
+}
+
+.main-posts-container .button-animation-effect {
+  justify-content: unset;
 }
 
 .main-posts-art.second .main-posts-container {

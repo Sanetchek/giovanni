@@ -69,14 +69,12 @@ $categories_array = product_collection_categories();
 				// Add Find your size Popup
 				$radio_value = get_field('use_size_table_popup');
 				if ( $radio_value ) {
-					echo '<div class="product-size-container">';
-					echo '<div class="body-s-medium-u">זמין ב</div>';
-
 					if ($radio_value !== 'none') {
-						echo '<a href="#" class="open-modal-btnsize">מצא את המידה שלך</a>';
+						echo '<div class="product-size-container">';
+						echo '<div class="body-s-medium-u">'. __('זמין ב', 'giovanni') .'</div>';
+						echo '<a href="#" class="open-modal-btnsize">'.__('מצא את המידה שלך', 'giovanni').'</a>';
+						echo '</div>';
 					}
-
-					echo '</div>';
 				}
 
 				// Output the add to cart button

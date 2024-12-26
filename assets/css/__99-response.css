@@ -134,6 +134,7 @@
     min-height: auto;
     width: 100%;
     display: flex;
+    max-width: 100%;
   }
 
   .main-post-image {
@@ -700,10 +701,17 @@
     box-shadow: none;
   }
 
+  .main-posts-art.second .main-posts-container,
   .main-posts-container {
     position: relative;
     width: 94%;
-    margin: -30px auto 0;
+    max-width: 100%;
+    margin: -30px auto 0 !important;
+  }
+
+  .main-posts-wrap {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
 
   .gift-title,
