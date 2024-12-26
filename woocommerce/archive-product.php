@@ -54,7 +54,10 @@ get_header( 'shop' );
 	$category = get_queried_object();
 	$term_id = get_queried_object_id();
 
-	$is_category_box = $category ? get_field('activate_category_boxes', 'product_cat_' . $category->term_id) : false;
+	if ($category && is_a($category, 'WP_Term')) {
+		$term_id = $category->term_id;  // Correctly accessing term_id
+		$is_category_box = get_field('activate_category_boxes', 'product_cat_' . $category->term_id);
+	}
 
 	$page_id = !is_shop() ? 'product_cat_' . $term_id : 'option';
 
@@ -190,42 +193,111 @@ get_header( 'shop' );
 		<div class="product-container <?php if ( has_term( $category_id, 'product_cat' ) || has_term( get_term_children( $category_id, 'product_cat' ), 'product_cat' ) ) { echo 'charms-cat'; } ?>">
 
 		<?php
-		woocommerce_product_loop_start();
+		// Detect if we're on the Shop page or a Product Category archive.
+		if (is_shop() || is_product_category()) {
+			// Determine the current page
+			$paged = get_query_var('paged') ? get_query_var('paged') : 1; // Default to page 1
 
-		if ( wc_get_loop_prop( 'total' ) ) {
-			$count = 0;
+			$args = array(
+				'post_type'      => 'product',
+				'posts_per_page' => 20, // You can modify this value
+				'paged'          => $paged, // Pagination parameter
+				'post_status'    => 'publish',
+				'orderby'  => 'meta_value_num',
+				'meta_key' => 'total_sales',
+				'order'    => 'DESC',
+			);
 
-			while ( have_posts() ) {
-				the_post();
+			// For category archives, add a tax_query to filter by category.
+			if (is_product_category()) {
+				$current_category = get_queried_object();
 
-				global $product;
-
-				// Ensure visibility.
-				if ( empty( $product ) || ! $product->is_visible() ) {
-					return;
+				if ($current_category && !is_wp_error($current_category)) {
+					$category_id = $current_category->term_id; // Get the current category ID.
+					$args['tax_query'] = array(
+						'relation' => 'AND',
+						array(
+							'taxonomy' => 'product_cat',
+							'field'    => 'term_id',
+							'terms'    => $category_id,
+						),
+					);
 				}
-
-				/**
-				 * Hook: woocommerce_shop_loop.
-				 */
-				do_action( 'woocommerce_shop_loop' );
-
-				// Use product-card-big for all posts except the 11th and 19th
-				if ( $count === 10 && $banner1 && $banner1['enable_disable_banner'] ) {
-					get_template_part('template-parts/product-card-adv', '', ['banner' => $banner1]);
-				}
-
-				if ( $count === 18 && $banner2 && $banner2['enable_disable_banner'] ) {
-					get_template_part('template-parts/product-card-adv', '', ['banner' => $banner2]);
-				}
-
-				wc_get_template_part( 'content', 'product' );
-
-				$count++;
 			}
-		}
 
-		woocommerce_product_loop_end(); ?>
+			// Custom query for products.
+			$query = new WP_Query($args);
+
+			if (defined('WP_DEBUG') && WP_DEBUG) {
+				error_log('Query Args First Load: ' . print_r($args, true));
+			}
+
+			if ($query->have_posts()) {
+				woocommerce_product_loop_start();
+
+				$count = 0;
+
+				while ($query->have_posts()) {
+					$query->the_post();
+
+					global $product;
+
+					// Ensure visibility.
+					if (empty($product) || !$product->is_visible()) {
+							continue;
+					}
+
+					/**
+					 * Hook: woocommerce_shop_loop.
+					 */
+					do_action('woocommerce_shop_loop');
+
+					// Use product-card-adv for specific positions.
+					if ($count === 10 && isset($banner1['enable_disable_banner']) && $banner1['enable_disable_banner']) {
+						get_template_part('template-parts/product-card-adv', '', ['banner' => $banner1]);
+					}
+
+					if ($count === 18 && isset($banner2['enable_disable_banner']) && $banner2['enable_disable_banner']) {
+						get_template_part('template-parts/product-card-adv', '', ['banner' => $banner2]);
+					}
+
+					// Default product template.
+					wc_get_template_part('content', 'product');
+
+					$count++;
+				}
+
+				woocommerce_product_loop_end();
+			} else {
+				/**
+				 * Hook: woocommerce_no_products_found.
+				 */
+				do_action('woocommerce_no_products_found');
+			}
+
+			// Restore original Post Data.
+			wp_reset_postdata();
+		} else {
+			// If not on Shop or Category, fallback to default WooCommerce behavior.
+			woocommerce_product_loop_start();
+
+			if (wc_get_loop_prop('total')) {
+				while (have_posts()) {
+					the_post();
+
+					/**
+					 * Hook: woocommerce_shop_loop.
+					 */
+					do_action('woocommerce_shop_loop');
+
+					wc_get_template_part('content', 'product');
+				}
+			}
+
+			woocommerce_product_loop_end();
+		}
+		?>
+
 		</div>
 		<div id="page-loader" class="page-loader hidden"></div>
 

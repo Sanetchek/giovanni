@@ -282,95 +282,94 @@ add_action('wp_ajax_nopriv_filter_products', 'handle_filter_products');
  * @return array Query arguments.
  */
 function build_product_query_args($form_data = [], $paged = 1, $category_id = false) {
-    $posts_per_page = !empty($form_data['posts_per_page']) ? absint($form_data['posts_per_page']) : 20;
+  $posts_per_page = !empty($form_data['posts_per_page']) ? absint($form_data['posts_per_page']) : 20;
 
-    // Get the paged parameter from the global query if not provided or invalid
-    if (!$paged) {
-        $paged = get_query_var('paged') ? absint(get_query_var('paged')) : 1;
-    }
+  // Get the paged parameter from the global query if not provided or invalid
+  if (!$paged) {
+    $paged = get_query_var('paged') ? absint(get_query_var('paged')) : 1;
+  }
 
-    $args = [
-        'post_type'      => 'product',
-        'paged'          => max(1, $paged), // Ensure valid pagination
-        'posts_per_page' => $posts_per_page,
-        'meta_query'     => [],
-        'tax_query'      => [
-            'relation' => 'AND',
-        ],
+  $args = [
+    'post_type'      => 'product',
+    'paged'          => max(1, $paged), // Ensure valid pagination
+    'posts_per_page' => $posts_per_page,
+    'tax_query'      => [
+      'relation' => 'AND',
+    ],
+  ];
+
+  // Search query
+  if (!empty($form_data['s'])) {
+    $args['s'] = sanitize_text_field($form_data['s']);
+  }
+
+  // Add category filtering
+  if ($category_id) {
+    $args['tax_query'][] = [
+      'taxonomy' => 'product_cat',
+      'field'    => 'term_id',
+      'terms'    => absint($category_id),
     ];
+  }
 
-    // Search query
-    if (!empty($form_data['s'])) {
-        $args['s'] = sanitize_text_field($form_data['s']);
+  // Sorting options
+  if (!empty($form_data['sort'])) {
+    switch ($form_data['sort']) {
+      case 'popularity':
+        $args['orderby']  = 'meta_value_num';
+        $args['meta_key'] = 'total_sales';
+        $args['order']    = 'DESC';
+        break;
+      case 'rating':
+        $args['orderby']  = 'meta_value_num';
+        $args['meta_key'] = '_wc_average_rating';
+        $args['order']    = 'DESC';
+        break;
+      case 'date':
+        $args['orderby'] = 'date';
+        $args['order']   = 'DESC';
+        break;
+      case 'price':
+        $args['orderby']  = 'meta_value_num';
+        $args['meta_key'] = '_price';
+        $args['order']    = 'ASC';
+        break;
+      case 'price-desc':
+        $args['orderby']  = 'meta_value_num';
+        $args['meta_key'] = '_price';
+        $args['order']    = 'DESC';
+        break;
+      default:
+        $args['orderby'] = 'menu_order';
+        $args['order']   = 'ASC';
+        break;
     }
+  }
 
-    // Add category filtering
-    if ($category_id) {
-        $args['tax_query'][] = [
-            'taxonomy' => 'product_cat',
-            'field'    => 'term_id',
-            'terms'    => absint($category_id),
-        ];
+  // Handle attribute filtering
+  $attribute_tax_query = [];
+  foreach ($form_data as $key => $value) {
+    if (strpos($key, 'filter_') === 0 && !empty($value)) {
+      $taxonomy = sanitize_text_field(str_replace('filter_', '', $key));
+      $attribute_tax_query[] = [
+        'taxonomy' => $taxonomy,
+        'field'    => 'slug',
+        'terms'    => is_array($value) ? array_map('sanitize_text_field', $value) : [sanitize_text_field($value)],
+      ];
     }
+  }
 
-    // Sorting options
-    if (!empty($form_data['sort'])) {
-        switch ($form_data['sort']) {
-            case 'popularity':
-                $args['orderby']  = 'meta_value_num';
-                $args['meta_key'] = 'total_sales';
-                $args['order']    = 'DESC';
-                break;
-            case 'rating':
-                $args['orderby']  = 'meta_value_num';
-                $args['meta_key'] = '_wc_average_rating';
-                $args['order']    = 'DESC';
-                break;
-            case 'date':
-                $args['orderby'] = 'date';
-                $args['order']   = 'DESC';
-                break;
-            case 'price':
-                $args['orderby']  = 'meta_value_num';
-                $args['meta_key'] = '_price';
-                $args['order']    = 'ASC';
-                break;
-            case 'price-desc':
-                $args['orderby']  = 'meta_value_num';
-                $args['meta_key'] = '_price';
-                $args['order']    = 'DESC';
-                break;
-            default:
-                $args['orderby'] = 'menu_order';
-                $args['order']   = 'ASC';
-                break;
-        }
-    }
+  // Merge attribute filters into tax_query
+  if (!empty($attribute_tax_query)) {
+    $args['tax_query'] = array_merge($args['tax_query'], $attribute_tax_query);
+  }
 
-    // Handle attribute filtering
-    $attribute_tax_query = [];
-    foreach ($form_data as $key => $value) {
-        if (strpos($key, 'filter_') === 0 && !empty($value)) {
-            $taxonomy = sanitize_text_field(str_replace('filter_', '', $key));
-            $attribute_tax_query[] = [
-                'taxonomy' => $taxonomy,
-                'field'    => 'slug',
-                'terms'    => is_array($value) ? array_map('sanitize_text_field', $value) : [sanitize_text_field($value)],
-            ];
-        }
-    }
+  // Debugging logs (for testing during development only)
+  if (defined('WP_DEBUG') && WP_DEBUG) {
+    error_log('Query Args Load More: ' . print_r($args, true));
+  }
 
-    // Merge attribute filters into tax_query
-    if (!empty($attribute_tax_query)) {
-        $args['tax_query'] = array_merge($args['tax_query'], $attribute_tax_query);
-    }
-
-    // Debugging logs (for testing during development only)
-    if (defined('WP_DEBUG') && WP_DEBUG) {
-        error_log('Query Args: ' . print_r($args, true));
-    }
-
-    return $args;
+  return $args;
 }
 
 
