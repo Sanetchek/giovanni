@@ -235,6 +235,14 @@
   .product-image img {
     width: 100%;
   }
+
+  .main-posts-container {
+    margin-left: 0;
+  }
+
+  .main-posts-art.second .main-posts-container {
+    margin-right: 0;
+  }
 }
 
 @media screen and (max-width: 1024px) {

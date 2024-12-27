@@ -428,7 +428,6 @@ li.product-card-big.banner img {
 .main-posts-picture {
   position: relative;
   min-height: 400px;
-  width: 70.14vw;
   max-width: 80%;
 }
 
@@ -471,9 +470,8 @@ li.product-card-big.banner img {
   bottom: 0px;
   padding: 32px 40px;
   background-color: #fff;
-  width: 36.24vw;
   max-width: 45%;
-  margin-left: 80px;
+  margin-left: 20%;
 }
 
 .main-posts-container .button-animation-effect {
@@ -483,7 +481,7 @@ li.product-card-big.banner img {
 .main-posts-art.second .main-posts-container {
   left: unset;
   margin-left: unset;
-  margin-right: 80px;
+  margin-right: 20%;
 }
 
 .main-posts-shadow {
