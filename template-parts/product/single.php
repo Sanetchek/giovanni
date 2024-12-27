@@ -65,9 +65,14 @@ $videos = get_field('gallery_media');
 
     // Show the 360-view element with "half" class only if videos exist.
     $class = $has_videos ? 'half' : '';
-    echo '<div class="product-gallery__image ' . esc_attr($class) . '">';
-    echo do_shortcode('[wp360view product_id=' .  $product_id . ']');
-    echo '</div>';
+    $has_360_view = get_post_meta($product_id, '_wp360view_images', true);
+
+    if (!empty($has_360_view)) {
+      // If images are set, display the 360 view
+      echo '<div class="product-gallery__image ' . esc_attr($class) . '">';
+      echo do_shortcode('[wp360view product_id=' . $product_id . ']');
+      echo '</div>';
+    }
     ?>
   </div>
 </div>

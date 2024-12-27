@@ -446,6 +446,11 @@ button.filter-item:hover {
   max-width: 812px;
 }
 
+.product-gallery__image .custom-slider-cl {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
 .product-gallery__image.half {
   width: calc((100% - 8px) / 2);
 }
