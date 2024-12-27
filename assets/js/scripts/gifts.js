@@ -114,6 +114,7 @@
 
           // Clear form inputs
           $('#gift_form')[0].reset();
+          $('.gift-certificate__form-section').addClass('disabled');
         } else {
           console.log('Failed to add gift card to cart.');
         }
