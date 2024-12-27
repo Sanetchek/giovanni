@@ -111,6 +111,9 @@
           setTimeout(() => {
             $('.header-cart').trigger('click');
           }, 1000);
+
+          // Clear form inputs
+          $('#gift_form')[0].reset();
         } else {
           console.log('Failed to add gift card to cart.');
         }

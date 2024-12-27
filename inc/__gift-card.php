@@ -14,8 +14,8 @@ function add_gift_card_to_cart() {
   $message = sanitize_textarea_field($_POST['message']);
 
   // Get the gift card product ID (make sure this is the correct product ID for gift cards)
-  $product_id = 8188; // Replace with your gift card product ID
-  // $product_id = 7935; // Replace with your gift card product ID
+  // $product_id = 8188; // Replace with your gift card product ID
+  $product_id = 7935; // Replace with your gift card product ID
 
   // Prepare the post data for the plugin's add to cart method
   $_POST['wps_wgm_single_nonce_field'] = wp_create_nonce('wps_wgm_single_nonce');
