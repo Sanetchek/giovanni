@@ -911,6 +911,19 @@
     max-width: 90%;
     min-width: 90%;
   }
+
+  .modal-side-content {
+    padding: 30px 24px 24px;
+  }
+
+  h2.modal-subscribe-title {
+    font-size: 24px !important;
+  }
+
+  .modal-privacy {
+    padding-bottom: 6px;
+    padding-top: 6px;
+  }
 }
 
 @media screen and (max-width: 782px) {
