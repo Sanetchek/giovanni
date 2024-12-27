@@ -261,6 +261,10 @@ function giovanni_scripts() {
         '1.0.0'
     );
 	// wp_dequeue_style( 'wc-blocks-style' ); // Remove WooCommerce block CSS
+
+	if (class_exists('WooCommerce')) {
+		wp_enqueue_script('wc-cart-fragments');
+	}
 }
 add_action( 'wp_enqueue_scripts', 'giovanni_scripts' );
 

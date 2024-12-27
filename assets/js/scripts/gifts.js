@@ -80,8 +80,6 @@
   $('#gift_form').on('submit', function (e) {
     e.preventDefault();
 
-    console.log('giovanni:', giovanni);
-
 
     // Collect form data
     const senderName = $('#senderName').val();
@@ -90,21 +88,9 @@
     const message = $('#message').val();
     const selectedAmount = $('input[name="giftAmount"]:checked').val() || $('.gift-certificate__custom-amount').val();
 
-    console.log('Form data:', {
-      senderName,
-      reciverName,
-      reciverEmail,
-      selectedAmount
-    });
-
     if (!senderName || !reciverName || !reciverEmail || !selectedAmount) {
       return;
     }
-
-    console.log('Ajax URL:', giovanni.ajax_url);
-    console.log('Nonce:', giovanni.gift_nonce);
-
-
 
     $.ajax({
       url: giovanni.ajax_url, // Make sure this is defined in your wp_localize_script
@@ -119,9 +105,12 @@
         _wpnonce: giovanni.gift_nonce,
       },
       success: function (response) {
-        console.log('AJAX success:', response);
         if (response.success) {
-          window.location.href = '/cart';
+          // Refresh mini cart and header count
+          $(document.body).trigger('wc_fragment_refresh');
+          setTimeout(() => {
+            $('.header-cart').trigger('click');
+          }, 1000);
         } else {
           console.log('Failed to add gift card to cart.');
         }

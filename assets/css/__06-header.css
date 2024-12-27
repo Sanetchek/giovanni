@@ -337,6 +337,7 @@ p.link-item-title {
 .header-mini-cart,
 .login-modal {
   position: fixed;
+  max-width: 480px;
   right: 0;
   top: 0;
   bottom: 0;

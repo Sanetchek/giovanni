@@ -129,16 +129,19 @@
 
     if ($('.header-mini-cart').hasClass('is-show')) {
       $('.header-mini-cart').removeClass('is-show').addClass('is-hidden');
+      $('.modal-overlay').removeClass('is-visible');
     } else {
       $('.header-mini-cart').removeClass('is-hidden').addClass('is-show');
+      $('.modal-overlay').addClass('is-visible');
     }
   });
 
   /**
    * Hide Mini Cart
    */
-  $('.header-mini-cart-close').on('click', function () {
+  $('.header-mini-cart-close, .modal-overlay').on('click', function () {
     $('.header-mini-cart').removeClass('is-show').addClass('is-hidden');
+    $('.modal-overlay').removeClass('is-visible');
   })
 
   /**
