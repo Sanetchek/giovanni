@@ -148,6 +148,64 @@
     $(this).css('transition', 'background-position 0.1s ease');
   });
 
+  const $zoomableElement = $('.zoomable');
+  let initialDistance = 0;
+  let currentScale = 1;
+  let startX = 0;
+  let startY = 0;
+  let currentX = 0;
+  let currentY = 0;
+
+  const getDistance = (touches) => {
+    const dx = touches[1].clientX - touches[0].clientX;
+    const dy = touches[1].clientY - touches[0].clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+  };
+
+  if ($(window).width() <= 992) {
+    $zoomableElement.on('touchstart', function (e) {
+      if (e.touches.length === 2) {
+        // Pinch-to-zoom start
+        initialDistance = getDistance(e.touches);
+        $zoomableElement.css('transition', 'none'); // Disable smooth transition
+      } else if (e.touches.length === 1 && currentScale > 1) {
+        // Panning start
+        startX = e.touches[0].clientX - currentX;
+        startY = e.touches[0].clientY - currentY;
+      }
+    });
+
+    $zoomableElement.on('touchmove', function (e) {
+      e.preventDefault(); // Prevent default scrolling behavior
+
+      if (e.touches.length === 2) {
+        // Pinch-to-zoom
+        const currentDistance = getDistance(e.touches);
+        const scaleChange = currentDistance / initialDistance;
+
+        // Calculate and clamp new scale
+        currentScale = Math.min(Math.max(currentScale * scaleChange, 1), 3);
+        $zoomableElement.css('background-size', `${currentScale * 100}%`);
+      } else if (e.touches.length === 1 && currentScale > 1) {
+        // Panning
+        currentX = e.touches[0].clientX - startX;
+        currentY = e.touches[0].clientY - startY;
+
+        $zoomableElement.css('background-position', `${currentX}px ${currentY}px`);
+      }
+    });
+
+    $zoomableElement.on('touchend', function () {
+      // Reset or clamp background position on touch end
+      if (currentScale === 1) {
+        $zoomableElement.css({
+          transition: 'background-position 0.2s ease-out',
+          'background-position': 'center',
+        });
+      }
+    });
+  }
+
   /**
    * Initializes the customer menu slider on the customer page.
    * This function is called on page load and on window resize.

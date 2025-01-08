@@ -855,6 +855,7 @@ form.cart .button {
   background-size: 120%;
   background-repeat: no-repeat;
   transition: background-size 0.1s ease;
+  touch-action: none;
 }
 
 .slider-nav.slick-slider {
