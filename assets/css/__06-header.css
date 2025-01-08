@@ -86,6 +86,13 @@ header#masthead.is-sticky {
   gap: 15px;
 }
 
+.site-branding span {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-start;
+  gap: 15px;
+}
+
 .branding-label {
   background: #000;
   font-family: "Jost", sans-serif;
@@ -644,7 +651,7 @@ form.header-form-search button {
 }
 
 .product-results h5 {
- font-size: 14px;
+  font-size: 14px;
 }
 
 .product-results li a {
