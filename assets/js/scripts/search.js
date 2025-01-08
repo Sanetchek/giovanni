@@ -4,14 +4,13 @@
   const ajax_url = window.giovanni.ajax_url;
 
   /**
-   * Open Modal Search
+   * Open/Close Modal Search
    */
-  $('.header-search .icon-search').on('click', function () {
+  $('.header-search .icon-search, #search_overlay').on('click', function () {
     $('form.header-form-search').fadeToggle();
     $('.search-overlay-container').toggleClass('active');
     $('body').toggleClass('no-scroll');
   });
-
 
   /**
    * Typing check
@@ -67,10 +66,10 @@
 
    function searchAjaxRequest() {
      let searchTerm = $('#header_search').val().trim();
-   
+
      if (searchTerm.length > 0) {
        clearTimeout(searchTimeout);
-   
+
        searchTimeout = setTimeout(function () {
          $.ajax({
            url: ajax_url,
@@ -87,14 +86,14 @@
              console.log('AJAX Error: ' + error);
            }
          });
-       }, 300); 
+       }, 300);
      } else {
-       $('#search_results').fadeOut(); 
+       $('#search_results').fadeOut();
      }
    }
 
    $('#header_search').on('input', searchAjaxRequest);
-   
+
 
   /**
    * Close Modal Search
