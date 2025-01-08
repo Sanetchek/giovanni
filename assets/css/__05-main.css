@@ -443,6 +443,9 @@ html[dir="rtl"] .button-hover.white::after {
   background: transparent;
 }
 
+.no-scroll {
+  overflow: hidden;
+}
 
 @keyframes animloader {
   0% {

@@ -53,5 +53,15 @@
 </div>
 
 <div class="page-mob">
-  <?php show_burger(); ?>
+  <div class="header-actions-burger">
+    <?php show_burger(); ?>
+
+    <span class="header-action header-search">
+      <svg class='icon-search' width='24' height='24'>
+        <use href='<?= assets('img/sprite.svg#icon-search') ?>'></use>
+      </svg>
+
+      <?php get_template_part('template-parts/header/searchform') ?>
+    </span>
+  </div>
 </div>

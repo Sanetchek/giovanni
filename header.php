@@ -43,6 +43,8 @@
 
 					<nav class="main-navigation">
 						<div class="page-mob">
+							<?php get_template_part('template-parts/header/bar') ?>
+
 							<div class="main-navigation-mob">
 								<?php show_logo('header_logo_image', 'header_logo_name') ?>
 								<?php show_burger(true); ?>
@@ -57,6 +59,23 @@
 							]);
 						?>
 
+						<div class="page-mob mobile-user-info">
+							<ul class="user-info-menu">
+
+								<li class="mobile-user-action"><a href="/my-account" class="login-link show-login-form">
+									<?php if (is_user_logged_in()) : ?>
+										<?= __('My Account', 'giovanni') ?>
+									<?php else : ?>
+										<?= __('Login', 'giovanni') ?>
+									<?php endif ?>
+								</a></li>
+								<?php if (!is_user_logged_in()) : ?>
+									<li class="mobile-user-action"><a href="/my-account/orders" class="order-link"><?= __('My orders', 'giovanni') ?></a></li>
+								<?php endif ?>
+								<li class="mobile-user-action"><a href="/favorites" class="wishlist-link"><?= __('Wishlist', 'giovanni') ?></a></li>
+								<li class="mobile-user-action"><a href="/customer-service" class="customer-link"><?= __('Customer service', 'giovanni') ?></a></li>
+							</ul>
+						</div>
 					</nav><!-- #site-navigation -->
 				</div>
 

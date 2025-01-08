@@ -399,24 +399,27 @@ function showYoutubeVideo($link)
  */
 function show_logo($image, $text) { ?>
 <a href="/" class="site-branding" rel="home" aria-current="page" tabindex="0">
-  <?php
-		$logo = get_field($image, 'option');
+  <span class="site-logo-desktop">
+  	<?php
+			$logo = get_field($image, 'option');
 
-		if ($logo['image']) :
+			if ($logo['image']) :
 
-			show_image( $logo['image'], [300, 50], ['class' => 'site-logo'] );
+				show_image( $logo['image'], [300, 50], ['class' => 'site-logo'] );
 
-		else :
-			$logo = get_field($text, 'option');
+			else :
+				$logo = get_field($text, 'option');
 
-			if ($logo['name']) :
-				echo $logo['name'];
+				if ($logo['name']) :
+					echo $logo['name'];
+				endif;
+
+				if ($logo['label']) : ?>
+					<span class="branding-label"><?= $logo['label'] ?></span>
+				<?php endif;
 			endif;
-
-			if ($logo['label']) : ?>
-  <span class="branding-label"><?= $logo['label'] ?></span>
-  <?php endif;
-		endif; ?>
+		?>
+  </span>
 </a>
 <?php
 }
