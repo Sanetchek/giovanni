@@ -1061,6 +1061,10 @@
 }
 
 @media screen and (max-width: 768px) {
+  h1 {
+    font-size: 28px !important;
+  }
+
   .hero-content {
     border-right: none;
   }
@@ -1135,11 +1139,11 @@
   }
 
   h2 {
-    font-size: 24px;
+    font-size: 24px !important;
   }
 
   .exhibition-content h2 {
-    font-size: 27px;
+    font-size: 27px !important;
   }
 
   .product-title {
