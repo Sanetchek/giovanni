@@ -388,7 +388,7 @@
   }
 
   .site-logo-desktop {
-    display: none;
+    display: none !important;
   }
 
   .site-branding {
