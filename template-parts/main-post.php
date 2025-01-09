@@ -16,10 +16,6 @@
     <?php endif ?>
 
     <div class="main-posts-content">
-      <div class="main-posts-shadow">
-        <?php get_shadow($shadow); ?>
-      </div>
-
       <div class="main-posts-container">
         <div class="main-posts-wrap">
           <h2><?php echo $item['title']; ?></h2>

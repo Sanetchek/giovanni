@@ -214,7 +214,9 @@
     if (scrollPosition > lastScrollTop) {
       // Scrolling down
       siteHeader.addClass('notshowmenu');
-      mainNavigation.addClass('hide'); // Slide up
+      if ($('body').width() > 1024) {
+        mainNavigation.addClass('hide'); // Slide up
+      }
     } else {
       // Scrolling up
       siteHeader.removeClass('notshowmenu');
@@ -237,8 +239,6 @@
       ticking = true;
     }
   });
-
-
 
 }(jQuery));
 

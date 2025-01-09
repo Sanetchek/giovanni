@@ -209,7 +209,7 @@
 .collections-image {
   position: relative;
   z-index: 0;
-  margin-bottom: -105px;
+  margin-bottom: -40px;
 }
 
 .collections-bg {
@@ -234,10 +234,6 @@
   padding: 35px 0 41px;
   background: #fff;
   position: relative;
-}
-
-.collections-content .products-list {
-  margin-top: 17px;
 }
 
 .button-animation-effect {
@@ -310,6 +306,7 @@ li.product-card-big.banner img {
 }
 
 .product-link {
+  background: #fff;
   position: relative;
   height: 100%;
   display: flex;

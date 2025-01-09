@@ -39,7 +39,6 @@ function generate_picture_element($image_id, $is_last, $class) {
 	if ($large_image && $medium_image) {
 		$output = '<picture aria-hidden="true">';
 		$output .= '<source media="(min-width:1280px)" srcset="' . esc_url($large_image[0]) . '">';
-		$output .= '<source media="(max-width:768px)" srcset="' . esc_url($large_image[0]) . '">';
 		$output .= '<img class="lazyloaded" data-src="' . esc_url($medium_image[0]) . '" alt="' . esc_attr(get_the_title($image_id)) . '" src="' . esc_url($medium_image[0]) . '" class="'.$class.'">';
 		$output .= '</picture>';
 
