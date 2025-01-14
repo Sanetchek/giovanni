@@ -17,6 +17,17 @@
             'container'			 => ''
           ]);
         ?>
+
+        <?php $btns = get_field('menu_gifts_btns', 'options'); ?>
+        <?php if ($btns) : ?>
+          <div class="menu-btns">
+            <?php foreach ( $btns as $btn ) : ?>
+              <?php if ($btn['link']) : ?>
+                <a href="<?= $btn['link'] ?>" class="btn-black"><?= $btn['label'] ?></a>
+              <?php endif ?>
+            <?php endforeach ?>
+          </div>
+        <?php endif ?>
       </div>
 
       <div class="menu-2">
@@ -50,7 +61,7 @@
     </button>
   </div>
 
-  
+
       <div class="menu-1">
         <p class="menu-title"><?= __('מתנות עבור', 'giovanni') ?></p>
 
@@ -73,7 +84,7 @@
         ?>
       </div>
 
-    
+
 
     <div class="links-wrap mobile-links-wrap">
     <?php
@@ -81,6 +92,6 @@
       get_template_part('template-parts/mega-menu/links-mobile', '', ['links' => $links]);
     ?>
   </div>
- 
+
 
 </div>

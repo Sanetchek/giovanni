@@ -18,10 +18,16 @@
           ]);
         ?>
 
-        <div class="menu-btns">
-          <a href="#" class="btn-black"><?= __('פופולרי', 'giovanni') ?></a>
-          <a href="#" class="btn-black"><?= __('חדש ב', 'giovanni') ?></a>
-        </div>
+        <?php $btns = get_field('menu_collections_btns', 'options'); ?>
+        <?php if ($btns) : ?>
+          <div class="menu-btns">
+            <?php foreach ( $btns as $btn ) : ?>
+              <?php if ($btn['link']) : ?>
+                <a href="<?= $btn['link'] ?>" class="btn-black"><?= $btn['label'] ?></a>
+              <?php endif ?>
+            <?php endforeach ?>
+          </div>
+        <?php endif ?>
       </div>
 
       <div class="menu-2">

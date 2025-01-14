@@ -34,15 +34,15 @@ $second_image_url = $second_image_id ? wp_get_attachment_image_url($second_image
       <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($title); ?>">
     </a>
 
-    <div class="product-hidden product-hidden-img">
-      <?php echo simpleLikes($product_id); ?>
+    <a href="<?php echo esc_url($permalink); ?>">
+      <div class="product-hidden product-hidden-img">
+        <?php echo simpleLikes($product_id); ?>
 
-      <?php if ($second_image_url) : ?>
-        <a href="<?php echo esc_url($permalink); ?>">
+        <?php if ($second_image_url) : ?>
           <img src="<?php echo esc_url($second_image_url); ?>" alt="<?php echo esc_attr($title); ?>">
-        </a>
-      <?php endif ?>
-    </div>
+        <?php endif ?>
+      </div>
+    </a>
   </div>
 
   <a href="<?php echo esc_url($permalink); ?>" class="product-info-box">

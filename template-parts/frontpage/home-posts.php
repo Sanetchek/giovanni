@@ -16,7 +16,7 @@
   </div>
   <?php endif ?>
 
-  <?php $productArray = get_field('pop_products') ?>
+  <?php $productArray = get_field('post_products') ?>
   <?php if ($productArray) : ?>
     <div class="container">
       <?php get_template_part('template-parts/product', 'slider', ['productArray' => $productArray]) ?>
