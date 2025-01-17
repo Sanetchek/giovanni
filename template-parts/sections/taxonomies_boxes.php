@@ -3,25 +3,21 @@
 $taxs = isset($args['taxonomies']) ? $args['taxonomies'] : false;
 ?>
 
-<div class="taxonomies-container-boxes slick-slider-boxes">
-  <?php if ($taxs) : ?>
-    
+<div class="taxonomies-container">
+  <?php if (!empty($taxs) && is_array($taxs)) : ?>
+    <ul class="taxonomies-wrap">
       <?php foreach ($taxs as $key => $category_id) :
-        // Calculate the total and the current count
         $all_cat_count = count($taxs);
         $count = $key + 1;
-
-        // Pass parameters to 'taxonomy-card' template part
-        $args = [
-          'category_id' => $category_id,
-          'all_cat_count' => $all_cat_count,
-          'count' => $count
-        ];
+        $is_last = $count === $all_cat_count && $count % 2 !== 0;
       ?>
- 
-        <?php get_template_part('template-parts/taxonomy', 'cardboxes', $args); ?>
-     
+        <li class="taxonomies-content <?= $is_last ? 'last' : '' ?>">
+          <?php
+          $args = ['category_id' => $category_id, 'all_cat_count' => $all_cat_count, 'count' => $count];
+          get_template_part('template-parts/taxonomy', 'card', $args);
+          ?>
+        </li>
       <?php endforeach; ?>
-    
+    </ul>
   <?php endif; ?>
 </div>

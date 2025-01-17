@@ -1050,6 +1050,14 @@
   .admin-bar nav.main-navigation {
     top: 32px;
   }
+
+  img.main-post-image-mobile {
+    display: block;
+  }
+
+  img.main-post-image-desktop {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -1503,6 +1511,14 @@
 
   .popular-product .slick-list {
     overflow: unset;
+  }
+
+  .exhibition-image-wrap {
+    margin: 0 auto;
+  }
+
+  .exhibition-content-wrap {
+    text-align: center;
   }
 }
 

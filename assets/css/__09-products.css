@@ -1073,3 +1073,11 @@ body.modal-open {
 .modal-size-guide .modal-main-title {
   font-size: 22px;
 }
+
+img.main-post-image-mobile {
+  display: none;
+}
+
+img.main-post-image-desktop {
+  display: block;
+}
