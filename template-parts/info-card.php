@@ -2,7 +2,7 @@
   $group = $args['group'];
 ?>
 
-<div class="product-info-item">
+<div class="product-info-item" data-page="<?= $group['page_id'] ?>">
   <div class="product-info-shadow">
     <svg width="579" height="270" viewBox="0 0 579 270" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g filter="url(#filter0_f_79_2102)">

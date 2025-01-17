@@ -664,10 +664,6 @@
     width: calc((100% - 48px) / 3);
   }
 
-  .charms-cat li.product-card .product-image img {
-    height: 100%;
-  }
-
   .page-id-3494 li.product-card .product-image img,
   .page-id-3494 .slick-slide .product-image img {
     padding: 0;

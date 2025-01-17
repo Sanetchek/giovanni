@@ -342,13 +342,14 @@ p.link-item-title {
 }
 
 .header-mini-cart,
-.login-modal {
+.login-modal,
+.product-modal {
   position: fixed;
   max-width: 480px;
   right: 0;
   top: 0;
   bottom: 0;
-  z-index: 1000;
+  z-index: 99999;
   background: #fff;
   padding: 80px 20px 20px;
   overflow-y: auto;
@@ -364,28 +365,40 @@ p.link-item-title {
 }
 
 .header-mini-cart.is-show,
-.login-modal.is-show {
+.login-modal.is-show,
+.product-modal.is-show {
   pointer-events: initial;
   animation: slideLeft 0.5s forwards;
 }
 
 .header-mini-cart.is-hidden,
-.login-modal.is-hidden {
+.login-modal.is-hidden,
+.product-modal.is-hidden {
   pointer-events: none;
   animation: slideRight 0.5s forwards;
 }
 
 .admin-bar .header-mini-cart,
-.admin-bar .login-modal {
+.admin-bar .login-modal,
+.admin-bar .product-modal {
   top: 32px;
 }
 
 .header-mini-cart-close,
-.login-modal-close {
+.login-modal-close,
+.product-modal-close {
   position: absolute;
   top: 20px;
   left: 20px;
   cursor: pointer;
+}
+
+.product-modal-content h2 {
+  text-align: center;
+  position: relative;
+  top: -65px;
+  margin-bottom: -35px;
+  font-size: 20px !important;
 }
 
 .register-difider {
@@ -460,6 +473,7 @@ p.link-item-title {
   display: flex !important;
   width: 20px;
   height: 20px;
+  line-height: 20px;
   font-size: 20px;
   align-items: center;
   justify-content: center;

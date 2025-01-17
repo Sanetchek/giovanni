@@ -125,7 +125,7 @@ function giovanni_search_suggestions() {
       $query_title->the_post();
       $product = wc_get_product(get_the_ID());
       $name = get_the_title();
-      $thumbnail = get_the_post_thumbnail(get_the_ID(), 'thumbnail') ?: 
+      $thumbnail = get_the_post_thumbnail(get_the_ID(), 'thumbnail') ?:
                    '<img src="' . esc_url(wc_placeholder_img_src('full')) . '" alt="' . esc_attr($name) . '" />';
       $price_html = $product->get_price_html();
       $permalink = get_permalink();
@@ -146,7 +146,7 @@ function giovanni_search_suggestions() {
       $query_sku->the_post();
       $product = wc_get_product(get_the_ID());
       $name = get_the_title();
-      $thumbnail = get_the_post_thumbnail(get_the_ID(), 'thumbnail') ?: 
+      $thumbnail = get_the_post_thumbnail(get_the_ID(), 'thumbnail') ?:
                    '<img src="' . esc_url(wc_placeholder_img_src('full')) . '" alt="' . esc_attr($name) . '" />';
       $price_html = $product->get_price_html();
       $permalink = get_permalink();
@@ -196,3 +196,39 @@ function giovanni_search_suggestions() {
 }
 add_action('wp_ajax_giovanni_search_suggestions', 'giovanni_search_suggestions');
 add_action('wp_ajax_nopriv_giovanni_search_suggestions', 'giovanni_search_suggestions');
+
+add_action('wp_ajax_get_product_modal', 'get_product_modal');
+add_action('wp_ajax_nopriv_get_product_modal', 'get_product_modal');
+
+function get_product_modal() {
+  // Check the nonce for security
+  if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'giovanni_product_info_nonce')) {
+    wp_send_json_error(['message' => 'Invalid nonce']);
+    wp_die();
+  }
+
+  // Get the page ID from the request
+  $page_id = intval($_POST['page_id']);
+  if (!$page_id) {
+    wp_send_json_error(['message' => 'Invalid page ID']);
+    wp_die();
+  }
+
+  // Fetch the post content and title
+  $post = get_post($page_id);
+  if (!$post) {
+    wp_send_json_error(['message' => 'Post not found']);
+    wp_die();
+  }
+
+  $content = get_field('content', $page_id);
+
+
+  $response = [
+    'title' => $post->post_title,
+    'content' => get_customer_service_content($content),
+  ];
+
+  wp_send_json_success($response);
+  wp_die();
+}

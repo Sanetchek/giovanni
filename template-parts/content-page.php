@@ -7,6 +7,8 @@
  * @package giovanni
  */
 
+$not_woo_pages = ! is_woocommerce() && ! is_cart() && ! is_checkout();
+$template = $not_woo_pages ? 'page default-template' : 'page-woo';
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -20,12 +22,18 @@
 				echo '</div>';
 			?>
 		</header><!-- .entry-header -->
-	<?php endif ?>
+	<?php elseif ( $not_woo_pages ) : ?>
+		<header class="entry-header <?= $template ?>">
+			<?php
+				the_title( '<h1 class="entry-title">', '</h1>' );
+			?>
+		</header><!-- .entry-header -->
+	<?php endif; ?>
 
 	<div class="container">
 		<?php the_post_thumbnail(); ?>
 
-		<div class="entry-content">
+		<div class="entry-content <?= $template ?>">
 			<?php
 			if ( is_account_page() && is_user_logged_in() ) { echo '<div class="profile-container">';}
 

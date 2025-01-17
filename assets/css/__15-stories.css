@@ -96,6 +96,7 @@
   display: none;
 }
 
+.active .tab-content,
 .tab-content.active {
   display: block;
 }

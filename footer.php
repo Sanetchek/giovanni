@@ -63,13 +63,9 @@
 					<a rel="noreferrer" href="https://www.tiktok.com/@giovanni_raspini" target="_blank" class="icon-tiktok" aria-label="tiktok"></a>
 				</div>
 
-				<?php $copyrights = get_field('copyrights', 'option'); ?>
-
-				<?php if ($copyrights) : ?>
-					<p class="copyrights">
-						<?= $copyrights ?>
-					</p>
-				<?php endif ?>
+				<p class="copyrights">
+					Built by <a href="https://webeffect.co.il/">Webeffect</a> | Copyright © 2025 Tilion Studio LTD
+				</p>
 
 				<div class="footer-menu-bottom">
 					<?php
@@ -101,6 +97,24 @@
 			</div>
 		</div>
 	</div>
+
+
+
+  <?php
+    // Modal mini cart
+    get_template_part('template-parts/modal/cart', 'modal');
+
+    // Modal product
+    get_template_part('template-parts/modal/product', 'modal');
+
+    // Modal search
+    // get_template_part('template-parts/modal/search', 'modal');
+
+    // Login search
+    if (!is_user_logged_in()) {
+      get_template_part('template-parts/modal/login', 'modal');
+    }
+  ?>
 
 	<div id="modal-subscribe-overlay"></div>
 	<div id="modal-overlay" class="modal-overlay"></div>

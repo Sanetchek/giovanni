@@ -319,6 +319,10 @@ button.filter-item:hover {
   margin-bottom: 30px;
 }
 
+.taxonomies-container-boxes .slick-item {
+  padding: 0 10px;
+}
+
 .taxonomies-category-boxes.taxonomies {
   padding: 5px 0 5px;
 }
@@ -663,6 +667,7 @@ form.cart .button {
   position: relative;
   max-width: 453px;
   width: 100%;
+  cursor: pointer;
 }
 
 .product-info-shadow svg {
@@ -964,7 +969,7 @@ body.modal-open {
   background-color: rgba(0, 0, 0, 0.5);
   opacity: 0;
   visibility: hidden;
-  z-index: 100;
+  z-index: 9999;
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 

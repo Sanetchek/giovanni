@@ -137,6 +137,7 @@ $categories_array = product_collection_categories();
 				<?php if ($group) : ?>
 					<?php
 						$group['icon'] = 'returns';
+						$group['page_id'] = 4141;
 					?>
 					<?php get_template_part('template-parts/info', 'card', ['group' => $group]) ?>
 				<?php endif ?>
@@ -145,6 +146,7 @@ $categories_array = product_collection_categories();
 				<?php if ($group) : ?>
 					<?php
 						$group['icon'] = 'delivery';
+						$group['page_id'] = 4135;
 					?>
 					<?php get_template_part('template-parts/info', 'card', ['group' => $group]) ?>
 				<?php endif ?>
@@ -153,6 +155,7 @@ $categories_array = product_collection_categories();
 				<?php if ($group) : ?>
 					<?php
 						$group['icon'] = 'shield';
+						$group['page_id'] = 4144;
 					?>
 					<?php get_template_part('template-parts/info', 'card', ['group' => $group]) ?>
 				<?php endif ?>

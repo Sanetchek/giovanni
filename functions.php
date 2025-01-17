@@ -246,6 +246,7 @@ function giovanni_scripts() {
 		'max_page' => $wp_query->max_num_pages,
 		'search_nonce' => wp_create_nonce('giovanni_search_nonce'),
 		'product_filter_nonce' => wp_create_nonce('giovanni_product_filter_nonce'),
+		'product_info_nonce' => wp_create_nonce('giovanni_product_info_nonce'),
 		'registration_nonce'   => wp_create_nonce('register_nonce'),
 		'gift_nonce' => wp_create_nonce('add_gift_card_action'),
 		'current_category_id' => $category_id, // Include current category ID if on a product category page

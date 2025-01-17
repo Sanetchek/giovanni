@@ -20,16 +20,21 @@
   }
 
   // Tab toggle functionality
-  $('.tab-btn').on('click', function () {
-    const item = $(this).closest('.tab-item');
-    const content = $(item).find('.tab-content');
+  $('body').on('click', '.tab-btn', function () {
+    const item = $(this).closest('.tab-item'); // Current tab item
+    const content = $(item).find('.tab-content'); // Current tab content
 
-    $('.tab-item').removeClass('active');
-    $('.tab-content').slideUp();
+    // Close all other tabs
+    $('.tab-item').not(item).removeClass('active'); // Remove 'active' from all other tabs
+    $('.tab-content').not(content).slideUp(); // Slide up all other tab contents
 
-    if (!content.is(':visible')) {
-      content.slideDown();
-      $(item).addClass('active');
+    // Toggle the current tab
+    if (content.is(':visible')) {
+      content.slideUp(); // Close current tab if it's open
+      $(item).removeClass('active'); // Remove active state from current tab
+    } else {
+      content.slideDown(); // Open current tab
+      $(item).addClass('active'); // Add active state to current tab
     }
   });
 

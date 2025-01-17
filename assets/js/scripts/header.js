@@ -145,6 +145,54 @@
   })
 
   /**
+   * Show/Hide Product Modal
+   */
+  $('.product-info-item').on('click', function (e) {
+    e.preventDefault();
+
+    console.log('ok');
+
+    if ($('.product-modal').hasClass('is-show')) {
+      $('.product-modal').removeClass('is-show').addClass('is-hidden');
+      $('.modal-overlay').removeClass('is-visible');
+    } else {
+      const pageId = $(this).data('page');
+
+      $.ajax({
+        url: giovanni.ajax_url,
+        type: 'POST',
+        data: {
+          action: 'get_product_modal',
+          page_id: pageId,
+          nonce: giovanni.product_info_nonce
+        },
+        success: function (response) {
+          console.log(response);
+          if (response.success) {
+            const { title, content } = response.data;
+            $('.product-modal-content').html(`
+              <h2>${title}</h2>
+              <div>${content}</div>
+            `);
+            $('.product-modal').removeClass('is-hidden').addClass('is-show');
+            $('.modal-overlay').addClass('is-visible');
+          } else {
+            alert('Error: ' + response.data.message);
+          }
+        }
+      })
+    }
+  });
+
+  /**
+   * Hide Product Modal
+   */
+  $('.product-modal-close, .modal-overlay').on('click', function () {
+    $('.product-modal').removeClass('is-show').addClass('is-hidden');
+    $('.modal-overlay').removeClass('is-visible');
+  })
+
+  /**
    * Show Login form
    */
   $('.show-login-form').on('click', function (e) {

@@ -37,19 +37,6 @@
       <use href='<?= assets('img/sprite.svg#icon-bag') ?>'></use>
     </svg>
   </a>
-
-  <?php
-    // Modal mini cart
-    get_template_part('template-parts/modal/cart', 'modal');
-
-    // Modal search
-    // get_template_part('template-parts/modal/search', 'modal');
-
-    // Login search
-    if (!is_user_logged_in()) {
-      get_template_part('template-parts/modal/login', 'modal');
-    }
-  ?>
 </div>
 
 <div class="page-mob">
