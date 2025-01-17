@@ -960,7 +960,8 @@ body.modal-open {
   left: 0;
 }
 
-.modal-overlay {
+.modal-overlay,
+.modal-menu-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -973,7 +974,12 @@ body.modal-open {
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.modal-overlay.is-visible {
+.modal-menu-overlay {
+  z-index: 100;
+}
+
+.modal-overlay.is-visible,
+.modal-menu-overlay.is-visible {
   opacity: 1;
   visibility: visible;
 }

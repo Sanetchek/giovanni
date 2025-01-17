@@ -118,6 +118,7 @@
 
 	<div id="modal-subscribe-overlay"></div>
 	<div id="modal-overlay" class="modal-overlay"></div>
+	<div id="modal-menu-overlay" class="modal-menu-overlay"></div>
 
 <?php wp_footer(); ?>
 

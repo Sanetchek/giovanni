@@ -22,7 +22,7 @@
    * @param {string} menuSelector - The selector for the menu to be shown/hidden.
    */
   function setupHoverHandler(triggerSelector, menuSelector) {
-    const overlaySelector = '.modal-overlay'; // Selector for the overlay
+    const overlaySelector = '.modal-menu-overlay'; // Selector for the overlay
 
     // Function to toggle menu and overlay visibility
     function toggleMenuAndOverlay(menu, overlay, show) {
