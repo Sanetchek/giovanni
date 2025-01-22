@@ -404,3 +404,10 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters('active_plugins', ge
     return $crumbs;
   }
 }
+
+add_action('woocommerce_checkout_process', function() {
+  if (!isset($_POST['terms']) || $_POST['terms'] !== 'on') {
+    wc_add_notice(__('You must agree to the terms and conditions to proceed.', 'woocommerce'), 'error');
+  }
+});
+

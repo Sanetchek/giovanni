@@ -5,7 +5,6 @@
     </svg>
   </div>
 
-
   <?php get_template_part('template-parts/woocommerce/login'); ?>
 
   <div class="register-section">

@@ -609,57 +609,6 @@ function show_customer_service_content($content) {
 	endforeach;
 }
 
-/**
- * Generates HTML content for the Customer Service page based on provided content blocks.
- *
- * This function processes an array of content blocks, each containing a specific layout type
- * (e.g., 'tabs', 'text_content', 'image', 'shortcode', 'table'), and generates the corresponding
- * HTML output for each block. The function utilizes WordPress template parts and helper functions
- * to render the content appropriately.
- *
- * @param array $content An array of content blocks, where each block is an associative array
- *                       containing 'acf_fc_layout' and other necessary data for rendering.
- *
- * @return string The generated HTML content for the Customer Service page, or an empty string
- *                if the content is empty.
- */
-
-function get_customer_service_content($content) {
-	if (empty($content)) {
-		return '';
-	}
-
-	ob_start(); // Start output buffering
-
-	foreach ($content as $block) {
-		switch ($block['acf_fc_layout']) {
-			case 'tabs':
-				$tabs = $block['tab_list'];
-				get_template_part('template-parts/customer-service/tabs', '', ['tabs' => $tabs]);
-				break;
-			case 'text_content':
-				echo '<div class="customer-content">';
-				echo $block['content'];
-				echo '</div>';
-				break;
-			case 'image':
-				show_image($block['image'], 'full', ['class' => 'customer-image']);
-				break;
-			case 'shortcode':
-				echo '<div class="customer-shortcode">';
-				echo do_shortcode(sanitize_text_field($block['shortcode']));
-				echo '</div>';
-				break;
-			case 'table':
-				$table = $block['table'];
-				get_template_part('template-parts/customer-service/table', '', ['table' => $table]);
-				break;
-		}
-	}
-
-	return ob_get_clean(); // Return the buffered output
-}
-
 
 /**
  * Get the parent page ID of the current page or a specified page.
@@ -742,4 +691,28 @@ function get_shadow($shadow) {
 			</defs>
 		</svg>
 	<?php endif;
+}
+
+/**
+ * Fetches the content of a product modal and renders it
+ *
+ * @param int $page_id The ID of the page to fetch content from
+ * @return void
+ */
+function get_product_modal($page_id) {
+  // Get the page ID from the request
+  if (!$page_id) {
+    return;
+  }
+
+  // Fetch the post content and title
+  $post = get_post($page_id);
+  if (!$post) {
+    return;
+  }
+
+  $content = get_field('content', $page_id);
+
+  echo '<h2>' . $post->post_title . '</h2>';
+  show_customer_service_content($content);
 }

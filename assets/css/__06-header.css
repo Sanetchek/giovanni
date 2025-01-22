@@ -341,9 +341,27 @@ p.link-item-title {
   filter: contrast(0.7)
 }
 
+#login_modal h2 {
+  position: relative;
+  top: -58px;
+  margin-bottom: -35px;
+  font-size: 24px !important;
+}
+
+#login_modal input {
+  border: 0;
+  border-bottom: 1px solid #000;
+}
+
+#login_modal .woocommerce-form-login__submit {
+  width: 100%;
+  background: #000;
+  color: #fff;
+}
+
 .header-mini-cart,
 .login-modal,
-.product-modal {
+.product-modal-tab {
   position: fixed;
   max-width: 480px;
   right: 0;
@@ -351,7 +369,7 @@ p.link-item-title {
   bottom: 0;
   z-index: 99999;
   background: #fff;
-  padding: 80px 20px 20px;
+  padding: 80px 24px 20px;
   overflow-y: auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   visibility: hidden;
@@ -366,37 +384,42 @@ p.link-item-title {
 
 .header-mini-cart.is-show,
 .login-modal.is-show,
-.product-modal.is-show {
+.product-modal-tab.is-show {
   pointer-events: initial;
   animation: slideLeft 0.5s forwards;
 }
 
 .header-mini-cart.is-hidden,
 .login-modal.is-hidden,
-.product-modal.is-hidden {
+.product-modal-tab.is-hidden {
   pointer-events: none;
   animation: slideRight 0.5s forwards;
 }
 
 .admin-bar .header-mini-cart,
 .admin-bar .login-modal,
-.admin-bar .product-modal {
+.admin-bar .product-modal-tab {
   top: 32px;
 }
 
 .header-mini-cart-close,
 .login-modal-close,
-.product-modal-close {
+.product-modal-tab-close {
   position: absolute;
   top: 20px;
   left: 20px;
   cursor: pointer;
+  z-index: 100;
 }
 
-.product-modal-content h2 {
+.product-modal-content-tab {
+  display: none;
+}
+
+.product-modal-content-tab h2 {
   text-align: center;
   position: relative;
-  top: -65px;
+  top: -58px;
   margin-bottom: -35px;
   font-size: 20px !important;
 }
@@ -444,6 +467,7 @@ p.link-item-title {
 .mini_cart_item {
   display: flex;
   align-items: flex-end;
+  justify-content: space-between;
   position: relative;
   gap: 40px;
   margin-bottom: 30px;

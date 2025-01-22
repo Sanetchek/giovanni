@@ -11,6 +11,15 @@
   })
 
   /**
+   * Show Mini Cart
+   */
+  $('.single_add_to_cart_button').on('click', function () {
+    setTimeout(() => {
+      $('.header-cart').trigger('click');
+    }, 2000);
+  })
+
+  /**
    * Ajax update Single Product add to cart
    */
   if (!$('.product-type-wgm_gift_card').length) {

@@ -22,14 +22,15 @@
         <input class="woocommerce-form__input woocommerce-form__input-checkbox" name="rememberme" type="checkbox" id="rememberme" value="forever" /> <span><?php esc_html_e( 'תזכור אותי', 'giovanni' ); ?></span>
       </label>
 
-      <?php wp_nonce_field( 'woocommerce-login', 'woocommerce-login-nonce' ); ?>
-      <button type="submit" class="woocommerce-button button woocommerce-form-login__submit<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>" name="login" value="<?php esc_attr_e( 'התחברות', 'giovanni' ); ?>"><?php esc_html_e( 'התחברות', 'giovanni' ); ?></button>
     </span>
 
     <span class="woocommerce-LostPassword lost_password">
       <a href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php esc_html_e( 'איבדת את הסיסמה שלך?', 'giovanni' ); ?></a>
     </span>
   </p>
+
+  <?php wp_nonce_field( 'woocommerce-login', 'woocommerce-login-nonce' ); ?>
+  <button type="submit" class="woocommerce-button button woocommerce-form-login__submit<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>" name="login" value="<?php esc_attr_e( 'התחברות', 'giovanni' ); ?>"><?php esc_html_e( 'התחברות', 'giovanni' ); ?></button>
 
   <?php do_action( 'woocommerce_login_form_end' ); ?>
 
