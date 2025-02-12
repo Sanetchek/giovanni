@@ -53,6 +53,7 @@ get_header( 'shop' );
 	//show category boxes instead of .archive-header
 	$category = get_queried_object();
 	$term_id = get_queried_object_id();
+	$is_category_box = false;
 
 	if ($category && is_a($category, 'WP_Term')) {
 		$term_id = $category->term_id;  // Correctly accessing term_id
@@ -85,12 +86,42 @@ get_header( 'shop' );
 			 * @hooked woocommerce_product_taxonomy_archive_header - 10
 			 */
 			do_action( 'woocommerce_shop_loop_header' );
-			?>
-			<?php
-				$taxonomies_category_box = get_field('category_taxonomies_boxes', 'product_cat_' . $term_id);
-				if (!empty($taxonomies_category_box)) :
-					get_template_part('template-parts/sections/taxonomies_boxes', '', ['taxonomies' => $taxonomies_category_box]);
-				endif;
+
+			$taxonomies_pages = get_field('pages_with_taxonomies', 'product_cat_' . $term_id);
+			$taxonomies_category_box = get_field('category_taxonomies_boxes', 'product_cat_' . $term_id);
+
+			// Ensure $taxonomies_pages is an array
+			if (!is_array($taxonomies_pages)) {
+				$taxonomies_pages = [];
+			}
+
+			// Ensure $taxonomies_category_box is an array
+			if (!is_array($taxonomies_category_box)) {
+				$taxonomies_category_box = [];
+			}
+
+			// Add type => 'page' to each ID in $taxonomies_pages
+			$taxonomies_pages_with_type = array_map(function($id) {
+				return [
+					'id' => $id,
+					'type' => 'page'
+				];
+			}, $taxonomies_pages);
+
+			// Add type => 'term' to each ID in $taxonomies_category_box
+			$taxonomies_category_box_with_type = array_map(function($id) {
+				return [
+					'id' => $id,
+					'type' => 'term'
+				];
+			}, $taxonomies_category_box);
+
+			// Merge the arrays
+			$taxs = array_merge($taxonomies_pages_with_type, $taxonomies_category_box_with_type);
+
+			if (!empty($taxs)) :
+				get_template_part('template-parts/sections/taxonomies_boxes', '', ['taxonomies' => $taxs]);
+			endif;
 			?>
 		</div>
 

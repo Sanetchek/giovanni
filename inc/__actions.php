@@ -101,3 +101,23 @@ add_action('wp_head', function ($args = []) {
 		}
 	}
 });
+
+// Remove the product category base
+add_filter('request', function ($vars) {
+	if (!empty($vars['attachment'])) {
+		$slug = $vars['attachment'];
+		$term = get_term_by('slug', $slug, 'product_cat');
+		if ($term) {
+			$vars['product_cat'] = $slug;
+			unset($vars['attachment']);
+		}
+	}
+	return $vars;
+});
+
+add_filter('term_link', function ($url, $term, $taxonomy) {
+	if ($taxonomy === 'product_cat') {
+		$url = str_replace('/product-category/', '/', $url);
+	}
+	return $url;
+}, 10, 3);
