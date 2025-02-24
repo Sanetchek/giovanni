@@ -54,6 +54,11 @@ p {
   margin: 0 0 16px;
 }
 
+ul {
+  padding: 0;
+  list-style: none;
+}
+
 html[dir="rtl"] input,
 html[dir="rtl"] select,
 html[dir="rtl"] textarea {

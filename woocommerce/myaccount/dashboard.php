@@ -45,6 +45,7 @@ $allowed_html = array(
 
 			if ($order_count > 0) {
 				// Display the order count if there are orders
+				/* translators: %d is the number of orders */
 				echo sprintf('<p>' . __('יש לך %d הזמנות', 'giovanni') . '</p>', $order_count);
 			} else {
 				// Display the message if no orders are found

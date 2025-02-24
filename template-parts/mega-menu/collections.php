@@ -6,41 +6,43 @@
   </div>
 
   <div class="mega-menu-container">
-    <div class="menu-wrap">
-      <div class="menu-1">
-        <p class="menu-title"><?= __('ערכות נושא', 'giovanni') ?></p>
+    <div class="menu-side">
+      <div class="menu-wrap">
+        <div class="menu-1">
+          <p class="menu-title"><?= __('ערכות נושא', 'giovanni') ?></p>
 
-        <?php
-          wp_nav_menu([
-            'theme_location' => 'themes',
-            'menu_id'        => 'themes-menu',
-            'container'			 => ''
-          ]);
-        ?>
+          <?php
+            wp_nav_menu([
+              'theme_location' => 'themes',
+              'menu_id'        => 'themes-menu',
+              'container'			 => ''
+            ]);
+          ?>
+        </div>
 
-        <?php $btns = get_field('menu_collections_btns', 'options'); ?>
-        <?php if ($btns) : ?>
-          <div class="menu-btns">
-            <?php foreach ( $btns as $btn ) : ?>
-              <?php if ($btn['link']) : ?>
-                <a href="<?= $btn['link'] ?>" class="btn-black"><?= $btn['label'] ?></a>
-              <?php endif ?>
-            <?php endforeach ?>
-          </div>
-        <?php endif ?>
+        <div class="menu-2">
+          <p class="menu-title"><?= __('מומלצים', 'giovanni') ?></p>
+
+          <?php
+            wp_nav_menu([
+              'theme_location' => 'featured',
+              'menu_id'        => 'featured-menu',
+              'container'			 => ''
+            ]);
+          ?>
+        </div>
       </div>
 
-      <div class="menu-2">
-        <p class="menu-title"><?= __('מומלצים', 'giovanni') ?></p>
-
-        <?php
-          wp_nav_menu([
-            'theme_location' => 'featured',
-            'menu_id'        => 'featured-menu',
-            'container'			 => ''
-          ]);
-        ?>
-      </div>
+      <?php $btns = get_field('menu_collections_btns', 'options'); ?>
+      <?php if ($btns) : ?>
+        <div class="menu-btns">
+          <?php foreach ( $btns as $btn ) : ?>
+            <?php if ($btn['link']) : ?>
+              <a href="<?= $btn['link'] ?>" class="btn-black"><?= $btn['label'] ?></a>
+            <?php endif ?>
+          <?php endforeach ?>
+        </div>
+      <?php endif ?>
     </div>
 
     <div class="links-wrap">

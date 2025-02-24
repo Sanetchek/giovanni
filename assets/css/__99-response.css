@@ -50,7 +50,7 @@
 }
 
 @media screen and (min-width: 1601px) {
-  .menu-wrap {
+  .menu-side {
     width: calc(100% - 880px);
   }
 }

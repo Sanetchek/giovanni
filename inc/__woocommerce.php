@@ -405,9 +405,83 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters('active_plugins', ge
   }
 }
 
-add_action('woocommerce_checkout_process', function() {
-  if (!isset($_POST['terms']) || $_POST['terms'] !== 'on') {
-    wc_add_notice(__('You must agree to the terms and conditions to proceed.', 'woocommerce'), 'error');
+/**
+ * Outputs a custom privacy policy checkbox to the checkout page.
+ *
+ * @since 1.0.0
+ */
+function custom_privacy_checkbox() {
+  ?>
+  <p class="form-row terms">
+    <label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox">
+      <input type="checkbox" class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox" name="custom_privacy_checkbox" id="custom_privacy_checkbox">
+      <span class="woocommerce-terms-and-conditions-checkbox-text"><?php _e('הנתונים האישיים שלך ישמשו כדי לעבד ולטפל בהזמנה שלך, לתמוך בחוויה שלך בכל האתר, ולמטרות אחרות המתוארות ב <a href="/privacy-policy/" target="_blank">מדיניות הפרטיות</a> שלנו.', 'giovanni'); ?>
+      </span>
+    </label>
+  </p>
+  <?php
+}
+add_action('woocommerce_review_order_before_submit', 'custom_privacy_checkbox', 20);
+
+/**
+ * Validates the custom privacy checkbox during the WooCommerce checkout process.
+ *
+ * Checks if the custom privacy checkbox is set in the POST request, and if not,
+ * adds an error notice prompting the user to agree to the privacy policy before proceeding.
+ */
+
+function validate_custom_privacy_checkbox() {
+  if (!isset($_POST['custom_privacy_checkbox'])) {
+    wc_add_notice(__('עליך לאשר את מדיניות הפרטיות לפני שתמשיך.', 'giovanni'), 'error');
   }
+}
+add_action('woocommerce_checkout_process', 'validate_custom_privacy_checkbox');
+
+/**
+ * Save the custom privacy checkbox field as order meta.
+ *
+ * @param int $order_id The ID of the order.
+ */
+function save_custom_privacy_checkbox($order_id) {
+  if (isset($_POST['custom_privacy_checkbox'])) {
+    update_post_meta($order_id, '_custom_privacy_checkbox', 'yes');
+  }
+}
+add_action('woocommerce_checkout_update_order_meta', 'save_custom_privacy_checkbox');
+
+/**
+ * remove checkout privacy policy text
+ */
+add_action('wp', function () {
+  remove_action('woocommerce_checkout_terms_and_conditions', 'wc_checkout_privacy_policy_text', 20);
 });
 
+/**
+ * Customize WooCommerce billing fields.
+ *
+ * This function modifies the WooCommerce billing fields to ensure that the
+ * billing phone number is marked as a required field. It also adds the
+ * 'validate-required' class to the billing phone field for frontend validation.
+ *
+ * @param array $fields The existing billing fields.
+ * @return array The modified billing fields with the phone number set as required.
+ */
+
+function custom_billing_fields( $fields ) {
+  $fields['billing_phone']['required'] = true;
+
+  return $fields;
+}
+add_filter('woocommerce_billing_fields', 'custom_billing_fields', 1000, 1);
+
+
+add_filter( 'woocommerce_blocks_product_grid_item_html', function( $html, $data, $product ) {
+  // Use output buffering to capture template output
+  ob_start();
+  get_template_part( 'template-parts/product-card', null, ['product_id' => $product->get_id()] );
+  $custom_template = ob_get_clean();
+
+  $custom_html = "<li class=\"wc-block-grid__product\">{$custom_template}</li>";
+
+  return $custom_html;
+}, 10, 3 );

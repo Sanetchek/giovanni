@@ -214,8 +214,11 @@ header#masthead.is-sticky .notshowmenu .mega-menu {
   margin: 0 auto;
 }
 
-.menu-wrap {
+.menu-side {
   min-width: 365px;
+}
+
+.menu-wrap {
   display: flex;
   gap: 24px;
 }
@@ -263,8 +266,15 @@ header#masthead.is-sticky .notshowmenu .mega-menu {
 
 .menu-btns {
   display: flex;
+  flex-wrap: wrap;
   gap: 13px;
   margin-top: 52px;
+}
+
+.menu-btns .btn-black {
+  padding: 0 10px;
+  min-width: 100px;
+  width: auto;
 }
 
 .menu-title {
@@ -507,7 +517,7 @@ p.link-item-title {
 }
 
 .mini_cart_item a img {
-  width: 60px !important;
+  width: 100px !important;
 }
 
 .header-mini-cart .total {

@@ -113,8 +113,11 @@
   mix-blend-mode: multiply;
 }
 
-.taxonomies-content img {
+.taxonomies-content img,
+.taxonomies-content-image picture {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .taxonomies-content img:hover {
@@ -391,6 +394,8 @@ li.product-card-big.banner img {
 .product-hidden-img img {
   display: block;
   width: 100%;
+  height: 100%;
+  object-fit: cover;
   margin: 0 auto;
 }
 

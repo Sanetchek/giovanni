@@ -1,5 +1,3 @@
-'use strict';
-
 (function ($) {
   const ajax_url = window.giovanni.ajax_url;
 
@@ -9,7 +7,7 @@
   $('.header-search .icon-search, #search_overlay').on('click', function () {
     $('form.header-form-search').fadeToggle();
     $('.search-overlay-container').toggleClass('active');
-    $('body').toggleClass('no-scroll');
+    $('input#header_search').focus();
   });
 
   /**

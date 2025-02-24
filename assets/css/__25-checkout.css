@@ -1,3 +1,91 @@
 .is-large .wc-block-checkout__sidebar {
   top: 114px !important;
 }
+
+.woocommerce-error,
+.woocommerce-info,
+.woocommerce-message {
+  color: #fff !important;
+  background: #000 !important;
+}
+
+.woocommerce-error a,
+.woocommerce-info a,
+.woocommerce-message a {
+  color: #fff !important;
+}
+
+#add_payment_method #payment,
+.woocommerce-cart #payment,
+.woocommerce-checkout #payment {
+  background: transparent !important;
+}
+
+#add_payment_method #payment div.payment_box,
+.woocommerce-cart #payment div.payment_box,
+.woocommerce-checkout #payment div.payment_box {
+  background-color: #e6e6e6 !important;
+}
+
+#add_payment_method #payment div.payment_box::before,
+.woocommerce-cart #payment div.payment_box::before,
+.woocommerce-checkout #payment div.payment_box::before {
+  content: "";
+  border: 1em solid #e6e6e6 !important;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+  border-top-color: transparent !important;
+}
+
+button#place_order {
+  background: #000 !important;
+  padding: 20px 40px !important;
+}
+
+.woocommerce-info {
+  border-top-color: #000 !important;
+}
+
+.woocommerce-info::before {
+  color: #e6e6e6 !important;
+}
+
+form.checkout_coupon button[type="submit"],
+a.button.cancel {
+  color: #fff;
+  background: #000;
+  padding: 18px 40px;
+}
+
+form.checkout_coupon button[type="submit"]:hover,
+a.button.cancel:hover {
+  color: #fff;
+  background: #000;
+}
+
+table.wc-block-cart-items .wc-block-components-product-name,
+table.wc-block-cart-items span.wc-block-components-product-price__value,
+table.wc-block-cart-items .wc-block-components-product-metadata__description * {
+  font-size: 18px !important;
+}
+
+td.wc-block-cart-item__image {
+  width: 200px;
+}
+
+@media screen and (max-width: 1024px) {
+
+  .wc-block-components-sidebar,
+  .wc-block-components-sidebar-layout .wc-block-components-main {
+    box-sizing: border-box;
+    margin-top: 8px;
+    padding-right: 2.2641509434%;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 754px) {
+  td.wc-block-cart-item__image {
+    width: 80px;
+  }
+}
