@@ -73,6 +73,10 @@ td.wc-block-cart-item__image {
   width: 200px;
 }
 
+li.wc_payment_method:nth-child(n+2) {
+  margin-top: 24px !important;
+}
+
 @media screen and (max-width: 1024px) {
 
   .wc-block-components-sidebar,
