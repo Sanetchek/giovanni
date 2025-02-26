@@ -384,3 +384,7 @@ header.entry-header.page.default-template h1.entry-title {
   line-height: 56px;
   letter-spacing: -0.2px;
 }
+
+#post-9067 .entry-content p {
+  font-size: 20px !important;
+}

@@ -1,15 +1,21 @@
 <div id="jewellery_menu" class="mega-menu">
-  <div class="page-mob">
-    <button class="mega-menu-header">
-      <?= __('תכשיטים', 'giovanni') ?>
-    </button>
-  </div>
+  <?php $mob_title = get_field('mob_jewellery_title', 'options') ?>
+  <?php if ($mob_title) : ?>
+    <div class="page-mob">
+      <button class="mega-menu-header">
+        <?= $mob_title ?>
+      </button>
+    </div>
+  <?php endif ?>
 
   <div class="mega-menu-container">
     <div class="menu-side">
       <div class="menu-wrap">
         <div class="menu-1">
-          <p class="menu-title"><?= __('נשים', 'giovanni') ?></p>
+          <?php $title1 = get_field('menu_jewellery_title_1', 'options'); ?>
+          <?php if ($title1) : ?>
+            <p class="menu-title"><?= $title1 ?></p>
+          <?php endif ?>
 
           <?php
             wp_nav_menu([
@@ -21,7 +27,10 @@
         </div>
 
         <div class="menu-2">
-          <p class="menu-title"><?= __('גברים', 'giovanni') ?></p>
+          <?php $title2 = get_field('menu_jewellery_title_2', 'options'); ?>
+          <?php if ($title2) : ?>
+            <p class="menu-title"><?= $title2 ?></p>
+          <?php endif ?>
 
           <?php
             wp_nav_menu([
@@ -58,15 +67,18 @@
 
 
 <div id="jewellery_menu_mobile" class="mobile-jewellery mobile-dropdown-menu">
-
-  <div class="page-mob">
-    <button class="mega-menu-header">
-      <?= __('תכשיטים', 'giovanni') ?>
-    </button>
-  </div>
+  <?php if ($mob_title) : ?>
+    <div class="page-mob">
+      <button class="mega-menu-header">
+        <?= $mob_title ?>
+      </button>
+    </div>
+  <?php endif ?>
 
   <div class="menu-1">
-    <p class="menu-title"><?= __('נשים', 'giovanni') ?></p>
+    <?php if ($title1) : ?>
+      <p class="menu-title"><?= $title1 ?></p>
+    <?php endif ?>
 
     <?php
       wp_nav_menu([
@@ -76,7 +88,9 @@
       ]);
     ?>
 
-    <p class="menu-title"><?= __('גברים', 'giovanni') ?></p>
+    <?php if ($title2) : ?>
+      <p class="menu-title"><?= $title2 ?></p>
+    <?php endif ?>
 
     <?php
       wp_nav_menu([
@@ -86,15 +100,19 @@
       ]);
     ?>
 
-    <div class="menu-btns">
-      <a href="#" class="btn-black"><?= __('פופולרי', 'giovanni') ?></a>
-      <a href="#" class="btn-black"><?= __('חדש ב', 'giovanni') ?></a>
-    </div>
+    <?php if ($btns) : ?>
+      <div class="menu-btns">
+        <?php foreach ( $btns as $btn ) : ?>
+          <?php if ($btn['link']) : ?>
+            <a href="<?= $btn['link'] ?>" class="btn-black"><?= $btn['label'] ?></a>
+          <?php endif ?>
+        <?php endforeach ?>
+      </div>
+    <?php endif ?>
   </div>
 
   <div class="links-wrap mobile-links-wrap">
     <?php
-      $links = get_field('menu_gifts', 'options');
       get_template_part('template-parts/mega-menu/links-mobile', '', ['links' => $links]);
     ?>
   </div>
