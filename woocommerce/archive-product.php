@@ -237,6 +237,7 @@ get_header( 'shop' );
 				'orderby'  => 'meta_value_num',
 				'meta_key' => 'total_sales',
 				'order'    => 'DESC',
+				'post__not_in'   => array(7935),
 			);
 
 			// For category archives, add a tax_query to filter by category.

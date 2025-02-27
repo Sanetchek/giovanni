@@ -107,19 +107,19 @@ html select[disabled] {
 
 .btn,
 .button {
-  display: flex;
-  width: fit-content;
+  display: flex !important;
+  width: fit-content !important;
   align-items: center;
   justify-content: center;
   font-family: "Heebo", sans-serif;
-  font-weight: 600;
-  font-size: 12px;
-  line-height: 1.06667;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  line-height: 1.06667 !important;
   letter-spacing: 0.07em;
-  color: #000;
+  color: #000 !important;
   text-transform: uppercase;
-  padding: 16px 24px;
-  text-decoration: none;
+  padding: 16px 24px !important;
+  text-decoration: none !important;
   cursor: pointer !important;
 }
 
