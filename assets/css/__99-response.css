@@ -1040,6 +1040,16 @@
     padding-bottom: 6px;
     padding-top: 6px;
   }
+
+  .u-columns {
+    flex-direction: column;
+  }
+
+  .u-column1,
+  .u-column2 {
+    float: unset !important;
+    width: 100% !important;
+  }
 }
 
 @media screen and (max-width: 782px) {
