@@ -162,7 +162,7 @@ form.wpcf7-form * {
 }
 
 .form-submit {
-  color: #fff;
+  color: #fff !important;
   background: #000;
   display: block;
   margin-left: auto;

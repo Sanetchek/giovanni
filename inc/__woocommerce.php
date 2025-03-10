@@ -485,3 +485,28 @@ add_filter( 'woocommerce_blocks_product_grid_item_html', function( $html, $data,
 
   return $custom_html;
 }, 10, 3 );
+
+/**
+ * Remove flat rate shipping if free shipping is available
+ */
+add_filter('woocommerce_package_rates', function($rates) {
+  $free_shipping_key = '';
+
+  // Find free shipping method
+  foreach ($rates as $key => $rate) {
+    if ('free_shipping' === $rate->method_id) {
+      $free_shipping_key = $key;
+    }
+  }
+
+  // If free shipping exists, remove flat rate
+  if ($free_shipping_key) {
+    foreach ($rates as $key => $rate) {
+      if ('flat_rate' === $rate->method_id) {
+        unset($rates[$key]);
+      }
+    }
+  }
+
+  return $rates;
+}, 100);

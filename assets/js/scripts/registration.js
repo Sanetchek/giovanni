@@ -1,6 +1,8 @@
 jQuery(document).ready(function ($) {
   $('#ajax-registration-form').on('submit', function (e) {
     e.preventDefault();
+    console.log('ok');
+
 
     // Basic validation
     const birthDate = $('#birth-date').val();
