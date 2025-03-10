@@ -335,9 +335,38 @@
     align-items: center;
   }
 
-  .user-actions-side .header-like,
-  .user-actions-side .header-search {
+  .user-actions-side .header-like {
     display: none;
+  }
+
+  .user-actions-side .header-search {
+    position: absolute;
+    right: 40px;
+  }
+
+  form.header-form-search .header-form-container {
+    justify-content: space-between;
+  }
+
+  .product-results li img {
+    width: 120px;
+  }
+
+  .product-results h5 {
+    font-size: 16px;
+  }
+
+  .product-results li bdi {
+    font-size: 14px;
+  }
+
+  #search_results {
+    width: 374px;
+    position: absolute;
+    top: 100px;
+    right: 0;
+    background: #fff;
+    z-index: 9999;
   }
 
   .header-action.header-search {
