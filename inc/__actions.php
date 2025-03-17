@@ -54,14 +54,17 @@ add_action('wp_head', function ($args = []) {
 	}
 
 	if ($do_count && $rg->exclude_bots) {
-		$notbot = 'Mozilla|Opera'; // Chrome|Safari|Firefox|Netscape - all equal Mozilla
-		$bot = 'Bot/|robot|Slurp/|yahoo';
-		if (
-			!preg_match("/$notbot/i", $_SERVER['HTTP_USER_AGENT']) ||
-			preg_match("~$bot~i", $_SERVER['HTTP_USER_AGENT'])
-		) {
-			$do_count = false;
-		}
+    $notbot = 'Mozilla|Opera'; // Chrome|Safari|Firefox|Netscape - all equal Mozilla
+    $bot = 'Bot/|robot|Slurp/|yahoo';
+
+    $user_agent = $_SERVER['HTTP_USER_AGENT'] ?? ''; // Ensure it's always defined
+
+    if (
+			!empty($user_agent) &&
+			(!preg_match("/$notbot/i", $user_agent) || preg_match("~$bot~i", $user_agent))
+    ) {
+      $do_count = false;
+    }
 	}
 
 	if ($do_count) {

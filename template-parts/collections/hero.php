@@ -10,7 +10,7 @@ $link = get_field('hero_link');
   <?php endif ?>
 
   <div class="hero-image main-wrap">
-    <?php get_template_part('template-parts/page', 'hero', ['hero_image' => $bg, 'hero_image_mob' => $bg_mob]) ?>
+    <?php generate_picture_source($bg, $bg_mob); ?>
 
     <h1 class="visually-hidden">Collections Page</h1>
   </div>

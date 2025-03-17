@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-02-18T16:24:39+03:00\n"
+"POT-Creation-Date: 2025-03-12T16:47:50+03:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: giovanni\n"
@@ -162,7 +162,7 @@ msgstr ""
 msgid "הצעות:"
 msgstr ""
 
-#: inc/__custom-functions.php:451
+#: inc/__custom-functions.php:473
 msgid "עמוד הבית "
 msgstr ""
 
@@ -236,27 +236,27 @@ msgid "Gift card added to cart!"
 msgstr ""
 
 #: inc/__registration.php:10
-msgid "You must agree to the Privacy Policy."
+msgid "עליך להסכים למדיניות הפרטיות."
 msgstr ""
 
 #: inc/__registration.php:14
-msgid "Emails do not match."
+msgid "המיילים אינם תואמים."
 msgstr ""
 
 #: inc/__registration.php:18
-msgid "Passwords do not match."
+msgid "הסיסמאות אינן תואמות."
 msgstr ""
 
 #: inc/__registration.php:24
-msgid "A valid email is required."
+msgid "יש צורך באימייל תקף."
 msgstr ""
 
 #: inc/__registration.php:32
-msgid "Could not generate a valid username. Please use a different email."
+msgid "לא ניתן ליצור שם משתמש חוקי. אנא השתמש באימייל אחר."
 msgstr ""
 
 #: inc/__registration.php:66
-msgid "Registration successful! Please log in."
+msgid "ההרשמה הצליחה! נא להיכנס."
 msgstr ""
 
 #: inc/__user-profile.php:6
@@ -317,6 +317,10 @@ msgstr ""
 msgid "לא נמצאו מוצרים נמכרים ביותר."
 msgstr ""
 
+#: template-parts/collections/block-8.php:10
+msgid "Collections Page"
+msgstr ""
+
 #: template-parts/content-none.php:14
 msgid "Nothing Found"
 msgstr ""
@@ -351,73 +355,6 @@ msgstr ""
 
 #: template-parts/header/searchform.php:3
 msgid "מה אתה מחפש?"
-msgstr ""
-
-#: template-parts/mega-menu/about.php:4
-#: template-parts/mega-menu/about.php:47
-msgid "אוֹדוֹת"
-msgstr ""
-
-#: template-parts/mega-menu/charms.php:4
-#: template-parts/mega-menu/charms.php:60
-msgid "CHARMS"
-msgstr ""
-
-#: template-parts/mega-menu/charms.php:11
-#: template-parts/mega-menu/jewellry.php:11
-#: template-parts/mega-menu/jewellry.php:67
-msgid "נשים"
-msgstr ""
-
-#: template-parts/mega-menu/charms.php:34
-#: template-parts/mega-menu/jewellry.php:34
-#: template-parts/mega-menu/jewellry.php:77
-msgid "גברים"
-msgstr ""
-
-#: template-parts/mega-menu/collections.php:4
-#: template-parts/mega-menu/collections.php:60
-msgid "אוספים"
-msgstr ""
-
-#: template-parts/mega-menu/collections.php:11
-#: template-parts/mega-menu/collections.php:65
-msgid "ערכות נושא"
-msgstr ""
-
-#: template-parts/mega-menu/collections.php:34
-#: template-parts/mega-menu/collections.php:74
-msgid "מומלצים"
-msgstr ""
-
-#: template-parts/mega-menu/collections.php:84
-#: template-parts/mega-menu/jewellry.php:88
-msgid "פופולרי"
-msgstr ""
-
-#: template-parts/mega-menu/collections.php:85
-#: template-parts/mega-menu/jewellry.php:89
-msgid "חדש ב"
-msgstr ""
-
-#: template-parts/mega-menu/gifts.php:4
-#: template-parts/mega-menu/gifts.php:60
-msgid "מתנות"
-msgstr ""
-
-#: template-parts/mega-menu/gifts.php:11
-#: template-parts/mega-menu/gifts.php:66
-msgid "מתנות עבור"
-msgstr ""
-
-#: template-parts/mega-menu/gifts.php:34
-#: template-parts/mega-menu/gifts.php:76
-msgid "מקרים"
-msgstr ""
-
-#: template-parts/mega-menu/jewellry.php:4
-#: template-parts/mega-menu/jewellry.php:62
-msgid "תכשיטים"
 msgstr ""
 
 #: template-parts/modal/login-modal.php:16

@@ -98,88 +98,42 @@ function generate_picture($image_id, $thumb = 'full', $class = '', $min = [], $m
 	return '';
 }
 
-
 /**
- * Counting the number of page visits
+ * Generates a responsive background image using the <picture> element.
+ *
+ * By default, the image is shown in its full size on desktop and in a smaller
+ * size on mobile devices. If the $bg_mob parameter is provided, it will be used
+
+ * instead of the $bg parameter for mobile devices.
+ *
+ * @param int $bg The ID of the background image.
+ * @param int $bg_mob The ID of the background image for mobile devices.
  */
-add_action('wp_head', function ($args = []) {
-	global $user_ID, $post, $wpdb;
-	$cont_id = '';
+function generate_picture_source($bg, $bg_mob = null) {
+	// Default mobile image to desktop image if not provided
+	$bg_mob = $bg_mob ? $bg_mob : $bg;
 
-	$rg = (object) wp_parse_args($args, [
-		// The post meta field key, where the number of views will be recorded.
-		'meta_key' => 'views',
-		// Whose visits count? 0 - All. 1 - Guests only. 2 - Only registered users.
-		'who_count' => 0,
-		// Exclude bots, robots? 0 - no, let them also count. 1 - yes, exclude from the count.
-		'exclude_bots' => true,
-	]);
+	// Get the URL of the desktop image
+	$desktop_image_url = wp_get_attachment_image_url($bg, '1920-865');
 
-	$do_count = false;
-	switch ($rg->who_count) {
-		case 0:
-			$do_count = true;
-			break;
-		case 1:
-			if (!$user_ID) {
-				$do_count = true;
-			}
-			break;
-		case 2:
-			if ($user_ID) {
-				$do_count = true;
-			}
-			break;
-	}
+	// Get the URL of the mobile image
+	$mob_image_url = wp_get_attachment_image_url($bg_mob, '768-865');
 
-	if ($do_count && $rg->exclude_bots) {
-		$notbot = 'Mozilla|Opera'; // Chrome|Safari|Firefox|Netscape - all equal Mozilla
-		$bot = 'Bot/|robot|Slurp/|yahoo';
-		if (
-			!preg_match("/$notbot/i", $_SERVER['HTTP_USER_AGENT']) ||
-			preg_match("~$bot~i", $_SERVER['HTTP_USER_AGENT'])
-		) {
-			$do_count = false;
-		}
-	}
+	// Preload both images (desktop and mobile)
+	if ($desktop_image_url): ?>
+		<link rel="preload" as="image" href="<?= esc_url($desktop_image_url); ?>" />
+	<?php endif;
 
-	if ($do_count) {
-		// for single page
-		if (is_singular()) {
-			$up = $wpdb->query(
-				$wpdb->prepare(
-					"UPDATE $wpdb->postmeta SET meta_value = (meta_value+1) WHERE post_id = %d AND meta_key = %s",
-					$post->ID,
-					$rg->meta_key
-				)
-			);
+	if ($mob_image_url): ?>
+		<link rel="preload" as="image" href="<?= esc_url($mob_image_url); ?>" />
+	<?php endif; ?>
 
-			if (!$up) {
-				add_post_meta($post->ID, $rg->meta_key, 1, true);
-			}
-
-			wp_cache_delete($post->ID, 'post_meta');
-		}
-
-		// for user/author page
-		if (is_author()) {
-			$user = get_user_by('slug', get_query_var('author_name'));
-			$up = $wpdb->query(
-				$wpdb->prepare(
-					"UPDATE $wpdb->usermeta SET meta_value = (meta_value+1) WHERE user_id = %d AND meta_key = %s",
-					$user->ID,
-					$rg->meta_key
-				)
-			);
-
-			if (!$up) {
-				add_user_meta($user->ID, $rg->meta_key, 1, true);
-			}
-
-			wp_cache_delete($user->ID, 'user_meta');
-		}
-	}
-});
+	<picture>
+		<source media="(max-width:1024px)" srcset="<?= esc_url($mob_image_url) ?>" sizes="(max-width: 1024px) 100vw">
+		<img width="1920" height="865" src="<?= esc_url($desktop_image_url) ?>" alt="hero" loading="lazy">
+	</picture>
+	<?php
+}
 
 /**
  * Count Page View
@@ -518,7 +472,7 @@ function show_page_content($content) {
 			case 'full_width_image':
 				$bg = $block['image'];
 				$bg_mob = $block['image_mob'];
-				get_template_part('template-parts/page', 'hero', ['hero_image' => $bg, 'hero_image_mob' => $bg_mob]);
+				generate_picture_source($bg, $bg_mob);
 				break;
 			case 'image_with_caption':
 				get_template_part('template-parts/page/image', 'caption', ['block' => $block]);

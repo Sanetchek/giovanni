@@ -56,11 +56,30 @@
 				</div>
 
 				<div class="footer-socials">
-					<a rel="noreferrer" href="https://www.facebook.com/giovanniraspini" target="_blank" class="icon-fb" aria-label="facebook"></a>
-					<a rel="noreferrer" href="https://www.instagram.com/giovanniraspini" target="_blank" class="icon-is" aria-label="istangram"></a>
-					<a rel="noreferrer" href="https://www.youtube.com/giovanniraspinigioielli" target="_blank" class="icon-yt" aria-label="youtube"></a>
-					<a rel="noreferrer" href="https://www.pinterest.it/giovanni_raspini/" target="_blank" class="icon-pinterest" aria-label="pinterest"></a>
-					<a rel="noreferrer" href="https://www.tiktok.com/@giovanni_raspini" target="_blank" class="icon-tiktok" aria-label="tiktok"></a>
+					<?php $pinterest = get_field('pinterest', 'option'); ?>
+					<?php if ($pinterest) : ?>
+						<a rel="noreferrer" href="<?php echo esc_html($pinterest)?>" target="_blank" class="icon-pinterest" aria-label="pinterest"></a>
+					<?php endif ?>
+
+					<?php $youtube = get_field('youtube', 'option'); ?>
+					<?php if ($youtube) : ?>
+						<a rel="noreferrer" href="<?php echo esc_html($youtube)?>" target="_blank" class="icon-yt" aria-label="youtube"></a>
+					<?php endif ?>
+
+					<?php $instagram = get_field('instagram', 'option'); ?>
+					<?php if ($instagram) : ?>
+						<a rel="noreferrer" href="<?php echo esc_html($instagram)?>" target="_blank" class="icon-is" aria-label="istangram"></a>
+					<?php endif ?>
+
+					<?php $facebook = get_field('facebook', 'option'); ?>
+					<?php if ($facebook) : ?>
+						<a rel="noreferrer" href="<?php echo esc_html($facebook)?>" target="_blank" class="icon-fb" aria-label="facebook"></a>
+					<?php endif ?>
+
+					<?php $tiktok = get_field('tiktok', 'option'); ?>
+					<?php if ($tiktok) : ?>
+						<a rel="noreferrer" href="<?php echo esc_html($tiktok)?>" target="_blank" class="icon-tiktok" aria-label="tiktok"></a>
+					<?php endif ?>
 				</div>
 
 				<p class="copyrights">

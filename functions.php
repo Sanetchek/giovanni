@@ -368,3 +368,8 @@ require get_template_directory() . '/inc/__gift-card.php';
  * Woocommerce.
  */
 require get_template_directory() . '/inc/__woocommerce.php';
+
+/**
+ * Site Optimization.
+ */
+require get_template_directory() . '/inc/__site-optimization.php';

@@ -6,12 +6,8 @@ $bg_mob = get_field('block8_image_mob');
 <section id="block8" class="block8">
   <div class="hero">
     <div class="hero-image main-wrap">
-      <?php show_image($bg, '1920-865', ['class' => 'page-desk']) ?>
-      <?php
-        $bg_mob = $bg_mob ? $bg_mob : $bg;
-        show_image($bg_mob, '768-865', ['class' => 'page-mob']);
-      ?>
-      <h1 class="visually-hidden">Collections Page</h1>
+      <?php generate_picture_source($bg, $bg_mob); ?>
+      <h1 class="visually-hidden"><?= __('Collections Page', 'giovanni') ?></h1>
     </div>
   </div>
 

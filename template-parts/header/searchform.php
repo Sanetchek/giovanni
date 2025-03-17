@@ -1,6 +1,6 @@
 <form action="/" method="get" id="header_form_search" class="header-form-search">
   <div class="header-form-container">
-    <input type="text" name="s" id="header_search" placeholder="<?= __('מה אתה מחפש?', 'giovanni') ?>">
+    <input type="text" name="s" id="header_search" placeholder="<?= __('הקלד/י את החיפוש..', 'giovanni') ?>">
     <div class="header-form-btns">
       <div class="header-form-btns-container">
         <button type="button" id="header_form_clear">

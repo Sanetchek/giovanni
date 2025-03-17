@@ -1,14 +1,12 @@
 jQuery(document).ready(function ($) {
   $('#ajax-registration-form').on('submit', function (e) {
     e.preventDefault();
-    console.log('ok');
-
 
     // Basic validation
     const birthDate = $('#birth-date').val();
     const email = $('#email').val();
     const confirmEmail = $('#confirm-email').val();
-    const password = $('#password').val();
+    const password = $('#main-password').val();
     const confirmPassword = $('#confirm-password').val();
 
     const currentDate = new Date();
@@ -17,35 +15,42 @@ jQuery(document).ready(function ($) {
     // Password validation regex: At least 8 characters, one uppercase, one special character
     const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
 
+    console.log('birthDate', birthDate && (enteredDate > currentDate || enteredDate.getFullYear() < 1900));
     if (birthDate && (enteredDate > currentDate || enteredDate.getFullYear() < 1900)) {
       showError('birth-date', 'נא להזין תאריך לידה חוקי.');
       return;
     }
 
+    console.log('email', email !== confirmEmail);
     if (email !== confirmEmail) {
       showError('confirm-email', 'המיילים אינם תואמים.');
       return;
     }
 
+    console.log('passwordRegex', !passwordRegex.test(password));
     if (!passwordRegex.test(password)) {
       showError('password', 'הסיסמה חייבת להיות לפחות 8 תווים, לכלול אות אחת גדולה ותו מיוחד אחד.');
       return;
     }
 
+    console.log('password', password !== confirmPassword);
     if (password !== confirmPassword) {
       showError('confirm-password', 'הסיסמאות אינן תואמות.');
       return;
     }
 
+    const data = {
+      action: 'giovanni_register_user',
+      nonce: giovanni.registration_nonce,
+      formData: $(this).serialize(),
+    };
+    console.log('data', data);
+
     // AJAX request
     $.ajax({
       url: giovanni.ajax_url,
       type: 'POST',
-      data: {
-        action: 'giovanni_register_user',
-        nonce: giovanni.registration_nonce,
-        formData: $(this).serialize(),
-      },
+      data,
       success: function (response) {
         if (!response.success) {
           // Display the error message from PHP

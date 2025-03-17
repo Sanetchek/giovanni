@@ -32,7 +32,7 @@
     </div>
 
     <div class="form-row-register">
-      <label class="form-label" for="password"><?php _e('סיסמה', 'giovanni'); ?>*</label>
+      <label class="form-label" for="main-password"><?php _e('סיסמה', 'giovanni'); ?>*</label>
       <input type="password" name="password" id="main-password" class="form-input" placeholder="<?php _e('הזן לפחות 8 תווים, רישיות אחת ותו מיוחד', 'giovanni'); ?>" required>
     </div>
 

@@ -21,7 +21,7 @@ get_header();
 		$bg = get_field('background_image');
 		$bg_mob = get_field('background_image_mob');
 
-	 	get_template_part('template-parts/page', 'hero', ['hero_image' => $bg, 'hero_image_mob' => $bg_mob]);
+	 	generate_picture_source($bg, $bg_mob);
 	?>
 
   <div class="article-wrap">

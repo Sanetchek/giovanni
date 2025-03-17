@@ -7,21 +7,21 @@ function handle_user_registration() {
 
   // Validate required fields
   if (empty($formData['privacy_policy'])) {
-    wp_send_json_error(['message' => __('You must agree to the Privacy Policy.', 'giovanni')]);
+    wp_send_json_error(['message' => __('עליך להסכים למדיניות הפרטיות.', 'giovanni')]);
   }
 
   if ($formData['email'] !== $formData['confirm_email']) {
-    wp_send_json_error(['message' => __('Emails do not match.', 'giovanni')]);
+    wp_send_json_error(['message' => __('המיילים אינם תואמים.', 'giovanni')]);
   }
 
   if ($formData['password'] !== $formData['confirm_password']) {
-    wp_send_json_error(['message' => __('Passwords do not match.', 'giovanni')]);
+    wp_send_json_error(['message' => __('הסיסמאות אינן תואמות.', 'giovanni')]);
   }
 
   // Automatically set username as the first part of the email
   $email = sanitize_email($formData['email']);
   if (empty($email)) {
-    wp_send_json_error(['message' => __('A valid email is required.', 'giovanni')]);
+    wp_send_json_error(['message' => __('יש צורך באימייל תקף.', 'giovanni')]);
   }
 
   $username_raw = explode('@', $email)[0];
@@ -29,7 +29,7 @@ function handle_user_registration() {
 
   // Check if username is valid
   if (empty($username) || !validate_username($username)) {
-    wp_send_json_error(['message' => __('Could not generate a valid username. Please use a different email.', 'giovanni')]);
+    wp_send_json_error(['message' => __('לא ניתן ליצור שם משתמש חוקי. אנא השתמש באימייל אחר.', 'giovanni')]);
   }
 
   // Check if username already exists and append a number if necessary
@@ -63,7 +63,7 @@ function handle_user_registration() {
   update_user_meta($user_id, 'privacy_policy', 1); // Privacy policy is required.
 
   // Success message
-  wp_send_json_success(['message' => __('Registration successful! Please log in.', 'giovanni')]);
+  wp_send_json_success(['message' => __('ההרשמה הצליחה! נא להיכנס.', 'giovanni')]);
 }
 add_action('wp_ajax_giovanni_register_user', 'handle_user_registration');
 add_action('wp_ajax_nopriv_giovanni_register_user', 'handle_user_registration');
