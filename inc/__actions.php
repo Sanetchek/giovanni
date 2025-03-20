@@ -104,3 +104,20 @@ add_action('wp_head', function ($args = []) {
 		}
 	}
 });
+
+/**
+ * Adds a Pluro AI script to the head section of the page.
+ *
+ * This function injects an asynchronous and deferred JavaScript
+ * snippet into the document's head. The script sourced from
+ * "https://my.pluro.ai/unitoolbar.js" is loaded with the language
+ * parameter set to Hebrew.
+ */
+
+function add_pluro_ai_script() {
+    ?>
+    <script type="text/javascript">(function(){var e=document.createElement('script');e.async=true;e.defer=true;e.setAttribute("type","text/javascript");e.setAttribute("src","https://my.pluro.ai/unitoolbar.js?lang=he");document.getElementsByTagName("head")[0].appendChild(e);})();</script>
+    <?php
+}
+add_action('wp_head', 'add_pluro_ai_script');
+

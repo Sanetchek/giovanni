@@ -79,7 +79,8 @@
   // Step 4: Form submission
   $('#gift_form').on('submit', function (e) {
     e.preventDefault();
-
+    const form = $(this);
+    $(form).find('#submit_gift_certificate').prop('disabled', true);
 
     // Collect form data
     const senderName = $('#senderName').val();
@@ -118,6 +119,8 @@
         } else {
           console.log('Failed to add gift card to cart.');
         }
+
+        $(form).find('#submit_gift_certificate').prop('disabled', false);
       },
       error: function () {
         console.log('Error:', 'An error occurred. Please try again.');

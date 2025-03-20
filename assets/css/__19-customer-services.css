@@ -138,6 +138,7 @@ img.customer-image {
   margin-bottom: 16px;
 }
 
+.wpcf7,
 form.wpcf7-form * {
   text-align: right;
   direction: rtl;

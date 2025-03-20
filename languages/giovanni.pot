@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-03-12T16:47:50+03:00\n"
+"POT-Creation-Date: 2025-03-19T18:43:53+03:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: giovanni\n"
@@ -162,7 +162,7 @@ msgstr ""
 msgid "הצעות:"
 msgstr ""
 
-#: inc/__custom-functions.php:473
+#: inc/__custom-functions.php:442
 msgid "עמוד הבית "
 msgstr ""
 
@@ -287,12 +287,17 @@ msgstr ""
 msgid "Check this to agree to the Privacy Policy."
 msgstr ""
 
-#: inc/__woocommerce.php:418
+#: inc/__woocommerce.php:414
 msgid "הנתונים האישיים שלך ישמשו כדי לעבד ולטפל בהזמנה שלך, לתמוך בחוויה שלך בכל האתר, ולמטרות אחרות המתוארות ב <a href=\"/privacy-policy/\" target=\"_blank\">מדיניות הפרטיות</a> שלנו."
 msgstr ""
 
-#: inc/__woocommerce.php:435
+#: inc/__woocommerce.php:431
 msgid "עליך לאשר את מדיניות הפרטיות לפני שתמשיך."
+msgstr ""
+
+#: inc/__woocommerce.php:677
+#: template-parts/emails/gift.php:34
+msgid "מתנה מיוחדת עבורך"
 msgstr ""
 
 #: search.php:29
@@ -353,8 +358,136 @@ msgstr ""
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr ""
 
+#: template-parts/emails/footer.php:3
+msgid "אם יש לך שאלות בנוגע להזמנה שלך, אנא צור איתנו קשר:"
+msgstr ""
+
+#: template-parts/emails/footer.php:9
+msgid "תנאי שימוש"
+msgstr ""
+
+#: template-parts/emails/footer.php:10
+msgid "מדיניות פרטיות"
+msgstr ""
+
+#: template-parts/emails/footer.php:11
+msgid "משלוחים והחזרות"
+msgstr ""
+
+#: template-parts/emails/footer.php:15
+msgid "Giovanni Raspini. כל הזכויות שמורות."
+msgstr ""
+
+#: template-parts/emails/gift.php:45
+msgid "שלום"
+msgstr ""
+
+#: template-parts/emails/gift.php:49
+msgid "שלח/ה לך כרטיס מתנה של Giovanni Raspini ISRL"
+msgstr ""
+
+#: template-parts/emails/gift.php:49
+msgid " בשווי "
+msgstr ""
+
+#: template-parts/emails/gift.php:63
+msgid "קוד כרטיס המתנה שלך"
+msgstr ""
+
+#: template-parts/emails/gift.php:74
+msgid "כיצד להשתמש בכרטיס המתנה שלך:"
+msgstr ""
+
+#: template-parts/emails/gift.php:76
+msgid "בקר/י באתר"
+msgstr ""
+
+#: template-parts/emails/gift.php:77
+msgid "בחר/י את הפריטים האהובים עליך של Giovanni Raspini ISRL"
+msgstr ""
+
+#: template-parts/emails/gift.php:78
+msgid "הזן/י את קוד כרטיס המתנה שלך בקופה"
+msgstr ""
+
+#: template-parts/emails/gift.php:79
+msgid "תהנה/י מתכשיטי Giovanni Raspini ISRL החדשים שלך!"
+msgstr ""
+
+#: template-parts/emails/gift.php:85
+msgid "לקנייה עכשיו"
+msgstr ""
+
+#: template-parts/emails/order.php:7
+msgid "תודה על הזמנתך!"
+msgstr ""
+
+#: template-parts/emails/order.php:9
+msgid "הזמנה חדשה מספר"
+msgstr ""
+
+#: template-parts/emails/order.php:9
+msgid "# מאתר Giovanni Raspini ISRL"
+msgstr ""
+
+#: template-parts/emails/order.php:15
+msgid "פרטי ההזמנה"
+msgstr ""
+
+#: template-parts/emails/order.php:20
+msgid "מוצר"
+msgstr ""
+
+#: template-parts/emails/order.php:21
+msgid "תמונה"
+msgstr ""
+
+#: template-parts/emails/order.php:22
+msgid "כמות"
+msgstr ""
+
+#: template-parts/emails/order.php:23
+msgid "מחיר"
+msgstr ""
+
+#: template-parts/emails/order.php:55
+msgid "סכום ביניים:"
+msgstr ""
+
+#: template-parts/emails/order.php:60
+msgid "משלוח:"
+msgstr ""
+
+#: template-parts/emails/order.php:65
+msgid "מע\"מ (18%):"
+msgstr ""
+
+#: template-parts/emails/order.php:70
+msgid "סה\"כ לתשלום:"
+msgstr ""
+
+#: template-parts/emails/order.php:78
+msgid "אמצעי תשלום"
+msgstr ""
+
+#: template-parts/emails/order.php:85
+msgid "כתובת למשלוח"
+msgstr ""
+
+#: template-parts/emails/order.php:92
+msgid "כתובת לחיוב"
+msgstr ""
+
+#: template-parts/emails/order.php:96
+msgid "טלפון:"
+msgstr ""
+
+#: template-parts/emails/order.php:99
+msgid "אימייל:"
+msgstr ""
+
 #: template-parts/header/searchform.php:3
-msgid "מה אתה מחפש?"
+msgid "הקלד/י את החיפוש.."
 msgstr ""
 
 #: template-parts/modal/login-modal.php:16
@@ -621,12 +754,16 @@ msgstr ""
 msgid "Details"
 msgstr ""
 
-#: woocommerce/content-single-product.php:167
+#: woocommerce/content-single-product.php:176
 msgid "מומלצים ביחד"
 msgstr ""
 
-#: woocommerce/content-single-product.php:244
+#: woocommerce/content-single-product.php:238
 msgid "בקר בקטגוריה"
+msgstr ""
+
+#: woocommerce/loop/no-products-found.php:22
+msgid "בקרוב..."
 msgstr ""
 
 #: woocommerce/myaccount/dashboard.php:34

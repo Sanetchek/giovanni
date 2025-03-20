@@ -163,26 +163,20 @@ $categories_array = product_collection_categories();
 		</div>
 	</div>
 
-	<div class="product-container single-product-related">
-		<h2 class="related-title"><?php echo __('מומלצים ביחד', 'giovanni') ?></h2>
-
-		<?php
+	<?php
 		//this function shows products if they are selected in upsells or cross-sells. If nothing is set - show related items
 		$product_id = $product->get_id();
 		$upsell_ids = $product->get_upsell_ids();
 		$cross_sell_ids = $product->get_cross_sell_ids();
 
 		$productArray = array_merge($upsell_ids, $cross_sell_ids);
-
-		if ( empty($productArray) ) {
-			$productArray = get_related_product_ids($product_id);
-		}
-
-		if ( ! empty($productArray) ) {
-			get_template_part('template-parts/product', 'slider', ['productArray' => $productArray]);
-		}
-		?>
-	</div>
+	?>
+	<?php if (! empty($productArray)) : ?>
+		<div class="product-container single-product-related">
+			<h2 class="related-title"><?php echo __('מומלצים ביחד', 'giovanni') ?></h2>
+			<?php	get_template_part('template-parts/product', 'slider', ['productArray' => $productArray]);	?>
+		</div>
+	<?php endif ?>
 
 	<?php if ($categories_array) : ?>
 		<div class="main-wrap">

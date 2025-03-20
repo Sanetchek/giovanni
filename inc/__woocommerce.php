@@ -172,9 +172,6 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters('active_plugins', ge
     woocommerce_mini_cart( [ 'list_class' => 'header-mini-cart-list' ] );
     $fragments['.header-mini-cart-content'] = '<div class="header-mini-cart-content">' . ob_get_clean() . '</div>';
 
-    // Debugging: Log the fragments to the console
-    error_log(print_r($fragments, true));
-
     return $fragments;
   }
   add_filter( 'woocommerce_add_to_cart_fragments', 'giovanni_add_to_cart_fragment' );
@@ -403,110 +400,292 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters('active_plugins', ge
 
     return $crumbs;
   }
-}
 
-/**
- * Outputs a custom privacy policy checkbox to the checkout page.
- *
- * @since 1.0.0
- */
-function custom_privacy_checkbox() {
-  ?>
-  <p class="form-row terms">
-    <label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox">
-      <input type="checkbox" class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox" name="custom_privacy_checkbox" id="custom_privacy_checkbox">
-      <span class="woocommerce-terms-and-conditions-checkbox-text"><?php _e('הנתונים האישיים שלך ישמשו כדי לעבד ולטפל בהזמנה שלך, לתמוך בחוויה שלך בכל האתר, ולמטרות אחרות המתוארות ב <a href="/privacy-policy/" target="_blank">מדיניות הפרטיות</a> שלנו.', 'giovanni'); ?>
-      </span>
-    </label>
-  </p>
-  <?php
-}
-add_action('woocommerce_review_order_before_submit', 'custom_privacy_checkbox', 20);
-
-/**
- * Validates the custom privacy checkbox during the WooCommerce checkout process.
- *
- * Checks if the custom privacy checkbox is set in the POST request, and if not,
- * adds an error notice prompting the user to agree to the privacy policy before proceeding.
- */
-
-function validate_custom_privacy_checkbox() {
-  if (!isset($_POST['custom_privacy_checkbox'])) {
-    wc_add_notice(__('עליך לאשר את מדיניות הפרטיות לפני שתמשיך.', 'giovanni'), 'error');
+  /**
+   * Outputs a custom privacy policy checkbox to the checkout page.
+   *
+   * @since 1.0.0
+   */
+  function custom_privacy_checkbox() {
+    ?>
+    <p class="form-row terms">
+      <label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox">
+        <input type="checkbox" class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox" name="custom_privacy_checkbox" id="custom_privacy_checkbox">
+        <span class="woocommerce-terms-and-conditions-checkbox-text"><?php _e('הנתונים האישיים שלך ישמשו כדי לעבד ולטפל בהזמנה שלך, לתמוך בחוויה שלך בכל האתר, ולמטרות אחרות המתוארות ב <a href="/privacy-policy/" target="_blank">מדיניות הפרטיות</a> שלנו.', 'giovanni'); ?>
+        </span>
+      </label>
+    </p>
+    <?php
   }
-}
-add_action('woocommerce_checkout_process', 'validate_custom_privacy_checkbox');
+  add_action('woocommerce_review_order_before_submit', 'custom_privacy_checkbox', 20);
 
-/**
- * Save the custom privacy checkbox field as order meta.
- *
- * @param int $order_id The ID of the order.
- */
-function save_custom_privacy_checkbox($order_id) {
-  if (isset($_POST['custom_privacy_checkbox'])) {
-    update_post_meta($order_id, '_custom_privacy_checkbox', 'yes');
-  }
-}
-add_action('woocommerce_checkout_update_order_meta', 'save_custom_privacy_checkbox');
+  /**
+   * Validates the custom privacy checkbox during the WooCommerce checkout process.
+   *
+   * Checks if the custom privacy checkbox is set in the POST request, and if not,
+   * adds an error notice prompting the user to agree to the privacy policy before proceeding.
+   */
 
-/**
- * remove checkout privacy policy text
- */
-add_action('wp', function () {
-  remove_action('woocommerce_checkout_terms_and_conditions', 'wc_checkout_privacy_policy_text', 20);
-});
-
-/**
- * Customize WooCommerce billing fields.
- *
- * This function modifies the WooCommerce billing fields to ensure that the
- * billing phone number is marked as a required field. It also adds the
- * 'validate-required' class to the billing phone field for frontend validation.
- *
- * @param array $fields The existing billing fields.
- * @return array The modified billing fields with the phone number set as required.
- */
-
-function custom_billing_fields( $fields ) {
-  $fields['billing_phone']['required'] = true;
-
-  return $fields;
-}
-add_filter('woocommerce_billing_fields', 'custom_billing_fields', 1000, 1);
-
-
-add_filter( 'woocommerce_blocks_product_grid_item_html', function( $html, $data, $product ) {
-  // Use output buffering to capture template output
-  ob_start();
-  get_template_part( 'template-parts/product-card', null, ['product_id' => $product->get_id()] );
-  $custom_template = ob_get_clean();
-
-  $custom_html = "<li class=\"wc-block-grid__product\">{$custom_template}</li>";
-
-  return $custom_html;
-}, 10, 3 );
-
-/**
- * Remove flat rate shipping if free shipping is available
- */
-add_filter('woocommerce_package_rates', function($rates) {
-  $free_shipping_key = '';
-
-  // Find free shipping method
-  foreach ($rates as $key => $rate) {
-    if ('free_shipping' === $rate->method_id) {
-      $free_shipping_key = $key;
+  function validate_custom_privacy_checkbox() {
+    if (!isset($_POST['custom_privacy_checkbox'])) {
+      wc_add_notice(__('עליך לאשר את מדיניות הפרטיות לפני שתמשיך.', 'giovanni'), 'error');
     }
   }
+  add_action('woocommerce_checkout_process', 'validate_custom_privacy_checkbox');
 
-  // If free shipping exists, remove flat rate
-  if ($free_shipping_key) {
+  /**
+   * Save the custom privacy checkbox field as order meta.
+   *
+   * @param int $order_id The ID of the order.
+   */
+  function save_custom_privacy_checkbox($order_id) {
+    if (isset($_POST['custom_privacy_checkbox'])) {
+      update_post_meta($order_id, '_custom_privacy_checkbox', 'yes');
+    }
+  }
+  add_action('woocommerce_checkout_update_order_meta', 'save_custom_privacy_checkbox');
+
+  /**
+   * remove checkout privacy policy text
+   */
+  add_action('wp', function () {
+    remove_action('woocommerce_checkout_terms_and_conditions', 'wc_checkout_privacy_policy_text', 20);
+  });
+
+  /**
+   * Customize WooCommerce billing fields.
+   *
+   * This function modifies the WooCommerce billing fields to ensure that the
+   * billing phone number is marked as a required field. It also adds the
+   * 'validate-required' class to the billing phone field for frontend validation.
+   *
+   * @param array $fields The existing billing fields.
+   * @return array The modified billing fields with the phone number set as required.
+   */
+
+  function custom_billing_fields( $fields ) {
+    $fields['billing_phone']['required'] = true;
+
+    return $fields;
+  }
+  add_filter('woocommerce_billing_fields', 'custom_billing_fields', 1000, 1);
+
+
+  add_filter( 'woocommerce_blocks_product_grid_item_html', function( $html, $data, $product ) {
+    // Use output buffering to capture template output
+    ob_start();
+    get_template_part( 'template-parts/product-card', null, ['product_id' => $product->get_id()] );
+    $custom_template = ob_get_clean();
+
+    $custom_html = "<li class=\"wc-block-grid__product\">{$custom_template}</li>";
+
+    return $custom_html;
+  }, 10, 3 );
+
+  /**
+   * Remove flat rate shipping if free shipping is available
+   */
+  add_filter('woocommerce_package_rates', function($rates) {
+    $free_shipping_key = '';
+
+    // Find free shipping method
     foreach ($rates as $key => $rate) {
-      if ('flat_rate' === $rate->method_id) {
-        unset($rates[$key]);
+      if ('free_shipping' === $rate->method_id) {
+        $free_shipping_key = $key;
+      }
+    }
+
+    // If free shipping exists, remove flat rate
+    if ($free_shipping_key) {
+      foreach ($rates as $key => $rate) {
+        if ('flat_rate' === $rate->method_id) {
+          unset($rates[$key]);
+        }
+      }
+    }
+
+    return $rates;
+  }, 100);
+
+  /**
+   * Retrieves and merges taxonomies associated with a given product category.
+   *
+   * This function fetches pages and category taxonomy boxes related to a specific
+   * product category, ensures they are arrays, assigns a type ('page' or 'term')
+   * to each item, and merges them into a single array.
+   *
+   * @param int $term_id The ID of the product category term.
+   * @return array Merged array of taxonomies with type indicators.
+   */
+  function get_merged_taxonomies($term_id) {
+    $taxonomies_pages = get_field('pages_with_taxonomies', 'product_cat_' . $term_id);
+    $taxonomies_category_box = get_field('category_taxonomies_boxes', 'product_cat_' . $term_id);
+
+    // Ensure $taxonomies_pages is an array
+    if (!is_array($taxonomies_pages)) {
+      $taxonomies_pages = [];
+    }
+
+    // Ensure $taxonomies_category_box is an array
+    if (!is_array($taxonomies_category_box)) {
+      $taxonomies_category_box = [];
+    }
+
+    // Add type => 'page' to each ID in $taxonomies_pages
+    $taxonomies_pages_with_type = array_map(function($id) {
+      return [
+        'id' => $id,
+        'type' => 'page'
+      ];
+    }, $taxonomies_pages);
+
+    // Add type => 'term' to each ID in $taxonomies_category_box
+    $taxonomies_category_box_with_type = array_map(function($id) {
+      return [
+        'id' => $id,
+        'type' => 'term'
+      ];
+    }, $taxonomies_category_box);
+
+    // Merge the arrays
+    return array_merge($taxonomies_pages_with_type, $taxonomies_category_box_with_type);
+  }
+
+  /**
+   * Retrieves a paginated list of WooCommerce products ordered by total sales.
+   *
+   * This function sets up a query to fetch published WooCommerce products,
+   * ordered by their total sales in descending order. It also supports pagination
+   * and filters products by category if on a product category archive page.
+   *
+   * @return WP_Query The query object containing the products.
+   */
+  function get_paginated_products() {
+    // Determine the current page
+    $paged = get_query_var('paged') ? get_query_var('paged') : 1; // Default to page 1
+
+    $args = array(
+      'post_type'      => 'product',
+      'posts_per_page' => 20, // You can modify this value
+      'paged'          => $paged, // Pagination parameter
+      'post_status'    => 'publish',
+      'orderby'        => 'meta_value_num',
+      'meta_key'       => 'total_sales',
+      'order'          => 'DESC',
+      'post__not_in'   => array(7935), // Exclude specific products
+    );
+
+    // For category archives, add a tax_query to filter by category.
+    if (is_product_category()) {
+      $current_category = get_queried_object();
+
+      if ($current_category && !is_wp_error($current_category)) {
+        $category_id = $current_category->term_id; // Get the current category ID.
+        $args['tax_query'] = array(
+          'relation' => 'AND',
+          array(
+            'taxonomy' => 'product_cat',
+            'field'    => 'term_id',
+            'terms'    => $category_id,
+          ),
+        );
+      }
+    }
+
+    return new WP_Query($args);
+  }
+
+  /**
+   * Filters available payment gateways based on the presence of a gift card in the cart.
+   *
+   * If a gift card is found in the cart, only the 'tranzilla' gateway will be available.
+   *
+   * @param array $available_gateways The available payment gateways.
+   * @return array The filtered payment gateways.
+   */
+  function filter_payment_gateways_based_on_gift_card($available_gateways) {
+    // Check if WooCommerce is ready and the cart is available
+    if (is_admin() || !WC()->cart) {
+      return $available_gateways;
+    }
+
+    // Check if the cart has any product matching the conditions
+    $has_gift_card = false;
+
+    foreach (WC()->cart->get_cart() as $cart_item) {
+      $product = $cart_item['data'];
+      $product_id = $cart_item['product_id'];
+      $product_type = $product->get_type();
+      $wps_gift_product = get_post_meta($product_id, 'wps_gift_product', true);
+
+      // Check if it's a gift card
+      if ('wgm_gift_card' === $product_type || 'gw_gift_card' === $product_type || 'on' === $wps_gift_product) {
+        $has_gift_card = true;
+        break;
+      }
+    }
+
+    // If a gift card is found, leave only the 'tranzila' gateway
+    if ($has_gift_card) {
+      foreach ($available_gateways as $gateway_id => $gateway) {
+        if ($gateway_id !== 'tranzila') {
+          unset($available_gateways[$gateway_id]);
+        }
+      }
+    }
+
+    return $available_gateways;
+  }
+  add_filter('woocommerce_available_payment_gateways', 'filter_payment_gateways_based_on_gift_card', 10, 1);
+
+  function debug_gift_card_product_info($order_id, $order) {
+    if (!$order_id || !$order instanceof WC_Order) return;
+
+    foreach ($order->get_items() as $item_id => $item) {
+      $product_id = $item->get_product_id();
+      $product = wc_get_product($product_id);
+
+      if (!$product) continue;
+
+      $product_type = $product->get_type();
+      $wps_gift_product = get_post_meta($product_id, 'wps_gift_product', true);
+
+      // Check if it's a gift card
+      if ('wgm_gift_card' === $product_type || 'gw_gift_card' === $product_type || 'on' === $wps_gift_product) {
+        // Retrieve gift coupon using both possible keys
+        $giftcoupon = get_post_meta($order_id, "$order_id#$item_id", true);
+
+        // Get all metadata for debugging
+        $all_meta = wc_get_order_item_meta($item_id, '');
+
+        $data = [
+          'recipient_name' => $all_meta['To'][0],
+          'sender_name' => $all_meta['From'][0],
+          'message' => $all_meta['Message'][0],
+          'code_list' => $giftcoupon,
+          'amount' => $all_meta['_line_subtotal'][0]
+        ];
+
+        // Capture template output
+        ob_start();
+        get_template_part('template-parts/emails/gift', null, ['data' => $data]);
+        $email_body = ob_get_clean();
+
+        // Email details
+        $to = $all_meta['Delivery Method'][0];
+        $subject = __('מתנה מיוחדת עבורך', 'giovanni');
+        $headers = [
+          'Content-Type: text/html; charset=UTF-8',
+          'From: Givanni Raspini <no-reply@giovanniraspini-shop.co.il>'
+        ];
+
+        // Send email
+        wp_mail($to, $subject, $email_body, $headers);
       }
     }
   }
 
-  return $rates;
-}, 100);
+  add_action('woocommerce_order_status_processing', 'debug_gift_card_product_info', 10, 2);
+  add_action('woocommerce_order_status_completed', 'debug_gift_card_product_info', 10, 2);
+}
+

@@ -136,6 +136,43 @@ function generate_picture_source($bg, $bg_mob = null) {
 }
 
 /**
+ * Generates a responsive background image using the <picture> element.
+ *
+ * By default, the image is shown in its full size on desktop and in a smaller
+ * size on mobile devices. If the $bg_mob parameter is provided, it will be used
+
+ * instead of the $bg parameter for mobile devices.
+ *
+ * @param int $bg The ID of the background image.
+ * @param int $bg_mob The ID of the background image for mobile devices.
+ */
+function generate_archive_picture_source($bg, $bg_mob = null) {
+	// Default mobile image to desktop image if not provided
+	$bg_mob = $bg_mob ? $bg_mob : $bg;
+
+	// Get the URL of the desktop image
+	$desktop_image_url = wp_get_attachment_image_url($bg, '1920-400');
+
+	// Get the URL of the mobile image
+	$mob_image_url = wp_get_attachment_image_url($bg_mob, '768-400');
+
+	// Preload both images (desktop and mobile)
+	if ($desktop_image_url): ?>
+		<link rel="preload" as="image" href="<?= esc_url($desktop_image_url); ?>" />
+	<?php endif;
+
+	if ($mob_image_url): ?>
+		<link rel="preload" as="image" href="<?= esc_url($mob_image_url); ?>" />
+	<?php endif; ?>
+
+	<picture>
+		<source media="(max-width:1024px)" srcset="<?= esc_url($mob_image_url) ?>" sizes="(max-width: 1024px) 100vw">
+		<img width="1920" height="400" src="<?= esc_url($desktop_image_url) ?>" alt="hero" loading="lazy">
+	</picture>
+	<?php
+}
+
+/**
  * Count Page View
  *
  * @param string $cont_id

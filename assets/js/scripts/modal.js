@@ -37,12 +37,4 @@ jQuery(document).ready(function ($) {
 
   // Show modal
   showModal();
-
-  $('.modal-subscribe-form input').on('input', function () {
-    if ($(this).val()) {
-      $('.modal-privacy').css('opacity', 1);
-    } else {
-      $('.modal-privacy').css('opacity', 0);
-    }
-  });
 });

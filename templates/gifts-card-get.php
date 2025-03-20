@@ -113,7 +113,7 @@ $pattern = '^[a-zA-Z0-9.%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,6}$';
           </div>
         </div>
         <div class="wrapper-gift-certificate__next-step">
-          <button type="button" class="gift-certificate__button gift-certificate__next-step button button-black button-hover white" disabled><?= __('המשיכו', 'giovanni') ?></button>
+          <button type="button" id="submit_gift_certificate" class="gift-certificate__button gift-certificate__next-step button button-black button-hover white" disabled><?= __('המשיכו', 'giovanni') ?></button>
         </div>
       </div>
     </div>

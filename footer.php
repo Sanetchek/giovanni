@@ -117,8 +117,6 @@
 		</div>
 	</div>
 
-
-
   <?php
     // Modal mini cart
     get_template_part('template-parts/modal/cart', 'modal');
@@ -138,6 +136,8 @@
 	<div id="modal-subscribe-overlay"></div>
 	<div id="modal-overlay" class="modal-overlay"></div>
 	<div id="modal-menu-overlay" class="modal-menu-overlay"></div>
+
+	<button id="scrollToTop">▲</button>
 
 <?php wp_footer(); ?>
 

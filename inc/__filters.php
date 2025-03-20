@@ -364,11 +364,6 @@ function build_product_query_args($form_data = [], $paged = 1, $category_id = fa
     $args['tax_query'] = array_merge($args['tax_query'], $attribute_tax_query);
   }
 
-  // Debugging logs (for testing during development only)
-  if (defined('WP_DEBUG') && WP_DEBUG) {
-    error_log('Query Args Load More: ' . print_r($args, true));
-  }
-
   return $args;
 }
 

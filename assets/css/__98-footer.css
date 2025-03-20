@@ -14,6 +14,7 @@
 .subscribe-container {
   max-width: 576px;
   border-bottom: 1px solid #000;
+  margin-bottom: 60px;
 }
 
 .subscribe-title {
@@ -29,10 +30,22 @@
 
 .subscribe-form form.wpcf7-form {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+  position: relative;
+}
+
+label.footer-subscribe-privacy {
+  position: absolute;
+  right: -10px;
+  bottom: -40px;
+  width: 100% !important;
+}
+
+label.popup-subscribe-privacy span span {
+  display: inline;
 }
 
 .subscribe-form label {
@@ -265,4 +278,32 @@ button.js-accordion-trigger.accordion-trigger {
   width: 20px;
   height: 20px;
   display: inline-block;
+}
+
+#scrollToTop {
+  position: fixed;
+  z-index: 100;
+  bottom: 40px;
+  left: 50px;
+  width: 50px;
+  height: 50px;
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 2px;
+  font-size: 24px;
+  cursor: pointer;
+  display: none;
+  transition: opacity .3s, transform .3s;
+}
+
+#scrollToTop:hover {
+  background: white;
+  color: black;
+  border: 1px solid black;
+}
+
+#scrollToTop.show {
+  display: block;
+  opacity: 1;
 }
