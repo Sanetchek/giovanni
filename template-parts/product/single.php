@@ -21,7 +21,7 @@ $videos = get_field('gallery_media');
       $title = $product->get_name();
       $image_url = wc_placeholder_img_src('full');
       ?>
-      <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($title); ?>" width="812" height="812">
+      <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($title); ?>" width="812" height="812" loading="lazy">
     <?php }
     echo '</div>';
 

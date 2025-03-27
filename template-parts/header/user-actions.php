@@ -1,11 +1,11 @@
 <div class="user-actions-side">
-  <span class="header-action header-search">
+  <div class="header-action header-search">
     <svg class='icon-search' width='24' height='24'>
       <use href='<?= assets('img/sprite.svg#icon-search') ?>'></use>
     </svg>
 
     <?php get_template_part('template-parts/header/searchform') ?>
-  </span>
+  </div>
 
   <?php
     $login = !is_user_logged_in() ? 'show-login-form' : '';

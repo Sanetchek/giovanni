@@ -90,9 +90,14 @@ input:not([type="checkbox"]):not([type="radio"]),
 select {
   height: 50px;
   border: 1px solid #000;
-  padding: 8px 20px;
+  padding: 8px 0 8px 20px;
   max-width: 100%;
   width: 100%;
+}
+
+input:not([type="checkbox"]):not([type="radio"])::placeholder,
+select {
+  font-size: 11px;
 }
 
 textarea {
@@ -456,6 +461,12 @@ html[dir="rtl"] .button-hover.white::after {
 
 .no-scroll {
   overflow: hidden;
+}
+
+.grecaptcha-badge {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
 }
 
 @keyframes animloader {

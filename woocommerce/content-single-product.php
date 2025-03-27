@@ -109,7 +109,7 @@ $categories_array = product_collection_categories();
 			<div class="single-product-content-wrap">
 				<?php if (get_the_content()) : ?>
 					<div class="single-product-description">
-						<h2 class="single-product-title"><?= __('Description', 'giovanni') ?></h2>
+						<h2 class="single-product-title"><?= __('תיאור', 'giovanni') ?></h2>
 						<?php the_content() ?>
 					</div>
 				<?php endif ?>
@@ -117,7 +117,7 @@ $categories_array = product_collection_categories();
 				<?php $details = get_field('details') ?>
 				<?php if ($details) : ?>
 					<div class="single-product-details">
-						<h2 class="single-product-title"><?= __('Details', 'giovanni') ?></h2>
+						<h2 class="single-product-title"><?= __('פרטים', 'giovanni') ?></h2>
 
 						<ul class="product-details-list">
 							<?php foreach ($details as $item) : ?>

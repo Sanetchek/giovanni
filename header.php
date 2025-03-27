@@ -64,16 +64,16 @@
 
 								<li class="mobile-user-action"><a href="/my-account" class="login-link show-login-form">
 									<?php if (is_user_logged_in()) : ?>
-										<?= __('My Account', 'giovanni') ?>
+										<?= __('החשבון שלי', 'giovanni') ?>
 									<?php else : ?>
-										<?= __('Login', 'giovanni') ?>
+										<?= __('התחבר/י', 'giovanni') ?>
 									<?php endif ?>
 								</a></li>
 								<?php if (!is_user_logged_in()) : ?>
-									<li class="mobile-user-action"><a href="/my-account/orders" class="order-link"><?= __('My orders', 'giovanni') ?></a></li>
+									<li class="mobile-user-action"><a href="/my-account/orders" class="order-link"><?= __('ההזמנות שלי', 'giovanni') ?></a></li>
 								<?php endif ?>
-								<li class="mobile-user-action"><a href="/favorites" class="wishlist-link"><?= __('Wishlist', 'giovanni') ?></a></li>
-								<li class="mobile-user-action"><a href="/customer-service" class="customer-link"><?= __('Customer service', 'giovanni') ?></a></li>
+								<li class="mobile-user-action"><a href="/favorites" class="wishlist-link"><?= __('רשימת המשאלות', 'giovanni') ?></a></li>
+								<li class="mobile-user-action"><a href="/customer-service" class="customer-link"><?= __('שירות לקוחות', 'giovanni') ?></a></li>
 							</ul>
 						</div>
 					</nav><!-- #site-navigation -->

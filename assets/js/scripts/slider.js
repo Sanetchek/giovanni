@@ -218,31 +218,41 @@
       if (!$('.customer-menu-links, .profile-navigation ul').hasClass('slick-initialized')) {
         $('.customer-menu-links, .profile-navigation ul').slick({
           dots: false,
-          arrows: false,
+          arrows: true,
           infinite: false,
           slidesToShow: 5,
           slidesToScroll: 1,
           rtl: true,
-          responsive: [{
+          prevArrow: '<button class="slick-prev"></button>',
+          nextArrow: '<button class="slick-next"></button>',
+          responsive: [
+            {
               breakpoint: 600,
               settings: {
-                slidesToShow: 4,
+                slidesToShow: 4
               }
             },
             {
               breakpoint: 500,
               settings: {
-                slidesToShow: 3,
+                slidesToShow: 3
               }
             },
             {
               breakpoint: 400,
               settings: {
-                slidesToShow: 2,
+                slidesToShow: 2
               }
-            },
+            }
           ]
         });
+      }
+
+      // Scroll to the `.current` slide after initializing Slick
+      const $currentSlide = $('.customer-menu-links li.customer-menu-item.current, .profile-navigation ul li.customer-menu-item.current');
+      if ($currentSlide.length > 0) {
+        const index = $currentSlide.index(); // Get the correct index inside Slick
+        $('.customer-menu-links, .profile-navigation ul').slick('slickGoTo', index);
       }
     } else {
       if ($('.customer-menu-links').hasClass('slick-initialized')) {

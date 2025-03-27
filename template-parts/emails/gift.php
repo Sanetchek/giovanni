@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-$gift_card_data = $args['data'];
+$gift_card_data = isset($args['data']) ? $args['data'] : [];
 
 // Get recipient data from your gift card plugin
 // These are example variables - adjust based on your plugin's data structure
@@ -36,7 +36,7 @@ $gift_card_image = 'https://giovanniraspini-shop.co.il/wp-content/uploads/2024/1
 
     <!-- Gift Card Image -->
     <div style="text-align: center; padding: 30px 20px;">
-        <img src="<?php echo esc_url($gift_card_image); ?>" alt="כרטיס מתנה Giovanni Raspini ISRL" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+        <img src="<?php echo esc_url($gift_card_image); ?>" alt="כרטיס מתנה Giovanni Raspini ISRL" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);" loading="lazy">
     </div>
 
     <!-- Recipient Information -->

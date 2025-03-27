@@ -388,3 +388,9 @@ header.entry-header.page.default-template h1.entry-title {
 #post-9067 .entry-content p {
   font-size: 20px !important;
 }
+
+.btn-newslatter {
+  display: block;
+  width: max-content;
+  margin: 0 auto 60px;
+}

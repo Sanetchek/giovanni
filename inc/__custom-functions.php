@@ -39,7 +39,7 @@ function generate_picture_element($image_id, $is_last, $class) {
 	if ($large_image && $medium_image) {
 		$output = '<picture aria-hidden="true">';
 		$output .= '<source media="(min-width:1280px)" srcset="' . esc_url($large_image[0]) . '">';
-		$output .= '<img class="lazyloaded" data-src="' . esc_url($medium_image[0]) . '" alt="' . esc_attr(get_the_title($image_id)) . '" src="' . esc_url($medium_image[0]) . '" class="'.$class.'">';
+		$output .= '<img class="lazyloaded" data-src="' . esc_url($medium_image[0]) . '" alt="' . esc_attr(get_the_title($image_id)) . '" src="' . esc_url($medium_image[0]) . '" class="'.$class.'" loading="lazy">';
 		$output .= '</picture>';
 
 		return $output;
@@ -89,7 +89,7 @@ function generate_picture($image_id, $thumb = 'full', $class = '', $min = [], $m
 		}
 
 		// Add the <img> element
-		$output .= '<img class="lazyloaded ' . esc_attr($class) . '" data-src="' . esc_url($image[0]) . '" alt="' . esc_attr(get_the_title($image_id)) . '" src="' . esc_url($image[0]) . '">';
+		$output .= '<img class="lazyloaded ' . esc_attr($class) . '" data-src="' . esc_url($image[0]) . '" alt="' . esc_attr(get_the_title($image_id)) . '" src="' . esc_url($image[0]) . '" loading="lazy">';
 		$output .= '</picture>';
 
 		return $output;
@@ -117,16 +117,7 @@ function generate_picture_source($bg, $bg_mob = null) {
 	$desktop_image_url = wp_get_attachment_image_url($bg, '1920-865');
 
 	// Get the URL of the mobile image
-	$mob_image_url = wp_get_attachment_image_url($bg_mob, '768-865');
-
-	// Preload both images (desktop and mobile)
-	if ($desktop_image_url): ?>
-		<link rel="preload" as="image" href="<?= esc_url($desktop_image_url); ?>" />
-	<?php endif;
-
-	if ($mob_image_url): ?>
-		<link rel="preload" as="image" href="<?= esc_url($mob_image_url); ?>" />
-	<?php endif; ?>
+	$mob_image_url = wp_get_attachment_image_url($bg_mob, '768-865'); ?>
 
 	<picture>
 		<source media="(max-width:1024px)" srcset="<?= esc_url($mob_image_url) ?>" sizes="(max-width: 1024px) 100vw">
@@ -154,16 +145,7 @@ function generate_archive_picture_source($bg, $bg_mob = null) {
 	$desktop_image_url = wp_get_attachment_image_url($bg, '1920-400');
 
 	// Get the URL of the mobile image
-	$mob_image_url = wp_get_attachment_image_url($bg_mob, '768-400');
-
-	// Preload both images (desktop and mobile)
-	if ($desktop_image_url): ?>
-		<link rel="preload" as="image" href="<?= esc_url($desktop_image_url); ?>" />
-	<?php endif;
-
-	if ($mob_image_url): ?>
-		<link rel="preload" as="image" href="<?= esc_url($mob_image_url); ?>" />
-	<?php endif; ?>
+	$mob_image_url = wp_get_attachment_image_url($bg_mob, '768-400'); ?>
 
 	<picture>
 		<source media="(max-width:1024px)" srcset="<?= esc_url($mob_image_url) ?>" sizes="(max-width: 1024px) 100vw">
@@ -376,7 +358,7 @@ function showYoutubeVideo($link)
   frameborder="0" allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
   allowfullscreen></iframe>
 <?php else: ?>
-<img src="https://img.youtube.com/vi/<?php $video ?>/default.jpg" class="br-40" alt="youtube">
+<img src="https://img.youtube.com/vi/<?php $video ?>/default.jpg" class="br-40" alt="youtube" loading="lazy">
 <?php endif;
 }
 
@@ -423,7 +405,7 @@ function show_logo($image, $text) { ?>
 function show_burger($is_active = false) {
 	$is_active = $is_active ? 'open' : '';
 	?>
-<div id="burger-menu" class="burger-menu <?= $is_active ?>">
+<div class="burger-menu <?= $is_active ?>">
   <div class="burger-bar"></div>
   <div class="burger-bar"></div>
   <div class="burger-bar"></div>

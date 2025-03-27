@@ -5,10 +5,16 @@ $bg_mob = get_field('block8_image_mob');
 
 <section id="block8" class="block8">
   <div class="hero">
-    <div class="hero-image main-wrap">
-      <?php generate_picture_source($bg, $bg_mob); ?>
-      <h1 class="visually-hidden"><?= __('Collections Page', 'giovanni') ?></h1>
-    </div>
+    <?php $has_link = get_field('block8_use_link') ?>
+    <?php if ($has_link) : ?>
+      <a href="<?= get_field('block8_link_for_banner') ?>">
+    <?php endif ?>
+        <div class="hero-image main-wrap">
+          <?php generate_picture_source($bg, $bg_mob); ?>
+        </div>
+    <?php if ($has_link) : ?>
+      </a>
+    <?php endif ?>
   </div>
 
   <div class="taxonomies page-container">

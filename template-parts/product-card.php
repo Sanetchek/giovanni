@@ -31,7 +31,7 @@ $second_image_url = $second_image_id ? wp_get_attachment_image_url($second_image
 <div class="product-link">
   <div class="product-image">
     <a href="<?php echo esc_url($permalink); ?>">
-      <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($title); ?>">
+      <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($title); ?>" loading="lazy">
     </a>
 
     <a href="<?php echo esc_url($permalink); ?>">
@@ -39,7 +39,7 @@ $second_image_url = $second_image_id ? wp_get_attachment_image_url($second_image
         <?php echo simpleLikes($product_id); ?>
 
         <?php if ($second_image_url) : ?>
-          <img src="<?php echo esc_url($second_image_url); ?>" alt="<?php echo esc_attr($title); ?>">
+          <img src="<?php echo esc_url($second_image_url); ?>" alt="<?php echo esc_attr($title); ?>" loading="lazy">
         <?php endif ?>
       </div>
     </a>

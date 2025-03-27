@@ -5,17 +5,16 @@ $link = get_field('hero_link');
 ?>
 
 <section id="hero" class="hero">
-  <?php if ($link) : ?>
-    <a href="<?= $link ?>">
+  <?php $has_link = get_field('hero_use_link') ?>
+  <?php if ($has_link) : ?>
+    <a href="<?= get_field('hero_link_for_banner') ?>">
   <?php endif ?>
 
-  <div class="hero-image main-wrap">
-    <?php generate_picture_source($bg, $bg_mob); ?>
+    <div class="hero-image main-wrap">
+      <?php generate_picture_source($bg, $bg_mob); ?>
+    </div>
 
-    <h1 class="visually-hidden">Collections Page</h1>
-  </div>
-
-  <?php if ($link) : ?>
+  <?php if ($has_link) : ?>
     </a>
   <?php endif ?>
 </section>

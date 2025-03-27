@@ -217,7 +217,7 @@ function giovanni_scripts() {
 	wp_enqueue_script('jquery');
 
 	// script - aos animation https://michalsnik.github.io/aos/
-	wp_enqueue_script( 'aos', get_template_directory_uri() . '/assets/js/aos-next/aos.js', array(), _S_VERSION, true  );
+	// wp_enqueue_script( 'aos', get_template_directory_uri() . '/assets/js/aos-next/aos.js', array(), _S_VERSION, true  );
 
 	// script - slick slider https://kenwheeler.github.io/slick/
 	wp_enqueue_script( 'slick', get_template_directory_uri() . '/assets/js/slick/slick.min.js', array(), _S_VERSION, true  );
@@ -256,11 +256,11 @@ function giovanni_scripts() {
 	wp_dequeue_style( 'wp-block-library' );
 	wp_dequeue_style( 'wp-block-library-theme' );
 	wp_enqueue_style(
-        'giovanni-slick-css',
-        get_template_directory_uri() . '/assets/js/slick/slick.css',
-        array(),
-        '1.0.0'
-    );
+		'giovanni-slick-css',
+		get_template_directory_uri() . '/assets/js/slick/slick.css',
+		array(),
+		'1.0.0'
+	);
 	// wp_dequeue_style( 'wc-blocks-style' ); // Remove WooCommerce block CSS
 
 	if (class_exists('WooCommerce')) {
@@ -286,7 +286,6 @@ function add_attribs_to_scripts( $tag, $handle, $src ) {
 	);
 
 	$defer_scripts = array(
-		'contact-form-7',
 		'jquery-form',
 		'wpdm-bootstrap',
 		'frontjs',
@@ -368,8 +367,3 @@ require get_template_directory() . '/inc/__gift-card.php';
  * Woocommerce.
  */
 require get_template_directory() . '/inc/__woocommerce.php';
-
-/**
- * Site Optimization.
- */
-require get_template_directory() . '/inc/__site-optimization.php';

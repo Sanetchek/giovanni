@@ -36,7 +36,7 @@
                         </td>
                         <td style="text-align: center; padding: 10px; border-bottom: 1px solid #eeeeee;">
                             <?php if ( $product_image ) : ?>
-                                <img src="<?php echo esc_url( $product_image[0] ); ?>" width="50" height="50" style="max-width: 50px; height: auto;">
+                                <img src="<?php echo esc_url( $product_image[0] ); ?>" width="50" height="50" style="max-width: 50px; height: auto;" loading="lazy">
                             <?php endif; ?>
                         </td>
                         <td style="text-align: center; padding: 10px; border-bottom: 1px solid #eeeeee;">

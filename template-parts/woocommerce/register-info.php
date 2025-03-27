@@ -13,7 +13,7 @@
       <?php foreach ($group['list'] as $item) : ?>
         <li class="reg-info-item">
           <?php if ($item['icon']) : ?>
-            <img src="<?= $item['icon'] ?>" alt="icon" class="reg-info-image" width="24" height="24">
+            <img src="<?= $item['icon'] ?>" alt="icon" class="reg-info-image" width="24" height="24" loading="lazy">
           <?php endif ?>
 
           <?php if ($item['text']) : ?>

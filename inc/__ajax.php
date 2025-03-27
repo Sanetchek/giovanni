@@ -126,7 +126,7 @@ function giovanni_search_suggestions() {
       $product = wc_get_product(get_the_ID());
       $name = get_the_title();
       $thumbnail = get_the_post_thumbnail(get_the_ID(), 'thumbnail') ?:
-                   '<img src="' . esc_url(wc_placeholder_img_src('full')) . '" alt="' . esc_attr($name) . '" />';
+                   '<img src="' . esc_url(wc_placeholder_img_src('full')) . '" alt="' . esc_attr($name) . '" loading="lazy" />';
       $price_html = $product->get_price_html();
       $permalink = get_permalink();
 
@@ -147,7 +147,7 @@ function giovanni_search_suggestions() {
       $product = wc_get_product(get_the_ID());
       $name = get_the_title();
       $thumbnail = get_the_post_thumbnail(get_the_ID(), 'thumbnail') ?:
-                   '<img src="' . esc_url(wc_placeholder_img_src('full')) . '" alt="' . esc_attr($name) . '" />';
+                   '<img src="' . esc_url(wc_placeholder_img_src('full')) . '" alt="' . esc_attr($name) . '" loading="lazy" />';
       $price_html = $product->get_price_html();
       $permalink = get_permalink();
 

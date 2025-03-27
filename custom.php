@@ -4,8 +4,8 @@ get_header();
 
 	<main id="primary" class="site-main">
 
-		<button class="btn btn__orange btn__delete"><img src="<?php echo get_template_directory_uri() . '/assets/img/icons/delete.svg' ?>" alt="delete button"></button>
-		<button class="btn btn__orange btn__edit"><img src="<?php echo get_template_directory_uri() . '/assets/img/icons/edit.svg' ?>" alt="edit button"></button>
+		<button class="btn btn__orange btn__delete"><img src="<?php echo get_template_directory_uri() . '/assets/img/icons/delete.svg' ?>" alt="delete button" loading="lazy"></button>
+		<button class="btn btn__orange btn__edit"><img src="<?php echo get_template_directory_uri() . '/assets/img/icons/edit.svg' ?>" alt="edit button" loading="lazy"></button>
 		<button class="btn btn__green"><?php _e('Diabetes world') ?></button>
 		<button class="btn btn__border_green">Schedule appointment</button>
 		<button class="btn btn__border_black">Schedule appointment</button>

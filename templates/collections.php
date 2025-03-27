@@ -22,9 +22,7 @@ get_header();
   <?php get_template_part('template-parts/collections/block', '1'); ?>
   <?php get_template_part('template-parts/collections/block', '2'); ?>
   <?php get_template_part('template-parts/collections/block', '3'); ?>
-
   <?php get_template_part('template-parts/collections/block', '5'); ?>
-
   <?php get_template_part('template-parts/collections/block', '4'); ?>
   <?php get_template_part('template-parts/collections/block', '6'); ?>
   <?php get_template_part('template-parts/collections/block', '7'); ?>

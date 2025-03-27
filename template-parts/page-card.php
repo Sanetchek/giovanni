@@ -11,7 +11,7 @@ $id = $args['id'];
 
     <?php if (!$image) : ?>
     <div class="page-item-replacer">
-      <img src="<?= assets('img/replacer.jpg') ?>" alt="replacer">
+      <img src="<?= assets('img/replacer.jpg') ?>" alt="replacer" loading="lazy">
     </div>
     <?php endif ?>
   </a>

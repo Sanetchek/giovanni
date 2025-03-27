@@ -18,7 +18,7 @@ $template = $not_woo_pages ? 'page default-template' : 'page-woo';
 				$current_user = wp_get_current_user();
 				echo '<div class="my-account-header">';
 				echo '<p>' . esc_html( $current_user->display_name ) . '</p>'; // Display user name
-				the_title( '<h1 class="entry-title">', '</h1>' );
+				the_title( '<h1 class="customer-title">', '</h1>' );
 				echo '</div>';
 			?>
 		</header><!-- .entry-header -->

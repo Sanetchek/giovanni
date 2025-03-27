@@ -95,6 +95,23 @@ p.modal-subscribe-text {
   text-transform: none !important;
 }
 
-.modal-subscribe-form .button {
+.modal-subscribe-form button.button {
   width: 100%;
+  display: flex;
+  width: -moz-fit-content;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Heebo', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.06667;
+  letter-spacing: .07em;
+  color: #000;
+  text-transform: uppercase;
+  padding: 16px 24px;
+  text-decoration: none;
+  cursor: pointer !important;
+  background-color: #000;
+  color: #fff;
 }

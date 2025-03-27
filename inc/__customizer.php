@@ -27,7 +27,7 @@ function theme_logo() {
   // Display the logo if it's set
   if ( $header_logo ) {
     $template .= '<a href="/" class="site-logo-link" rel="home" aria-current="page" tabindex="0">';
-    $template .= '<img src="' . esc_url( $header_logo ) . '" width="300" class="site-logo" alt="logo" decoding="async">';
+    $template .= '<img src="' . esc_url( $header_logo ) . '" width="300" class="site-logo" alt="logo" decoding="async" loading="lazy">';
     $template .= '</a>';
   }
 
