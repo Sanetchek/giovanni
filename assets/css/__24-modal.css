@@ -115,3 +115,79 @@ p.modal-subscribe-text {
   background-color: #000;
   color: #fff;
 }
+
+.thankyou-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99999;
+  height: max-content;
+  width: 90%;
+  max-width: 400px;
+  max-height: 90%;
+  overflow: auto;
+  background: #fff;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.thankyou-modal.is-visible {
+  pointer-events: initial;
+  opacity: 1;
+  visibility: visible;
+}
+
+.thankyou-modal-content {
+  padding: 24px;
+}
+
+.thankyou-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.thankyou-modal-close svg {
+  fill: #fff;
+}
+
+.thankyou-modal-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.thankyou-modal-title {
+  margin: 0;
+}
+
+.thankyou-modal-text * {
+  margin: 0;
+  text-align: center;
+}
+
+.cf7-submit-button {
+  position: relative;
+}
+
+.cf7-submit-button .cf7-submit-button-spinner {
+  position: absolute;
+  display: flex;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+}
+
+.cf7-submit-button .wpcf7-spinner {
+  margin: 0;
+}

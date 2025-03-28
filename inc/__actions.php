@@ -11,12 +11,16 @@ add_action('upload_mimes', function ($mimes) {
 });
 
 /**
- * Login redirect if not administrator
+ * Login redirect if not administrator, editor, or Yoast SEO manager
  */
 add_action('admin_init', function () {
-	if (is_admin() && !(current_user_can('administrator')) && (!defined('DOING_AJAX') || !DOING_AJAX)) {
+	if (is_admin() &&
+	    !(current_user_can('administrator') ||
+	      current_user_can('editor') ||
+	      current_user_can('wpseo_manage_options')) &&
+	    (!defined('DOING_AJAX') || !DOING_AJAX)) {
 		wp_redirect(home_url(404), 302);
-		exit ();
+		exit();
 	}
 });
 

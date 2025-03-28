@@ -121,11 +121,11 @@
     // Modal mini cart
     get_template_part('template-parts/modal/cart', 'modal');
 
+    // Modal Thankyou
+    get_template_part('template-parts/modal/thankyou', 'modal');
+
     // Modal product
     get_template_part('template-parts/modal/product', 'modal');
-
-    // Modal search
-    // get_template_part('template-parts/modal/search', 'modal');
 
     // Login search
     if (!is_user_logged_in()) {

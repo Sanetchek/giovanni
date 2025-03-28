@@ -1,9 +1,15 @@
 jQuery(document).ready(function ($) {
   $(document).on('wpcf7mailsent', function (event) {
-    if (event.detail.contactFormId == 'c7cfe8b' || event.detail.contactFormId == '3b7a46a') { // Replace with actual form IDs
-      setTimeout(function () {
-        window.location.href = "https://giovanniraspini-shop.co.il/thankyou-newslatter/";
-      }, 500); // Delay to ensure form submission completes
+    if (event.detail.contactFormId == '26' || event.detail.contactFormId == '8225' || event.detail.contactFormId == '7965') { // Replace with actual form IDs
+      $('#thankyou_modal, #thankyou_overlay').addClass('is-visible');
+      $('body').addClass('no-scroll');
+      $('#modal_subscription').hide();
+      $('#modal-subscribe-overlay').removeClass('is-visible');
     }
+  });
+
+  $('.thankyou-modal-close, #thankyou_overlay').on('click', function () {
+    $('#thankyou_modal, #thankyou_overlay').removeClass('is-visible');
+    $('body').removeClass('no-scroll');
   });
 });
