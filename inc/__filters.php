@@ -229,7 +229,9 @@ function display_sort_options() {
 function load_more_products() {
   check_ajax_referer('giovanni_product_filter_nonce', 'nonce');
 
-  $paged = isset($_POST['page']) ? intval($_POST['page']) + 1 : 1;
+  $paged = isset($_POST['page']) ? absint($_POST['page']) + 1 : 1;
+  error_log("Loading products for page: " . $paged); // Debugging
+
   $category_id = isset($_POST['category_id']) ? intval($_POST['category_id']) : false;
   $decoded_data = isset($_POST['formData']) ? urldecode($_POST['formData']) : '';
   parse_str($decoded_data, $form_data);
@@ -291,8 +293,11 @@ function build_product_query_args($form_data = [], $paged = 1, $category_id = fa
 
   $args = [
     'post_type'      => 'product',
-    'paged'          => max(1, $paged), // Ensure valid pagination
+    'paged'          => max(1, $paged),
     'posts_per_page' => $posts_per_page,
+    'offset'         => ($paged - 1) * $posts_per_page,
+    'post_status'    => 'publish',
+    'post__not_in'   => array(7935),
     'tax_query'      => [
       'relation' => 'AND',
     ],

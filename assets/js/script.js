@@ -338,15 +338,17 @@
             $('#page-loader').removeClass('hidden');
           },
           success: function (data) {
-            if (data) {
+            if (data.trim().length > 0) { // Ensure data is not empty
               $('#product-list').append(data); // insert new posts
-              giovanni.current_page++;
-              canBeLoaded = true; // the ajax is completed, now we can run it again
-              $('#page-loader').addClass('hidden'); // hide loader
+              giovanni.current_page++; // Update only after successful append
+              canBeLoaded = true;
+              $('#page-loader').addClass('hidden');
 
-              // Change the URL without reloading the page
+              // Update URL without reloading the page
               const newUrl = giovanni.siteurl + '/page/' + giovanni.current_page;
               history.pushState(null, null, newUrl);
+            } else {
+              canBeLoaded = false; // Stop AJAX calls when no more products
             }
           }
         });

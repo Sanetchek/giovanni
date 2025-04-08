@@ -11,16 +11,18 @@ add_action('upload_mimes', function ($mimes) {
 });
 
 /**
- * Login redirect if not administrator, editor, or Yoast SEO manager
+ * Login redirect if not administrator, editor, Yoast SEO manager/editor, or shop manager
  */
 add_action('admin_init', function () {
-	if (is_admin() &&
-	    !(current_user_can('administrator') ||
-	      current_user_can('editor') ||
-	      current_user_can('wpseo_manage_options')) &&
-	    (!defined('DOING_AJAX') || !DOING_AJAX)) {
-		wp_redirect(home_url(404), 302);
-		exit();
+	if (!current_user_can('administrator') &&
+		!current_user_can('editor') &&
+		!current_user_can('wpseo_manager') &&
+		!current_user_can('wpseo_editor') &&
+		!current_user_can('shop_manager') &&
+		(!defined('DOING_AJAX') || !DOING_AJAX)) {
+
+		wp_safe_redirect(home_url('/')); // Redirect to homepage instead of 404
+		exit;
 	}
 });
 

@@ -9,6 +9,7 @@
       bottomOffset = 2500;
 
     $(window).scroll(function () {
+      console.log('max page', giovanni.max_page);
       if (
         $(document).scrollTop() > $(document).height() - bottomOffset &&
         canBeLoaded &&

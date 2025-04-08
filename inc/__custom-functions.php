@@ -227,16 +227,6 @@ function query_user_liked_posts() {
 }
 
 /**
- * Login redirect if not administrator
- */
-add_action('admin_init', function () {
-	if (is_admin() && !(current_user_can('administrator')) && (!defined('DOING_AJAX') || !DOING_AJAX)) {
-		wp_redirect(home_url(404), 302);
-		exit ();
-	}
-});
-
-/**
  * Contact form 7 remove span
  */
 add_filter('wpcf7_form_elements', function ($content) {

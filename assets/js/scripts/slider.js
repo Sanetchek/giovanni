@@ -1,5 +1,3 @@
-'use strict';
-
 (function ($) {
   const screenWidth = $(window).width();
 
@@ -19,6 +17,8 @@
     });
 
     $slider.slick({
+      useTransform: false,
+      useCSS: false,
       dots: false,
       infinite: true,
       speed: 300,
@@ -217,6 +217,8 @@
     if ($(window).width() <= 768) {
       if (!$('.customer-menu-links, .profile-navigation ul').hasClass('slick-initialized')) {
         $('.customer-menu-links, .profile-navigation ul').slick({
+          useTransform: false,
+          useCSS: false,
           dots: false,
           arrows: true,
           infinite: false,

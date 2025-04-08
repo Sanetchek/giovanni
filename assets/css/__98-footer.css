@@ -293,6 +293,7 @@ button.js-accordion-trigger.accordion-trigger {
   border-radius: 2px;
   font-size: 24px;
   cursor: pointer;
+  padding: 6px;
   display: none;
   transition: opacity .3s, transform .3s;
 }

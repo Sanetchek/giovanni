@@ -216,9 +216,6 @@ function giovanni_scripts() {
 	// script - jquery
 	wp_enqueue_script('jquery');
 
-	// script - aos animation https://michalsnik.github.io/aos/
-	// wp_enqueue_script( 'aos', get_template_directory_uri() . '/assets/js/aos-next/aos.js', array(), _S_VERSION, true  );
-
 	// script - slick slider https://kenwheeler.github.io/slick/
 	wp_enqueue_script( 'slick', get_template_directory_uri() . '/assets/js/slick/slick.min.js', array(), _S_VERSION, true  );
 

@@ -1,5 +1,5 @@
 
-<?php 
+<?php
 $category_id = $args['category_id'];
 $all_cat_count = $args['all_cat_count'];
 $count = $args['count'];
