@@ -325,10 +325,12 @@
   }
 
   .hero-wrap {
-    right: 0;
-    left: 0;
+    right: unset;
+    left: unset;
+    bottom: unset;
     display: flex;
     justify-content: center;
+    min-height: 220px;
   }
 
   .hero-content {
@@ -885,7 +887,9 @@
   }
 
   .hero-content {
-    padding: 40px 5px 10px 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
   }
 
   .hero-image.main-wrap img {
