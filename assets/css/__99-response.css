@@ -239,6 +239,10 @@
   .main-posts-art.second .main-posts-container {
     margin-right: 0;
   }
+
+  .slider-container {
+    overflow-x: unset;
+  }
 }
 
 @media screen and (max-width: 1024px) {
@@ -1652,6 +1656,10 @@
   #customer_details {
     display: flex;
     flex-direction: column-reverse;
+  }
+
+  .slick-dots {
+    margin: 20px 0 0;
   }
 }
 

@@ -21,7 +21,8 @@
       useCSS: false,
       dots: false,
       infinite: true,
-      speed: 300,
+      speed: 300, // or 800 for even smoother effect
+      cssEase: 'ease-in-out', // <-- this makes it smooth
       slidesToShow: 4,
       slidesToScroll: 1,
       rtl: false,
@@ -38,8 +39,9 @@
           breakpoint: 768,
           settings: {
             centerMode: true,
-            centerPadding: '100px',
-            slidesToShow: 1
+            centerPadding: '10%',
+            slidesToShow: 1,
+            dots: true,
           }
         },
         {

@@ -644,6 +644,7 @@ li.product-card-big.banner img {
   align-items: center;
   gap: 10px;
   margin-bottom: 45px;
+  min-height: 30px;
 }
 
 .nav-indicator {

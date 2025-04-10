@@ -23,7 +23,7 @@
         $product = wc_get_product($product_id); ?>
         <div class="product-item">
           <?php $args = ['product_id' => $product_id]; ?>
-          <?php get_template_part( 'template-parts/product', 'card', $args ) ?>
+          <?php get_template_part( 'template-parts/product', 'card-slide', $args ) ?>
         </div>
       <?php endforeach; ?>
     </div>
