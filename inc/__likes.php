@@ -132,11 +132,11 @@ function simpleLikes($post_id, $field_count = '_likes_count', $field_user_liked 
       $list = array_combine(range(1, count($list)), $list);
 			$uid_key = array_search($user_info->user_nicename, $list); // search for username
 
-			if ($uid_key) {
-				$heart = get_liked_icon();
-			} else {
-				$heart = get_unliked_icon();
-			}
+			if ($uid_key === false) {
+        $heart = get_unliked_icon();
+      } else {
+        $heart = get_liked_icon();
+      }
 		}
 	} else { // user is anonymous
 		$user_ip = sl_get_user_ip();
@@ -148,14 +148,13 @@ function simpleLikes($post_id, $field_count = '_likes_count', $field_user_liked 
 			$list   = explode(', ', $user_liked);
 			$uid_key = array_search($user_ip, $list);
 
-			if (!$uid_key) {
-				$heart = get_liked_icon();
-			} else {
-				$heart = get_unliked_icon();
-			}
+      if ($uid_key === false) {
+        $heart = get_unliked_icon();
+      } else {
+        $heart = get_liked_icon();
+      }
 		}
 	}
-
 
 	$output = '<span class="post-review__like" data-post-id="' . $post_id . '" data-nonce="' . $nonce . '">
       <span class="post-review__like-icon">' . $heart . '</span>

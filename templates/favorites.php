@@ -60,8 +60,8 @@ defined( 'ABSPATH' ) || exit; ?>
 
             <div class="profile-content">
 
+              <?php $favorites = query_user_liked_posts(); ?>
               <ul id="product-list" class="products products-list products-container">
-                <?php $favorites = query_user_liked_posts(); ?>
 
                 <?php if ($favorites['query']) : ?>
                   <?php foreach ($favorites['query'] as $item) : ?>
@@ -73,13 +73,13 @@ defined( 'ABSPATH' ) || exit; ?>
                     </li>
 
                   <?php endforeach ?>
-                <?php else : ?>
-                  <li class="no-favorites-message">
-                    <p class="message-primary"><?= __('עדיין אין לך פריטים שמורים', 'giovanni') ?></p>
-                    <p class="message-secondary"><?= __('אתה צריך קצת השראה? יש לנו כמה הצעות שתאהבו.', 'giovanni') ?></p>
-                  </li>
                 <?php endif ?>
               </ul>
+
+              <div class="no-favorites-message" <?= $favorites['query'] ? 'style="display: none;"' : '' ?>>
+                <p class="message-primary"><?= __('עדיין אין לך פריטים שמורים', 'giovanni') ?></p>
+                <p class="message-secondary"><?= __('אתה צריך קצת השראה? יש לנו כמה הצעות שתאהבו.', 'giovanni') ?></p>
+              </div>
 
             </div>
           </div>

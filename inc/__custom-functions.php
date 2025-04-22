@@ -1,6 +1,48 @@
 <?php
 
 /**
+ * Logs data to a file in the WordPress uploads directory.
+ *
+ * This function saves a provided data object to a log file within the 'giovanni-logs'
+ * directory under the WordPress uploads directory. A subdirectory can be specified
+ * to further categorize logs. Each log entry is timestamped and appended to a
+ * daily log file. The log directory and file are created with 777 permissions if
+ * they do not already exist.
+ *
+ * @param mixed  $data   The data to be logged, which will be encoded as JSON.
+ * @param string $subdir Optional. A subdirectory to append to the log directory.
+ */
+
+function log_data($data, $subdir = '') {
+  // Get WordPress uploads directory
+  $upload_dir = wp_upload_dir();
+  $log_dir = trailingslashit($upload_dir['basedir']) . 'giovanni-logs/';
+
+  // If a subdirectory is provided, append it to the log directory
+  if (!empty($subdir)) {
+    $log_dir .= trailingslashit($subdir);
+  }
+
+  // Ensure the directory exists
+  if (!file_exists($log_dir)) {
+    wp_mkdir_p($log_dir);
+    chmod($log_dir, 0777); // Set permissions to 777 for the directory
+  }
+
+  // Log file name with current date
+  $log_file = $log_dir . 'log-' . date('Y-m-d') . '.log';
+
+  // Create log entry
+  $log_entry = '[' . date('Y-m-d H:i:s') . '] ' . json_encode($data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) . PHP_EOL;
+
+  // Write log to file
+  file_put_contents($log_file, $log_entry, FILE_APPEND);
+
+  // Ensure the log file has 777 permissions
+  chmod($log_file, 0777);
+}
+
+/**
  * Break content on N words
  *
  * @param [type] $text
