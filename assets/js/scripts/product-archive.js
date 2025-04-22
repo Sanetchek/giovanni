@@ -4,12 +4,11 @@
   const ajax_url = window.giovanni.ajax_url;
 
   // Infinite Scroll for Products Loop
-  if ($('#product-list').length) {
+  if ($('#page-loader').length) {
     var canBeLoaded = true,
       bottomOffset = 2500;
 
     $(window).scroll(function () {
-      console.log('max page', giovanni.max_page);
       if (
         $(document).scrollTop() > $(document).height() - bottomOffset &&
         canBeLoaded &&

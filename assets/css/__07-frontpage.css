@@ -363,6 +363,8 @@ li.product-card-big.banner img {
   transition: all 0.5s ease;
 }
 
+.product-link.favorite-product .product-hidden.product-hidden-btn,
+.product-link.favorite-product .product-hidden.product-remove-btn,
 .product-link:hover .product-hidden {
   opacity: 1;
   visibility: visible;

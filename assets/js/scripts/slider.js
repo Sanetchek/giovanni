@@ -217,8 +217,8 @@
    */
   function initCustomerMenuSlider() {
     if ($(window).width() <= 768) {
-      if (!$('.customer-menu-links, .profile-navigation ul').hasClass('slick-initialized')) {
-        $('.customer-menu-links, .profile-navigation ul').slick({
+      if (!$('.customer-menu-links, .profile-navigation-list').hasClass('slick-initialized')) {
+        $('.customer-menu-links, .profile-navigation-list').slick({
           useTransform: false,
           useCSS: false,
           dots: false,
@@ -226,6 +226,7 @@
           infinite: false,
           slidesToShow: 5,
           slidesToScroll: 1,
+          cssEase: 'ease-in-out',
           rtl: true,
           prevArrow: '<button class="slick-prev"></button>',
           nextArrow: '<button class="slick-next"></button>',

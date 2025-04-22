@@ -25,10 +25,11 @@ $image_url = $image ? wp_get_attachment_image_url($image, '812-812') : wc_placeh
 $attachment_ids = $product->get_gallery_image_ids();
 $second_image_id = !empty($attachment_ids) ? $attachment_ids[0] : '';
 $second_image_url = $second_image_id ? wp_get_attachment_image_url($second_image_id, '812-812') : null;
+$favorite_class = is_page_template('templates/favorites.php') ? 'favorite-product' : '';
 ?>
 
 <?php if ($product) : ?>
-<div class="product-link">
+<div class="product-link <?php echo $favorite_class; ?>">
   <div class="product-image">
     <a href="<?php echo esc_url($permalink); ?>">
       <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($title); ?>" loading="lazy">

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-03-26T14:15:35+03:00\n"
+"POT-Creation-Date: 2025-04-22T14:06:06+03:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: giovanni\n"
@@ -163,7 +163,7 @@ msgstr ""
 msgid "הצעות:"
 msgstr ""
 
-#: inc/__custom-functions.php:424
+#: inc/__custom-functions.php:414
 msgid "עמוד הבית "
 msgstr ""
 
@@ -234,6 +234,22 @@ msgstr ""
 
 #: inc/__gift-card.php:32
 msgid "Gift card added to cart!"
+msgstr ""
+
+#: inc/__likes.php:241
+msgid "מעבד..."
+msgstr ""
+
+#: inc/__likes.php:242
+msgid "המוצר התווסף לרשימת המשאלות "
+msgstr ""
+
+#: inc/__likes.php:243
+msgid "מוצר זה הוסר מרשימת המשאלות שלך"
+msgstr ""
+
+#: inc/__likes.php:244
+msgid "משהו השתבש..."
 msgstr ""
 
 #: inc/__registration.php:10
@@ -495,15 +511,18 @@ msgstr ""
 msgid "No Image for that banner"
 msgstr ""
 
+#: template-parts/product-card-slide.php:11
 #: template-parts/product-card.php:11
 msgid "המוצר לא נמצא"
 msgstr ""
 
-#: template-parts/product-card.php:57
+#: template-parts/product-card-slide.php:58
+#: template-parts/product-card.php:58
 msgid "לקנות עכשיו"
 msgstr ""
 
-#: template-parts/product-card.php:64
+#: template-parts/product-card-slide.php:65
+#: template-parts/product-card.php:65
 msgid "להסיר מוצר"
 msgstr ""
 
@@ -622,11 +641,11 @@ msgstr ""
 msgid "Favorites"
 msgstr ""
 
-#: templates/favorites.php:77
+#: templates/favorites.php:78
 msgid "עדיין אין לך פריטים שמורים"
 msgstr ""
 
-#: templates/favorites.php:78
+#: templates/favorites.php:79
 msgid "אתה צריך קצת השראה? יש לנו כמה הצעות שתאהבו."
 msgstr ""
 
@@ -744,11 +763,11 @@ msgid "מצא את המידה שלך"
 msgstr ""
 
 #: woocommerce/content-single-product.php:112
-msgid "Description"
+msgid "תיאור"
 msgstr ""
 
 #: woocommerce/content-single-product.php:120
-msgid "Details"
+msgid "פרטים"
 msgstr ""
 
 #: woocommerce/content-single-product.php:176

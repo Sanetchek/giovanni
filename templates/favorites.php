@@ -34,14 +34,15 @@ defined( 'ABSPATH' ) || exit; ?>
 
       <div class="entry-content">
         <div class="profile-container">
-          <div class="woocommerce">
+          <?php $reverse = !is_user_logged_in() ? 'profile-container--reverse' : '' ?>
+          <div class="woocommerce <?php echo $reverse ?>">
             <?php if (is_user_logged_in()) : ?>
               <?php do_action( 'woocommerce_account_navigation' ); ?>
             <?php else : ?>
-              <div class="profile-navigation">
+              <nav class="profile-navigation" aria-label="<?php esc_html_e( 'Account pages', 'woocommerce' ); ?>">
                 <?php $group = get_field('section_not_registered_users') ?>
                 <?php if ($group) : ?>
-                  <ul class="my-account_sidebar--menu">
+                  <div class="my-account_sidebar--menu">
                     <h3 class="sidebar-empty-title"><?= $group['title'] ?></h3>
                     <?php if ($group['list']) : ?>
                       <ul class="wishlist-create-account--description-empty">
@@ -52,9 +53,9 @@ defined( 'ABSPATH' ) || exit; ?>
                     <?php endif ?>
 
                     <a class="button-wishlist button-hover" href="/my-account" role="button" tabindex="-1"><?= $group['link_label'] ?></a>
-                  </ul>
+                  </div>
                 <?php endif ?>
-              </div>
+              </nav>
             <?php endif ?>
 
             <div class="profile-content">
