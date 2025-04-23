@@ -321,9 +321,11 @@ function build_product_query_args($form_data = [], $paged = 1, $category_id = fa
   if (!empty($form_data['sort'])) {
     switch ($form_data['sort']) {
       case 'popularity':
-        $args['orderby']  = 'meta_value_num';
-        $args['meta_key'] = 'total_sales';
-        $args['order']    = 'DESC';
+        $args['meta_key'] = 'total_sales'; // Required for popularity sorting
+        $args['orderby']  = array(
+          'meta_value_num' => 'DESC', // Sort by total_sales
+          'ID'             => 'ASC',  // Tie-breaker: by post ID
+        );
         break;
       case 'rating':
         $args['orderby']  = 'meta_value_num';

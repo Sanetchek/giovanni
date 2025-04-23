@@ -66,7 +66,7 @@ defined( 'ABSPATH' ) || exit; ?>
                 <?php if ($favorites['query']) : ?>
                   <?php foreach ($favorites['query'] as $item) : ?>
 
-                    <li class="product-card">
+                    <li class="product-card" data-id="<?= $item->ID ?>">
 
                       <?php get_template_part('template-parts/product', 'card', ['product_id' => $item->ID]); ?>
 

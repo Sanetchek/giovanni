@@ -562,27 +562,29 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters('active_plugins', ge
    */
   function get_paginated_products() {
     // Determine the current page
-    $paged = get_query_var('paged') ? get_query_var('paged') : 1; // Default to page 1
+    $paged = get_query_var('paged') ? get_query_var('paged') : 1;
 
     $args = array(
       'post_type'      => 'product',
-      'posts_per_page' => 20, // You can modify this value
-      'paged'          => $paged, // Pagination parameter
+      'posts_per_page' => 20,
+      'paged'          => $paged,
       'post_status'    => 'publish',
-      'orderby'        => 'meta_value_num',
-      'meta_key'       => 'total_sales',
+      'meta_key'       => 'total_sales', // Required for sorting by meta_value_num
+      'orderby'        => array(
+        'meta_value_num' => 'DESC', // Primary sort: by total_sales
+        'ID'             => 'ASC',  // Secondary sort: by ID to prevent duplicate pagination
+      ),
       'order'          => 'DESC',
       'post__not_in'   => array(7935), // Exclude specific products
     );
 
-    // For category archives, add a tax_query to filter by category.
+    // For category archives, add a tax_query to filter by category
     if (is_product_category()) {
       $current_category = get_queried_object();
 
       if ($current_category && !is_wp_error($current_category)) {
-        $category_id = $current_category->term_id; // Get the current category ID.
+        $category_id = $current_category->term_id;
         $args['tax_query'] = array(
-          'relation' => 'AND',
           array(
             'taxonomy' => 'product_cat',
             'field'    => 'term_id',

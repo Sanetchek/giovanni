@@ -90,3 +90,22 @@
   });
 
 }(jQuery));
+
+function checkIds() {
+  const idCounts = {};
+  const allIds = [];
+  const $cards = jQuery('.product-card');
+
+  $cards.each(function () {
+    const id = jQuery(this).attr('data-id');
+    if (id) {
+      allIds.push(id);
+      idCounts[id] = (idCounts[id] || 0) + 1;
+    }
+  });
+
+  const duplicateIds = Object.keys(idCounts).filter(id => idCounts[id] > 1);
+
+  console.log('All product ids:', allIds);
+  console.log('Duplicate product ids:', duplicateIds.length ? duplicateIds : 'No duplicates found.');
+}

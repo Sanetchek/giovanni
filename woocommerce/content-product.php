@@ -24,7 +24,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	return;
 }
 ?>
-<li class="product-card">
+<li class="product-card" data-id="<?= $product->get_id() ?>">
 
 	<?php get_template_part('template-parts/product-card'); ?>
 
