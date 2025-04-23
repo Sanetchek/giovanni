@@ -1729,6 +1729,18 @@
     display: flex;
     gap: 10px;
   }
+
+  .search-page {
+    margin: 20px 0 0;
+  }
+
+  .search-page h1.search-title {
+    padding-bottom: 0;
+  }
+
+  .search-page .page-header {
+    margin-bottom: 0;
+  }
 }
 
 @media screen and (max-width: 402px) {
