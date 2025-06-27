@@ -5,7 +5,7 @@ $button_title = get_field('signature_button_title');
 $button_link = get_field('signature_button_link');
 $image = get_field('sig_image');
 $image_mob = get_field('sig_image_mob');
-$image_link = get_field('sig_image_link') || 'javascript:void(0)';
+$image_link = get_field('sig_image_link') ?? 'javascript:void(0)';
 ?>
 <?php if ($title || $desc || $button_link || $image) : ?>
   <section id="signature_pieces" class="signature_pieces">
