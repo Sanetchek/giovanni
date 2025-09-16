@@ -295,6 +295,7 @@ function build_product_query_args($form_data = [], $paged = 1, $category_id = fa
     'post_type'      => 'product',
     'paged'          => max(1, $paged),
     'posts_per_page' => $posts_per_page,
+    'offset'         => ($paged - 1) * $posts_per_page,
     'post_status'    => 'publish',
     'post__not_in'   => array(7935),
     'tax_query'      => [
