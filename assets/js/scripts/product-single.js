@@ -83,3 +83,46 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+ 
+(function($){
+  window.vimeoPlayers = [];
+  const iframes = Array.from(document.querySelectorAll('iframe.js-vimeo'));
+  iframes.forEach(el => {
+    const p = new Vimeo.Player(el);
+    p.setVolume(0).catch(()=>{});
+    window.vimeoPlayers.push(p);
+  });
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const el = entry.target;
+        const player = window.vimeoPlayers.find(pp => pp.element === el);
+        if (!player) return;
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
+          player.play().catch(()=>{});
+        } else {
+          player.pause().catch(()=>{});
+        }
+      });
+    }, { threshold: [0, 0.6] });
+    iframes.forEach(el => io.observe(el));
+  }
+
+  const $slider = $('.product-gallery__wrapper');
+
+  $slider
+    .on('mousedown touchstart', '.product-gallery__video', function(){
+      $(this).addClass('dragging');
+    })
+    .on('mouseup touchend touchcancel', '.product-gallery__video', function(){
+      $(this).removeClass('dragging');
+    });
+
+  $slider.on('beforeChange', function(){
+    if (window.vimeoPlayers) {
+      window.vimeoPlayers.forEach(p => p.pause().catch(()=>{}));
+    }
+  });
+})(jQuery);
+
