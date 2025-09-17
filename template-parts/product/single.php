@@ -77,21 +77,29 @@ $vimeo_video = get_field('vimeo_video');
     }
   
     if ($vimeo_video) {
-        preg_match('/(\d+)/', $vimeo_video, $matches); 
-        $vimeo_id = $matches[1] ?? '';
+        preg_match('/(\d+)/', $vimeo_video, $m);
+        $vimeo_id = $m[1] ?? '';
 
         if ($vimeo_id) {
-            echo '<div class="product-gallery__image full">';
-            echo '<iframe 
-                    src="https://player.vimeo.com/video/' . $vimeo_id . '?autoplay=1&muted=1&loop=1&background=0" 
-                    width="812" height="457" 
-                    frameborder="0" 
-                    allow="autoplay; fullscreen; picture-in-picture" 
-                    allowfullscreen>
-                  </iframe>';
-            echo '</div>';
+          echo '<div class=" product-gallery__video">';
+          echo '<div class="vp-center vimeo-box">';
+          echo '<iframe 
+                  class="js-vimeo"
+                  data-vimeo-id="' . esc_attr($vimeo_id) . '"
+                  src="https://player.vimeo.com/video/' . esc_attr($vimeo_id) . '?muted=1&loop=1&autopause=1&title=0&byline=0&portrait=0"
+                  frameborder="0"
+                  loading="lazy"
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  allowfullscreen
+                  playsinline>
+                </iframe>';
+          echo '</div>';
+          echo '</div>';
+
         }
     }
+
+
 
 
     ?>
