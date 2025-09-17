@@ -6,6 +6,8 @@ $product_id = $product->get_id();
 // Get the product gallery attachment ids.
 $attachment_ids = $product->get_gallery_image_ids();
 $videos = get_field('gallery_media');
+$vimeo_video = get_field('vimeo_video');
+
 ?>
 
 <div class="product-gallery">
@@ -73,6 +75,25 @@ $videos = get_field('gallery_media');
       echo do_shortcode('[wp360view product_id=' . $product_id . ']');
       echo '</div>';
     }
+  
+    if ($vimeo_video) {
+        preg_match('/(\d+)/', $vimeo_video, $matches);
+        $vimeo_id = $matches[1] ?? '';
+
+        if ($vimeo_id) {
+            echo '<div class="product-gallery__image full">';
+            echo '<iframe 
+                    src="https://player.vimeo.com/video/' . $vimeo_id . '?autoplay=1&muted=1&loop=1&background=0" 
+                    width="812" height="457" 
+                    frameborder="0" 
+                    allow="autoplay; fullscreen; picture-in-picture" 
+                    allowfullscreen>
+                  </iframe>';
+            echo '</div>';
+        }
+    }
+
+
     ?>
   </div>
 </div>
