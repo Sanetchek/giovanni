@@ -77,7 +77,7 @@ $vimeo_video = get_field('vimeo_video');
     }
   
     if ($vimeo_video) {
-        preg_match('/(\d+)/', $vimeo_video, $matches);
+        preg_match('/(\d+)/', $vimeo_video, $matches); 
         $vimeo_id = $matches[1] ?? '';
 
         if ($vimeo_id) {
