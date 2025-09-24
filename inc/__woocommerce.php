@@ -45,7 +45,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters('active_plugins', ge
         $total_products = $wp_query->found_posts;
 
         // Modify the title to include the product count
-        $title .= '<span class="product-count">' . esc_html( $total_products ) . '</span>';
+        //$title .= '<span class="product-count">' . esc_html( $total_products ) . '</span>';
 
         // Check ACF field use_black_title
         $use_black_title = get_field('use_black_title', get_queried_object());
