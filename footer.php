@@ -140,6 +140,6 @@
 	<button id="scrollToTop">▲</button>
 
 <?php wp_footer(); ?>
-
+<script src="https://player.vimeo.com/api/player.js"></script>
 </body>
 </html>
