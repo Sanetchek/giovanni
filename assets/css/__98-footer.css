@@ -43,6 +43,7 @@ label.footer-subscribe-privacy {
   right: -10px;
   bottom: -40px;
   width: 100% !important;
+  font-size: 14px; 
 }
 
 label.popup-subscribe-privacy span span {

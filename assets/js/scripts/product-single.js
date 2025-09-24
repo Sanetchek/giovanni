@@ -84,6 +84,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
  
+
+
+
 (function($){
   window.vimeoPlayers = [];
   const iframes = Array.from(document.querySelectorAll('iframe.js-vimeo'));
@@ -126,3 +129,11 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 })(jQuery);
 
+document.querySelectorAll('.js-vimeo').forEach((iframe) => {
+  const player = new Vimeo.Player(iframe);
+  Promise.all([player.getVideoWidth(), player.getVideoHeight()]).then(([w, h]) => {
+    if (w && h) {
+      iframe.parentElement.style.aspectRatio = `${w} / ${h}`;
+    }
+  });
+});
