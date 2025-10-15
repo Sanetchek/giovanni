@@ -151,22 +151,60 @@ function generate_picture($image_id, $thumb = 'full', $class = '', $min = [], $m
  * @param int $bg The ID of the background image.
  * @param int $bg_mob The ID of the background image for mobile devices.
  */
-function generate_picture_source($bg, $bg_mob = null) {
-	// Default mobile image to desktop image if not provided
-	$bg_mob = $bg_mob ? $bg_mob : $bg;
+function generate_picture_source($bg, $bg_mob = null, $attrs = array()) {
+  $resolve_id = function($val) {
+    if (!$val) return 0;
+    if (is_numeric($val)) return (int)$val;                     
+    if (is_array($val)) {
+      if (!empty($val['ID'])) return (int)$val['ID'];           
+      if (!empty($val['id'])) return (int)$val['id'];
+      if (!empty($val['url'])) return attachment_url_to_postid($val['url']);
+    }
+    if (is_string($val)) return attachment_url_to_postid($val); 
+    return 0;
+  };
 
-	// Get the URL of the desktop image
-	$desktop_image_url = wp_get_attachment_image_url($bg, '1920-865');
+  $bg_id     = $resolve_id($bg);
+  $bg_mob_id = $resolve_id($bg_mob ?: $bg);
 
-	// Get the URL of the mobile image
-	$mob_image_url = wp_get_attachment_image_url($bg_mob, '768-865'); ?>
+  $desktop = $bg_id ? wp_get_attachment_image_src($bg_id, '1920-865') : false;
+  if (!$desktop && is_string($bg) && filter_var($bg, FILTER_VALIDATE_URL)) {
+    $desktop = [$bg, 1920, 865];
+  }
+  if (!$desktop) {
+    $desktop = $bg_id ? wp_get_attachment_image_src($bg_id, 'full') : ['', 1920, 865];
+  }
 
-	<picture>
-		<source media="(max-width:1024px)" srcset="<?= esc_url($mob_image_url) ?>" sizes="(max-width: 1024px) 100vw">
-		<img width="1920" height="865" src="<?= esc_url($desktop_image_url) ?>" alt="hero" loading="lazy">
-	</picture>
-	<?php
+  $mobile = $bg_mob_id ? wp_get_attachment_image_src($bg_mob_id, '768-865') : false;
+  if (!$mobile && is_string($bg_mob) && filter_var($bg_mob, FILTER_VALIDATE_URL)) {
+    $mobile = [$bg_mob, 768, 865];
+  }
+  if (!$mobile) {
+    $mobile = $bg_mob_id ? wp_get_attachment_image_src($bg_mob_id, 'full') : $desktop;
+  }
+
+  $alt = isset($attrs['alt']) ? $attrs['alt'] : 'hero';
+
+  $class = 'is-hero';
+  if (!empty($attrs['class'])) $class = trim($attrs['class'].' is-hero');
+
+  ?>
+  <picture>
+    <source media="(max-width:1024px)"
+            srcset="<?php echo esc_url($mobile[0]); ?>"
+            sizes="(max-width: 1024px) 100vw">
+    <img
+      class="<?php echo esc_attr($class); ?>"
+      src="<?php echo esc_url($desktop[0]); ?>"
+      width="<?php echo (int)($desktop[1] ?: 1920); ?>"
+      height="<?php echo (int)($desktop[2] ?: 865); ?>"
+      alt="<?php echo esc_attr($alt); ?>"
+      loading="eager"
+      fetchpriority="high">
+  </picture>
+  <?php
 }
+
 
 /**
  * Generates a responsive background image using the <picture> element.
@@ -739,3 +777,74 @@ function whatsapp() {
 	 </a>';
 }
 add_action( 'wp_footer', 'whatsapp' );
+
+
+add_filter('script_loader_tag', function ($tag, $handle, $src) {
+  if (is_admin() || wp_doing_ajax()) return $tag;
+  $exclude = [
+    'jquery','jquery-core','jquery-migrate',
+    'woocommerce','wc-add-to-cart','wc-cart-fragments',
+    'elementor-frontend','elementor-waypoints'
+  ];
+  if (in_array($handle, $exclude, true)) return $tag;
+  if (strpos($tag, ' type="module"') !== false) return $tag;
+  if (strpos($tag, ' defer') === false && strpos($tag, ' async') === false) {
+    $tag = str_replace('<script ', '<script defer ', $tag);
+  }
+  return $tag;
+}, 10, 3);
+
+add_action('wp_enqueue_scripts', function () {
+  if (wp_script_is('jquery-core', 'registered')) {
+    wp_deregister_script('jquery-core');
+    wp_register_script('jquery-core', includes_url('/js/jquery/jquery.min.js'), [], null, true);
+  }
+  if (wp_script_is('jquery-migrate', 'registered')) {
+    wp_deregister_script('jquery-migrate');
+    wp_register_script('jquery-migrate', includes_url('/js/jquery/jquery-migrate.min.js'), ['jquery-core'], null, true);
+  }
+  if (wp_script_is('jquery', 'registered')) {
+    wp_deregister_script('jquery');
+    wp_register_script('jquery', false, ['jquery-core','jquery-migrate'], null, true);
+  }
+  wp_enqueue_script('jquery');
+}, 100);
+
+
+add_filter('script_loader_tag', function ($tag, $handle, $src) {
+  if (is_admin() || wp_doing_ajax()) return $tag;
+  $delay = false;
+  if (strpos($src, 'pluro.ai') !== false) $delay = true;
+  if (strpos($src, 'unitoolbar') !== false) $delay = true;
+  if (strpos($src, 'google.com') !== false && strpos($src, 'api') !== false) $delay = true;
+  if ($delay) {
+    $tag = preg_replace('#\s+src=([\'"]).*?\1#', '', $tag);
+    $tag = str_replace('<script ', '<script data-delayed-src="'.esc_attr($src).'" ', $tag);
+  }
+  return $tag;
+}, 10, 3);
+
+add_action('wp_footer', function () {
+?>
+<script>
+(function(){
+  var started=false;
+  function loadDelayed(){
+    if(started) return; started=true;
+    var nodes=document.querySelectorAll('script[data-delayed-src]');
+    nodes.forEach(function(n){
+      var s=document.createElement('script');
+      s.src=n.getAttribute('data-delayed-src');
+      s.async=true; s.defer=true;
+      document.head.appendChild(s);
+      n.parentNode.removeChild(n);
+    });
+  }
+  ['mousemove','keydown','touchstart','scroll'].forEach(function(e){
+    window.addEventListener(e, loadDelayed, {once:true, passive:true});
+  });
+  setTimeout(loadDelayed, 4000);
+})();
+</script>
+<?php
+}, 1);
