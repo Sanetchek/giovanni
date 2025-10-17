@@ -264,125 +264,107 @@ function giovanni_scripts() {
 		wp_enqueue_script('wc-cart-fragments');
 	}
 }
-
-
 add_action( 'wp_enqueue_scripts', 'giovanni_scripts' );
 
 
-add_action('wp_print_styles', function () {
-  if (is_admin()) return;
-  wp_dequeue_style('giovanni-style');
-  wp_dequeue_style('giovanni-slick-css');
-}, 999);
-
 add_action('wp_head', function () {
-  echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
-  echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
-  echo '<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Jost:wght@500&family=Libre+Caslon+Text&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" onload="this.onload=null;this.rel=\'stylesheet\'">';
-  echo '<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@500&family=Libre+Caslon+Text&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"></noscript>';
+	echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
+	echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
+	echo '<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Jost:wght@500&family=Libre+Caslon+Text&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" onload="this.onload=null;this.rel=\'stylesheet\'">';
+	echo '<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@500&family=Libre+Caslon+Text&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"></noscript>';
 }, 1);
 
-add_action('wp_head', function () {
-  $href = get_stylesheet_uri(); 
-  if (is_rtl()) {
-    $href = preg_replace('/\.css(\?.*)?$/', '-rtl.css$1', $href);
-  }
-  printf('<link rel="preload" as="style" href="%1$s" onload="this.onload=null;this.rel=\'stylesheet\'"><noscript><link rel="stylesheet" href="%1$s"></noscript>', esc_url($href));
-  $slick = get_template_directory_uri() . '/assets/js/slick/slick.css';
-  printf('<link rel="preload" as="style" href="%1$s" onload="this.onload=null;this.rel=\'stylesheet\'"><noscript><link rel="stylesheet" href="%1$s"></noscript>', esc_url($slick));
-}, 5);
-
-add_filter('wp_get_attachment_image_attributes', function($attr, $attachment, $size){
-  if (!is_admin() && !empty($attr['class']) && strpos($attr['class'], 'is-hero') !== false) {
-    $attr['loading'] = 'eager';
-    $attr['fetchpriority'] = 'high';
-  }
-  return $attr;
+add_filter('wp_get_attachment_image_attributes', function($attr, $attachment = null, $size = null){
+	if (is_admin()) return $attr;
+	$class = isset($attr['class']) ? $attr['class'] : '';
+	$is_hero = (strpos($class, 'is-hero') !== false);
+	if ($is_hero) {
+		$attr['loading'] = 'eager';
+		$attr['fetchpriority'] = 'high';
+	} else {
+		$attr['loading'] = 'lazy';
+		$attr['decoding'] = 'async';
+	}
+	if (!empty($class)) {
+		if (strpos($class, 'collections-bg') !== false && strpos($class, 'page-desk') !== false) {
+			$attr['sizes'] = '(max-width: 1920px) 100vw, 1920px';
+		}
+		if (strpos($class, 'main-post-image') !== false && strpos($class, 'main-post-image-desktop') !== false) {
+			$attr['sizes'] = '(max-width: 1280px) 100vw, 1280px';
+		}
+	}
+	if (empty($attr['sizes'])) {
+		$attr['sizes'] = '100vw';
+	}
+	return $attr;
 }, 10, 3);
 
 
-// 1) IMG по умолчанию: decoding="async", lazy для всех, кроме hero
-add_filter('wp_get_attachment_image_attributes', function($attr){
-  if (is_admin()) return $attr;
-  $class = isset($attr['class']) ? $attr['class'] : '';
-  $is_hero = (strpos($class, 'is-hero') !== false);
-  if (!$is_hero) {
-    $attr['loading'] = 'lazy';
-    $attr['decoding'] = 'async';
-  }
-  return $attr;
-}, 9);
-
-// 2) Глобально подрежем srcset: не больше 1920px (чтоб не лить лишнее)
 add_filter('wp_calculate_image_srcset', function($sources, $size_array, $image_src, $image_meta, $attachment_id){
-  if (is_admin() || !is_array($sources)) return $sources;
-  $max_w = 1920;
-  foreach ($sources as $w => $data) {
-    if ($w > $max_w) unset($sources[$w]);
-  }
-  return $sources;
+	if (is_admin() || !is_array($sources)) return $sources;
+	$max_w = 1920;
+	foreach ($sources as $w => $data) {
+		if ($w > $max_w) unset($sources[$w]);
+	}
+	return $sources;
 }, 10, 5);
 
-// 3) Пропишем умные sizes для конкретных блоков (по классам)
-add_filter('wp_get_attachment_image_attributes', function($attr){
-  if (is_admin()) return $attr;
-  if (empty($attr['class'])) return $attr;
 
-  // .collections-bg.page-desk — твой первый пример (макс 1920)
-  if (strpos($attr['class'], 'collections-bg') !== false && strpos($attr['class'], 'page-desk') !== false) {
-    $attr['sizes'] = '(max-width: 1920px) 100vw, 1920px';
-  }
 
-  // .main-post-image.main-post-image-desktop — второй пример (макс 1280)
-  if (strpos($attr['class'], 'main-post-image') !== false && strpos($attr['class'], 'main-post-image-desktop') !== false) {
-    $attr['sizes'] = '(max-width: 1280px) 100vw, 1280px';
-  }
-
-  // базовый fallback: если sizes не задан, пусть будет «экран минус поля»
-  if (empty($attr['sizes'])) {
-    $attr['sizes'] = '100vw';
-  }
-  return $attr;
-}, 11);
-
-// 4) Подхватываем IMG, вставленные «руками» в контент (не через wp_get_attachment_image)
 add_filter('the_content', function($html){
-  if (is_admin() || stripos($html, '<img') === false) return $html;
-
-  // decoding="async" если нет
-  $html = preg_replace('/<img\b((?:(?!decoding=).)*?)>/i', '<img decoding="async"$1>', $html);
-
-  // loading="lazy" если нет (hero мы выводим не через контент, поэтому ок)
-  $html = preg_replace('/<img\b((?:(?!loading=).)*?)>/i', '<img loading="lazy"$1>', $html);
-
-  return $html;
+	if (is_admin() || stripos($html, '<img') === false) return $html;
+	$html = preg_replace('/<img\b((?:(?!\bdecoding=).)*?)>/i', '<img decoding="async"$1>', $html);
+	$html = preg_replace('/<img\b((?:(?!\bloading=).)*?)>/i', '<img loading="lazy"$1>', $html);
+	return $html;
 }, 12);
 
-// 5) (опционально) lazy для фоновых изображений через data-bg
 add_action('wp_footer', function () {
-  ?>
-  <script>
-  (function(){
-    if(!('IntersectionObserver' in window)) return;
-    var els = [].slice.call(document.querySelectorAll('[data-bg]'));
-    if(!els.length) return;
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting){
-          var el = e.target;
-          var url = el.getAttribute('data-bg');
-          if(url){ el.style.backgroundImage = 'url('+url+')'; el.removeAttribute('data-bg'); }
-          io.unobserve(el);
-        }
-      });
-    }, { rootMargin: '300px 0px' });
-    els.forEach(function(el){ io.observe(el); });
-  })();
-  </script>
-  <?php
+	?>
+	<script>
+	(function(){
+	  if(!('IntersectionObserver' in window)) return;
+	  var els = [].slice.call(document.querySelectorAll('[data-bg]'));
+	  if(!els.length) return;
+	  var io = new IntersectionObserver(function(entries){
+	    entries.forEach(function(e){
+	      if(e.isIntersecting){
+	        var el = e.target;
+	        var url = el.getAttribute('data-bg');
+	        if(url){ el.style.backgroundImage = 'url('+url+')'; el.removeAttribute('data-bg'); }
+	        io.unobserve(el);
+	      }
+	    });
+	  }, { rootMargin: '300px 0px' });
+	  els.forEach(function(el){ io.observe(el); });
+	})();
+	</script>
+	<?php
 }, 99);
 
-
+add_filter('script_loader_tag', function($tag, $handle, $src){
+	if (is_admin()) return $tag;
+	$tag = preg_replace('/\s(defer|async)(=("defer"|"async"))?/i','', $tag);
+	$never_touch = array(
+		'wp-i18n','wp-hooks','wp-element','wp-components','wp-api-fetch','wp-util','wp-a11y',
+		'jquery','jquery-migrate','underscore',
+		'wp-url','wp-dom-ready','wp-api-request','wp-api','wp-polyfill',
+		'mediaelement-core','mediaelement-migrate','wp-mediaelement',
+		'wp-blob','react','react-dom','react-jsx-runtime',
+		'wp-private-apis','wp-escape-html',
+		'media-views','media-models','media-editor','media-audiovideo',
+		'wp-pointer','thickbox','wp-backbone','backbone','shortcode',
+		'wc-cart-fragments',
+		'contact-form-7','wpcf7-recaptcha','google-recaptcha','recaptcha','grecaptcha','g-recaptcha'
+	);
+	if (in_array($handle, $never_touch, true)) return $tag;
+	$safe_defer = array('slick','giovanni-script');
+	if (in_array($handle, $safe_defer, true) && !empty($src)) {
+		if (!preg_match('/\sdefer(\s|=|>)/i', $tag)) {
+			$tag = preg_replace('/<script\b/i', '<script defer', $tag, 1);
+		}
+	}
+	return $tag;
+}, 1000, 3);
 
 /**
  * Add attributes to SCRIPT link
@@ -393,6 +375,8 @@ add_action('wp_footer', function () {
  * @return void
  */
 function add_attribs_to_scripts( $tag, $handle, $src ) {
+
+	// The handles of the enqueued scripts we want to defer
 	$async_scripts = array(
 		'jquery-migrate',
 		'sharethis',
@@ -405,31 +389,25 @@ function add_attribs_to_scripts( $tag, $handle, $src ) {
 		'jquery-choosen',
 		'fancybox',
 		'jquery-colorbox',
-		'search',
-		'slick',
-		'giovanni-script'
+		'search'
 	);
 
-	$jquery = array('jquery');
+	$jquery = array(
+		'jquery'
+	);
 
-	if ( in_array( $handle, $defer_scripts, true ) ) {
-		return '<script src="' . esc_url($src) . '" defer="defer" type="text/javascript"></script>' . "\n";
+	if ( in_array( $handle, $defer_scripts ) ) {
+		return '<script src="' . $src . '" defer="defer" type="text/javascript"></script>' . "\n";
 	}
-
-	if ( in_array( $handle, $async_scripts, true ) ) {
-		return '<script src="' . esc_url($src) . '" async="async" type="text/javascript"></script>' . "\n";
+	if ( in_array( $handle, $async_scripts ) ) {
+		return '<script src="' . $src . '" async="async" type="text/javascript"></script>' . "\n";
 	}
-
-	if ( in_array( $handle, $jquery, true ) ) {
-		return '<script src="' . esc_url($src) . '" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous" type="text/javascript"></script>' . "\n";
+	if ( in_array( $handle, $jquery ) ) {
+		return '<script src="' . $src . '" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous" type="text/javascript"></script>' . "\n";
 	}
 
 	return $tag;
 }
-add_filter( 'script_loader_tag', 'add_attribs_to_scripts', 10, 3 );
-
-
-
 add_filter( 'script_loader_tag', 'add_attribs_to_scripts', 10, 3 );
 
 /**

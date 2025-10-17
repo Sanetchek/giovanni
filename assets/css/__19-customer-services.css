@@ -171,7 +171,7 @@ form.wpcf7-form * {
 
 .customer-main form.wpcf7-form label {
   width: calc((100% - 20px) / 2);
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .customer-main form.wpcf7-form input[type="text"],
@@ -180,5 +180,5 @@ form.wpcf7-form * {
 .customer-main form.wpcf7-form select {
   border: none !important;
   border-bottom: 1px solid #999 !important;
-  font-size: 10px;
+  font-size: 11px;
 }

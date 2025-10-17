@@ -320,3 +320,7 @@ button.js-accordion-trigger.accordion-trigger {
   height: 50px;
   z-index: 100;
 }
+
+.adress {
+  max-width: 195px;
+}
