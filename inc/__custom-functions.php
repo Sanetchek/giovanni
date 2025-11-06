@@ -70,22 +70,28 @@ function str_word($text, $counttext = 30, $sep = ' ')
  * @return void
  */
 function generate_picture_element($image_id, $is_last, $class) {
-	// Get the image URLs for different sizes
-	$thumb = '812-812';
-	$large_image = wp_get_attachment_image_src($image_id, $thumb);
 
-  $thumb = $is_last ? '1440-500' : $thumb;
-	$medium_image = wp_get_attachment_image_src($image_id, $thumb);
+	$thumb = [473, 473];
+	$thumb1024 = [345, 345];
 
-	// Check if images are available
-	if ($large_image && $medium_image) {
-		$output = '<picture aria-hidden="true">';
-		$output .= '<source media="(min-width:1280px)" srcset="' . esc_url($large_image[0]) . '">';
-		$output .= '<img class="lazyloaded" data-src="' . esc_url($medium_image[0]) . '" alt="' . esc_attr(get_the_title($image_id)) . '" src="' . esc_url($medium_image[0]) . '" class="'.$class.'" loading="lazy">';
-		$output .= '</picture>';
+  	$thumb = $is_last ? [1440, 500] : $thumb;
+	$thumb1024 = $is_last ? [718, 332] : $thumb1024;
 
-		return $output;
+	if ($image_id) {
+
+		$data = [
+			'thumb' => [718, 718],
+			'max' => [
+				'1279' => $thumb,
+				'1024' => $thumb1024,
+			],
+			'args' => [
+				'class' => $class,
+			]
+		];
+		return liteimage($image_id, $data);
 	}
+
 
 	return '';
 }
@@ -848,3 +854,20 @@ add_action('wp_footer', function () {
 </script>
 <?php
 }, 1);
+
+add_action('after_setup_theme', function(){
+    add_image_size('mobile-s', 360, 0, false);
+    add_image_size('mobile-m', 480, 0, false);
+    add_image_size('mobile-l', 768, 0, false);
+});
+
+add_filter('wp_calculate_image_sizes', function($sizes, $size, $image_src, $attachment_id){
+    $width = is_array($size) ? (int)$size[0] : (int)$size;
+
+    if ($width <= 1024) {
+        return '(max-width:480px) 100vw, (max-width:768px) 100vw, 1024px';
+    }
+
+    return $sizes;
+},10,4);
+

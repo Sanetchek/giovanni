@@ -12,13 +12,17 @@ $paged    = max( 1, get_query_var('paged') );
 
 $args = array(
     'post_type'           => 'product',
-    's'                   => get_search_query(),
+    's'                   => get_search_query(false),
     'post_status'         => 'publish',
     'ignore_sticky_posts' => true,
     'paged'               => $paged,
     'posts_per_page'      => $per_page,
     'no_found_rows'       => false,
+    'wc_query'            => 'product_query',
+    'orderby'             => 'relevance',
+    'order'               => 'DESC',
 );
+
 
 $query      = new WP_Query($args);
 $post_count = $query->found_posts;

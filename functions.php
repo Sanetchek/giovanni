@@ -410,6 +410,62 @@ function add_attribs_to_scripts( $tag, $handle, $src ) {
 }
 add_filter( 'script_loader_tag', 'add_attribs_to_scripts', 10, 3 );
 
+add_filter('posts_join', function ($join, \WP_Query $q) {
+    if (is_admin()) return $join;
+
+    $post_type = (array) $q->get('post_type');
+    $is_products = in_array('product', $post_type, true) || $q->get('wc_query') === 'product_query';
+
+    if ($q->is_search() && $is_products) {
+        global $wpdb;
+        $join .= " 
+            LEFT JOIN {$wpdb->postmeta} AS sku_pm 
+                ON sku_pm.post_id = {$wpdb->posts}.ID 
+               AND sku_pm.meta_key = '_sku'
+            LEFT JOIN {$wpdb->posts} AS var_p 
+                ON var_p.post_parent = {$wpdb->posts}.ID 
+               AND var_p.post_type = 'product_variation'
+            LEFT JOIN {$wpdb->postmeta} AS var_pm 
+                ON var_pm.post_id = var_p.ID 
+               AND var_pm.meta_key = '_sku'
+        ";
+    }
+    return $join;
+}, 10, 2);
+
+add_filter('posts_where', function ($where, \WP_Query $q) {
+    if (is_admin()) return $where;
+
+    $post_type = (array) $q->get('post_type');
+    $is_products = in_array('product', $post_type, true) || $q->get('wc_query') === 'product_query';
+
+    if ($q->is_search() && $is_products) {
+        global $wpdb;
+        $s_raw = $q->get('s');
+        if ($s_raw !== '') {
+            $like = '%' . $wpdb->esc_like(wc_clean(wp_unslash($s_raw))) . '%';
+            // Додаємо OR-умову на збіг SKU у товарів і їх варіацій
+            $where .= $wpdb->prepare(
+                " OR (sku_pm.meta_value LIKE %s) OR (var_pm.meta_value LIKE %s)",
+                $like, $like
+            );
+        }
+    }
+    return $where;
+}, 10, 2);
+
+add_filter('posts_distinct', function ($distinct, \WP_Query $q) {
+    if (is_admin()) return $distinct;
+
+    $post_type = (array) $q->get('post_type');
+    $is_products = in_array('product', $post_type, true) || $q->get('wc_query') === 'product_query';
+
+    if ($q->is_search() && $is_products) {
+        return 'DISTINCT';
+    }
+    return $distinct;
+}, 10, 2);
+
 /**
  * Actions.
  */
