@@ -85,28 +85,6 @@
 				<p class="copyrights">
 					Built by <a href="https://webeffect.co.il/">Webeffect</a> | Copyright © 2025 Tilion Studio LTD
 				</p>
-				
-				<hr style="border:none; border-top:1px solid #eee; margin:15px auto; width:80%;">
-
-<p style="text-align:center; font-size:13px; color:#666; margin:4px 0; line-height:1.5; direction:ltr;">
-  Giovanni Raspini Israel – Operated by <strong>Tilion Studio LTD</strong><br>
-  Lev ha-Ir St 2, Azrieli Mall, Modi'in, Israel 7177806 | ☎ ‎054-683-0101 | ✉ 
-  <a href="mailto:customercare@giovanniraspini-shop.co.il" style="color:#444; text-decoration:none;">
-    customercare@giovanniraspini-shop.co.il
-  </a>
-</p>
-
-
-<p style="text-align:center; font-size:13px; color:#888; margin:2px 0 8px; line-height:1.5; direction:rtl; font-family:'Assistant',sans-serif;">
-  <strong style="color:#555;">Tilion Studio LTD</strong>, המפעילה את מותג <strong>Imeretti</strong> – המשווק הרשמי של תכשיטי <strong>Giovanni Raspini</strong> בישראל
-</p>
-
-
-
-
-
-
-
 
 				<div class="footer-menu-bottom">
 					<?php

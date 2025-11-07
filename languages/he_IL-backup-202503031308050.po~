@@ -1,0 +1,737 @@
+# Copyright (C) 2025 Webeffect
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Giovanni Raspini Special 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/giovanni\n"
+"Last-Translator: \n"
+"Language-Team: Hebrew\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-02-18T16:24:39+03:00\n"
+"PO-Revision-Date: 2025-02-18 13:26+0000\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Domain: giovanni\n"
+"\n"
+"Language: he_IL\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Loco-Version: 2.7.1; wp-6.7.2"
+
+#. Theme Name of the theme
+msgid "Giovanni Raspini Special"
+msgstr ""
+
+#. Description of the theme
+msgid "Giovanni Raspini Special theme"
+msgstr ""
+
+#. Author of the theme
+msgid "Webeffect"
+msgstr ""
+
+#. translators: 1: title.
+#: comments.php:34
+msgid "One thought on &ldquo;%1$s&rdquo;"
+msgstr ""
+
+#. translators: 1: comment count number, 2: title.
+#: comments.php:40
+msgctxt "comments title"
+msgid "%1$s thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:66
+msgid "Comments are closed."
+msgstr ""
+
+#: functions.php:52
+msgid "Primary"
+msgstr ""
+
+#: functions.php:53
+msgid "Footer"
+msgstr ""
+
+#: functions.php:54
+msgid "Footer-2"
+msgstr ""
+
+#. Template Name of the theme
+#: functions.php:55
+msgid "Collections"
+msgstr ""
+
+#: functions.php:56
+msgid "Featured"
+msgstr ""
+
+#: functions.php:57
+msgid "Men"
+msgstr ""
+
+#: functions.php:58
+msgid "Women"
+msgstr ""
+
+#: functions.php:59
+msgid "Charms"
+msgstr ""
+
+#: functions.php:60
+msgid "Charms 2"
+msgstr ""
+
+#: functions.php:61
+msgid "Gifts"
+msgstr ""
+
+#: functions.php:62
+msgid "About"
+msgstr ""
+
+#: functions.php:63
+msgid "Occasions"
+msgstr ""
+
+#: functions.php:156
+msgid "Sidebar"
+msgstr ""
+
+#: functions.php:158
+msgid "Add widgets here."
+msgstr ""
+
+#: functions.php:167
+msgid "Footer Widget 1"
+msgstr ""
+
+#: functions.php:169
+msgid "First area"
+msgstr ""
+
+#: functions.php:177
+msgid "Footer Widget 2"
+msgstr ""
+
+#: functions.php:179
+msgid "Second area"
+msgstr ""
+
+#: functions.php:187
+msgid "Footer Widget 3"
+msgstr ""
+
+#: functions.php:189
+msgid "Third area"
+msgstr ""
+
+#: functions.php:197
+msgid "Footer Widget 4"
+msgstr ""
+
+#: functions.php:199
+msgid "Fourth area"
+msgstr ""
+
+#: header.php:67
+msgid "My Account"
+msgstr ""
+
+#: header.php:69
+msgid "Login"
+msgstr ""
+
+#: header.php:73
+msgid "My orders"
+msgstr ""
+
+#: header.php:75
+msgid "Wishlist"
+msgstr ""
+
+#: header.php:76
+msgid "Customer service"
+msgstr ""
+
+#: inc/__ajax.php:70 inc/__ajax.php:191 search.php:64
+msgid "לא נמצאו תוצאות"
+msgstr ""
+
+#: inc/__ajax.php:120
+msgid "הצעות:"
+msgstr ""
+
+#: inc/__custom-functions.php:451
+msgid "עמוד הבית "
+msgstr ""
+
+#: inc/__customizer.php:6
+msgid "Site Identity"
+msgstr ""
+
+#: inc/__customizer.php:14
+msgid "Logo"
+msgstr ""
+
+#: inc/__customizer.php:40
+msgid "Social Media Links"
+msgstr ""
+
+#: inc/__customizer.php:50
+msgid "Whatsup URL"
+msgstr ""
+
+#: inc/__customizer.php:62
+msgid "Telegram URL"
+msgstr ""
+
+#: inc/__customizer.php:74
+msgid "LinkedIn URL"
+msgstr ""
+
+#: inc/__customizer.php:85
+msgid "Copyrights"
+msgstr ""
+
+#: inc/__customizer.php:95
+msgid "Copyrights Text"
+msgstr ""
+
+#: inc/__filters.php:125 search.php:43
+msgid "מסנן"
+msgstr ""
+
+#: inc/__filters.php:205
+msgid "מיין לפי"
+msgstr ""
+
+#: inc/__filters.php:207
+msgid "המלצות"
+msgstr ""
+
+#: inc/__filters.php:213
+msgid "מומלץ"
+msgstr ""
+
+#: inc/__filters.php:214
+msgid "חדשים ביותר"
+msgstr ""
+
+#: inc/__filters.php:215
+msgid "מחיר: מהנמוך לגבוה"
+msgstr ""
+
+#: inc/__filters.php:216
+msgid "מחיר: מהגבוה לנמוך"
+msgstr ""
+
+#: inc/__gift-card.php:6
+msgid "Nonce verification failed"
+msgstr ""
+
+#: inc/__gift-card.php:32
+msgid "Gift card added to cart!"
+msgstr ""
+
+#: inc/__registration.php:10
+msgid "You must agree to the Privacy Policy."
+msgstr ""
+
+#: inc/__registration.php:14
+msgid "Emails do not match."
+msgstr ""
+
+#: inc/__registration.php:18
+msgid "Passwords do not match."
+msgstr ""
+
+#: inc/__registration.php:24
+msgid "A valid email is required."
+msgstr ""
+
+#: inc/__registration.php:32
+msgid "Could not generate a valid username. Please use a different email."
+msgstr ""
+
+#: inc/__registration.php:66
+msgid "Registration successful! Please log in."
+msgstr ""
+
+#: inc/__user-profile.php:6
+msgid "Additional Information"
+msgstr ""
+
+#: inc/__user-profile.php:9
+msgid "Birth Date"
+msgstr ""
+
+#: inc/__user-profile.php:12
+msgid "Enter your birth date."
+msgstr ""
+
+#: inc/__user-profile.php:16
+msgid "Receive Updates"
+msgstr ""
+
+#: inc/__user-profile.php:19
+msgid "Check this if you want to receive updates."
+msgstr ""
+
+#: inc/__user-profile.php:23
+msgid "Privacy Policy Consent"
+msgstr ""
+
+#: inc/__user-profile.php:26
+msgid "Check this to agree to the Privacy Policy."
+msgstr ""
+
+#: inc/__woocommerce.php:418
+msgid ""
+"הנתונים האישיים שלך ישמשו כדי לעבד ולטפל בהזמנה שלך, לתמוך בחוויה שלך בכל "
+"האתר, ולמטרות אחרות המתוארות ב <a href=\"/privacy-policy/\" "
+"target=\"_blank\">מדיניות הפרטיות</a> שלנו."
+msgstr ""
+
+#: inc/__woocommerce.php:435
+msgid "עליך לאשר את מדיניות הפרטיות לפני שתמשיך."
+msgstr ""
+
+#: search.php:29
+msgid "תוצאות חיפוש"
+msgstr ""
+
+#. translators: %s: search query.
+#: search.php:34
+msgid " תוצאות עבור "
+msgstr ""
+
+#: searchform.php:4 template-parts/search/search-form.php:4
+msgid "חפש"
+msgstr ""
+
+#: template-parts/best-seller.php:2
+msgid "מוצרים הנמכרים ביותר"
+msgstr ""
+
+#: template-parts/best-seller.php:37
+msgid "לא נמצאו מוצרים נמכרים ביותר."
+msgstr ""
+
+#: template-parts/content-none.php:14
+msgid "Nothing Found"
+msgstr ""
+
+#. translators: 1: link to WP admin new post page.
+#: template-parts/content-none.php:24
+msgid ""
+"Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr ""
+
+#: template-parts/content-none.php:37
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with some "
+"different keywords."
+msgstr ""
+
+#: template-parts/content-none.php:44
+msgid ""
+"It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
+"searching can help."
+msgstr ""
+
+#: template-parts/content-page.php:44 template-parts/content.php:44
+msgid "Pages:"
+msgstr ""
+
+#. translators: %s: Name of current post. Only visible to screen readers
+#: template-parts/content-page.php:60
+msgid "Edit <span class=\"screen-reader-text\">%s</span>"
+msgstr ""
+
+#. translators: %s: Name of current post. Only visible to screen readers
+#: template-parts/content.php:31
+msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
+msgstr ""
+
+#: template-parts/header/searchform.php:3
+msgid "מה אתה מחפש?"
+msgstr ""
+
+#: template-parts/mega-menu/about.php:4 template-parts/mega-menu/about.php:47
+msgid "אוֹדוֹת"
+msgstr ""
+
+#: template-parts/mega-menu/charms.php:4 template-parts/mega-menu/charms.php:60
+msgid "CHARMS"
+msgstr ""
+
+#: template-parts/mega-menu/charms.php:11
+#: template-parts/mega-menu/jewellry.php:11
+#: template-parts/mega-menu/jewellry.php:67
+msgid "נשים"
+msgstr ""
+
+#: template-parts/mega-menu/charms.php:34
+#: template-parts/mega-menu/jewellry.php:34
+#: template-parts/mega-menu/jewellry.php:77
+msgid "גברים"
+msgstr ""
+
+#: template-parts/mega-menu/collections.php:4
+#: template-parts/mega-menu/collections.php:60
+msgid "אוספים"
+msgstr ""
+
+#: template-parts/mega-menu/collections.php:11
+#: template-parts/mega-menu/collections.php:65
+msgid "ערכות נושא"
+msgstr ""
+
+#: template-parts/mega-menu/collections.php:34
+#: template-parts/mega-menu/collections.php:74
+msgid "מומלצים"
+msgstr ""
+
+#: template-parts/mega-menu/collections.php:84
+#: template-parts/mega-menu/jewellry.php:88
+msgid "פופולרי"
+msgstr ""
+
+#: template-parts/mega-menu/collections.php:85
+#: template-parts/mega-menu/jewellry.php:89
+msgid "חדש ב"
+msgstr ""
+
+#: template-parts/mega-menu/gifts.php:4 template-parts/mega-menu/gifts.php:60
+msgid "מתנות"
+msgstr ""
+
+#: template-parts/mega-menu/gifts.php:11 template-parts/mega-menu/gifts.php:66
+msgid "מתנות עבור"
+msgstr ""
+
+#: template-parts/mega-menu/gifts.php:34 template-parts/mega-menu/gifts.php:76
+msgid "מקרים"
+msgstr ""
+
+#: template-parts/mega-menu/jewellry.php:4
+#: template-parts/mega-menu/jewellry.php:62
+msgid "תכשיטים"
+msgstr ""
+
+#: template-parts/modal/login-modal.php:16
+msgid "חדש ב-Giovanni Raspini? <a href=\"/my-account\">הירשם</a>"
+msgstr ""
+
+#: template-parts/product-card-adv.php:22
+msgid "No Image for that banner"
+msgstr ""
+
+#: template-parts/product-card.php:11
+msgid "המוצר לא נמצא"
+msgstr ""
+
+#: template-parts/product-card.php:57
+msgid "לקנות עכשיו"
+msgstr ""
+
+#: template-parts/product-card.php:64
+msgid "להסיר מוצר"
+msgstr ""
+
+#: template-parts/search/search-form.php:3
+msgid "חפש לפי מילת מפתח"
+msgstr ""
+
+#: template-parts/search/search-form.php:9
+msgid "אירעה שגיאה "
+msgstr ""
+
+#: template-parts/stories/tabs.php:14
+msgid "הכל"
+msgstr ""
+
+#: template-parts/subscribe-form.php:3
+msgid "Enter your email"
+msgstr ""
+
+#: template-parts/subscribe-form.php:4
+msgid "Sign up"
+msgstr ""
+
+#: template-parts/woocommerce/login.php:1
+#: template-parts/woocommerce/login.php:33
+msgid "התחברות"
+msgstr ""
+
+#: template-parts/woocommerce/login.php:2
+msgid ""
+"אם יש לך חשבון, היכנס עם הדוא\"ל והסיסמה שלך כדי לראות את כל ההזמנות שלך "
+msgstr ""
+
+#: template-parts/woocommerce/login.php:9
+msgid "שם משתמש או כתובת אימייל"
+msgstr ""
+
+#: template-parts/woocommerce/login.php:13
+msgid "סיסמא"
+msgstr ""
+
+#: template-parts/woocommerce/login.php:22
+msgid "תזכור אותי"
+msgstr ""
+
+#: template-parts/woocommerce/login.php:28
+msgid "איבדת את הסיסמה שלך?"
+msgstr ""
+
+#: template-parts/woocommerce/register.php:10
+msgid "שם פרטי"
+msgstr ""
+
+#: template-parts/woocommerce/register.php:11
+msgid "שם"
+msgstr ""
+
+#: template-parts/woocommerce/register.php:14
+#: template-parts/woocommerce/register.php:15
+msgid "שם משפחה"
+msgstr ""
+
+#: template-parts/woocommerce/register.php:20
+msgid "תאריך לידה"
+msgstr ""
+
+#: template-parts/woocommerce/register.php:25
+msgid "כתובת אימייל"
+msgstr ""
+
+#: template-parts/woocommerce/register.php:30
+msgid "אשר אימייל"
+msgstr ""
+
+#: template-parts/woocommerce/register.php:35
+msgid "סיסמה"
+msgstr ""
+
+#: template-parts/woocommerce/register.php:36
+#: template-parts/woocommerce/register.php:41
+msgid "הזן לפחות 8 תווים, רישיות אחת ותו מיוחד"
+msgstr ""
+
+#: template-parts/woocommerce/register.php:40
+msgid "אשר את הסיסמה"
+msgstr ""
+
+#: template-parts/woocommerce/register.php:48
+msgid ""
+"ברצוני לקבל חדשות ועדכונים על הטרנדים האחרונים, כניסות חדשות ואירועים "
+"מיוחדים."
+msgstr ""
+
+#: template-parts/woocommerce/register.php:56
+msgid ""
+"אני מצהיר שקראתי והבנתי את <a href=\"/privacy-policy\">מדיניות הפרטיות</a> "
+"ואני מסכים לעיבוד הנתונים האישיים שלי*"
+msgstr ""
+
+#: template-parts/woocommerce/register.php:61
+msgid "צור חשבון"
+msgstr ""
+
+#: template-parts/woocommerce/register.php:65
+msgid ""
+"אתר זה מוגן על ידי reCAPTCHA. השימוש בו כפוף למדיניות הפרטיות ולתנאי השימוש "
+"של גוגל."
+msgstr ""
+
+#. Template Name of the theme
+msgid "Configurable Page"
+msgstr ""
+
+#. Template Name of the theme
+msgid "Customer Service Page"
+msgstr ""
+
+#: templates/customer-service.php:27
+msgid "שירות לקוחות"
+msgstr ""
+
+#: templates/customer-service.php:33
+msgid "דשבורד"
+msgstr ""
+
+#. Template Name of the theme
+msgid "Favorites"
+msgstr ""
+
+#: templates/favorites.php:77
+msgid "עדיין אין לך פריטים שמורים"
+msgstr ""
+
+#: templates/favorites.php:78
+msgid "אתה צריך קצת השראה? יש לנו כמה הצעות שתאהבו."
+msgstr ""
+
+#. Template Name of the theme
+msgid "Gifts Card Check"
+msgstr ""
+
+#: templates/gifts-card-check.php:23
+msgid "בדוק את יתרת כרטיס המתנה שלך"
+msgstr ""
+
+#: templates/gifts-card-check.php:25
+msgid ""
+"כדי לבדוק את יתרת כרטיס המתנה של Giovanni Raspini שלך, הזן את המספר בן 19 "
+"הספרות המשויך לכרטיס שלך במקום למטה."
+msgstr ""
+
+#: templates/gifts-card-check.php:35
+msgid "הזן אימייל של נמען"
+msgstr ""
+
+#: templates/gifts-card-check.php:39
+msgid "הזן קוד כרטיס מתנה"
+msgstr ""
+
+#: templates/gifts-card-check.php:43
+msgid "בדוק יתרה"
+msgstr ""
+
+#: templates/gifts-card-check.php:54 templates/gifts-card-get.php:169
+msgid "כרטיס מתנה"
+msgstr ""
+
+#. Template Name of the theme
+msgid "Gifts Card Get"
+msgstr ""
+
+#: templates/gifts-card-get.php:68
+msgid "בחר את הסכום"
+msgstr ""
+
+#: templates/gifts-card-get.php:73
+msgid "בחר את סכום כרטיס המתנה או הזן אחד לבחירתך."
+msgstr ""
+
+#: templates/gifts-card-get.php:107
+msgid "סכום אחר"
+msgstr ""
+
+#: templates/gifts-card-get.php:110
+msgid "המספר חייב להיות בין 50 ל-1000"
+msgstr ""
+
+#: templates/gifts-card-get.php:116
+msgid "המשיכו"
+msgstr ""
+
+#: templates/gifts-card-get.php:128
+msgid "הוסף את הנתונים שלך והודעה מותאמת אישית"
+msgstr ""
+
+#: templates/gifts-card-get.php:130
+msgid "הזן את פרטי הנמען והוסף הודעה מותאמת אישית אם תרצה."
+msgstr ""
+
+#: templates/gifts-card-get.php:135
+msgid "השם שלך"
+msgstr ""
+
+#: templates/gifts-card-get.php:137 templates/gifts-card-get.php:143
+#: templates/gifts-card-get.php:149 templates/gifts-card-get.php:156
+msgid "אנא מלא שדה זה"
+msgstr ""
+
+#: templates/gifts-card-get.php:141
+msgid "שם הנמען"
+msgstr ""
+
+#: templates/gifts-card-get.php:147
+msgid "האימייל של הנמען"
+msgstr ""
+
+#: templates/gifts-card-get.php:150 templates/gifts-card-get.php:157
+msgid "כתובות האימייל אינן תואמות."
+msgstr ""
+
+#: templates/gifts-card-get.php:154
+msgid "אשר את האימייל של הנמען"
+msgstr ""
+
+#: templates/gifts-card-get.php:161
+msgid "הוסף הודעה אישית (אופציונלי)"
+msgstr ""
+
+#: templates/gifts-card-get.php:176
+msgid "הוסף לעגלה"
+msgstr ""
+
+#. Template Name of the theme
+msgid "Stories"
+msgstr ""
+
+#: woocommerce/content-single-product.php:74
+msgid "זמין ב"
+msgstr ""
+
+#: woocommerce/content-single-product.php:75
+msgid "מצא את המידה שלך"
+msgstr ""
+
+#: woocommerce/content-single-product.php:112
+msgid "Description"
+msgstr ""
+
+#: woocommerce/content-single-product.php:120
+msgid "Details"
+msgstr ""
+
+#: woocommerce/content-single-product.php:167
+msgid "מומלצים ביחד"
+msgstr ""
+
+#: woocommerce/content-single-product.php:244
+msgid "בקר בקטגוריה"
+msgstr ""
+
+#: woocommerce/myaccount/dashboard.php:34
+msgid "הזמנות והחזרות "
+msgstr ""
+
+#: woocommerce/myaccount/dashboard.php:36
+msgid "בדוק את סטטוס ההזמנות שלך או ראה הזמנות קודמות "
+msgstr ""
+
+#. translators: %d is the number of orders
+#: woocommerce/myaccount/dashboard.php:49
+msgid "יש לך %d הזמנות"
+msgstr ""
+
+#: woocommerce/myaccount/dashboard.php:52
+msgid "אין הזמנות ממתינות"
+msgstr ""
+
+#: woocommerce/myaccount/dashboard.php:59
+msgid "פרטים אישיים "
+msgstr ""
+
+#: woocommerce/myaccount/dashboard.php:61
+msgid "הצג או עדכן את המידע האישי שלך "
+msgstr ""
+
+#: woocommerce/myaccount/dashboard.php:68
+msgid "כתובת "
+msgstr ""
+
+#: woocommerce/myaccount/dashboard.php:70
+msgid "נהל את הכתובות למשלוח שלך "
+msgstr ""
+
+#: woocommerce/myaccount/dashboard.php:75
+msgid "התנתקות "
+msgstr ""
