@@ -63,7 +63,7 @@ add_action('wp_head', function ($args = []) {
     $notbot = 'Mozilla|Opera'; // Chrome|Safari|Firefox|Netscape - all equal Mozilla
     $bot = 'Bot/|robot|Slurp/|yahoo';
 
-    $user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : ''; // Ensure it's always defined
+    $user_agent = $_SERVER['HTTP_USER_AGENT'] ?? ''; // Ensure it's always defined
 
     if (
 			!empty($user_agent) &&
@@ -126,3 +126,4 @@ function add_pluro_ai_script() {
     <?php
 }
 add_action('wp_head', 'add_pluro_ai_script');
+

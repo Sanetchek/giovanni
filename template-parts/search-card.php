@@ -16,9 +16,6 @@
           <?php
           $data = [
             'thumb' => [400, 400],
-            'max' => [
-              '390' => [371, 371],
-            ],
             'args' => [
               'alt' => esc_attr(get_the_title($post_id)),
               'class' => 'product-thumbnail',

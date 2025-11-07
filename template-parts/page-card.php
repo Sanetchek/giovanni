@@ -13,9 +13,6 @@ $id = $args['id'];
         $image = get_field('background_image', $id);
         $data = [
           'thumb' => [400, 400],
-          'max' => [
-            '390' => [371, 371],
-          ],
           'args' => [
             'class' => 'page-item-image',
           ],

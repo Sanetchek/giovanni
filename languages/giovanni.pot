@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-11-07T13:16:37+02:00\n"
+"POT-Creation-Date: 2025-11-07T12:10:52+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: giovanni\n"
@@ -146,29 +146,29 @@ msgstr ""
 msgid "הצעות:"
 msgstr ""
 
-#: inc/__custom-functions.php:278
+#: inc/__custom-functions.php:272
 msgid "Submit subscription form"
 msgstr ""
 
 #. translators: %s: Site name
-#: inc/__custom-functions.php:420
+#: inc/__custom-functions.php:414
 msgid "Go to %s home page"
 msgstr ""
 
 #. translators: %s: Site name
-#: inc/__custom-functions.php:420
+#: inc/__custom-functions.php:414
 msgid "Go to home page"
 msgstr ""
 
-#: inc/__custom-functions.php:433
+#: inc/__custom-functions.php:427
 msgid "Home"
 msgstr ""
 
-#: inc/__custom-functions.php:480
+#: inc/__custom-functions.php:474
 msgid "עמוד הבית "
 msgstr ""
 
-#: inc/__custom-functions.php:767
+#: inc/__custom-functions.php:761
 msgid "Contact us on WhatsApp"
 msgstr ""
 
@@ -541,30 +541,30 @@ msgid "המוצר לא נמצא"
 msgstr ""
 
 #. translators: %s: Product name
-#: template-parts/product-card-slide.php:54
-#: template-parts/product-card.php:54
+#: template-parts/product-card-slide.php:48
+#: template-parts/product-card.php:48
 msgid "View %s product details"
 msgstr ""
 
 #. translators: %s: Product name
-#: template-parts/product-card-slide.php:73
-#: template-parts/product-card.php:73
+#: template-parts/product-card-slide.php:67
+#: template-parts/product-card.php:67
 msgid "View %s product details and price"
 msgstr ""
 
 #. translators: %s: Product name
-#: template-parts/product-card-slide.php:82
-#: template-parts/product-card.php:82
+#: template-parts/product-card-slide.php:76
+#: template-parts/product-card.php:76
 msgid "Buy %s now"
 msgstr ""
 
-#: template-parts/product-card-slide.php:86
-#: template-parts/product-card.php:86
+#: template-parts/product-card-slide.php:80
+#: template-parts/product-card.php:80
 msgid "לקנות עכשיו"
 msgstr ""
 
-#: template-parts/product-card-slide.php:93
-#: template-parts/product-card.php:93
+#: template-parts/product-card-slide.php:87
+#: template-parts/product-card.php:87
 msgid "להסיר מוצר"
 msgstr ""
 

@@ -70,6 +70,7 @@ function str_word($text, $counttext = 30, $sep = ' ')
  * @return void
  */
 function generate_picture_element($image_id, $is_last, $class) {
+
 	$thumb = [473, 473];
 	$thumb1024 = [345, 345];
 	$thumb576 = [247, 247];
@@ -96,6 +97,7 @@ function generate_picture_element($image_id, $is_last, $class) {
 		];
 		return liteimage($image_id, $data);
 	}
+
 
 	return;
 }
@@ -772,18 +774,6 @@ add_action( 'wp_footer', 'whatsapp' );
 
 add_filter('script_loader_tag', function ($tag, $handle, $src) {
   if (is_admin() || wp_doing_ajax()) return $tag;
-
-  if ($src && (
-    strpos($src, 'google.com/recaptcha') !== false ||
-    strpos($src, 'gstatic.com/recaptcha') !== false ||
-    strpos($src, 'googleapis.com') !== false ||
-    strpos($src, 'recaptcha') !== false ||
-    strpos($handle, 'recaptcha') !== false ||
-    strpos($handle, 'grecaptcha') !== false
-  )) {
-    return $tag;
-  }
-
   $exclude = [
     'jquery','jquery-core','jquery-migrate',
     'woocommerce','wc-add-to-cart','wc-cart-fragments',
@@ -852,66 +842,19 @@ add_action('wp_footer', function () {
 <?php
 }, 1);
 
-/**
- * Add protective checks for grecaptcha and tldjs in head to prevent errors
- * This ensures the stubs are available before any scripts try to use them
- */
-add_action('wp_head', function() {
-    if (is_admin()) return;
-    ?>
-    <script>
-    (function() {
-      if (typeof window.grecaptcha === 'undefined') {
-        window.grecaptcha = {
-          ready: function(callback) {
-            if (typeof callback === 'function') {
-              var checkInterval = setInterval(function() {
-                if (typeof window.grecaptcha !== 'undefined' && typeof window.grecaptcha.execute !== 'undefined') {
-                  clearInterval(checkInterval);
-                  callback();
-                }
-              }, 100);
-              setTimeout(function() {
-                clearInterval(checkInterval);
-              }, 10000);
-            }
-          },
-          execute: function() {
-            // Silent fail - don't spam console
-            return Promise.resolve('');
-          },
-          render: function() {
-            // Silent fail - don't spam console
-            return 0;
-          }
-        };
-      }
+add_action('after_setup_theme', function(){
+    add_image_size('mobile-s', 360, 0, false);
+    add_image_size('mobile-m', 480, 0, false);
+    add_image_size('mobile-l', 768, 0, false);
+});
 
-      if (typeof window.tldjs === 'undefined') {
-        window.tldjs = {
-          getDomain: function(hostname) {
-            if (!hostname) return '';
-            var parts = hostname.split('.');
-            if (parts.length <= 2) return hostname;
-            return parts.slice(-2).join('.');
-          },
-          getSubdomain: function(hostname) {
-            if (!hostname) return '';
-            var parts = hostname.split('.');
-            if (parts.length <= 2) return '';
-            return parts.slice(0, -2).join('.');
-          },
-          isValid: function(hostname) {
-            if (!hostname) return false;
-            return /^([a-z0-9]([a-z0-9\-]{0,61}[a-z0-9])?\.)+[a-z]{2,}$/i.test(hostname);
-          },
-          getRootDomain: function(hostname) {
-            return this.getDomain(hostname);
-          }
-        };
-      }
-    })();
-    </script>
-    <?php
-}, 1);
+add_filter('wp_calculate_image_sizes', function($sizes, $size, $image_src, $attachment_id){
+    $width = is_array($size) ? (int)$size[0] : (int)$size;
+
+    if ($width <= 1024) {
+        return '(max-width:480px) 100vw, (max-width:768px) 100vw, 1024px';
+    }
+
+    return $sizes;
+},10,4);
 

@@ -21,9 +21,6 @@ $permalink = get_permalink($product_id);
 $image = get_post_thumbnail_id($product_id);
 $data = [
   'thumb' => [400, 400],
-  'max' => [
-    '390' => [371, 371],
-  ],
   'args' => [
     'alt' => esc_attr($title),
   ],
@@ -35,9 +32,6 @@ $attachment_ids = $product->get_gallery_image_ids();
 $second_image_id = !empty($attachment_ids) ? $attachment_ids[0] : '';
 $data = [
   'thumb' => [400, 400],
-  'max' => [
-    '390' => [371, 371],
-  ],
   'args' => [
     'alt' => esc_attr($title),
   ],
