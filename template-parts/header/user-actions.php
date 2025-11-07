@@ -10,30 +10,39 @@
   <?php
     $login = !is_user_logged_in() ? 'show-login-form' : '';
     $url = !is_user_logged_in() ? '#' : '/my-account';
+    $login_label = !is_user_logged_in() ? __('Login or create account', 'giovanni') : __('My account', 'giovanni');
   ?>
-  <a href="<?= $url ?>" class="header-login-link <?= $login ?>">
+  <a href="<?= $url ?>" class="header-login-link <?= $login ?>" aria-label="<?php echo esc_attr($login_label); ?>">
     <span class="header-action header-user">
-      <svg class='icon-user' width='24' height='24'>
+      <svg class='icon-user' width='24' height='24' aria-hidden="true">
         <use href='<?= assets('img/sprite.svg#icon-user') ?>'></use>
       </svg>
     </span>
   </a>
 
-  <a href="/favorites" class="header-action header-like">
-    <span class="header-count">
-      <?php
-        $likes = query_user_liked_posts();
-        echo $likes['count'];
-      ?>
+  <?php
+    $likes = query_user_liked_posts();
+    $likes_count = $likes['count'];
+    // translators: %s: Number of favorite items
+    $favorites_label = sprintf(__('Favorites (%s items)', 'giovanni'), $likes_count);
+  ?>
+  <a href="/favorites" class="header-action header-like" aria-label="<?php echo esc_attr($favorites_label); ?>">
+    <span class="header-count" aria-hidden="true">
+      <?php echo $likes_count; ?>
     </span>
-    <svg class='icon-like' width='24' height='24'>
+    <svg class='icon-like' width='24' height='24' aria-hidden="true">
       <use href='<?= assets('img/sprite.svg#icon-like') ?>'></use>
     </svg>
   </a>
 
-  <a href="<?php echo wc_get_cart_url() ?>" class="header-action header-cart">
-    <span class="header-count header-cart-count"><?php echo WC()->cart->get_cart_contents_count() ?></span>
-    <svg class='icon-bag' width='24' height='24'>
+  <?php
+    $cart_count = WC()->cart->get_cart_contents_count();
+    // translators: %s: Number of items in shopping cart
+    $cart_label = sprintf(_n('Shopping cart (%s item)', 'Shopping cart (%s items)', $cart_count, 'giovanni'), $cart_count);
+  ?>
+  <a href="<?php echo wc_get_cart_url() ?>" class="header-action header-cart" aria-label="<?php echo esc_attr($cart_label); ?>">
+    <span class="header-count header-cart-count" aria-hidden="true"><?php echo $cart_count ?></span>
+    <svg class='icon-bag' width='24' height='24' aria-hidden="true">
       <use href='<?= assets('img/sprite.svg#icon-bag') ?>'></use>
     </svg>
   </a>

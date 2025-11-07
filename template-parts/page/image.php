@@ -3,6 +3,13 @@ $block = $args['block'];
 $bg = $block['image'];
 $bg_mob = $block['image_mob'];
 
-show_image($bg, '1920-865', ['class' => 'page-desk']);
-$bg_mob = $bg_mob ? $bg_mob : $bg;
-show_image($bg_mob, '800-full', ['class' => 'page-mob']);
+$data = [
+  'thumb' => [1920, 865],
+  'max' => [
+    '1024' => [800, 0],
+    '768' => [768, 0],
+    '576' => [576, 0],
+    '390' => [390, 0],
+  ],
+];
+echo liteimage( $bg, $data, $bg_mob );

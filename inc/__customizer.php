@@ -18,22 +18,6 @@ function custom_theme_customizer( $wp_customize ) {
 }
 add_action( 'customize_register', 'custom_theme_customizer' );
 
-// Show Logo on Front
-function theme_logo() {
-  // Get the logo setting value
-  $header_logo = get_theme_mod( 'logo_setting', '' );
-  $template = '';
-
-  // Display the logo if it's set
-  if ( $header_logo ) {
-    $template .= '<a href="/" class="site-logo-link" rel="home" aria-current="page" tabindex="0">';
-    $template .= '<img src="' . esc_url( $header_logo ) . '" width="300" class="site-logo" alt="logo" decoding="async" loading="lazy">';
-    $template .= '</a>';
-  }
-
-  return $template;
-}
-
 // Add custom fields to Social Media Links Tab
 function social_theme_customizer( $wp_customize ) {
   $wp_customize->add_section( 'social_media_section', array(

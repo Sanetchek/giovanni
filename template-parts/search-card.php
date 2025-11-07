@@ -13,7 +13,16 @@
 
       <?php if (has_post_thumbnail($post_id)) : ?>
         <a href="<?= get_permalink( $post_id ) ?>" class="product-thumbnail-link" target="_blank" rel="noopener noreferrer">
-          <img src="<?= get_the_post_thumbnail_url($post_id, 'full'); ?>" alt="<?= get_the_title($post_id); ?>" class="product-thumbnail">
+          <?php
+          $data = [
+            'thumb' => [400, 400],
+            'args' => [
+              'alt' => esc_attr(get_the_title($post_id)),
+              'class' => 'product-thumbnail',
+            ],
+          ];
+          echo liteimage(get_post_thumbnail_id($post_id), $data);
+          ?>
         </a>
       <?php endif; ?>
       <h2 class="search-result-title"><?= get_the_title($post_id) ?></h2>

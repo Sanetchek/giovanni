@@ -30,16 +30,24 @@ $pattern = '^[a-zA-Z0-9.%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,6}$';
     ?>
 
     <?php if ($banner_image) : ?>
-      <?php show_image($banner_image, '1920-400', ['class' => 'page-desk']) ?>
       <?php
-        $bg_mob = $banner_image_mob ? $banner_image_mob : $banner_image;
-        show_image($bg_mob, '768-400', ['class' => 'page-mob']);
+        $data = [
+          'thumb' => [1920, 400],
+          'max' => [
+            '1024' => [768, 400],
+          ],
+        ];
+        echo liteimage( $banner_image, $data, $banner_image_mob );
       ?>
     <?php else: ?>
-      <?php show_image($bg_image, '1920-400', ['class' => 'page-desk']) ?>
       <?php
-        $bg_mob = $bg_image_mob ? $bg_image_mob : $bg_image;
-        show_image($bg_mob, '768-400', ['class' => 'page-mob']);
+        $data = [
+          'thumb' => [1920, 400],
+          'max' => [
+            '1024' => [768, 400],
+          ],
+        ];
+        echo liteimage($bg_image, $data, $bg_image_mob);
       ?>
     <?php endif; ?>
 

@@ -24,13 +24,29 @@
           <?php endif ?>
 
           <?php if ($signature) : ?>
-            <?php show_image($signature, 'medium', ['class'=> 'signature']) ?>
+            <?php
+            $data = [
+              'thumb' => [300, 0],
+              'args' => [
+                'class' => 'signature',
+              ],
+            ];
+            echo liteimage( $signature, $data );
+            ?>
           <?php endif ?>
         </div>
       </div>
 
       <div class="exhibition-side exhibition-image-wrap">
-        <?php show_image($image, '424-424', ['class'=> 'exhibition-image']) ?>
+        <?php
+        $data = [
+          'thumb' => [424, 424],
+          'args' => [
+            'class' => 'exhibition-image',
+          ],
+        ];
+        echo liteimage( $image, $data );
+        ?>
       </div>
     </div>
   </div>

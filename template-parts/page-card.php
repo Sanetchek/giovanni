@@ -4,15 +4,21 @@ $id = $args['id'];
 
 <li class="page-item">
   <a href="<?= get_permalink($id) ?>" target="_blank">
-    <?php
-      $image = get_field('background_image', $id);
-      show_image($image, '812-812', ['class'=> 'page-item-image']);
-    ?>
-
     <?php if (!$image) : ?>
-    <div class="page-item-replacer">
-      <img src="<?= assets('img/replacer.jpg') ?>" alt="replacer" loading="lazy">
-    </div>
+      <div class="page-item-replacer">
+        <img src="<?= assets('img/replacer.jpg') ?>" alt="replacer" loading="lazy">
+      </div>
+    <?php else: ?>
+      <?php
+        $image = get_field('background_image', $id);
+        $data = [
+          'thumb' => [400, 400],
+          'args' => [
+            'class' => 'page-item-image',
+          ],
+        ];
+        echo liteimage($image, $data);
+      ?>
     <?php endif ?>
   </a>
 

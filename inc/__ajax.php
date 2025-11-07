@@ -76,7 +76,6 @@ function giovanni_ajax_search() {
 add_action('wp_ajax_giovanni_search', 'giovanni_ajax_search');
 add_action('wp_ajax_nopriv_giovanni_search', 'giovanni_ajax_search');
 
-
 /**
  * Handle AJAX Search Suggestion
  */
@@ -125,8 +124,16 @@ function giovanni_search_suggestions() {
       $query_title->the_post();
       $product = wc_get_product(get_the_ID());
       $name = get_the_title();
-      $thumbnail = get_the_post_thumbnail(get_the_ID(), 'thumbnail') ?:
-                   '<img src="' . esc_url(wc_placeholder_img_src('full')) . '" alt="' . esc_attr($name) . '" loading="lazy" />';
+      $thumbnail_id = get_the_post_thumbnail_id(get_the_ID());
+      $data = [
+        'thumb' => [150, 150],
+        'args' => [
+          'alt' => esc_attr($name),
+        ],
+      ];
+      $thumbnail = $thumbnail_id
+        ? liteimage($thumbnail_id, $data)
+        : get_placeholder_image($name);
       $price_html = $product->get_price_html();
       $permalink = get_permalink();
 
@@ -146,8 +153,16 @@ function giovanni_search_suggestions() {
       $query_sku->the_post();
       $product = wc_get_product(get_the_ID());
       $name = get_the_title();
-      $thumbnail = get_the_post_thumbnail(get_the_ID(), 'thumbnail') ?:
-                   '<img src="' . esc_url(wc_placeholder_img_src('full')) . '" alt="' . esc_attr($name) . '" loading="lazy" />';
+      $thumbnail_id = get_the_post_thumbnail_id(get_the_ID());
+      $data = [
+        'thumb' => [150, 150],
+        'args' => [
+          'alt' => esc_attr($name),
+        ],
+      ];
+      $thumbnail = $thumbnail_id
+        ? liteimage($thumbnail_id, $data)
+        : get_placeholder_image($name);
       $price_html = $product->get_price_html();
       $permalink = get_permalink();
 

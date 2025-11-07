@@ -83,30 +83,22 @@
 				</div>
 
 				<p class="copyrights">
-					Built by <a href="https://webeffect.co.il/">Webeffect</a> | Copyright © 2025 Tilion Studio LTD
+					Built by <a href="https://webeffect.co.il/" style="text-decoration: underline;">Webeffect</a> | Copyright © 2025 Tilion Studio LTD
 				</p>
-				
+
 				<hr style="border:none; border-top:1px solid #eee; margin:15px auto; width:80%;">
 
-<p style="text-align:center; font-size:13px; color:#666; margin:4px 0; line-height:1.5; direction:ltr;">
-  Giovanni Raspini Israel – Operated by <strong>Tilion Studio LTD</strong><br>
-  Lev ha-Ir St 2, Azrieli Mall, Modi'in, Israel 7177806 | ☎ ‎054-683-0101 | ✉ 
-  <a href="mailto:customercare@giovanniraspini-shop.co.il" style="color:#444; text-decoration:none;">
-    customercare@giovanniraspini-shop.co.il
-  </a>
-</p>
+				<p style="text-align:center; font-size:13px; color:#444; margin:4px 0; line-height:1.5; direction:ltr;">
+					Giovanni Raspini Israel – Operated by <strong style="color:#000;">Tilion Studio LTD</strong><br>
+					Lev ha-Ir St 2, Azrieli Mall, Modi'in, Israel 7177806 | ☎ ‎054-683-0101 | ✉
+					<a href="mailto:customercare@giovanniraspini-shop.co.il" style="color:#000; text-decoration:underline;">
+						customercare@giovanniraspini-shop.co.il
+					</a>
+				</p>
 
-
-<p style="text-align:center; font-size:13px; color:#888; margin:2px 0 8px; line-height:1.5; direction:rtl; font-family:'Assistant',sans-serif;">
-  <strong style="color:#555;">Tilion Studio LTD</strong>, המפעילה את מותג <strong>Imeretti</strong> – המשווק הרשמי של תכשיטי <strong>Giovanni Raspini</strong> בישראל
-</p>
-
-
-
-
-
-
-
+				<p style="text-align:center; font-size:13px; color:#444; margin:2px 0 8px; line-height:1.5; direction:rtl; font-family:'Assistant',sans-serif;">
+					<strong style="color:#000;">Tilion Studio LTD</strong>, המפעילה את מותג <strong style="color:#000;">Imeretti</strong> – המשווק הרשמי של תכשיטי <strong style="color:#000;">Giovanni Raspini</strong> בישראל
+				</p>
 
 				<div class="footer-menu-bottom">
 					<?php
@@ -121,23 +113,7 @@
 		</div>
 	</footer><!-- #colophon -->
 
-	<div id="modal_subscription" class="modal-subscription">
-		<span class="modal-close"></span>
-		<div class="modal-content">
-			<div class="modal-side modal-side-image">
-				<?php show_image(get_field('subscribe_image', 'option'), '800-full', ['class'=> 'modal-subscribe-image']) ?>
-			</div>
 
-			<div class="modal-side modal-side-content">
-				<h2 class="modal-subscribe-title"><?= get_field('subscribe_title', 'option') ?></h2>
-				<p class="modal-subscribe-text"><?= get_field('subscribe_description', 'option') ?></p>
-
-				<div class="modal-subscribe-form">
-					<?php echo do_shortcode( get_field('subscibe_form_short_code', 'option') ) ?>
-				</div>
-			</div>
-		</div>
-	</div>
 
   <?php
     // Modal mini cart
@@ -153,6 +129,9 @@
     if (!is_user_logged_in()) {
       get_template_part('template-parts/modal/login', 'modal');
     }
+
+	// Modal subscription
+	get_template_part('template-parts/modal/subscription', 'modal');
   ?>
 
 	<div id="modal-subscribe-overlay"></div>

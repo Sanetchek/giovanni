@@ -8,7 +8,15 @@
   <div class="container">
     <div class="post-wrap <?= $direction ?>">
       <div class="post-side">
-        <?php show_image($block['image'], '800-full', ['class'=> 'post-image']) ?>
+        <?php
+        $data = [
+          'thumb' => [800, 0],
+          'args' => [
+            'class' => 'post-image',
+          ],
+        ];
+        echo liteimage( $block['image'], $data );
+        ?>
       </div>
 
       <div class="post-side">

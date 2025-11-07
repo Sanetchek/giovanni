@@ -909,8 +909,15 @@
     align-items: center;
   }
 
+  .hero-image.main-wrap {
+    /* Reserve space on mobile to prevent layout shift */
+    min-height: 400px;
+    height: auto;
+  }
+
   .hero-image.main-wrap img {
     height: 100%;
+    min-height: 400px;
   }
 
   .main-posts-picture {

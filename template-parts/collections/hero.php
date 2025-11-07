@@ -11,7 +11,13 @@ $link = get_field('hero_link');
   <?php endif ?>
 
     <div class="hero-image main-wrap">
-      <?php generate_picture_source($bg, $bg_mob); ?>
+      <?php
+      $attrs = [
+        'loading' => 'eager',
+        'fetchpriority' => 'high',
+      ];
+      generate_picture_source($bg, $bg_mob, $attrs);
+      ?>
     </div>
 
   <?php if ($has_link) : ?>
