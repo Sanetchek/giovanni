@@ -10,6 +10,9 @@
     if ($image) {
       $data = [
         'thumb' => [400, 0],
+        'max' => [
+          '390' => [371, 0],
+        ],
       ];
       echo liteimage( $image, $data );
     }

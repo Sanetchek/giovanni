@@ -91,14 +91,12 @@ function giovanni_search_suggestions() {
     wp_die();
   }
 
-  // Первый запрос для поиска по названию
   $args_title_search = array(
     'post_type' => 'product',
     'posts_per_page' => 3,
     's' => $search_query,
   );
 
-  // Второй запрос для поиска по SKU
   $args_sku_search = array(
     'post_type' => 'product',
     'posts_per_page' => 3,
@@ -111,7 +109,6 @@ function giovanni_search_suggestions() {
     ),
   );
 
-  // Выполняем оба запроса
   $query_title = new WP_Query($args_title_search);
   $query_sku = new WP_Query($args_sku_search);
 
@@ -148,7 +145,6 @@ function giovanni_search_suggestions() {
       echo '</li>';
     }
 
-    // Выводим результаты поиска по SKU
     while ($query_sku->have_posts()) {
       $query_sku->the_post();
       $product = wc_get_product(get_the_ID());
@@ -179,7 +175,6 @@ function giovanni_search_suggestions() {
 
     echo '</ul>';
 
-    // Поиск по категориям
     $categories = get_terms(array(
       'taxonomy' => 'product_cat',
       'name__like' => $search_query,
