@@ -73,23 +73,17 @@ function generate_picture_element($image_id, $is_last, $class) {
 
 	$thumb = [473, 473];
 	$thumb1024 = [345, 345];
-	$thumb576 = [247, 247];
-	$thumb390 = [156, 156];
 
   	$thumb = $is_last ? [1440, 500] : $thumb;
 	$thumb1024 = $is_last ? [718, 332] : $thumb1024;
-	$thumb576 = $is_last ? [522, 241] : $thumb576;
-	$thumb390 = $is_last ? [337, 156] : $thumb390;
 
 	if ($image_id) {
 
 		$data = [
-			'thumb' => [300, 300],
+			'thumb' => [718, 718],
 			'max' => [
 				'1279' => $thumb,
 				'1024' => $thumb1024,
-				'576' => $thumb576,
-				'390' => $thumb390,
 			],
 			'args' => [
 				'class' => $class,
@@ -99,7 +93,57 @@ function generate_picture_element($image_id, $is_last, $class) {
 	}
 
 
-	return;
+	return '';
+}
+
+/**
+ * Generates a responsive <picture> element with multiple <source> elements for different screen sizes.
+ *
+ * @param int    $image_id ID of the image attachment.
+ * @param string $thumb    Size of the thumbnail to retrieve for the default image.
+ * @param string $class    CSS class to apply to the <img> element.
+ * @param array  $min      An associative array of min-width media queries and corresponding image sizes.
+ *                         Example: ['768' => 'medium', '1024' => 'large']
+ * @param array  $max      An associative array of max-width media queries and corresponding image sizes.
+ *                         Example: ['767' => 'thumbnail', '1023' => 'medium']
+ *
+ * @return string The generated HTML markup for the <picture> element or an empty string if the image is not found.
+ */
+function generate_picture($image_id, $thumb = 'full', $class = '', $min = [], $max = []) {
+	$image = wp_get_attachment_image_src($image_id, $thumb);
+
+	// Check if the image source is available
+	if ($image) {
+		$output = '<picture aria-hidden="true">';
+
+		// Generate <source> elements for min-width queries
+		if ($min) {
+			foreach ($min as $width => $size) {
+				$source_image = wp_get_attachment_image_src($image_id, $size);
+				if ($source_image) {
+					$output .= '<source media="(min-width:' . esc_attr($width) . 'px)" srcset="' . esc_url($source_image[0]) . '">';
+				}
+			}
+		}
+
+		// Generate <source> elements for max-width queries
+		if ($max) {
+			foreach ($max as $width => $size) {
+				$source_image = wp_get_attachment_image_src($image_id, $size);
+				if ($source_image) {
+					$output .= '<source media="(max-width:' . esc_attr($width) . 'px)" srcset="' . esc_url($source_image[0]) . '">';
+				}
+			}
+		}
+
+		// Add the <img> element
+		$output .= '<img class="lazyloaded ' . esc_attr($class) . '" data-src="' . esc_url($image[0]) . '" alt="' . esc_attr(get_the_title($image_id)) . '" src="' . esc_url($image[0]) . '" loading="lazy">';
+		$output .= '</picture>';
+
+		return $output;
+	}
+
+	return '';
 }
 
 /**
@@ -110,47 +154,61 @@ function generate_picture_element($image_id, $is_last, $class) {
 
  * instead of the $bg parameter for mobile devices.
  *
- * Uses LiteImage plugin for automatic WebP support and optimized image delivery.
- *
- * @param mixed $bg The background image (ID, array, or URL string).
- * @param mixed $bg_mob Optional. The background image for mobile devices (ID, array, or URL string).
- * @param array $attrs Optional. HTML attributes for the image (e.g., ['class' => 'custom-class', 'alt' => 'Description']).
+ * @param int $bg The ID of the background image.
+ * @param int $bg_mob The ID of the background image for mobile devices.
  */
 function generate_picture_source($bg, $bg_mob = null, $attrs = array()) {
-  $bg_id     = $bg;
-  $bg_mob_id = $bg_mob;
-
-  // If no valid image ID, return early
-  if (!$bg_id) {
-    return;
-  }
-
-  // Prepare LiteImage data array
-  $data = [
-    'thumb' => [1920, 865],
-    'max' => [
-      '1024' => [768, 865],
-    ],
-    'args' => [
-      'alt' => isset($attrs['alt']) ? $attrs['alt'] : 'hero',
-    ],
-  ];
-
-  // Handle class attribute
-  $class = 'is-hero';
-  if (!empty($attrs['class'])) {
-    $class = trim($attrs['class'].' is-hero');
-  }
-  $data['args']['class'] = $class;
-
-  // Merge any additional attributes from $attrs (allow override of loading/fetchpriority if needed)
-  foreach ($attrs as $key => $value) {
-    if (!in_array($key, ['alt', 'class'])) {
-      $data['args'][$key] = $value;
+  $resolve_id = function($val) {
+    if (!$val) return 0;
+    if (is_numeric($val)) return (int)$val;                     
+    if (is_array($val)) {
+      if (!empty($val['ID'])) return (int)$val['ID'];           
+      if (!empty($val['id'])) return (int)$val['id'];
+      if (!empty($val['url'])) return attachment_url_to_postid($val['url']);
     }
+    if (is_string($val)) return attachment_url_to_postid($val); 
+    return 0;
+  };
+
+  $bg_id     = $resolve_id($bg);
+  $bg_mob_id = $resolve_id($bg_mob ?: $bg);
+
+  $desktop = $bg_id ? wp_get_attachment_image_src($bg_id, '1920-865') : false;
+  if (!$desktop && is_string($bg) && filter_var($bg, FILTER_VALIDATE_URL)) {
+    $desktop = [$bg, 1920, 865];
+  }
+  if (!$desktop) {
+    $desktop = $bg_id ? wp_get_attachment_image_src($bg_id, 'full') : ['', 1920, 865];
   }
 
-  echo liteimage($bg_id, $data, $bg_mob_id);
+  $mobile = $bg_mob_id ? wp_get_attachment_image_src($bg_mob_id, '768-865') : false;
+  if (!$mobile && is_string($bg_mob) && filter_var($bg_mob, FILTER_VALIDATE_URL)) {
+    $mobile = [$bg_mob, 768, 865];
+  }
+  if (!$mobile) {
+    $mobile = $bg_mob_id ? wp_get_attachment_image_src($bg_mob_id, 'full') : $desktop;
+  }
+
+  $alt = isset($attrs['alt']) ? $attrs['alt'] : 'hero';
+
+  $class = 'is-hero';
+  if (!empty($attrs['class'])) $class = trim($attrs['class'].' is-hero');
+
+  ?>
+  <picture>
+    <source media="(max-width:1024px)"
+            srcset="<?php echo esc_url($mobile[0]); ?>"
+            sizes="(max-width: 1024px) 100vw">
+    <img
+      class="<?php echo esc_attr($class); ?>"
+      src="<?php echo esc_url($desktop[0]); ?>"
+      width="<?php echo (int)($desktop[1] ?: 1920); ?>"
+      height="<?php echo (int)($desktop[2] ?: 865); ?>"
+      alt="<?php echo esc_attr($alt); ?>"
+      loading="eager"
+      fetchpriority="high">
+  </picture>
+  <?php
 }
 
 
@@ -169,28 +227,17 @@ function generate_archive_picture_source($bg, $bg_mob = null) {
 	// Default mobile image to desktop image if not provided
 	$bg_mob = $bg_mob ? $bg_mob : $bg;
 
-	$data = [
-		'thumb' => [1920, 400],
-		'max' => [
-			'1024' => [768, 400],
-		],
-		'args' => [
-			'alt' => 'hero',
-		],
-	];
+	// Get the URL of the desktop image
+	$desktop_image_url = wp_get_attachment_image_url($bg, '1920-400');
 
-	echo liteimage($bg, $data, $bg_mob);
-}
+	// Get the URL of the mobile image
+	$mob_image_url = wp_get_attachment_image_url($bg_mob, '768-400'); ?>
 
-/**
- * Get placeholder image
- *
- * @param string $name
- * @return string
- */
-function get_placeholder_image($name)
-{
-	return '<img src="' . esc_url(assets('img/placeholder.webp')) . '" alt="' . esc_attr($name) . '" loading="lazy" />';
+	<picture>
+		<source media="(max-width:1024px)" srcset="<?= esc_url($mob_image_url) ?>" sizes="(max-width: 1024px) 100vw">
+		<img width="1920" height="400" src="<?= esc_url($desktop_image_url) ?>" alt="hero" loading="lazy">
+	</picture>
+	<?php
 }
 
 /**
@@ -272,21 +319,6 @@ add_filter('wpcf7_form_elements', function ($content) {
 	$content = preg_replace('/<(span).*?class="\s*(?:.*\s)?wpcf7-form-control-wrap(?:\s[^"]+)?\s*"[^\>]*>(.*)<\/\1>/i', '\2', $content);
 
 	$content = str_replace('<br />', '', $content);
-
-	// Add aria-label to submit buttons with arrow-btn class for accessibility
-	// Match any button with arrow-btn class that doesn't already have aria-label
-	$aria_label = esc_attr__('Submit subscription form', 'giovanni');
-	$content = preg_replace_callback(
-		'/<button((?![^>]*aria-label)[^>]*class="[^"]*arrow-btn[^"]*"[^>]*)>/i',
-		function($matches) use ($aria_label) {
-			// Check if button already has aria-label (shouldn't match, but safety check)
-			if (strpos($matches[1], 'aria-label') === false) {
-				return '<button' . $matches[1] . ' aria-label="' . $aria_label . '">';
-			}
-			return $matches[0];
-		},
-		$content
-	);
 
 	return $content;
 });
@@ -413,27 +445,15 @@ function showYoutubeVideo($link)
  * @param [type] $text
  * @return void
  */
-function show_logo($image, $text) {
-	// Get site name for aria-label
-	$site_name = get_bloginfo('name');
-	// translators: %s: Site name
-	$aria_label = $site_name ? sprintf(__('Go to %s home page', 'giovanni'), $site_name) : __('Go to home page', 'giovanni');
-	?>
-<a href="/" class="site-branding" rel="home" aria-current="page" tabindex="0" aria-label="<?php echo esc_attr($aria_label); ?>">
+function show_logo($image, $text) { ?>
+<a href="/" class="site-branding" rel="home" aria-current="page" tabindex="0">
   <span class="site-logo-desktop">
   	<?php
 			$logo = get_field($image, 'option');
 
 			if ($logo['image']) :
 
-				$data = [
-					'thumb' => [300, 50],
-					'args' => [
-						'class' => 'site-logo',
-						'alt' => $site_name ? esc_attr($site_name) : __('Home', 'giovanni'),
-					],
-				];
-				echo liteimage( $logo['image'], $data );
+				show_image( $logo['image'], [300, 50], ['class' => 'site-logo'] );
 
 			else :
 				$logo = get_field($text, 'option');
@@ -623,13 +643,7 @@ function show_customer_service_content($content) {
 				echo '</div>';
 				break;
 			case 'image':
-				$data = [
-					'thumb' => [0, 90],
-					'args' => [
-						'class' => 'customer-image',
-					],
-				];
-				echo liteimage( $block['image'], $data );
+				show_image($block['image'], 'full', ['class' => 'customer-image']);
 				break;
 			case 'shortcode':
 				echo '<div class="customer-shortcode">';
@@ -655,7 +669,7 @@ function show_customer_service_content($content) {
  */
 function get_parent_page_id($current_page = null) {
 	// If no current page is provided, get the ID of the current post
-	$current_page = $current_page ? $current_page : get_the_ID();
+	$current_page = $current_page ?? get_the_ID();
 
 	// Get the parent page ID
 	$parent_id = wp_get_post_parent_id($current_page);
@@ -764,9 +778,8 @@ function whatsapp() {
 	$whatsapp = get_field('whatsapp', 'option');
 	if (empty($whatsapp)) return;
 
-	$whatsapp_label = __('Contact us on WhatsApp', 'giovanni');
-  echo '<a href="'. esc_url($whatsapp) .'" class="whatsApp" target="_blank" rel="noopener noreferrer" aria-label="'. esc_attr($whatsapp_label) .'">
-	 	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 175.216 175.552" style="width:50px;height:50px" aria-hidden="true"><defs><linearGradient id="b" x1="85.915" x2="86.535" y1="32.567" y2="137.092" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#57d163"/><stop offset="1" stop-color="#23b33a"/></linearGradient><filter id="a" width="1.115" height="1.114" x="-.057" y="-.057" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="3.531"/></filter></defs><path fill="#b3b3b3" d="m54.532 138.45 2.235 1.324c9.387 5.571 20.15 8.518 31.126 8.523h.023c33.707 0 61.139-27.426 61.153-61.135.006-16.335-6.349-31.696-17.895-43.251A60.75 60.75 0 0 0 87.94 25.983c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.312-6.179 22.558zm-40.811 23.544L24.16 123.88c-6.438-11.154-9.825-23.808-9.821-36.772.017-40.556 33.021-73.55 73.578-73.55 19.681.01 38.154 7.669 52.047 21.572s21.537 32.383 21.53 52.037c-.018 40.553-33.027 73.553-73.578 73.553h-.032c-12.313-.005-24.412-3.094-35.159-8.954zm0 0" filter="url(#a)"/><path fill="#fff" d="m12.966 161.238 10.439-38.114a73.42 73.42 0 0 1-9.821-36.772c.017-40.556 33.021-73.55 73.578-73.55 19.681.01 38.154 7.669 52.047 21.572s21.537 32.383 21.53 52.037c-.018 40.553-33.027 73.553-73.578 73.553h-.032c-12.313-.005-24.412-3.094-35.159-8.954z"/><path fill="url(#linearGradient1780)" d="M87.184 25.227c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.312-6.179 22.559 23.146-6.069 2.235 1.324c9.387 5.571 20.15 8.518 31.126 8.524h.023c33.707 0 61.14-27.426 61.153-61.135a60.75 60.75 0 0 0-17.895-43.251 60.75 60.75 0 0 0-43.235-17.929z"/><path fill="url(#b)" d="M87.184 25.227c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.313-6.179 22.558 23.146-6.069 2.235 1.324c9.387 5.571 20.15 8.517 31.126 8.523h.023c33.707 0 61.14-27.426 61.153-61.135a60.75 60.75 0 0 0-17.895-43.251 60.75 60.75 0 0 0-43.235-17.928z"/><path fill="#fff" fill-rule="evenodd" d="M68.772 55.603c-1.378-3.061-2.828-3.123-4.137-3.176l-3.524-.043c-1.226 0-3.218.46-4.902 2.3s-6.435 6.287-6.435 15.332 6.588 17.785 7.506 19.013 12.718 20.381 31.405 27.75c15.529 6.124 18.689 4.906 22.061 4.6s10.877-4.447 12.408-8.74 1.532-7.971 1.073-8.74-1.685-1.226-3.525-2.146-10.877-5.367-12.562-5.981-2.91-.919-4.137.921-4.746 5.979-5.819 7.206-2.144 1.381-3.984.462-7.76-2.861-14.784-9.124c-5.465-4.873-9.154-10.891-10.228-12.73s-.114-2.835.808-3.751c.825-.824 1.838-2.147 2.759-3.22s1.224-1.84 1.836-3.065.307-2.301-.153-3.22-4.032-10.011-5.666-13.647"/></svg>
+  echo '<a href="'. $whatsapp .'" class="whatsApp" target="_blank">
+	 	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 175.216 175.552" style="width:50px;height:50px" ><defs><linearGradient id="b" x1="85.915" x2="86.535" y1="32.567" y2="137.092" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#57d163"/><stop offset="1" stop-color="#23b33a"/></linearGradient><filter id="a" width="1.115" height="1.114" x="-.057" y="-.057" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="3.531"/></filter></defs><path fill="#b3b3b3" d="m54.532 138.45 2.235 1.324c9.387 5.571 20.15 8.518 31.126 8.523h.023c33.707 0 61.139-27.426 61.153-61.135.006-16.335-6.349-31.696-17.895-43.251A60.75 60.75 0 0 0 87.94 25.983c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.312-6.179 22.558zm-40.811 23.544L24.16 123.88c-6.438-11.154-9.825-23.808-9.821-36.772.017-40.556 33.021-73.55 73.578-73.55 19.681.01 38.154 7.669 52.047 21.572s21.537 32.383 21.53 52.037c-.018 40.553-33.027 73.553-73.578 73.553h-.032c-12.313-.005-24.412-3.094-35.159-8.954zm0 0" filter="url(#a)"/><path fill="#fff" d="m12.966 161.238 10.439-38.114a73.42 73.42 0 0 1-9.821-36.772c.017-40.556 33.021-73.55 73.578-73.55 19.681.01 38.154 7.669 52.047 21.572s21.537 32.383 21.53 52.037c-.018 40.553-33.027 73.553-73.578 73.553h-.032c-12.313-.005-24.412-3.094-35.159-8.954z"/><path fill="url(#linearGradient1780)" d="M87.184 25.227c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.312-6.179 22.559 23.146-6.069 2.235 1.324c9.387 5.571 20.15 8.518 31.126 8.524h.023c33.707 0 61.14-27.426 61.153-61.135a60.75 60.75 0 0 0-17.895-43.251 60.75 60.75 0 0 0-43.235-17.929z"/><path fill="url(#b)" d="M87.184 25.227c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.313-6.179 22.558 23.146-6.069 2.235 1.324c9.387 5.571 20.15 8.517 31.126 8.523h.023c33.707 0 61.14-27.426 61.153-61.135a60.75 60.75 0 0 0-17.895-43.251 60.75 60.75 0 0 0-43.235-17.928z"/><path fill="#fff" fill-rule="evenodd" d="M68.772 55.603c-1.378-3.061-2.828-3.123-4.137-3.176l-3.524-.043c-1.226 0-3.218.46-4.902 2.3s-6.435 6.287-6.435 15.332 6.588 17.785 7.506 19.013 12.718 20.381 31.405 27.75c15.529 6.124 18.689 4.906 22.061 4.6s10.877-4.447 12.408-8.74 1.532-7.971 1.073-8.74-1.685-1.226-3.525-2.146-10.877-5.367-12.562-5.981-2.91-.919-4.137.921-4.746 5.979-5.819 7.206-2.144 1.381-3.984.462-7.76-2.861-14.784-9.124c-5.465-4.873-9.154-10.891-10.228-12.73s-.114-2.835.808-3.751c.825-.824 1.838-2.147 2.759-3.22s1.224-1.84 1.836-3.065.307-2.301-.153-3.22-4.032-10.011-5.666-13.647"/></svg>
 	 </a>';
 }
 add_action( 'wp_footer', 'whatsapp' );

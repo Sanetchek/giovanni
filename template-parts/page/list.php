@@ -43,14 +43,9 @@ switch($columns) {
                   $full = 'full-content';
                 }
 
-                $thumb = ($item['title'] || $item['text'] || $item['link'] || $columns !== 'one') ? [768, 0] : [1780, 0];  ?>
+                $thumb = ($item['title'] || $item['text'] || $item['link'] || $columns !== 'one') ? 'medium_large' : '1780-full';  ?>
               <div class="list-item-side list-item-image <?= $full ?>">
-                <?php
-                $data = [
-                  'thumb' => $thumb,
-                ];
-                echo liteimage( $item['image'], $data );
-                ?>
+                <?php show_image($item['image'], $thumb, ['class'=> '']) ?>
               </div>
             <?php endif ?>
 

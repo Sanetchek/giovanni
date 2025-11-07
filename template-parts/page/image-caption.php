@@ -9,19 +9,11 @@
       <?php foreach ($block['list'] as $item) : ?>
       <?php
           $width = $item['width'];
-          $thumb = $item['width'] === 'full' ? [1600, 0] : [800, 980];
+          $thumb = $item['width'] === 'full' ? [1600, 0] : '800-980';
         ?>
       <li class="image-caption-item <?= $width ?>">
         <figure>
-          <?php
-          $data = [
-            'thumb' => $thumb,
-            'args' => [
-              'class' => 'image-caption',
-            ],
-          ];
-          echo liteimage( $item['image'], $data );
-          ?>
+          <?php show_image($item['image'], $thumb, ['class'=> 'image-caption']) ?>
 
           <?php if ($item['text']) : ?>
           <figcaption class="caption"><?= $item['text'] ?></figcaption>

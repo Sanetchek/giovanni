@@ -5,7 +5,7 @@ $button_title = get_field('signature_button_title');
 $button_link = get_field('signature_button_link');
 $image = get_field('sig_image');
 $image_mob = get_field('sig_image_mob');
-$image_link = get_field('sig_image_link') ? get_field('sig_image_link') : 'javascript:void(0)';
+$image_link = get_field('sig_image_link') ?? 'javascript:void(0)';
 ?>
 <?php if ($title || $desc || $button_link || $image) : ?>
   <section id="signature_pieces" class="signature_pieces">
@@ -32,20 +32,9 @@ $image_link = get_field('sig_image_link') ? get_field('sig_image_link') : 'javas
       <div class="signature_pieces-side signature_pieces-image-wrap">
         <a href="<?= $image_link ?>">
         <?php
-
-        $data = [
-          'thumb' => [1920, 920],
-          'max' => [
-            '1024' => [800, 800],
-            '768' => [768, 768],
-            '576' => [576, 576],
-            '390' => [390, 390],
-          ],
-          'args' => [
-            'class' => 'collections-bg',
-          ],
-        ];
-        echo liteimage( $image, $data, $image_mob );
+        show_image($image, '1920-920', ['class' => 'collections-bg desktop-only page-desk']);
+        $image_mob = $image_mob ? $image_mob : $image;
+        show_image($image_mob, '800-800', ['class' => 'mobile-only page-mob']);
         ?>
         </a>
       </div>

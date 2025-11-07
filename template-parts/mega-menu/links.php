@@ -4,12 +4,7 @@
   <?php foreach ($links as $item) : ?>
     <?php if ($item['link']) : ?>
       <a href="<?= $item['link'] ?>" class="link-item">
-        <?php
-        $data = [
-          'thumb' => [424, 307],
-        ];
-        echo liteimage( $item['image'], $data );
-        ?>
+        <?php show_image($item['image'], '424-307') ?>
 
         <p class="link-item-title"><?= $item['title'] ?></p>
         <p><?= $item['description'] ?></p>

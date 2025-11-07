@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Giovanni Raspini Special 1.0.1\n"
+"Project-Id-Version: Giovanni Raspini Special 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/giovanni\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-11-07T12:10:52+02:00\n"
+"POT-Creation-Date: 2025-04-22T14:17:51+03:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: giovanni\n"
@@ -24,6 +24,23 @@ msgstr ""
 
 #. Author of the theme
 msgid "Webeffect"
+msgstr ""
+
+#. translators: 1: title.
+#: comments.php:34
+msgid "One thought on &ldquo;%1$s&rdquo;"
+msgstr ""
+
+#. translators: 1: comment count number, 2: title.
+#: comments.php:40
+msgctxt "comments title"
+msgid "%1$s thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:66
+msgid "Comments are closed."
 msgstr ""
 
 #: functions.php:52
@@ -115,61 +132,39 @@ msgstr ""
 msgid "Fourth area"
 msgstr ""
 
-#: header.php:68
+#: header.php:67
 msgid "החשבון שלי"
 msgstr ""
 
-#: header.php:70
+#: header.php:69
 msgid "התחבר/י"
 msgstr ""
 
-#: header.php:74
+#: header.php:73
 msgid "ההזמנות שלי"
 msgstr ""
 
-#: header.php:76
+#: header.php:75
 msgid "רשימת המשאלות"
 msgstr ""
 
-#: header.php:77
+#: header.php:76
 #: templates/customer-service.php:27
 msgid "שירות לקוחות"
 msgstr ""
 
 #: inc/__ajax.php:70
-#: inc/__ajax.php:206
-#: search.php:66
+#: inc/__ajax.php:191
+#: search.php:64
 msgid "לא נמצאו תוצאות"
 msgstr ""
 
-#: inc/__ajax.php:119
+#: inc/__ajax.php:120
 msgid "הצעות:"
 msgstr ""
 
-#: inc/__custom-functions.php:272
-msgid "Submit subscription form"
-msgstr ""
-
-#. translators: %s: Site name
 #: inc/__custom-functions.php:414
-msgid "Go to %s home page"
-msgstr ""
-
-#. translators: %s: Site name
-#: inc/__custom-functions.php:414
-msgid "Go to home page"
-msgstr ""
-
-#: inc/__custom-functions.php:427
-msgid "Home"
-msgstr ""
-
-#: inc/__custom-functions.php:474
 msgid "עמוד הבית "
-msgstr ""
-
-#: inc/__custom-functions.php:761
-msgid "Contact us on WhatsApp"
 msgstr ""
 
 #: inc/__customizer.php:6
@@ -180,32 +175,32 @@ msgstr ""
 msgid "Logo"
 msgstr ""
 
-#: inc/__customizer.php:24
+#: inc/__customizer.php:40
 msgid "Social Media Links"
 msgstr ""
 
-#: inc/__customizer.php:34
+#: inc/__customizer.php:50
 msgid "Whatsup URL"
 msgstr ""
 
-#: inc/__customizer.php:46
+#: inc/__customizer.php:62
 msgid "Telegram URL"
 msgstr ""
 
-#: inc/__customizer.php:58
+#: inc/__customizer.php:74
 msgid "LinkedIn URL"
 msgstr ""
 
-#: inc/__customizer.php:69
+#: inc/__customizer.php:85
 msgid "Copyrights"
 msgstr ""
 
-#: inc/__customizer.php:79
+#: inc/__customizer.php:95
 msgid "Copyrights Text"
 msgstr ""
 
 #: inc/__filters.php:125
-#: search.php:46
+#: search.php:43
 msgid "מסנן"
 msgstr ""
 
@@ -241,19 +236,19 @@ msgstr ""
 msgid "Gift card added to cart!"
 msgstr ""
 
-#: inc/__likes.php:240
+#: inc/__likes.php:241
 msgid "מעבד..."
 msgstr ""
 
-#: inc/__likes.php:241
+#: inc/__likes.php:242
 msgid "המוצר התווסף לרשימת המשאלות "
 msgstr ""
 
-#: inc/__likes.php:242
+#: inc/__likes.php:243
 msgid "מוצר זה הוסר מרשימת המשאלות שלך"
 msgstr ""
 
-#: inc/__likes.php:243
+#: inc/__likes.php:244
 msgid "משהו השתבש..."
 msgstr ""
 
@@ -317,16 +312,17 @@ msgstr ""
 msgid "עליך לאשר את מדיניות הפרטיות לפני שתמשיך."
 msgstr ""
 
-#: inc/__woocommerce.php:678
+#: inc/__woocommerce.php:676
 #: template-parts/emails/gift.php:34
 msgid "מתנה מיוחדת עבורך"
 msgstr ""
 
-#: search.php:35
+#: search.php:29
 msgid "תוצאות חיפוש"
 msgstr ""
 
-#: search.php:38
+#. translators: %s: search query.
+#: search.php:34
 msgid " תוצאות עבור "
 msgstr ""
 
@@ -467,39 +463,39 @@ msgstr ""
 msgid "מחיר"
 msgstr ""
 
-#: template-parts/emails/order.php:63
+#: template-parts/emails/order.php:55
 msgid "סכום ביניים:"
 msgstr ""
 
-#: template-parts/emails/order.php:68
+#: template-parts/emails/order.php:60
 msgid "משלוח:"
 msgstr ""
 
-#: template-parts/emails/order.php:73
+#: template-parts/emails/order.php:65
 msgid "מע\"מ (18%):"
 msgstr ""
 
-#: template-parts/emails/order.php:78
+#: template-parts/emails/order.php:70
 msgid "סה\"כ לתשלום:"
 msgstr ""
 
-#: template-parts/emails/order.php:86
+#: template-parts/emails/order.php:78
 msgid "אמצעי תשלום"
 msgstr ""
 
-#: template-parts/emails/order.php:93
+#: template-parts/emails/order.php:85
 msgid "כתובת למשלוח"
 msgstr ""
 
-#: template-parts/emails/order.php:100
+#: template-parts/emails/order.php:92
 msgid "כתובת לחיוב"
 msgstr ""
 
-#: template-parts/emails/order.php:104
+#: template-parts/emails/order.php:96
 msgid "טלפון:"
 msgstr ""
 
-#: template-parts/emails/order.php:107
+#: template-parts/emails/order.php:99
 msgid "אימייל:"
 msgstr ""
 
@@ -507,31 +503,11 @@ msgstr ""
 msgid "הקלד/י את החיפוש.."
 msgstr ""
 
-#: template-parts/header/user-actions.php:13
-msgid "Login or create account"
-msgstr ""
-
-#: template-parts/header/user-actions.php:13
-msgid "My account"
-msgstr ""
-
-#. translators: %s: Number of favorite items
-#: template-parts/header/user-actions.php:27
-msgid "Favorites (%s items)"
-msgstr ""
-
-#. translators: %s: Number of items in shopping cart
-#: template-parts/header/user-actions.php:41
-msgid "Shopping cart (%s item)"
-msgid_plural "Shopping cart (%s items)"
-msgstr[0] ""
-msgstr[1] ""
-
 #: template-parts/modal/login-modal.php:16
 msgid "חדש ב-Giovanni Raspini? <a href=\"/my-account\">הירשם</a>"
 msgstr ""
 
-#: template-parts/product-card-adv.php:30
+#: template-parts/product-card-adv.php:22
 msgid "No Image for that banner"
 msgstr ""
 
@@ -540,31 +516,13 @@ msgstr ""
 msgid "המוצר לא נמצא"
 msgstr ""
 
-#. translators: %s: Product name
-#: template-parts/product-card-slide.php:48
-#: template-parts/product-card.php:48
-msgid "View %s product details"
-msgstr ""
-
-#. translators: %s: Product name
-#: template-parts/product-card-slide.php:67
-#: template-parts/product-card.php:67
-msgid "View %s product details and price"
-msgstr ""
-
-#. translators: %s: Product name
-#: template-parts/product-card-slide.php:76
-#: template-parts/product-card.php:76
-msgid "Buy %s now"
-msgstr ""
-
-#: template-parts/product-card-slide.php:80
-#: template-parts/product-card.php:80
+#: template-parts/product-card-slide.php:58
+#: template-parts/product-card.php:58
 msgid "לקנות עכשיו"
 msgstr ""
 
-#: template-parts/product-card-slide.php:87
-#: template-parts/product-card.php:87
+#: template-parts/product-card-slide.php:65
+#: template-parts/product-card.php:65
 msgid "להסיר מוצר"
 msgstr ""
 
@@ -716,7 +674,7 @@ msgid "בדוק יתרה"
 msgstr ""
 
 #: templates/gifts-card-check.php:54
-#: templates/gifts-card-get.php:177
+#: templates/gifts-card-get.php:169
 msgid "כרטיס מתנה"
 msgstr ""
 
@@ -724,67 +682,67 @@ msgstr ""
 msgid "Gifts Card Get"
 msgstr ""
 
-#: templates/gifts-card-get.php:76
+#: templates/gifts-card-get.php:68
 msgid "בחר את הסכום"
 msgstr ""
 
-#: templates/gifts-card-get.php:81
+#: templates/gifts-card-get.php:73
 msgid "בחר את סכום כרטיס המתנה או הזן אחד לבחירתך."
 msgstr ""
 
-#: templates/gifts-card-get.php:115
+#: templates/gifts-card-get.php:107
 msgid "סכום אחר"
 msgstr ""
 
-#: templates/gifts-card-get.php:118
+#: templates/gifts-card-get.php:110
 msgid "המספר חייב להיות בין 50 ל-1000"
 msgstr ""
 
-#: templates/gifts-card-get.php:124
+#: templates/gifts-card-get.php:116
 msgid "המשיכו"
 msgstr ""
 
-#: templates/gifts-card-get.php:136
+#: templates/gifts-card-get.php:128
 msgid "הוסף את הנתונים שלך והודעה מותאמת אישית"
 msgstr ""
 
-#: templates/gifts-card-get.php:138
+#: templates/gifts-card-get.php:130
 msgid "הזן את פרטי הנמען והוסף הודעה מותאמת אישית אם תרצה."
 msgstr ""
 
-#: templates/gifts-card-get.php:143
+#: templates/gifts-card-get.php:135
 msgid "השם שלך"
 msgstr ""
 
-#: templates/gifts-card-get.php:145
-#: templates/gifts-card-get.php:151
-#: templates/gifts-card-get.php:157
-#: templates/gifts-card-get.php:164
+#: templates/gifts-card-get.php:137
+#: templates/gifts-card-get.php:143
+#: templates/gifts-card-get.php:149
+#: templates/gifts-card-get.php:156
 msgid "אנא מלא שדה זה"
 msgstr ""
 
-#: templates/gifts-card-get.php:149
+#: templates/gifts-card-get.php:141
 msgid "שם הנמען"
 msgstr ""
 
-#: templates/gifts-card-get.php:155
+#: templates/gifts-card-get.php:147
 msgid "האימייל של הנמען"
 msgstr ""
 
-#: templates/gifts-card-get.php:158
-#: templates/gifts-card-get.php:165
+#: templates/gifts-card-get.php:150
+#: templates/gifts-card-get.php:157
 msgid "כתובות האימייל אינן תואמות."
 msgstr ""
 
-#: templates/gifts-card-get.php:162
+#: templates/gifts-card-get.php:154
 msgid "אשר את האימייל של הנמען"
 msgstr ""
 
-#: templates/gifts-card-get.php:169
+#: templates/gifts-card-get.php:161
 msgid "הוסף הודעה אישית (אופציונלי)"
 msgstr ""
 
-#: templates/gifts-card-get.php:184
+#: templates/gifts-card-get.php:176
 msgid "הוסף לעגלה"
 msgstr ""
 

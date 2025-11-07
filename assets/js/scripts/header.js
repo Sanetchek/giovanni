@@ -200,34 +200,17 @@
   if ($(window).width() <= 768) {
     $('body').on('click', '.js-accordion-trigger, .accordion-row h2', function () {
       var $accordionRow = $(this).closest('.accordion-row');
-      var $button = $accordionRow.find('.js-accordion-trigger');
-      var controlsId = $button.attr('aria-controls');
-      var $controlledElement = null;
+      var $menuContainer1 = $accordionRow.next('.menu-footer-widget-1-container');
+      var $menuContainer2 = $accordionRow.next('.menu-footer-widget-2-container');
+      var $menuContainer3 = $accordionRow.next('.menu-footer-widget-3-container');
+      var $menuContainer4 = $accordionRow.next('.menu-footer-widget-4-container');
 
-      // Find the controlled element using the aria-controls ID
-      if (controlsId) {
-        $controlledElement = $('#' + controlsId);
-        // If found, get all content except the accordion row
-        if ($controlledElement.length > 0) {
-          $controlledElement = $controlledElement.children().not('.accordion-row');
-        }
-      }
-
-      // Fallback: check for menu container classes as siblings (for backward compatibility)
-      if (!$controlledElement || $controlledElement.length === 0) {
-        var $menuContainer1 = $accordionRow.next('.menu-footer-widget-1-container');
-        var $menuContainer2 = $accordionRow.next('.menu-footer-widget-2-container');
-        var $menuContainer3 = $accordionRow.next('.menu-footer-widget-3-container');
-        var $menuContainer4 = $accordionRow.next('.menu-footer-widget-4-container');
-        $controlledElement = $menuContainer1.add($menuContainer2).add($menuContainer3).add($menuContainer4);
-      }
-
-      var isExpanded = $button.attr('aria-expanded') === 'true';
-      $button.attr('aria-expanded', !isExpanded);
-
-      if ($controlledElement && $controlledElement.length > 0) {
-        $controlledElement.slideToggle(200);
-      }
+      var isExpanded = $accordionRow.find('.js-accordion-trigger').attr('aria-expanded') === 'true';
+      $accordionRow.find('.js-accordion-trigger').attr('aria-expanded', !isExpanded);
+      $menuContainer1.slideToggle(200);
+      $menuContainer2.slideToggle(200);
+      $menuContainer3.slideToggle(200);
+      $menuContainer4.slideToggle(200);
 
       $accordionRow.find('.toggle-icon.plus').toggle(isExpanded);
       $accordionRow.find('.toggle-icon.minus').toggle(!isExpanded);

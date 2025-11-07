@@ -28,23 +28,15 @@
                 foreach ( $order->get_items() as $item_id => $item ) {
                     $product = $item->get_product();
                     $product_id = $product ? $product->get_id() : 0;
-                    $product_image_id = get_post_thumbnail_id( $product_id );
+                    $product_image = wp_get_attachment_image_src( get_post_thumbnail_id( $product_id ), 'thumbnail' );
                     ?>
                     <tr>
                         <td style="text-align: right; padding: 10px; border-bottom: 1px solid #eeeeee;">
                             <?php echo esc_html( $item->get_name() ); ?>
                         </td>
                         <td style="text-align: center; padding: 10px; border-bottom: 1px solid #eeeeee;">
-                            <?php if ( $product_image_id ) : ?>
-                                <?php
-                                $data = [
-                                    'thumb' => [50, 50],
-                                    'args' => [
-                                        'alt' => esc_attr( $product->get_name() ),
-                                    ],
-                                ];
-                                echo liteimage( $product_image_id, $data );
-                                ?>
+                            <?php if ( $product_image ) : ?>
+                                <img src="<?php echo esc_url( $product_image[0] ); ?>" width="50" height="50" style="max-width: 50px; height: auto;" loading="lazy">
                             <?php endif; ?>
                         </td>
                         <td style="text-align: center; padding: 10px; border-bottom: 1px solid #eeeeee;">

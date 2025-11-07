@@ -15,21 +15,8 @@
             <a href="<?php echo $item['link'] ?>" class="link-for-image">
           <?php endif ?>
 
-          <?php
-          $data = [
-            'thumb' => [1280, 0],
-            'max' => [
-              '1024' => [1024, 0],
-              '768' => [768, 0],
-              '576' => [576, 0],
-              '390' => [390, 0],
-            ],
-            'args' => [
-              'class' => 'main-post-image',
-            ],
-          ];
-          echo liteimage( $image, $data, $image_mob);
-          ?>
+          <?php show_image($image_mob, '800-full', ['class'=> 'main-post-image main-post-image-mobile']) ?>
+          <?php show_image($image, '1280-full', ['class'=> 'main-post-image main-post-image-desktop']) ?>
 
           <?php if ($link_for_image && $item['link']) : ?>
             </a>

@@ -6,15 +6,7 @@
   <div class="article-slider-list" dir="ltr">
     <?php foreach ($block['images_list'] as $item) : ?>
       <div class="article-slider-item">
-        <?php
-        $data = [
-          'thumb' => [1920, 865],
-          'args' => [
-            'class' => 'article-slider-item-img',
-          ],
-        ];
-        echo liteimage( $item['image'], $data );
-        ?>
+        <?php show_image($item['image'], '1920-865', ['class'=> 'article-slider-item-img']) ?>
       </div>
     <?php endforeach ?>
   </div>

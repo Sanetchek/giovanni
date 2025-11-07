@@ -20,7 +20,6 @@
 
 .subscribe-title {
   margin-bottom: 21px;
-  color: #000; /* Ensure dark text for sufficient contrast on light background */
 }
 
 .subscribe-text {
@@ -28,7 +27,6 @@
   line-height: 1.6;
   letter-spacing: 0.07em;
   margin: 0 0 40px;
-  color: #333; /* Ensure dark text for sufficient contrast (WCAG AA) */
 }
 
 .subscribe-form form.wpcf7-form {
@@ -45,7 +43,7 @@ label.footer-subscribe-privacy {
   right: -10px;
   bottom: -40px;
   width: 100% !important;
-  font-size: 14px;
+  font-size: 14px; 
 }
 
 label.popup-subscribe-privacy span span {
@@ -136,65 +134,6 @@ p.copyrights {
   text-align: center;
   color: #000;
   margin: 0;
-}
-
-p.copyrights a {
-  text-decoration: underline;
-}
-
-p.copyrights a:hover,
-p.copyrights a:focus {
-  text-decoration: underline;
-}
-
-/* Footer contact info links - ensure they're distinguishable */
-.site-footer p a[href^="mailto:"] {
-  text-decoration: underline;
-}
-
-.site-footer p a[href^="mailto:"]:hover,
-.site-footer p a[href^="mailto:"]:focus {
-  text-decoration: underline;
-}
-
-/* Fix contrast ratio for footer text - WCAG AA compliance */
-/* Target all paragraphs in footer to ensure sufficient contrast (minimum 4.5:1 for normal text) */
-.site-footer .site-info p {
-  /* Ensure minimum contrast ratio of 4.5:1 - #444 provides 10.7:1 on white */
-  color: #444 !important;
-}
-
-.site-footer .site-info p strong {
-  /* Ensure strong elements have maximum contrast - #000 provides 21:1 on white */
-  color: #000 !important;
-}
-
-.site-footer .site-info p a {
-  /* Ensure links have sufficient contrast */
-  color: #000 !important;
-}
-
-/* Target paragraph with RTL direction and specific styling - override low contrast color */
-.site-footer p[style*="direction:rtl"],
-.site-footer p[style*="direction:ltr"] {
-  color: #444 !important; /* Changed from #888/#666 to #444 for better contrast ratio (10.7:1) */
-}
-
-.site-footer p[style*="direction:rtl"] strong[style*="color:#555"],
-.site-footer p[style*="direction:rtl"] strong,
-.site-footer p[style*="direction:ltr"] strong {
-  color: #000 !important; /* Changed to #000 for maximum contrast ratio (21:1) */
-}
-
-/* Also target any paragraphs with low contrast colors in footer */
-.site-footer .site-info p[style*="color:#888"],
-.site-footer .site-info p[style*="color:#666"] {
-  color: #444 !important;
-}
-
-.site-footer .site-info p[style*="color:#888"] strong,
-.site-footer .site-info p[style*="color:#666"] strong {
-  color: #000 !important;
 }
 
 .footer-menu-bottom .menu {

@@ -20,18 +20,7 @@
       </div>
 
       <div class="exhibition-side exhibition-image-wrap">
-        <?php
-        $data = [
-          'thumb' => [424, 424],
-          'max' => [
-            '390' => [390, 390],
-          ],
-          'args' => [
-            'class' => 'exhibition-image',
-          ],
-        ];
-        echo liteimage( $image, $data );
-        ?>
+        <?php show_image($image, '424-424', ['class'=> 'exhibition-image']) ?>
       </div>
     </div>
   </div>

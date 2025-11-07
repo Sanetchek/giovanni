@@ -44,13 +44,7 @@ $attachment_ids = $product->get_gallery_image_ids();
 
       if ( $post_thumbnail_id ) {
         echo '<div class="product-modal__image">';
-        $data = [
-          'thumb' => $thumb,
-          'args' => [
-            'class' => 'modal-thumbnail',
-          ],
-        ];
-        echo liteimage( $post_thumbnail_id, $data );
+        show_image($post_thumbnail_id, $thumb, ['class' => 'modal-thumbnail']);
         echo '</div>';
       }
 
@@ -58,13 +52,7 @@ $attachment_ids = $product->get_gallery_image_ids();
       if ( $attachment_ids && $product->get_image_id() ) {
         foreach ( $attachment_ids as $key => $attachment_id ) {
           echo '<div class="product-modal__image">';
-          $data = [
-            'thumb' => $thumb,
-            'args' => [
-              'class' => 'modal-thumbnail',
-            ],
-          ];
-          echo liteimage( $attachment_id, $data );
+          show_image($attachment_id, $thumb, ['class' => 'modal-thumbnail']);
           echo '</div>';
         }
       }
