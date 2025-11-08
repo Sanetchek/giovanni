@@ -4,10 +4,16 @@
       $img_mob = get_field('new_col_image_mob');
       $img = get_field('new_col_image');
 
-      show_image($img, '1920-920', ['class' => 'collections-bg page-desk']);
-
-      $img_mob = $img_mob ? $img_mob : $img;
-      show_image($img_mob, '768-865', ['class' => 'page-mob']);
+      $data = [
+        'thumb' => [1920, 920],
+        'max' => [
+          '768' => [768, 865],
+        ],
+        'args' => [
+          'class' => 'collections-bg',
+        ],
+      ];
+      echo liteimage( $img, $data, $img_mob );
     ?>
   </div>
 

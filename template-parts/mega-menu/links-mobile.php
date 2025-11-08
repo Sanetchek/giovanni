@@ -4,7 +4,12 @@
   <?php foreach ($links as $item) : ?>
     <?php if ($item['link']) : ?>
       <a href="<?= $item['link'] ?>" class="link-item">
-        <?php show_image($item['image'], '424-307') ?>
+        <?php
+        $data = [
+          'thumb' => [424, 307],
+        ];
+        echo liteimage( $item['image'], $data );
+        ?>
 
         <div class="links-mobile-column">
           <p class="link-item-title"><?= $item['title'] ?></p>

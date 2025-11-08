@@ -15,15 +15,23 @@ $vimeo_video = get_field('vimeo_video');
     <?php
     // Display the main product image.
     $post_thumbnail_id = $product->get_image_id();
-    $thumb = '812-812';
+    $thumb = [812, 812];
     echo '<div class="product-gallery__image">';
     if ( $post_thumbnail_id ) {
-      show_image($post_thumbnail_id, $thumb, ['class' => 'show-product-modal']);
+      $data = [
+        'thumb' => $thumb,
+        'max' => [
+          '576' => [576, 576],
+        ],
+        'args' => [
+          'class' => 'show-product-modal',
+        ],
+      ];
+      echo liteimage( $post_thumbnail_id, $data );
     } else {
       $title = $product->get_name();
-      $image_url = wc_placeholder_img_src('full');
+      echo get_placeholder_image($title);
       ?>
-      <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($title); ?>" width="812" height="812" loading="lazy">
     <?php }
     echo '</div>';
 
@@ -58,7 +66,13 @@ $vimeo_video = get_field('vimeo_video');
       $class = ($key > 0 && $has_videos) ? 'half' : '';
       echo '<div class="product-gallery__image ' . esc_attr($class) . '">';
       if ($item['type'] === 'image') {
-        show_image($item['id'], $thumb, ['class' => 'show-product-modal']);
+        $data = [
+          'thumb' => $thumb,
+          'args' => [
+            'class' => 'show-product-modal',
+          ],
+        ];
+        echo liteimage( $item['id'], $data );
       } elseif ($item['type'] === 'video') {
         show_video($item['url']);
       }
@@ -75,15 +89,15 @@ $vimeo_video = get_field('vimeo_video');
       echo do_shortcode('[wp360view product_id=' . $product_id . ']');
       echo '</div>';
     }
-  
+
     if ($vimeo_video) {
         preg_match('/(\d+)/', $vimeo_video, $m);
-        $vimeo_id = $m[1] ?? '';
+        $vimeo_id = isset($m[1]) ? $m[1] : '';
 
         if ($vimeo_id) {
           echo '<div class=" product-gallery__video">';
           echo '<div class="vp-center vimeo-box">';
-          echo '<iframe 
+          echo '<iframe
                   class="js-vimeo"
                   data-vimeo-id="' . esc_attr($vimeo_id) . '"
                   src="https://player.vimeo.com/video/' . esc_attr($vimeo_id) . '?muted=1&loop=1&autopause=1&title=0&byline=0&portrait=0"

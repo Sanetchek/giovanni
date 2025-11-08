@@ -8,7 +8,10 @@
   <?php
     $image = get_field('thku_image', 'option');
     if ($image) {
-      show_image($image, [400, 0]);
+      $data = [
+        'thumb' => [400, 0],
+      ];
+      echo liteimage( $image, $data );
     }
   ?>
 

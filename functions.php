@@ -167,40 +167,40 @@ function giovanni_widgets_init() {
     'name' => esc_html__( 'Footer Widget 1', 'giovanni' ),
     'id' => 'footer-1',
     'description' => esc_html__( 'First area', 'giovanni' ),
-    'before_widget' => '<div class="wsfooterwdget">',
+    'before_widget' => '<div id="footer1" class="wsfooterwdget">',
     'after_widget' => '</div>',
-    'before_title' => '<div class="accordion-row active"><h2>',
-    'after_title' => '</h2><button class="js-accordion-trigger accordion-trigger" aria-controls="footer1" aria-expanded="false"><span class="toggle-icon plus"></span>	<span class="toggle-icon minus" style="display: none;"></span></button></div>',
+    'before_title' => '<div class="accordion-row active"><h2 id="footer1-title">',
+    'after_title' => '</h2><button class="js-accordion-trigger accordion-trigger" aria-controls="footer1" aria-expanded="false" aria-labelledby="footer1-title"><span class="toggle-icon plus"></span>	<span class="toggle-icon minus" style="display: none;"></span></button></div>',
     ));
 
     register_sidebar(array(
     'name' => esc_html__( 'Footer Widget 2', 'giovanni' ),
     'id' => 'footer-2',
     'description' => esc_html__( 'Second area', 'giovanni' ),
-    'before_widget' => '<div class="wsfooterwdget">',
+    'before_widget' => '<div id="footer2" class="wsfooterwdget">',
     'after_widget' => '</div>',
-    'before_title' => '<div class="accordion-row"><h2>',
-    'after_title' => '</h2><button class="js-accordion-trigger accordion-trigger" aria-controls="footer2" aria-expanded="true"><span class="toggle-icon plus"></span>	<span class="toggle-icon minus" style="display: none;"></span></button></div>',
+    'before_title' => '<div class="accordion-row"><h2 id="footer2-title">',
+    'after_title' => '</h2><button class="js-accordion-trigger accordion-trigger" aria-controls="footer2" aria-expanded="true" aria-labelledby="footer2-title"><span class="toggle-icon plus"></span>	<span class="toggle-icon minus" style="display: none;"></span></button></div>',
     ));
 
     register_sidebar(array(
     'name' => esc_html__( 'Footer Widget 3', 'giovanni' ),
     'id' => 'footer-3',
     'description' => esc_html__( 'Third area', 'giovanni' ),
-    'before_widget' => '<div class="wsfooterwdget">',
+    'before_widget' => '<div id="footer3" class="wsfooterwdget">',
     'after_widget' => '</div>',
-    'before_title' => '<div class="accordion-row"><h2>',
-    'after_title' => '</h2><button class="js-accordion-trigger accordion-trigger" aria-controls="footer3" aria-expanded="true"><span class="toggle-icon plus"></span>	<span class="toggle-icon minus" style="display: none;"></span></button></div>',
+    'before_title' => '<div class="accordion-row"><h2 id="footer3-title">',
+    'after_title' => '</h2><button class="js-accordion-trigger accordion-trigger" aria-controls="footer3" aria-expanded="true" aria-labelledby="footer3-title"><span class="toggle-icon plus"></span>	<span class="toggle-icon minus" style="display: none;"></span></button></div>',
     ));
 
   register_sidebar(array(
     'name' => esc_html__( 'Footer Widget 4', 'giovanni' ),
     'id' => 'footer-4',
     'description' => esc_html__( 'Fourth area', 'giovanni' ),
-    'before_widget' => '<div class="wsfooterwdget">',
+    'before_widget' => '<div id="footer4" class="wsfooterwdget">',
     'after_widget' => '</div>',
-    'before_title' => '<div class="accordion-row"><h2>',
-    'after_title' => '</h2><button class="js-accordion-trigger accordion-trigger" aria-controls="footer4" aria-expanded="true"><span class="toggle-icon plus"></span>	<span class="toggle-icon minus" style="display: none;"></span></button></div>',
+    'before_title' => '<div class="accordion-row"><h2 id="footer4-title">',
+    'after_title' => '</h2><button class="js-accordion-trigger accordion-trigger" aria-controls="footer4" aria-expanded="true" aria-labelledby="footer4-title"><span class="toggle-icon plus"></span>	<span class="toggle-icon minus" style="display: none;"></span></button></div>',
   ));
 }
 add_action( 'widgets_init', 'giovanni_widgets_init' );
@@ -265,14 +265,6 @@ function giovanni_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'giovanni_scripts' );
-
-
-add_action('wp_head', function () {
-	echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
-	echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
-	echo '<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Jost:wght@500&family=Libre+Caslon+Text&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" onload="this.onload=null;this.rel=\'stylesheet\'">';
-	echo '<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@500&family=Libre+Caslon+Text&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"></noscript>';
-}, 1);
 
 add_filter('wp_get_attachment_image_attributes', function($attr, $attachment = null, $size = null){
 	if (is_admin()) return $attr;
@@ -418,15 +410,15 @@ add_filter('posts_join', function ($join, \WP_Query $q) {
 
     if ($q->is_search() && $is_products) {
         global $wpdb;
-        $join .= " 
-            LEFT JOIN {$wpdb->postmeta} AS sku_pm 
-                ON sku_pm.post_id = {$wpdb->posts}.ID 
+        $join .= "
+            LEFT JOIN {$wpdb->postmeta} AS sku_pm
+                ON sku_pm.post_id = {$wpdb->posts}.ID
                AND sku_pm.meta_key = '_sku'
-            LEFT JOIN {$wpdb->posts} AS var_p 
-                ON var_p.post_parent = {$wpdb->posts}.ID 
+            LEFT JOIN {$wpdb->posts} AS var_p
+                ON var_p.post_parent = {$wpdb->posts}.ID
                AND var_p.post_type = 'product_variation'
-            LEFT JOIN {$wpdb->postmeta} AS var_pm 
-                ON var_pm.post_id = var_p.ID 
+            LEFT JOIN {$wpdb->postmeta} AS var_pm
+                ON var_pm.post_id = var_p.ID
                AND var_pm.meta_key = '_sku'
         ";
     }

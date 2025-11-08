@@ -15,10 +15,13 @@ get_header();
 			<?php
 				$bg = get_field('error_image', 'option');
 				$bg_mob = get_field('error_image_mob', 'option');
-
-				show_image($bg, '1440-400', ['class' => 'page-desk']);
-				$bg_mob = $bg_mob ? $bg_mob : $bg;
-				show_image($bg_mob, '768-400', ['class' => 'page-mob']);
+				$data = [
+					'thumb' => [1440, 400],
+					'max' => [
+						'768' => [768, 400],
+					],
+				];
+				echo liteimage( $bg, $data, $bg_mob);
 			?>
 		</div>
 

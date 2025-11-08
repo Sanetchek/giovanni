@@ -5,21 +5,23 @@ $bg_mob = get_field('hero_image_mob');
 
 <section id="hero" class="hero">
   <div class="hero-image main-wrap">
-    <?php 
+    <?php
     $data = [
-        'thumb' => [1920, 0],
+        'thumb' => [1920, 864],
         'max' => [
-            '1024' => [1024, 0],
-            '768'  => [768, 0],
-            '576'  => [576, 0],
-            '390'  => [390, 0],
+            '1024' => [1024, 461],
+            '768'  => [768, 346],
+            '576'  => [576, 259],
+            '390'  => [390, 175],
         ],
         'args' => [
             'loading' => 'eager',
+            'fetchpriority' => 'high',
+            'class' => 'is-hero',
         ],
     ];
-    echo liteimage( $bg, $data, $bg_mob); 
-    
+    echo liteimage( $bg, $data, $bg_mob);
+
     ?>
     <div class="hero-wrap">
       <div class="hero-content">
