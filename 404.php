@@ -18,7 +18,7 @@ get_header();
 				$data = [
 					'thumb' => [1440, 400],
 					'max' => [
-						'768' => [768, 400],
+						'768' => [768, 0],
 					],
 				];
 				echo liteimage( $bg, $data, $bg_mob);

@@ -28,7 +28,7 @@
 
       <h1 class="page-title"><?= get_the_title() ?></h1>
       <div class="article-content">
-        <?= get_the_content() ?>
+        <?php the_content(); ?>
       </div>
     </div>
   </div>

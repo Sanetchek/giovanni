@@ -27,7 +27,7 @@ get_header();
   <div class="article-wrap">
     <div class="container">
       <div class="article-content">
-        <?= get_the_content() ?>
+        <?php the_content(); ?>
       </div>
     </div>
   </div>
