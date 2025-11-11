@@ -364,7 +364,7 @@ add_filter('script_loader_tag', function($tag, $handle, $src){
  * @param [type] $tag
  * @param [type] $handle
  * @param [type] $src
- * @return void
+ * @return string
  */
 function add_attribs_to_scripts( $tag, $handle, $src ) {
 

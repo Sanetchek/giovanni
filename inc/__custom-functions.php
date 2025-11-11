@@ -74,12 +74,12 @@ function generate_picture_element($image_id, $is_last, $class) {
 	$thumb = [473, 473];
 	$thumb1024 = [345, 345];
 	$thumb576 = [247, 247];
-	$thumb390 = [156, 156];
+	$thumb412 = [156, 156];
 
   	$thumb = $is_last ? [1440, 500] : $thumb;
 	$thumb1024 = $is_last ? [718, 332] : $thumb1024;
 	$thumb576 = $is_last ? [522, 241] : $thumb576;
-	$thumb390 = $is_last ? [337, 156] : $thumb390;
+	$thumb412 = $is_last ? [337, 156] : $thumb412;
 
 	if ($image_id) {
 
@@ -89,7 +89,7 @@ function generate_picture_element($image_id, $is_last, $class) {
 				'1279' => $thumb,
 				'1024' => $thumb1024,
 				'576' => $thumb576,
-				'390' => $thumb390,
+				'412' => $thumb412,
 			],
 			'args' => [
 				'class' => $class,
@@ -172,7 +172,8 @@ function generate_archive_picture_source($bg, $bg_mob = null) {
 	$data = [
 		'thumb' => [1920, 400],
 		'max' => [
-			'1024' => [768, 400],
+			'768' => [768, 400],
+			'412' => [412, 0],
 		],
 		'args' => [
 			'alt' => 'hero',

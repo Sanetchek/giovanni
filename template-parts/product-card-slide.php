@@ -36,7 +36,7 @@ $data = [
     'alt' => esc_attr($title),
   ],
 ];
-$second_image = $second_image_id ? liteimage($second_image_id, $data) : get_placeholder_image($title);
+$second_image = $second_image_id ? liteimage($second_image_id, $data) : '';
 $favorite_class = is_page_template('templates/favorites.php') ? 'favorite-product' : '';
 ?>
 

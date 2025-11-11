@@ -39,7 +39,7 @@ $image_link = get_field('sig_image_link') ? get_field('sig_image_link') : 'javas
             '1024' => [800, 800],
             '768' => [768, 768],
             '576' => [576, 576],
-            '390' => [390, 390],
+            '412' => [412, 412],
           ],
           'args' => [
             'class' => 'collections-bg',
