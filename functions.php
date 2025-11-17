@@ -249,10 +249,9 @@ function giovanni_scripts() {
 		'current_category_id' => $category_id, // Include current category ID if on a product category page
 	]);
 
-	add_action('send_headers', function() {
+	if (defined('DOING_AJAX') && DOING_AJAX) {
 		nocache_headers();
-	});
-
+	}
 
 	// dequeue
 	wp_dequeue_style( 'wp-block-library' );
@@ -422,15 +421,15 @@ add_filter('posts_join', function ($join, \WP_Query $q) {
 
     if ($q->is_search() && $is_products) {
         global $wpdb;
-        $join .= " 
-            LEFT JOIN {$wpdb->postmeta} AS sku_pm 
-                ON sku_pm.post_id = {$wpdb->posts}.ID 
+        $join .= "
+            LEFT JOIN {$wpdb->postmeta} AS sku_pm
+                ON sku_pm.post_id = {$wpdb->posts}.ID
                AND sku_pm.meta_key = '_sku'
-            LEFT JOIN {$wpdb->posts} AS var_p 
-                ON var_p.post_parent = {$wpdb->posts}.ID 
+            LEFT JOIN {$wpdb->posts} AS var_p
+                ON var_p.post_parent = {$wpdb->posts}.ID
                AND var_p.post_type = 'product_variation'
-            LEFT JOIN {$wpdb->postmeta} AS var_pm 
-                ON var_pm.post_id = var_p.ID 
+            LEFT JOIN {$wpdb->postmeta} AS var_pm
+                ON var_pm.post_id = var_p.ID
                AND var_pm.meta_key = '_sku'
         ";
     }
