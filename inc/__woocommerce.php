@@ -691,3 +691,144 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters('active_plugins', ge
   add_action('woocommerce_order_status_completed', 'debug_gift_card_product_info', 10, 2);
 }
 
+
+
+
+add_action( 'woocommerce_pay_order_before_submit', 'add_coupon_field_to_order_pay' );
+function add_coupon_field_to_order_pay( $order ){
+    ?>
+    <div id="order-pay-coupon" style="margin:20px 0; padding:15px; border:1px solid #ddd; border-radius:8px; background:#fafafa;">
+        <label for="order_pay_coupon_input" style="display:block; font-weight:600; margin-bottom:8px;">
+            קופון הנחה:
+        </label>
+
+        <div style="display:flex; gap:10px;">
+            <input 
+                type="text" 
+                id="order_pay_coupon_input" 
+                name="order_pay_coupon_input" 
+                placeholder="הזן את הקופון כאן" 
+                style="flex:1; padding:10px; border-radius:6px; border:1px solid #ccc;"
+            >
+            <button 
+                type="button" 
+                class="button" 
+                id="order_pay_apply_coupon"
+                style="padding:10px 18px;"
+            >
+                החל קופון
+            </button>
+        </div>
+
+        <div id="order_pay_coupon_message" style="margin-top:10px; font-weight:600;"></div>
+    </div>
+    <?php
+}
+
+
+add_action( 'wp_ajax_apply_order_pay_coupon', 'apply_order_pay_coupon' );
+add_action( 'wp_ajax_nopriv_apply_order_pay_coupon', 'apply_order_pay_coupon' );
+
+function apply_order_pay_coupon() {
+
+    $coupon_code = sanitize_text_field( $_POST['coupon'] );
+    $order_id    = intval( $_POST['order_id'] );
+
+    if ( empty( $coupon_code ) ) {
+        wp_send_json_error( 'אנא הזן קופון' );
+    }
+
+    $order = wc_get_order( $order_id );
+
+    if ( ! $order ) {
+        wp_send_json_error( 'הזמנה לא נמצאה' );
+    }
+
+    $coupon = new WC_Coupon( $coupon_code );
+
+    if ( ! $coupon->get_id() ) {
+        wp_send_json_error( 'קופון לא קיים' );
+    }
+
+    if ( ! $coupon->is_valid() ) {
+        wp_send_json_error( 'קופון לא תקף' );
+    }
+
+    $existing_coupons = array_map( 'strtolower', $order->get_coupon_codes() );
+
+    if ( in_array( strtolower( $coupon_code ), $existing_coupons ) ) {
+        wp_send_json_error( 'הקופון כבר הוזן' );
+    }
+
+    $order->apply_coupon( $coupon_code );
+    $order->calculate_totals();
+    $order->save();
+
+    ob_start();
+    wc_get_template( 'checkout/review-order.php', ['order' => $order] );
+    $html = ob_get_clean();
+
+    wp_send_json_success([
+        'total' => $order->get_total(),
+        'html'  => $html
+    ]);
+}
+
+
+
+add_action( 'wp_footer', 'order_pay_coupon_js_loader' );
+function order_pay_coupon_js_loader() {
+
+    if ( ! is_wc_endpoint_url( 'order-pay' ) ) {
+        return;
+    }
+    ?>
+
+    <script>
+    jQuery(function($){
+
+        $('#order_pay_apply_coupon').on('click', function(){
+
+            var coupon = $('#order_pay_coupon_input').val();
+
+            var orderIdMatch = window.location.pathname.match(/order-pay\/(\d+)/);
+            var orderId = orderIdMatch ? orderIdMatch[1] : null;
+
+            if(!orderId){
+                $('#order_pay_coupon_message').html('<span style="color:red">מספר הזמנה לא נמצא</span>');
+                return;
+            }
+
+            $.ajax({
+                url: '/wp-admin/admin-ajax.php',
+                type: 'POST',
+                data: {
+                    action: 'apply_order_pay_coupon',
+                    coupon: coupon,
+                    order_id: orderId
+                },
+                success: function(response) {
+
+                    if(response.success){
+                        $('#order_pay_coupon_message').html('<span style="color:green">הקופון הופעל, מעדכן...</span>');
+
+                        setTimeout(function(){
+                            location.reload();
+                        }, 700);
+
+                    } else {
+                        $('#order_pay_coupon_message').html('<span style="color:red">'+response.data+'</span>');
+                    }
+                }
+            });
+
+        });
+
+    });
+    </script>
+
+    <?php
+}
+
+
+

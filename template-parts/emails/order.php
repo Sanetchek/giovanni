@@ -39,7 +39,7 @@ if ( ! isset( $order ) || ! is_a( $order, 'WC_Order' ) ) {
 
     <!-- Thank You Message -->
     <div style="padding: 20px; text-align: center; border-top: 1px solid #000000; border-bottom: 1px solid #000000; margin: 20px 0;">
-        <h1 style="font-size: 24px; color: #000000; margin-bottom: 10px;"><?= __('תודה על הזמנתך!', 'giovanni') ?></h1>
+        <h1 style="font-size: 24px; color: #000000; margin-bottom: 10px; text-align:center;"><?= __('תודה על הזמנתך!', 'giovanni') ?></h1>
         <p style="font-size: 16px; color: #000000;">
             <?php
             if ( $order && is_a( $order, 'WC_Order' ) ) {

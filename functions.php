@@ -522,3 +522,32 @@ require get_template_directory() . '/inc/__gift-card.php';
  * Woocommerce.
  */
 require get_template_directory() . '/inc/__woocommerce.php';
+
+
+
+// Register custom email
+add_filter( 'woocommerce_email_classes', function( $emails ) {
+
+    require_once get_stylesheet_directory() . '/class-wc-email-custom-invoice.php';
+
+    $emails['WC_Email_Custom_Invoice'] = new WC_Email_Custom_Invoice();
+    return $emails;
+});
+
+// Add action button to order actions
+add_filter( 'woocommerce_order_actions', function( $actions ) {
+    $actions['send_custom_invoice'] = __('Send Payment Invoice', 'giovanni');
+    return $actions;
+});
+
+// Handle action trigger
+add_action( 'woocommerce_order_action_send_custom_invoice', function( $order_id ) {
+
+    $mailer = WC()->mailer();
+    $emails = $mailer->get_emails();
+
+    if ( isset( $emails['WC_Email_Custom_Invoice'] ) ) {
+        $emails['WC_Email_Custom_Invoice']->trigger( $order_id );
+    }
+});
+
