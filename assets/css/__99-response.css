@@ -642,8 +642,27 @@
     padding-right: 0;
   }
 
-  .product-gallery__wrapper * {
-    width: 100%;
+  .product-gallery__wrapper button.slick-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10000;
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    padding: 12px;
+    margin: 0 4px;
+  }
+
+  .product-gallery__wrapper button.slick-prev.slick-arrow {
+    right: 4px;
+    left: auto;
+  }
+
+  .product-gallery__wrapper button.slick-next.slick-arrow {
+    left: 4px;
+    right: auto;
   }
 
   .product-container .product-gallery,

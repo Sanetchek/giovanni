@@ -48,14 +48,17 @@ $vimeo_video = get_field('vimeo_video');
       }
     }
 
-    // Collect videos.
+    // Collect videos — skip empty URLs to avoid empty slides.
     if ($videos) {
       foreach ($videos as $key => $item) {
-        $gallery_items[] = [
-          'type' => 'video',
-          'url' => esc_url($item['video']),
-          'key' => $key
-        ];
+        $url = isset($item['video']) ? trim($item['video']) : '';
+        if ($url !== '') {
+          $gallery_items[] = [
+            'type' => 'video',
+            'url' => esc_url($url),
+            'key' => $key
+          ];
+        }
       }
     }
 
@@ -84,10 +87,12 @@ $vimeo_video = get_field('vimeo_video');
     $has_360_view = get_post_meta($product_id, '_wp360view_images', true);
 
     if (!empty($has_360_view)) {
-      // If images are set, display the 360 view
-      echo '<div class="product-gallery__image ' . esc_attr($class) . '">';
-      echo do_shortcode('[wp360view product_id=' . $product_id . ']');
-      echo '</div>';
+      $shortcode_output = do_shortcode('[wp360view product_id=' . $product_id . ']');
+      if (!empty(trim($shortcode_output))) {
+        echo '<div class="product-gallery__image ' . esc_attr($class) . '">';
+        echo $shortcode_output;
+        echo '</div>';
+      }
     }
 
     if ($vimeo_video) {

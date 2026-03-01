@@ -84,6 +84,16 @@
   });
 
   if (screenWidth <= 1024) {
+    $('.product-gallery__wrapper').each(function () {
+      const $wrapper = $(this);
+      $wrapper.children().each(function () {
+        const $slide = $(this);
+        const hasContent = $slide.text().trim().length > 0 || $slide.find('img, video, iframe, [class*="360"]').length > 0;
+        if (!hasContent) {
+          $slide.remove();
+        }
+      });
+    });
     $('.product-gallery__wrapper').slick({
       dots: true,
       infinite: true,

@@ -16,7 +16,7 @@ Security hardening of the Giovanni theme: added CSRF protection (nonce) and inpu
 3. Product Filters — validated taxonomy with `taxonomy_exists()`, sanitized `category_id` with `intval()`, added `isset()` check for form data
 4. XSS prevention — added `esc_html()`, `esc_attr()`, `esc_url()`, `wp_kses_post()` in 8 template files
 5. Registration — enforced minimum 8-character password with validation message
-6. `money/` folder — documented as unused legacy MLM code; recommended for removal
+6. `money/` folder — documented as unused legacy MLM code; - REMOVED!
 
 ---
 
