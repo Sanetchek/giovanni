@@ -552,11 +552,11 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters('active_plugins', ge
   }
 
   /**
-   * Retrieves a paginated list of WooCommerce products ordered by total sales.
+ * Retrieves a paginated list of WooCommerce products ordered randomly.
    *
    * This function sets up a query to fetch published WooCommerce products,
-   * ordered by their total sales in descending order. It also supports pagination
-   * and filters products by category if on a product category archive page.
+ * ordered randomly. It also supports pagination and filters products by
+ * category if on a product category archive page.
    *
    * @return WP_Query The query object containing the products.
    */
@@ -564,35 +564,20 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters('active_plugins', ge
     // Determine the current page
     $paged = get_query_var('paged') ? get_query_var('paged') : 1;
 
-    $args = array(
-      'post_type'      => 'product',
-      'posts_per_page' => 20,
-      'paged'          => $paged,
-      'post_status'    => 'publish',
-      'meta_key'       => 'total_sales', // Required for sorting by meta_value_num
-      'orderby'        => array(
-        'meta_value_num' => 'DESC', // Primary sort: by total_sales
-        'ID'             => 'ASC',  // Secondary sort: by ID to prevent duplicate pagination
-      ),
-      'order'          => 'DESC',
-      'post__not_in'   => array(7935), // Exclude specific products
-    );
-
-    // For category archives, add a tax_query to filter by category
+    // For category archives, get the current category ID
+    $category_id = false;
     if (is_product_category()) {
       $current_category = get_queried_object();
 
       if ($current_category && !is_wp_error($current_category)) {
         $category_id = $current_category->term_id;
-        $args['tax_query'] = array(
-          array(
-            'taxonomy' => 'product_cat',
-            'field'    => 'term_id',
-            'terms'    => $category_id,
-          ),
-        );
       }
     }
+
+    // Reuse the central query builder to keep sorting consistent with filters/AJAX.
+    $args = build_product_query_args([
+      'sort' => 'rand',
+    ], $paged, $category_id);
 
     return new WP_Query($args);
   }
@@ -703,16 +688,16 @@ function add_coupon_field_to_order_pay( $order ){
         </label>
 
         <div style="display:flex; gap:10px;">
-            <input 
-                type="text" 
-                id="order_pay_coupon_input" 
-                name="order_pay_coupon_input" 
-                placeholder="הזן את הקופון כאן" 
+            <input
+                type="text"
+                id="order_pay_coupon_input"
+                name="order_pay_coupon_input"
+                placeholder="הזן את הקופון כאן"
                 style="flex:1; padding:10px; border-radius:6px; border:1px solid #ccc;"
             >
-            <button 
-                type="button" 
-                class="button" 
+            <button
+                type="button"
+                class="button"
                 id="order_pay_apply_coupon"
                 style="padding:10px 18px;"
             >
@@ -760,7 +745,25 @@ function apply_order_pay_coupon() {
         wp_send_json_error( 'הקופון כבר הוזן' );
     }
 
+    // Apply coupon to order
     $order->apply_coupon( $coupon_code );
+
+    // Recalculate totals - WooCommerce will use our filter for progressive discounts
+    $order->calculate_totals();
+
+    // After calculation, we need to ensure coupon items have correct discount amounts
+    // Recalculate progressive discounts and update coupon items
+    $recalculated_discounts = calculate_progressive_order_discounts( $order );
+
+    // Update coupon items with recalculated amounts
+    foreach ( $order->get_items( 'coupon' ) as $item_id => $item ) {
+        $code = $item->get_code();
+        if ( isset( $recalculated_discounts[ $code ] ) ) {
+            $item->set_discount( $recalculated_discounts[ $code ] );
+        }
+    }
+
+    // Recalculate totals again with updated discount amounts
     $order->calculate_totals();
     $order->save();
 
@@ -830,5 +833,380 @@ function order_pay_coupon_js_loader() {
     <?php
 }
 
+/**
+ * Global variable to track running discounted prices per cart item.
+ * This enables progressive coupon stacking - each coupon applies to the already-discounted price.
+ */
+$GLOBALS['wc_progressive_discount_prices'] = [];
+$GLOBALS['wc_progressive_cart_subtotal'] = 0;
+$GLOBALS['wc_applied_coupons_order'] = [];
+
+/**
+ * Reset tracked prices when cart totals are recalculated.
+ */
+add_action( 'woocommerce_before_calculate_totals', function ( $cart ) {
+    if ( is_admin() && ! defined( 'DOING_AJAX' ) ) {
+        return;
+    }
+    // Reset tracked prices when cart totals are recalculated.
+    $GLOBALS['wc_progressive_discount_prices'] = [];
+    $GLOBALS['wc_applied_coupons_order'] = [];
+    // Store original cart subtotal for progressive calculation
+    if ( $cart ) {
+        $GLOBALS['wc_progressive_cart_subtotal'] = (float) $cart->get_subtotal();
+        // Track coupon order
+        $applied_coupons = $cart->get_applied_coupons();
+        foreach ( $applied_coupons as $coupon_code ) {
+            if ( ! in_array( $coupon_code, $GLOBALS['wc_applied_coupons_order'] ) ) {
+                $GLOBALS['wc_applied_coupons_order'][] = $coupon_code;
+            }
+        }
+    }
+}, 1 );
+
+/**
+ * Calculate all coupon discounts from the current price (already with discounts applied).
+ * This ensures coupons stack progressively - each coupon applies to the already-discounted price.
+ */
+add_filter(
+    'woocommerce_coupon_get_discount_amount',
+    function ( $discount, $discounting_amount, $cart_item, $single, $coupon ) {
+
+        // Get cart item key for tracking.
+        $item_key = null;
+        if ( is_array( $cart_item ) && isset( $cart_item['key'] ) ) {
+            $item_key = $cart_item['key'];
+        } elseif ( is_array( $cart_item ) && isset( $cart_item['product_id'] ) ) {
+            $variation_id = isset( $cart_item['variation_id'] ) ? $cart_item['variation_id'] : 0;
+            $item_key     = $cart_item['product_id'] . '_' . $variation_id;
+        }
+
+        if ( ! $item_key ) {
+            return $discount;
+        }
+
+        // Initialize global if not set.
+        if ( ! isset( $GLOBALS['wc_progressive_discount_prices'] ) ) {
+            $GLOBALS['wc_progressive_discount_prices'] = [];
+        }
+
+        // Get the base price (original product price before any coupon discounts).
+        $base_price = 0;
+        if ( is_array( $cart_item ) ) {
+            // For cart items, use line_subtotal (price before discounts) if available
+            if ( isset( $cart_item['line_subtotal'] ) && isset( $cart_item['quantity'] ) && $cart_item['quantity'] > 0 ) {
+                $base_price = (float) $cart_item['line_subtotal'] / (float) $cart_item['quantity'];
+            } elseif ( isset( $cart_item['data'] ) && is_callable( [ $cart_item['data'], 'get_price' ] ) ) {
+                $base_price = (float) $cart_item['data']->get_price();
+            }
+        } elseif ( $cart_item instanceof WC_Order_Item ) {
+            $product = $cart_item->get_product();
+            if ( $product ) {
+                $base_price = (float) $product->get_price();
+            }
+        }
+
+        // Fallback to discounting_amount if base_price is 0
+        if ( $base_price <= 0 ) {
+            $base_price = (float) $discounting_amount;
+        }
+
+        // Get current coupon code
+        $coupon_code = $coupon->get_code();
+
+        // Initialize price tracking for this item if not exists - use base price
+        if ( ! isset( $GLOBALS['wc_progressive_discount_prices'][ $item_key ] ) ) {
+            $GLOBALS['wc_progressive_discount_prices'][ $item_key ] = $base_price;
+        }
+
+        // Get the order of coupons to determine which ones were applied before this one
+        $current_coupon_index = false;
+        if ( ! empty( $GLOBALS['wc_applied_coupons_order'] ) ) {
+            $current_coupon_index = array_search( $coupon_code, $GLOBALS['wc_applied_coupons_order'] );
+        }
+
+        // Determine current price based on coupon order
+        if ( $current_coupon_index === false ) {
+            // Coupon order unknown - use tracked price (may not be accurate)
+            $current_price = $GLOBALS['wc_progressive_discount_prices'][ $item_key ];
+        } elseif ( $current_coupon_index === 0 ) {
+            // This is the first coupon - use base price
+            $current_price = $base_price;
+            $GLOBALS['wc_progressive_discount_prices'][ $item_key ] = $base_price;
+        } else {
+            // There are previous coupons - recalculate price from base considering all previous coupons
+            $current_price = $base_price;
+
+            // Apply all previous coupons in order
+            for ( $i = 0; $i < $current_coupon_index; $i++ ) {
+                $prev_coupon_code = $GLOBALS['wc_applied_coupons_order'][ $i ];
+                $prev_coupon = new WC_Coupon( $prev_coupon_code );
+
+                if ( $prev_coupon->get_id() ) {
+                    $prev_coupon_type = $prev_coupon->get_discount_type();
+                    $prev_discount = 0;
+
+                    if ( in_array( $prev_coupon_type, [ 'percent', 'percent_product' ] ) ) {
+                        $prev_percent = (float) $prev_coupon->get_amount();
+                        $prev_discount = $current_price * ( $prev_percent / 100 );
+                    } elseif ( $prev_coupon_type === 'fixed_product' ) {
+                        $prev_fixed = (float) $prev_coupon->get_amount();
+                        $prev_discount = min( $prev_fixed, $current_price );
+                    } elseif ( $prev_coupon_type === 'fixed_cart' ) {
+                        // For fixed_cart, we need to calculate proportionally
+                        $prev_fixed = (float) $prev_coupon->get_amount();
+                        $cart_subtotal = isset( $GLOBALS['wc_progressive_cart_subtotal'] ) && $GLOBALS['wc_progressive_cart_subtotal'] > 0
+                            ? $GLOBALS['wc_progressive_cart_subtotal']
+                            : ( WC()->cart ? (float) WC()->cart->get_subtotal() : $base_price );
+                        if ( $cart_subtotal > 0 ) {
+                            $prev_discount = ( $current_price / $cart_subtotal ) * $prev_fixed;
+                        }
+                    }
+
+                    $current_price = max( 0, $current_price - $prev_discount );
+                }
+            }
+
+            // Update tracked price
+            $GLOBALS['wc_progressive_discount_prices'][ $item_key ] = $current_price;
+        }
+
+        // Recalculate discount based on coupon type using the current discounted price.
+        $coupon_type = $coupon->get_discount_type();
+
+        switch ( $coupon_type ) {
+            case 'percent':
+            case 'percent_product':
+                // Percentage discounts: calculate from current discounted price.
+                $percent  = (float) $coupon->get_amount();
+                $discount = $current_price * ( $percent / 100 );
+                break;
+
+            case 'fixed_cart':
+                // Fixed cart discount: distribute proportionally based on current discounted cart total.
+                if ( WC()->cart ) {
+                    // Use progressive cart subtotal if available, otherwise use current subtotal
+                    $cart_subtotal = isset( $GLOBALS['wc_progressive_cart_subtotal'] ) && $GLOBALS['wc_progressive_cart_subtotal'] > 0
+                        ? $GLOBALS['wc_progressive_cart_subtotal']
+                        : (float) WC()->cart->get_subtotal();
+
+                    if ( $cart_subtotal > 0 ) {
+                        $fixed_amount = (float) $coupon->get_amount();
+                        // Distribute the fixed discount proportionally based on item's share of cart.
+                        // Use current_price (already discounted) for proportional distribution
+                        $discount = ( $current_price / $cart_subtotal ) * $fixed_amount;
+
+                        // Update progressive cart subtotal after this discount
+                        $GLOBALS['wc_progressive_cart_subtotal'] = max( 0, $cart_subtotal - $fixed_amount );
+                    } else {
+                        $discount = min( $discount, $current_price );
+                    }
+                } else {
+                    // Fallback: cap at current price.
+                    $discount = min( $discount, $current_price );
+                }
+                break;
+
+            case 'fixed_product':
+                // Fixed product discount: apply fixed amount, cap at current price.
+                $fixed_amount = (float) $coupon->get_amount();
+                $discount     = min( $fixed_amount, $current_price );
+                break;
+
+            default:
+                // For other coupon types, ensure discount doesn't exceed current price.
+                $discount = min( $discount, $current_price );
+                break;
+        }
+
+        // Update tracked price: subtract this discount from current price.
+        $GLOBALS['wc_progressive_discount_prices'][ $item_key ] = max( 0, $current_price - $discount );
+
+        return $discount;
+    },
+    10,
+    5
+);
+
+/**
+ * Calculate progressive discounts for an order
+ * Each coupon applies to the already-discounted amount
+ *
+ * @param WC_Order $order The order object
+ * @return array Array of coupon codes => discount amounts
+ */
+function calculate_progressive_order_discounts($order) {
+  $coupons = $order->get_coupon_codes();
+
+  if (empty($coupons)) {
+    return [];
+  }
+
+  // Get base subtotal (before any discounts)
+  $current_amount = (float) $order->get_subtotal();
+  $discounts = [];
+
+  // Apply each coupon progressively
+  foreach ($coupons as $code) {
+    $coupon = new WC_Coupon($code);
+
+    if (!$coupon->get_id()) {
+      continue;
+    }
+
+    $coupon_type = $coupon->get_discount_type();
+    $discount_amount = 0;
+
+    switch ($coupon_type) {
+      case 'percent':
+      case 'percent_product':
+        // Percentage discount: calculate from current discounted amount
+        $percent = (float) $coupon->get_amount();
+        $discount_amount = $current_amount * ($percent / 100);
+        break;
+
+      case 'fixed_cart':
+        // Fixed cart discount: apply fixed amount
+        $fixed_amount = (float) $coupon->get_amount();
+        $discount_amount = min($fixed_amount, $current_amount);
+        break;
+
+      case 'fixed_product':
+        // Fixed product discount: apply fixed amount per product
+        // For orders, we need to calculate proportionally
+        $fixed_amount = (float) $coupon->get_amount();
+        $subtotal = (float) $order->get_subtotal();
+
+        if ($subtotal > 0) {
+          // Distribute proportionally based on current amount
+          $discount_amount = ($current_amount / $subtotal) * $fixed_amount;
+        } else {
+          $discount_amount = min($fixed_amount, $current_amount);
+        }
+        break;
+
+      default:
+        // For other types, try to get from order item
+        foreach ($order->get_items('coupon') as $item) {
+          if (strtolower($item->get_code()) === strtolower($code)) {
+            $discount_amount = (float) $item->get_discount();
+            break;
+          }
+        }
+        // Cap at current amount
+        $discount_amount = min($discount_amount, $current_amount);
+        break;
+    }
+
+    // Update current amount after this discount
+    $current_amount = max(0, $current_amount - $discount_amount);
+
+    // Store discount for this coupon
+    $discounts[$code] = $discount_amount;
+  }
+
+  return $discounts;
+}
+
+/**
+ * Get coupon label from multiple sources
+ *
+ * @param WC_Coupon $coupon The coupon object
+ * @param string $code The coupon code
+ * @return string The coupon label
+ */
+function get_coupon_label($coupon, $code) {
+  $coupon_label = '';
+
+  // 1. Try coupon description
+  $coupon_label = $coupon->get_description();
+
+  // 2. Check coupon post title
+  if (empty($coupon_label)) {
+    $coupon_id = $coupon->get_id();
+    if ($coupon_id) {
+      $post_title = get_the_title($coupon_id);
+      if (!empty($post_title) && $post_title !== $code) {
+        $coupon_label = $post_title;
+      }
+    }
+  }
+
+  // 3. Fallback to coupon code
+  if (empty($coupon_label)) {
+    $coupon_label = $code;
+  }
+
+  return $coupon_label;
+}
+
+/**
+ * Modify discount row to show individual coupon labels on order-pay page
+ * Recalculate discounts progressively instead of using saved values
+ */
+add_filter('woocommerce_get_order_item_totals', function($total_rows, $order, $tax_display) {
+  // Only modify on order-pay page
+  if (!is_wc_endpoint_url('order-pay')) {
+    return $total_rows;
+  }
+
+  // Check if discount row exists
+  if (!isset($total_rows['discount'])) {
+    return $total_rows;
+  }
+
+  $coupons = $order->get_coupon_codes();
+
+  if (empty($coupons)) {
+    return $total_rows;
+  }
+
+  // Recalculate discounts progressively
+  $discounts = calculate_progressive_order_discounts($order);
+
+  // Build custom discount display with coupon labels
+  $discount_html = '';
+
+  foreach ($coupons as $code) {
+    $coupon = new WC_Coupon($code);
+
+    if (!$coupon->get_id()) {
+      continue;
+    }
+
+    // Get coupon label
+    $coupon_label = get_coupon_label($coupon, $code);
+
+    // Get recalculated discount amount
+    $discount_amount = isset($discounts[$code]) ? $discounts[$code] : 0;
+
+    // Add coupon line
+    $discount_html .= '<div class="discount-line">';
+    $discount_html .= '<strong>' . esc_html($coupon_label) . '</strong>';
+    $discount_html .= ' – ' . wc_price($discount_amount);
+    $discount_html .= '</div>';
+  }
+
+  // Replace discount value with our custom HTML
+  $total_rows['discount']['value'] = $discount_html;
+
+  return $total_rows;
+}, 10, 3);
+
+/**
+ * Get the amount of a specific coupon for an order
+ */
+function wc_get_coupon_discount_amount($order, $coupon)
+{
+  $discount = 0;
+
+  foreach ($order->get_items('coupon') as $item) {
+    if (strtolower($item->get_code()) === strtolower($coupon->get_code())) {
+      $discount += $item->get_discount();
+    }
+  }
+
+  return $discount;
+}
 
 

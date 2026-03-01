@@ -31,7 +31,7 @@ $is_dashboard = get_the_ID() === $dashboard_page_id;
     <h1 class="customer-title">
       <?php
         $dashbord_name = __('דשבורד', 'giovanni');
-        echo $is_dashboard ? $dashbord_name : get_the_title();
+        echo $is_dashboard ? esc_html($dashbord_name) : esc_html(get_the_title());
       ?>
     </h1>
   </div>

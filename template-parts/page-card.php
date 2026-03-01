@@ -1,5 +1,6 @@
 <?php
 $id = $args['id'];
+$image = get_field('background_image', $id);
 ?>
 
 <li class="page-item">
@@ -10,7 +11,6 @@ $id = $args['id'];
       </div>
     <?php else: ?>
       <?php
-        $image = get_field('background_image', $id);
         $data = [
           'thumb' => [400, 400],
           'args' => [

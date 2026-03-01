@@ -16,14 +16,14 @@
 
     <<?= esc_html($heading_tag) ?> class="paragraph-title"><?= esc_html($block['title']) ?></<?= esc_html($heading_tag) ?>>
 
-    <div class="paragraph-text"><?= $block['text'] ?></div>
+    <div class="paragraph-text"><?php echo wp_kses_post($block['text']); ?></div>
 
     <?php if ($block['link']) : ?>
       <div class="button-animation-effect paragraph-link">
-        <a href="<?php echo $block['link'] ?>" class="btn btn-hover">
+        <a href="<?php echo esc_url($block['link']); ?>" class="btn btn-hover">
           <div class="animation-label-container">
-            <p class="cta-text"><?php echo $block['link_label'] ?></p>
-            <p aria-hidden="true" class="cta-text animation-label-text"><?php echo $block['link_label'] ?></p>
+            <p class="cta-text"><?php echo esc_html($block['link_label']); ?></p>
+            <p aria-hidden="true" class="cta-text animation-label-text"><?php echo esc_html($block['link_label']); ?></p>
           </div>
         </a>
       </div>

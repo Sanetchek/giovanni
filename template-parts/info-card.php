@@ -2,7 +2,7 @@
   $group = $args['group'];
 ?>
 
-<div class="product-info-item" data-page="<?= $group['page_id'] ?>">
+<div class="product-info-item" data-page="<?php echo esc_attr($group['page_id']); ?>">
   <div class="product-info-shadow">
     <svg width="579" height="270" viewBox="0 0 579 270" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g filter="url(#filter0_f_79_2102)">
@@ -19,18 +19,18 @@
   </div>
 
   <div class="product-info-content">
-    <svg class='icon-<?= $group['icon'] ?>' width='24' height='24'>
+    <svg class='icon-<?php echo esc_attr($group['icon']); ?>' width='24' height='24'>
       <use href='<?= assets('img/sprite.svg#icon-' . $group['icon']) ?>'></use>
     </svg>
 
-    <h2 class="product-info-title"><?= $group['title'] ?></h2>
+    <h2 class="product-info-title"><?php echo esc_html($group['title']); ?></h2>
 
     <?php if ($group['link']) : ?>
       <div class="button-animation-effect">
-        <a href="<?php echo $group['link'] ?>" class="btn btn-hover">
+        <a href="<?php echo esc_url($group['link']); ?>" class="btn btn-hover">
           <div class="animation-label-container">
-            <p class="cta-text"><?php echo $group['link_label'] ?></p>
-            <p aria-hidden="true" class="cta-text animation-label-text"><?php echo $group['link_label'] ?></p>
+            <p class="cta-text"><?php echo esc_html($group['link_label']); ?></p>
+            <p aria-hidden="true" class="cta-text animation-label-text"><?php echo esc_html($group['link_label']); ?></p>
           </div>
         </a>
       </div>

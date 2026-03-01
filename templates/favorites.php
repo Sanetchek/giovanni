@@ -35,7 +35,7 @@ defined( 'ABSPATH' ) || exit; ?>
       <div class="entry-content">
         <div class="profile-container">
           <?php $reverse = !is_user_logged_in() ? 'profile-container--reverse' : '' ?>
-          <div class="woocommerce <?php echo $reverse ?>">
+          <div class="woocommerce <?php echo esc_attr($reverse); ?>">
             <?php if (is_user_logged_in()) : ?>
               <?php do_action( 'woocommerce_account_navigation' ); ?>
             <?php else : ?>
@@ -43,16 +43,16 @@ defined( 'ABSPATH' ) || exit; ?>
                 <?php $group = get_field('section_not_registered_users') ?>
                 <?php if ($group) : ?>
                   <div class="my-account_sidebar--menu">
-                    <h3 class="sidebar-empty-title"><?= $group['title'] ?></h3>
+                    <h3 class="sidebar-empty-title"><?php echo esc_html($group['title']); ?></h3>
                     <?php if ($group['list']) : ?>
                       <ul class="wishlist-create-account--description-empty">
                         <?php foreach ($group['list'] as $item) : ?>
-                          <li><div class="disc"></div><p class="disc-list"><?= $item['text'] ?></p></li>
+                          <li><div class="disc"></div><p class="disc-list"><?php echo esc_html($item['text']); ?></p></li>
                         <?php endforeach ?>
                       </ul>
                     <?php endif ?>
 
-                    <a class="button-wishlist button-hover" href="/my-account" role="button" tabindex="-1"><?= $group['link_label'] ?></a>
+                    <a class="button-wishlist button-hover" href="/my-account" role="button" tabindex="-1"><?php echo esc_html($group['link_label']); ?></a>
                   </div>
                 <?php endif ?>
               </nav>

@@ -35,6 +35,7 @@
 
       var data = {
         action: 'woocommerce_ajax_add_to_cart',
+        nonce: window.giovanni && window.giovanni.add_to_cart_nonce ? window.giovanni.add_to_cart_nonce : '',
         product_id: product_id,
         product_sku: '',
         quantity: product_qty,

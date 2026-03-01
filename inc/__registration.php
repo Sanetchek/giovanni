@@ -18,6 +18,11 @@ function handle_user_registration() {
     wp_send_json_error(['message' => __('הסיסמאות אינן תואמות.', 'giovanni')]);
   }
 
+  $password = $formData['password'];
+  if (strlen($password) < 8) {
+    wp_send_json_error(['message' => __('הסיסמה חייבת להכיל לפחות 8 תווים.', 'giovanni')]);
+  }
+
   // Automatically set username as the first part of the email
   $email = sanitize_email($formData['email']);
   if (empty($email)) {
@@ -46,7 +51,7 @@ function handle_user_registration() {
     'first_name'  => sanitize_text_field($formData['first_name']),
     'last_name'   => sanitize_text_field($formData['last_name']),
     'user_email'  => $email,
-    'user_pass'   => $formData['password'],
+    'user_pass'   => $password,
     'role'        => 'customer',
   ]);
 

@@ -440,11 +440,11 @@ function show_logo($image, $text) {
 				$logo = get_field($text, 'option');
 
 				if ($logo['name']) :
-					echo $logo['name'];
+					echo esc_html($logo['name']);
 				endif;
 
 				if ($logo['label']) : ?>
-					<span class="branding-label"><?= $logo['label'] ?></span>
+					<span class="branding-label"><?php echo esc_html($logo['label']); ?></span>
 				<?php endif;
 			endif;
 		?>
@@ -620,7 +620,7 @@ function show_customer_service_content($content) {
 				break;
 			case 'text_content':
 				echo '<div class="customer-content">';
-				echo $block['content'];
+				echo wp_kses_post($block['content']);
 				echo '</div>';
 				break;
 			case 'image':

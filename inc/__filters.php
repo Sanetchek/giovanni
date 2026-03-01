@@ -50,12 +50,14 @@ function build_query_args($search_query = '') {
     foreach ($_GET as $key => $value) {
       if (strpos($key, 'filter_') === 0 && !empty($value)) {
         $taxonomy = str_replace('filter_', '', $key);
-        $args['tax_query'][] = [
-          'taxonomy' => $taxonomy,
-          'field'    => 'slug',
-          'terms'    => explode(',', sanitize_text_field($value)),
-          'operator' => 'IN',
-        ];
+        if (taxonomy_exists($taxonomy)) {
+          $args['tax_query'][] = [
+            'taxonomy' => $taxonomy,
+            'field'    => 'slug',
+            'terms'    => explode(',', sanitize_text_field($value)),
+            'operator' => 'IN',
+          ];
+        }
       }
     }
   }
@@ -207,7 +209,7 @@ function display_sort_options() {
   echo '<span class="filter-sort-text">' . __('המלצות', 'giovanni') . '</span>';
   echo '<svg class="icon-chevron-down" width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 16"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 13.293l3.646-3.647.707.708L6 14.707l-4.354-4.353.708-.708L6 13.293zM6 2.707L2.354 6.354l-.708-.708L6 1.293l4.354 4.353-.708.708L6 2.707z" fill="black"/></svg>';
   echo '</button>';
-  echo '<input type="hidden" name="sort" class="sort-filter-input" id="sort" value="popularity">';
+  echo '<input type="hidden" name="sort" class="sort-filter-input" id="sort" value="rand">';
   echo '<div class="filter-dropdown"><ul>';
   $sort_options = [
     'menu_order' => __('מומלץ', 'giovanni'),
@@ -255,8 +257,8 @@ add_action('wp_ajax_nopriv_load_more_products', 'load_more_products');
 function handle_filter_products() {
   check_ajax_referer('giovanni_product_filter_nonce', 'nonce');
 
-  $category_id = isset($_POST['category_id']) ? $_POST['category_id'] : false;
-  $decoded_data = urldecode($_POST['formData']);
+  $category_id = isset($_POST['category_id']) ? intval($_POST['category_id']) : false;
+  $decoded_data = isset($_POST['formData']) ? urldecode($_POST['formData']) : '';
   parse_str($decoded_data, $form_data);
 
   // Build query arguments
@@ -318,39 +320,43 @@ function build_product_query_args($form_data = [], $paged = 1, $category_id = fa
   }
 
   // Sorting options
-  if (!empty($form_data['sort'])) {
-    switch ($form_data['sort']) {
-      case 'popularity':
-        $args['meta_key'] = 'total_sales'; // Required for popularity sorting
-        $args['orderby']  = array(
-          'meta_value_num' => 'DESC', // Sort by total_sales
-          'ID'             => 'ASC',  // Tie-breaker: by post ID
-        );
-        break;
-      case 'rating':
-        $args['orderby']  = 'meta_value_num';
-        $args['meta_key'] = '_wc_average_rating';
-        $args['order']    = 'DESC';
-        break;
-      case 'date':
-        $args['orderby'] = 'date';
-        $args['order']   = 'DESC';
-        break;
-      case 'price':
-        $args['orderby']  = 'meta_value_num';
-        $args['meta_key'] = '_price';
-        $args['order']    = 'ASC';
-        break;
-      case 'price-desc':
-        $args['orderby']  = 'meta_value_num';
-        $args['meta_key'] = '_price';
-        $args['order']    = 'DESC';
-        break;
-      default:
-        $args['orderby'] = 'menu_order';
-        $args['order']   = 'ASC';
-        break;
-    }
+  $sort = !empty($form_data['sort']) ? sanitize_text_field($form_data['sort']) : 'rand';
+
+  switch ($sort) {
+    case 'popularity':
+      $args['meta_key'] = 'total_sales'; // Required for popularity sorting
+      $args['orderby']  = array(
+        'meta_value_num' => 'DESC', // Sort by total_sales
+        'ID'             => 'ASC',  // Tie-breaker: by post ID
+      );
+      break;
+    case 'rating':
+      $args['orderby']  = 'meta_value_num';
+      $args['meta_key'] = '_wc_average_rating';
+      $args['order']    = 'DESC';
+      break;
+    case 'date':
+      $args['orderby'] = 'date';
+      $args['order']   = 'DESC';
+      break;
+    case 'price':
+      $args['orderby']  = 'meta_value_num';
+      $args['meta_key'] = '_price';
+      $args['order']    = 'ASC';
+      break;
+    case 'price-desc':
+      $args['orderby']  = 'meta_value_num';
+      $args['meta_key'] = '_price';
+      $args['order']    = 'DESC';
+      break;
+    case 'menu_order':
+      $args['orderby'] = 'menu_order';
+      $args['order']   = 'ASC';
+      break;
+    case 'rand':
+    default:
+      $args['orderby'] = 'rand';
+      break;
   }
 
   // Handle attribute filtering

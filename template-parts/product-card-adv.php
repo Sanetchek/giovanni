@@ -10,7 +10,7 @@
 
 <li class="product-card-big banner">
 <?php if ($image) : ?>
-  <a href="<?php echo $link ?>" class="adv-link">
+  <a href="<?php echo esc_url($link); ?>" class="adv-link">
     <?php
     $data = [
       'thumb' => [745, 516],
@@ -22,8 +22,8 @@
     ?>
 
     <div class="adv-info">
-      <h2 class="adv-title <?= $white_text ?>"><?php echo esc_html($title); ?></h2>
-      <button type="button" class="adv-link-label <?= $white_text ?>"><?= $label ?></button>
+      <h2 class="adv-title <?php echo esc_attr($white_text); ?>"><?php echo esc_html($title); ?></h2>
+      <button type="button" class="adv-link-label <?php echo esc_attr($white_text); ?>"><?php echo esc_html($label); ?></button>
     </div>
   </a>
   <?php else: ?>

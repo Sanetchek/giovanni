@@ -246,6 +246,7 @@ function giovanni_scripts() {
 		'product_info_nonce' => wp_create_nonce('giovanni_product_info_nonce'),
 		'registration_nonce'   => wp_create_nonce('register_nonce'),
 		'gift_nonce' => wp_create_nonce('add_gift_card_action'),
+		'add_to_cart_nonce' => wp_create_nonce('giovanni_add_to_cart'),
 		'current_category_id' => $category_id, // Include current category ID if on a product category page
 	]);
 

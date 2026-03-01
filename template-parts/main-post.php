@@ -8,11 +8,11 @@
 ?>
 
 <?php if ($item) : ?>
-  <div class="main-posts-art <?php echo $class ?>">
+  <div class="main-posts-art <?php echo esc_attr($class); ?>">
     <?php if ($image) : ?>
         <div class="main-posts-picture">
           <?php if ($link_for_image && $item['link']) : ?>
-            <a href="<?php echo $item['link'] ?>" class="link-for-image">
+            <a href="<?php echo esc_url($item['link']); ?>" class="link-for-image">
           <?php endif ?>
 
           <?php
@@ -40,15 +40,15 @@
     <div class="main-posts-content">
       <div class="main-posts-container">
         <div class="main-posts-wrap">
-          <h2><?php echo $item['title']; ?></h2>
-          <p><?php echo $item['description']; ?></p>
+          <h2><?php echo esc_html($item['title']); ?></h2>
+          <p><?php echo esc_html($item['description']); ?></p>
 
           <?php if ($item['link']) : ?>
             <div class="button-animation-effect">
-              <a href="<?php echo $item['link'] ?>" class="btn btn-hover">
+              <a href="<?php echo esc_url($item['link']); ?>" class="btn btn-hover">
                 <div class="animation-label-container">
-                  <p class="cta-text"><?php echo $item['link_label'] ?></p>
-                  <p aria-hidden="true" class="cta-text animation-label-text"><?php echo $item['link_label'] ?></p>
+                  <p class="cta-text"><?php echo esc_html($item['link_label']); ?></p>
+                  <p aria-hidden="true" class="cta-text animation-label-text"><?php echo esc_html($item['link_label']); ?></p>
                 </div>
               </a>
             </div>

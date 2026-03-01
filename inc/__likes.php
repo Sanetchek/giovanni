@@ -19,11 +19,11 @@ function processSimpleLike()
   $field_user_ip = '_user_ip';
 
   // Base variables
-  $post_id = $_POST["post"];
+  $post_id = isset($_POST['post']) ? absint($_POST['post']) : 0;
   $heart = get_unliked_icon();
   $was_liked = 'removed';
 
-  if ($post_id != '') {
+  if ($post_id > 0) {
     $count = get_field($field_count, $post_id); // like count
     $count = intval($count);
     $count = ( isset($count) && is_numeric($count) ) ? $count : 0;
