@@ -3,42 +3,112 @@
 (function ($) {
   const ajax_url = window.giovanni.ajax_url;
 
-  // Infinite Scroll for Products Loop
-  if ($('#page-loader').length) {
-    var canBeLoaded = true,
-      bottomOffset = 2500;
+  /**
+   * Get already displayed product IDs from current DOM.
+   */
+  function getShownProductIds() {
+    return $('.product-card[data-id]').map(function () {
+      return String($(this).attr('data-id'));
+    }).get();
+  }
 
-    $(window).scroll(function () {
+  /**
+   * Remove duplicated products from the whole current product list.
+   * This is final frontend protection after append.
+   */
+  function normalizeProductList() {
+    const seenIds = new Set();
+
+    $('#product-list .product-card[data-id]').each(function () {
+      const productId = String($(this).attr('data-id'));
+
+      if (seenIds.has(productId)) {
+        $(this).remove();
+        return;
+      }
+
+      seenIds.add(productId);
+    });
+  }
+
+  /**
+   * Remove duplicate product cards from AJAX response before append.
+   *
+   * It removes:
+   * 1. Products already visible on the page.
+   * 2. Products duplicated inside the same AJAX response.
+   */
+  function removeDuplicateProductsFromResponse(response) {
+    const shownIds = new Set(getShownProductIds());
+    const responseIds = new Set();
+    const $response = $('<div>').html(response);
+
+    $response.find('.product-card[data-id]').each(function () {
+      const productId = String($(this).attr('data-id'));
+
+      if (shownIds.has(productId) || responseIds.has(productId)) {
+        $(this).remove();
+        return;
+      }
+
+      responseIds.add(productId);
+    });
+
+    return $response.html();
+  }
+
+  /**
+   * Infinite Scroll for Products Loop
+   */
+  if ($('#page-loader').length) {
+    var canBeLoaded = true;
+    var bottomOffset = 2500;
+
+    $(window).on('scroll', function () {
       if (
         $(document).scrollTop() > $(document).height() - bottomOffset &&
         canBeLoaded &&
-        giovanni.current_page < giovanni.max_page
+        window.giovanni.current_page < window.giovanni.max_page
       ) {
         canBeLoaded = false;
+
+        var shownIds = getShownProductIds();
+
         var data = {
           action: 'load_more_products',
-          page: giovanni.current_page,
+          page: window.giovanni.current_page,
           formData: $('#product-filters').serialize(),
-          category_id: giovanni.current_category_id || '',
-          nonce: giovanni.product_filter_nonce
+          category_id: window.giovanni.current_category_id || '',
+          shown_ids: shownIds,
+          nonce: window.giovanni.product_filter_nonce
         };
 
         $.ajax({
           url: ajax_url,
           data: data,
           type: 'POST',
+
           beforeSend: function () {
             canBeLoaded = false;
             $('#page-loader').removeClass('hidden');
           },
+
           success: function (response) {
-            $('#product-list').append(response);
-            giovanni.current_page++;
+            var cleanResponse = removeDuplicateProductsFromResponse(response);
+
+            if ($.trim(cleanResponse).length) {
+              $('#product-list').append(cleanResponse);
+              normalizeProductList();
+            }
+
+            window.giovanni.current_page++;
             canBeLoaded = true;
             $('#page-loader').addClass('hidden');
           },
+
           error: function () {
-            $('#page-loader').addClass('hidden'); // Hide loader on error as well
+            canBeLoaded = true;
+            $('#page-loader').addClass('hidden');
           }
         });
       }
@@ -46,18 +116,19 @@
   }
 
   /**
-   *  Show Archive Text
+   * Show Archive Text
    */
   $('#show-archive-text').on('click', function () {
     $('.archive-text-container').css({
-      'height': 'auto',
-      'overflow': 'visible'
+      height: 'auto',
+      overflow: 'visible'
     });
+
     $(this).hide();
   });
 
   /**
-   *  Slider Category Boxes
+   * Slider Category Boxes
    */
   $('.slick-slider-boxes').slick({
     slidesToShow: 6,
@@ -91,21 +162,44 @@
 
 }(jQuery));
 
+
+
 function checkIds() {
+
+
   const idCounts = {};
   const allIds = [];
-  const $cards = jQuery('.product-card');
+  const $cards = jQuery('.product-card[data-id]');
 
   $cards.each(function () {
-    const id = jQuery(this).attr('data-id');
+    const id = String(jQuery(this).attr('data-id'));
+
     if (id) {
       allIds.push(id);
       idCounts[id] = (idCounts[id] || 0) + 1;
     }
   });
 
-  const duplicateIds = Object.keys(idCounts).filter(id => idCounts[id] > 1);
+  const duplicateIds = Object.keys(idCounts).filter(function (id) {
+    return idCounts[id] > 1;
+  });
 
+  console.log('Total product cards:', allIds.length);
+  console.log('Unique product ids:', Object.keys(idCounts).length);
   console.log('All product ids:', allIds);
-  console.log('Duplicate product ids:', duplicateIds.length ? duplicateIds : 'No duplicates found.');
+  console.log('test:');
+
+
+  if (duplicateIds.length) {
+    console.table(
+      duplicateIds.map(function (id) {
+        return {
+          id: id,
+          count: idCounts[id]
+        };
+      })
+    );
+  } else {
+    console.log('Duplicate product ids: No duplicates found.');
+  }
 }

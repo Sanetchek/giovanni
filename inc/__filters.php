@@ -201,50 +201,69 @@ function display_filter_options($attribute_name, $attribute_data) {
 /**
  * Display sorting options in the filter form.
  */
-function display_sort_options() {
-  echo '<div class="filter-side">';
-  echo '<div class="filter-wrap filter-sort">';
-  echo '<span class="filter-label">' . __('מיין לפי', 'giovanni') . '</span>';
-  echo '<button type="button" class="btn btn-no-border btn-filter btn-filter-sort">';
-  echo '<span class="filter-sort-text">' . __('המלצות', 'giovanni') . '</span>';
-  echo '<svg class="icon-chevron-down" width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 16"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 13.293l3.646-3.647.707.708L6 14.707l-4.354-4.353.708-.708L6 13.293zM6 2.707L2.354 6.354l-.708-.708L6 1.293l4.354 4.353-.708.708L6 2.707z" fill="black"/></svg>';
-  echo '</button>';
-  echo '<input type="hidden" name="sort" class="sort-filter-input" id="sort" value="rand">';
-  echo '<div class="filter-dropdown"><ul>';
-  $sort_options = [
-    'menu_order' => __('מומלץ', 'giovanni'),
-    'date'       => __('חדשים ביותר', 'giovanni'),
-    'price'      => __('מחיר: מהנמוך לגבוה', 'giovanni'),
-    'price-desc' => __('מחיר: מהגבוה לנמוך', 'giovanni'),
-  ];
-  foreach ($sort_options as $value => $label) {
-    echo '<li><button type="button" data-sort="' . esc_attr($value) . '" class="filter-sort-item">' . esc_html($label) . '</button></li>';
-  }
-  echo '</ul></div></div></div>';
-}
+ function display_sort_options() {
+   echo '<div class="filter-side">';
+   echo '<div class="filter-wrap filter-sort">';
+   echo '<span class="filter-label">' . __('מיין לפי', 'giovanni') . '</span>';
+
+   echo '<button type="button" class="btn btn-no-border btn-filter btn-filter-sort">';
+   echo '<span class="filter-sort-text">' . __('המלצות', 'giovanni') . '</span>';
+   echo '<svg class="icon-chevron-down" width="16" height="16" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 16"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 13.293l3.646-3.647.707.708L6 14.707l-4.354-4.353.708-.708L6 13.293zM6 2.707L2.354 6.354l-.708-.708L6 1.293l4.354 4.353-.708.708L6 2.707z" fill="black"/></svg>';
+   echo '</button>';
+
+   // IMPORTANT:
+   // Do not use "rand" as default sort with Ajax load more,
+   // because it can return duplicate products on each request.
+   echo '<input type="hidden" name="sort" class="sort-filter-input" id="sort" value="menu_order">';
+
+   echo '<div class="filter-dropdown"><ul>';
+
+   $sort_options = [
+     'menu_order' => __('מומלץ', 'giovanni'),
+     'date'       => __('חדשים ביותר', 'giovanni'),
+     'price'      => __('מחיר: מהנמוך לגבוה', 'giovanni'),
+     'price-desc' => __('מחיר: מהגבוה לנמוך', 'giovanni'),
+   ];
+
+   foreach ($sort_options as $value => $label) {
+     echo '<li><button type="button" data-sort="' . esc_attr($value) . '" class="filter-sort-item">' . esc_html($label) . '</button></li>';
+   }
+
+   echo '</ul></div></div></div>';
+ }
 
 /**
  * AJAX Callback for Loading More Products
  *
  * @return void
  */
-function load_more_products() {
-  check_ajax_referer('giovanni_product_filter_nonce', 'nonce');
+ function load_more_products() {
+   check_ajax_referer('giovanni_product_filter_nonce', 'nonce');
 
-  $paged = isset($_POST['page']) ? absint($_POST['page']) + 1 : 1;
-  error_log("Loading products for page: " . $paged); // Debugging
+   $category_id = isset($_POST['category_id']) ? intval($_POST['category_id']) : false;
+   $decoded_data = isset($_POST['formData']) ? urldecode($_POST['formData']) : '';
+   parse_str($decoded_data, $form_data);
 
-  $category_id = isset($_POST['category_id']) ? intval($_POST['category_id']) : false;
-  $decoded_data = isset($_POST['formData']) ? urldecode($_POST['formData']) : '';
-  parse_str($decoded_data, $form_data);
+   $shown_ids = [];
 
-  // Build query arguments
-  $args  = build_product_query_args($form_data, $paged, $category_id);
-  $query = new WP_Query($args);
+   if (!empty($_POST['shown_ids']) && is_array($_POST['shown_ids'])) {
+     $shown_ids = array_map('absint', $_POST['shown_ids']);
+   }
 
-  display_products($query);
-  wp_die();
-}
+   $args = build_product_query_args($form_data, 1, $category_id);
+
+   if (!empty($shown_ids)) {
+     $args['post__not_in'] = array_unique(array_merge(
+       isset($args['post__not_in']) ? (array) $args['post__not_in'] : [],
+       $shown_ids
+     ));
+   }
+
+   $query = new WP_Query($args);
+
+   display_products($query);
+   wp_die();
+ }
 
 add_action('wp_ajax_load_more_products', 'load_more_products');
 add_action('wp_ajax_nopriv_load_more_products', 'load_more_products');
@@ -285,100 +304,134 @@ add_action('wp_ajax_nopriv_filter_products', 'handle_filter_products');
  * @param int   $paged     Current page number for pagination.
  * @return array Query arguments.
  */
-function build_product_query_args($form_data = [], $paged = 1, $category_id = false) {
-  $posts_per_page = !empty($form_data['posts_per_page']) ? absint($form_data['posts_per_page']) : 20;
+ function build_product_query_args($form_data = [], $paged = 1, $category_id = false) {
+   $posts_per_page = !empty($form_data['posts_per_page']) ? absint($form_data['posts_per_page']) : 20;
 
-  // Get the paged parameter from the global query if not provided or invalid
-  if (!$paged) {
-    $paged = get_query_var('paged') ? absint(get_query_var('paged')) : 1;
-  }
+   if (!$paged) {
+     $paged = get_query_var('paged') ? absint(get_query_var('paged')) : 1;
+   }
 
-  $args = [
-    'post_type'      => 'product',
-    'paged'          => max(1, $paged),
-    'posts_per_page' => $posts_per_page,
-    'offset'         => ($paged - 1) * $posts_per_page,
-    'post_status'    => 'publish',
-    'post__not_in'   => array(7935),
-    'tax_query'      => [
-      'relation' => 'AND',
-    ],
-  ];
+   $paged = max(1, absint($paged));
 
-  // Search query
-  if (!empty($form_data['s'])) {
-    $args['s'] = sanitize_text_field($form_data['s']);
-  }
+   $args = [
+     'post_type'      => 'product',
+     'paged'          => $paged,
+     'posts_per_page' => $posts_per_page,
+     'post_status'    => 'publish',
+     'post__not_in'   => [7935],
+     'tax_query'      => [
+       'relation' => 'AND',
+     ],
+   ];
 
-  // Add category filtering
-  if ($category_id) {
-    $args['tax_query'][] = [
-      'taxonomy' => 'product_cat',
-      'field'    => 'term_id',
-      'terms'    => absint($category_id),
-    ];
-  }
+   /**
+    * Search query
+    */
+   if (!empty($form_data['s'])) {
+     $args['s'] = sanitize_text_field($form_data['s']);
+   }
 
-  // Sorting options
-  $sort = !empty($form_data['sort']) ? sanitize_text_field($form_data['sort']) : 'rand';
+   /**
+    * Category filtering
+    */
+   if ($category_id) {
+     $args['tax_query'][] = [
+       'taxonomy' => 'product_cat',
+       'field'    => 'term_id',
+       'terms'    => absint($category_id),
+     ];
+   }
 
-  switch ($sort) {
-    case 'popularity':
-      $args['meta_key'] = 'total_sales'; // Required for popularity sorting
-      $args['orderby']  = array(
-        'meta_value_num' => 'DESC', // Sort by total_sales
-        'ID'             => 'ASC',  // Tie-breaker: by post ID
-      );
-      break;
-    case 'rating':
-      $args['orderby']  = 'meta_value_num';
-      $args['meta_key'] = '_wc_average_rating';
-      $args['order']    = 'DESC';
-      break;
-    case 'date':
-      $args['orderby'] = 'date';
-      $args['order']   = 'DESC';
-      break;
-    case 'price':
-      $args['orderby']  = 'meta_value_num';
-      $args['meta_key'] = '_price';
-      $args['order']    = 'ASC';
-      break;
-    case 'price-desc':
-      $args['orderby']  = 'meta_value_num';
-      $args['meta_key'] = '_price';
-      $args['order']    = 'DESC';
-      break;
-    case 'menu_order':
-      $args['orderby'] = 'menu_order';
-      $args['order']   = 'ASC';
-      break;
-    case 'rand':
-    default:
-      $args['orderby'] = 'rand';
-      break;
-  }
+   /**
+    * Sorting options
+    *
+    * IMPORTANT:
+    * Do not use rand with Ajax pagination/load more.
+    * Random order is recalculated on every request and causes duplicate products.
+    */
+   $sort = !empty($form_data['sort']) ? sanitize_text_field($form_data['sort']) : 'menu_order';
 
-  // Handle attribute filtering
-  $attribute_tax_query = [];
-  foreach ($form_data as $key => $value) {
-    if (strpos($key, 'filter_') === 0 && !empty($value)) {
-      $taxonomy = sanitize_text_field(str_replace('filter_', '', $key));
-      $attribute_tax_query[] = [
-        'taxonomy' => $taxonomy,
-        'field'    => 'slug',
-        'terms'    => is_array($value) ? array_map('sanitize_text_field', $value) : [sanitize_text_field($value)],
-      ];
-    }
-  }
+   switch ($sort) {
+     case 'popularity':
+       $args['meta_key'] = 'total_sales';
+       $args['orderby']  = [
+         'meta_value_num' => 'DESC',
+         'ID'             => 'ASC',
+       ];
+       break;
 
-  // Merge attribute filters into tax_query
-  if (!empty($attribute_tax_query)) {
-    $args['tax_query'] = array_merge($args['tax_query'], $attribute_tax_query);
-  }
+     case 'rating':
+       $args['meta_key'] = '_wc_average_rating';
+       $args['orderby']  = [
+         'meta_value_num' => 'DESC',
+         'ID'             => 'ASC',
+       ];
+       break;
 
-  return $args;
-}
+     case 'date':
+       $args['orderby'] = [
+         'date' => 'DESC',
+         'ID'   => 'DESC',
+       ];
+       break;
+
+     case 'price':
+       $args['meta_key'] = '_price';
+       $args['orderby']  = [
+         'meta_value_num' => 'ASC',
+         'ID'             => 'ASC',
+       ];
+       break;
+
+     case 'price-desc':
+       $args['meta_key'] = '_price';
+       $args['orderby']  = [
+         'meta_value_num' => 'DESC',
+         'ID'             => 'ASC',
+       ];
+       break;
+
+     case 'menu_order':
+     case 'rand':
+     default:
+       /**
+        * rand intentionally falls back to stable sorting.
+        * This prevents duplicate products during Ajax load more.
+        */
+       $args['orderby'] = [
+         'menu_order' => 'ASC',
+         'title'      => 'ASC',
+         'ID'         => 'ASC',
+       ];
+       break;
+   }
+
+   /**
+    * Attribute filtering
+    */
+   $attribute_tax_query = [];
+
+   foreach ($form_data as $key => $value) {
+     if (strpos($key, 'filter_') === 0 && !empty($value)) {
+       $taxonomy = sanitize_text_field(str_replace('filter_', '', $key));
+
+       $attribute_tax_query[] = [
+         'taxonomy' => $taxonomy,
+         'field'    => 'slug',
+         'terms'    => is_array($value)
+           ? array_map('sanitize_text_field', $value)
+           : [sanitize_text_field($value)],
+         'operator' => 'IN',
+       ];
+     }
+   }
+
+   if (!empty($attribute_tax_query)) {
+     $args['tax_query'] = array_merge($args['tax_query'], $attribute_tax_query);
+   }
+
+   return $args;
+ }
 
 
 /**
