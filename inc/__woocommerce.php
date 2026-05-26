@@ -560,27 +560,26 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters('active_plugins', ge
    *
    * @return WP_Query The query object containing the products.
    */
-  function get_paginated_products() {
-    // Determine the current page
-    $paged = get_query_var('paged') ? get_query_var('paged') : 1;
+   function get_paginated_products() {
+     $paged = get_query_var('paged') ? absint(get_query_var('paged')) : 1;
 
-    // For category archives, get the current category ID
-    $category_id = false;
-    if (is_product_category()) {
-      $current_category = get_queried_object();
+     $category_id = false;
 
-      if ($current_category && !is_wp_error($current_category)) {
-        $category_id = $current_category->term_id;
-      }
-    }
+     if (is_product_category()) {
+       $current_category = get_queried_object();
 
-    // Reuse the central query builder to keep sorting consistent with filters/AJAX.
-    $args = build_product_query_args([
-      'sort' => 'rand',
-    ], $paged, $category_id);
+       if ($current_category && !is_wp_error($current_category)) {
+         $category_id = $current_category->term_id;
+       }
+     }
 
-    return new WP_Query($args);
-  }
+     $args = build_product_query_args([
+       'sort'           => 'menu_order',
+       'posts_per_page' => 20,
+     ], $paged, $category_id);
+
+     return new WP_Query($args);
+   }
 
   /**
    * Filters available payment gateways based on the presence of a gift card in the cart.
@@ -1208,5 +1207,3 @@ function wc_get_coupon_discount_amount($order, $coupon)
 
   return $discount;
 }
-
-

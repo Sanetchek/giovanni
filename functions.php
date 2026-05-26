@@ -551,4 +551,3 @@ add_action( 'woocommerce_order_action_send_custom_invoice', function( $order_id 
         $emails['WC_Email_Custom_Invoice']->trigger( $order_id );
     }
 });
-
