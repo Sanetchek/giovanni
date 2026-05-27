@@ -62,13 +62,14 @@
    */
   if ($('#page-loader').length) {
     var canBeLoaded = true;
+    var noMoreProducts = false;
     var bottomOffset = 2500;
 
     $(window).on('scroll', function () {
       if (
         $(document).scrollTop() > $(document).height() - bottomOffset &&
         canBeLoaded &&
-        window.giovanni.current_page < window.giovanni.max_page
+        !noMoreProducts
       ) {
         canBeLoaded = false;
 
@@ -89,21 +90,40 @@
           type: 'POST',
 
           beforeSend: function () {
-            canBeLoaded = false;
             $('#page-loader').removeClass('hidden');
           },
 
           success: function (response) {
-            var cleanResponse = removeDuplicateProductsFromResponse(response);
+            var $rawResponse = $('<div>').html(response);
+            var returnedProductsCount = $rawResponse.find('.product-card[data-id]').length;
 
-            if ($.trim(cleanResponse).length) {
-              $('#product-list').append(cleanResponse);
-              normalizeProductList();
+            if (!returnedProductsCount) {
+              noMoreProducts = true;
+              canBeLoaded = false;
+              $('#page-loader').addClass('hidden');
+
+              return;
             }
+
+            var cleanResponse = removeDuplicateProductsFromResponse(response);
+            cleanResponse = $.trim(cleanResponse);
+
+            if (!cleanResponse.length) {
+              noMoreProducts = true;
+              canBeLoaded = false;
+              $('#page-loader').addClass('hidden');
+
+              return;
+            }
+
+            $('#product-list').append(cleanResponse);
+            normalizeProductList();
 
             window.giovanni.current_page++;
             canBeLoaded = true;
             $('#page-loader').addClass('hidden');
+
+            console.log('Products displayed:', $('#product-list .product-card[data-id]').length);
           },
 
           error: function () {
@@ -162,11 +182,7 @@
 
 }(jQuery));
 
-
-
 function checkIds() {
-
-
   const idCounts = {};
   const allIds = [];
   const $cards = jQuery('.product-card[data-id]');
@@ -184,11 +200,8 @@ function checkIds() {
     return idCounts[id] > 1;
   });
 
-  console.log('Total product cards:', allIds.length);
+  console.log('Products displayed:', allIds.length);
   console.log('Unique product ids:', Object.keys(idCounts).length);
-  console.log('All product ids:', allIds);
-  console.log('test:');
-
 
   if (duplicateIds.length) {
     console.table(
