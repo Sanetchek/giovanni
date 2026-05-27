@@ -240,28 +240,50 @@ function display_filter_options($attribute_name, $attribute_data) {
  function load_more_products() {
    check_ajax_referer('giovanni_product_filter_nonce', 'nonce');
 
-   $category_id = isset($_POST['category_id']) ? intval($_POST['category_id']) : false;
-   $decoded_data = isset($_POST['formData']) ? urldecode($_POST['formData']) : '';
-   parse_str($decoded_data, $form_data);
+   $category_id = isset($_POST['category_id']) ? absint($_POST['category_id']) : false;
+
+   $decoded_data = isset($_POST['formData'])
+     ? urldecode(wp_unslash($_POST['formData']))
+     : '';
+
+   $form_data = [];
+
+   if (!empty($decoded_data)) {
+     parse_str($decoded_data, $form_data);
+   }
 
    $shown_ids = [];
 
    if (!empty($_POST['shown_ids']) && is_array($_POST['shown_ids'])) {
-     $shown_ids = array_map('absint', $_POST['shown_ids']);
+     $shown_ids = array_map('absint', wp_unslash($_POST['shown_ids']));
+     $shown_ids = array_filter($shown_ids);
+     $shown_ids = array_values(array_unique($shown_ids));
    }
 
+   /*
+    * IMPORTANT:
+    * Always use page 1 here because shown_ids already excludes products
+    * that are currently displayed on the page.
+    *
+    * Using $paged together with post__not_in can skip products.
+    */
    $args = build_product_query_args($form_data, 1, $category_id);
 
    if (!empty($shown_ids)) {
-     $args['post__not_in'] = array_unique(array_merge(
+     $args['post__not_in'] = array_values(array_unique(array_merge(
        isset($args['post__not_in']) ? (array) $args['post__not_in'] : [],
        $shown_ids
-     ));
+     )));
    }
+
+   $args['ignore_sticky_posts'] = true;
 
    $query = new WP_Query($args);
 
    display_products($query);
+
+   wp_reset_postdata();
+
    wp_die();
  }
 
@@ -314,15 +336,16 @@ add_action('wp_ajax_nopriv_filter_products', 'handle_filter_products');
    $paged = max(1, absint($paged));
 
    $args = [
-     'post_type'      => 'product',
-     'paged'          => $paged,
-     'posts_per_page' => $posts_per_page,
-     'post_status'    => 'publish',
-     'post__not_in'   => [7935],
-     'tax_query'      => [
-       'relation' => 'AND',
-     ],
-   ];
+      'post_type'      => 'product',
+      'paged'          => max(1, $paged),
+      'posts_per_page' => $posts_per_page,
+      'offset'         => ($paged - 1) * $posts_per_page,
+      'post_status' => ['publish', 'draft', 'pending', 'private'],
+      'post__not_in'   => array(7935),
+      'tax_query'      => [
+        'relation' => 'AND',
+      ],
+    ];
 
    /**
     * Search query
